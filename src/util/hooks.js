@@ -18,7 +18,6 @@ export const useForm = (callback, initialState = {}) => {
       list.splice(index, 1);
     }
 
-    // TODO: instructions out all console.logs
     list.sort();
     setValues({ ...values, [event.target.name]: list });
   };
