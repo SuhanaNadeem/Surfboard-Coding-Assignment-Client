@@ -13,6 +13,7 @@ import SignupMentor from "./pages/mentor/SignupMentor";
 import LoginMentor from "./pages/mentor/LoginMentor";
 import SignupAdmin from "./pages/admin/SignupAdmin";
 import LoginAdmin from "./pages/admin/LoginAdmin";
+import StudentDashboard from "./pages/student/StudentDashboard";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <StudentAuthRoute exact path="/" component={LoginStudent} />
           <StudentAuthRoute exact path="/login" component={LoginStudent} />
           <Route exact path="/signup" component={SignupStudent} />
+          <Route exact path="/dashboard" component={StudentDashboard} />
         </Router>
       </StudentAuthProvider>
 

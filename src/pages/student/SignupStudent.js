@@ -9,9 +9,10 @@ import { StudentAuthContext } from "../../context/studentAuth";
 function SignupStudent(props) {
   const context = useContext(StudentAuthContext);
   const [errors, setErrors] = useState({});
+  var email = props.match.params.email;
 
-  const { onChange, onSubmit, values } = useForm(signupStudentFunc, {
-    email: "",
+  const { onChange, onSubmit, values } = useForm(signupStudentCallback, {
+    email: email || "",
     name: "",
     orgName: "",
     password: "",
@@ -24,11 +25,13 @@ function SignupStudent(props) {
     //   { query: FETCH_ORDERS_BY_STUDENT_QUERY, variables: { status: 0 } },
     // ],
     update(_, { data: { signupStudent: studentData } }) {
-      context.signupStudent(studentData);
+      context.loginStudent(studentData);
 
-      props.history.push("/studentAccount");
+      props.history.push("/dashboard");
     },
     onError(err) {
+      console.log(values);
+
       console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
       console.log(err.graphQLErrors[0].extensions.exception.errors);
@@ -36,7 +39,7 @@ function SignupStudent(props) {
     variables: values,
   });
 
-  function signupStudentFunc() {
+  function signupStudentCallback() {
     signupStudent();
   }
 

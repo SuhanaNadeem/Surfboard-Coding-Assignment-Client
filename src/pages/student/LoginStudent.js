@@ -9,11 +9,11 @@ import { gql, useMutation } from "@apollo/client";
 function LoginStudent(props) {
   const context = useContext(StudentAuthContext);
   if (context.student) {
-    props.history.push("/explore");
+    props.history.push("/dashboard");
   }
   const [errors, setErrors] = useState({});
 
-  const { onChange, onSubmit, values } = useForm(loginStudentFunc, {
+  const { onChange, onSubmit, values } = useForm(loginStudentCallback, {
     email: "",
     password: "",
   });
@@ -25,14 +25,12 @@ function LoginStudent(props) {
     },
     onError(err) {
       console.log(err);
-      if (err.graphQLErrors[0]) {
-        setErrors(err.graphQLErrors[0].extensions.exception.errors);
-      }
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
   });
 
-  function loginStudentFunc() {
+  function loginStudentCallback() {
     loginStudent();
   }
 
