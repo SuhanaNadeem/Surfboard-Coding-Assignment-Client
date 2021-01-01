@@ -21,7 +21,7 @@ function LoginStudent(props) {
   const [loginStudent, { loading }] = useMutation(LOGIN_STUDENT, {
     update(_, { data: { loginStudent: studentData } }) {
       context.loginStudent(studentData);
-      props.history.push("/explore");
+      props.history.push("/dashboard");
     },
     onError(err) {
       console.log(err);

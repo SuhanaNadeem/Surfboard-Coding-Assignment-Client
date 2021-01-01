@@ -12,6 +12,8 @@ function SignupStudent(props) {
 
   const { onChange, onSubmit, values } = useForm(signupStudentFunc, {
     email: "",
+    name: "",
+    orgName: "",
     password: "",
     confirmPassword: "",
   });
@@ -46,6 +48,34 @@ function SignupStudent(props) {
           noValidate
           className="md:flex-grow flex-col overflow-y-auto flex-1 p-8 w-full"
         >
+          <div className="my-4 w-full">
+            <h4 className="font-thin uppercase">Name</h4>
+            <div className="border-b-2 py-4 border-gray-400 flex items-center justify-start w-full">
+              {/* <MdPersonOutline size={32} /> */}
+              <input
+                className="w-full focus:outline-none ml-4 text-lg"
+                name="name"
+                placeholder="Your Name"
+                value={values.name}
+                onChange={onChange}
+                type="name"
+              />
+            </div>
+          </div>
+          <div className="my-4 w-full">
+            <h4 className="font-thin uppercase">Organization</h4>
+            <div className="border-b-2 py-4 border-gray-400 flex items-center justify-start w-full">
+              {/* <MdPersonOutline size={32} /> */}
+              <input
+                className="w-full focus:outline-none ml-4 text-lg"
+                name="orgName"
+                placeholder="Your Organization"
+                value={values.orgName}
+                onChange={onChange}
+                type="orgName"
+              />
+            </div>
+          </div>
           <div className="my-4 w-full">
             <h4 className="font-thin uppercase">Email</h4>
             <div className="border-b-2 py-4 border-gray-400 flex items-center justify-start w-full">
@@ -87,7 +117,6 @@ function SignupStudent(props) {
               </p>
             )}
           </div>
-
           <div className="mb-4 w-full">
             <h4 className="mt-10 font-thin uppercase">Confirm Password</h4>
 
@@ -109,14 +138,12 @@ function SignupStudent(props) {
               </p>
             )}
           </div>
-
           <button
             type="submit"
             className="mt-8 uppercase text-xl mr-5 w-full bg-yellow-500 text-white border border-yellow-500 font-light py-2 px-6 rounded-full"
           >
             Sign Up
           </button>
-
           <button
             onClick={(e) => {
               props.history.push("/login");
@@ -136,14 +163,20 @@ const SIGNUP_STUDENT = gql`
     $email: String!
     $password: String!
     $confirmPassword: String!
+    $name: String!
+    $orgName: String!
   ) {
     signupStudent(
       email: $email
       password: $password
       confirmPassword: $confirmPassword
+      name: $name
+      orgName: $orgName
     ) {
       id
       email
+      name
+      orgName
       createdAt
       token
     }
