@@ -5,8 +5,8 @@ import { gql, useMutation } from "@apollo/client";
 // import { MdPersonOutline } from "react-icons/md";
 // import { VscKey } from "react-icons/vsc";
 import { StudentAuthContext } from "../../context/studentAuth";
-import StudentTitleBar from "../../components/student/StudentTitleBar";
-
+import StudentTitleBar from "../../components/student/TitleBar";
+import robotics from "../../images/robotics.jpg";
 function SignupStudent(props) {
   const context = useContext(StudentAuthContext);
   const [errors, setErrors] = useState({});
@@ -41,17 +41,17 @@ function SignupStudent(props) {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full">
       <StudentTitleBar />
-      <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:max-w-md">
+      <div className="flex w-full flex-col mx-auto py-10 px-16 md:flex-row">
         <form
           onSubmit={onSubmit}
           noValidate
-          className="md:flex-grow flex-col overflow-y-auto flex-1 p-8 w-full"
+          className="flex-col justify-center items-center flex md:pr-8 w-96"
         >
-          <div className="my-4 w-full">
-            <h4 className="font-thin mt-4 uppercase tracking-wider">Name</h4>
-            <div className="border-b-2 py-2 border-gray-700 flex items-center justify-start w-full">
+          <div className="w-64 mb-6">
+            <h4 className="font-thin  uppercase tracking-wider">Name</h4>
+            <div className="border-b-2 py-2 border-gray-300 flex items-center justify-start w-full">
               {/* <MdPersonOutline size={32} /> */}
               <input
                 className="w-full focus:outline-none text-sm font-thin"
@@ -63,11 +63,11 @@ function SignupStudent(props) {
               />
             </div>
           </div>
-          <div className="my-4 w-full">
-            <h4 className="font-thin mt-10 uppercase tracking-wider">
+          <div className="w-64 mb-6">
+            <h4 className="font-thin  uppercase tracking-wider">
               Organization
             </h4>
-            <div className="border-b-2 py-2 border-gray-700 flex items-center justify-start w-full">
+            <div className="border-b-2 py-2 border-gray-300 flex items-center justify-start w-full">
               {/* <MdPersonOutline size={32} /> */}
               <input
                 className="w-full focus:outline-none text-sm font-thin"
@@ -79,9 +79,9 @@ function SignupStudent(props) {
               />
             </div>
           </div>
-          <div className="my-4 w-full">
-            <h4 className="font-thin mt-10 uppercase tracking-wider">Email</h4>
-            <div className="border-b-2 py-2 border-gray-700 flex items-center justify-start w-full">
+          <div className="w-64 mb-6">
+            <h4 className="font-thin  uppercase tracking-wider">Email</h4>
+            <div className="border-b-2 py-2 border-gray-300 flex items-center justify-start w-full">
               {/* <MdPersonOutline size={32} /> */}
               <input
                 className="w-full focus:outline-none text-sm font-thin"
@@ -94,17 +94,15 @@ function SignupStudent(props) {
               />
             </div>
             {errors.email && (
-              <p className="text-red-700 md:text-xs">
+              <p className="text-red-800 md:text-xs">
                 <b>&#33;</b> {errors.email}
               </p>
             )}
           </div>
-          <div className="mb-4 w-full">
-            <h4 className="font-thin mt-10 uppercase tracking-wider">
-              Password
-            </h4>
+          <div className=" w-64 mb-6">
+            <h4 className="font-thin  uppercase tracking-wider">Password</h4>
 
-            <div className="border-b-2 py-2 border-gray-700 flex items-center justify-start w-full">
+            <div className="border-b-2 py-2 border-gray-300 flex items-center justify-start w-full">
               {/* <VscKey size={32} /> */}
               <input
                 className="w-full focus:outline-none text-sm font-thin"
@@ -117,17 +115,17 @@ function SignupStudent(props) {
               />
             </div>
             {errors.password && (
-              <p className="text-red-700 md:text-xs">
+              <p className="text-red-800 md:text-xs">
                 <b>&#33;</b> {errors.password}
               </p>
             )}
           </div>
-          <div className="mb-4 w-full">
-            <h4 className="font-thin mt-10 uppercase tracking-wider">
+          <div className=" w-64">
+            <h4 className="font-thin  uppercase tracking-wider">
               Confirm Password
             </h4>
 
-            <div className="border-b-2 py-2 border-gray-700 flex items-center justify-start w-full">
+            <div className="border-b-2 py-2 border-gray-300 flex items-center justify-start w-full">
               {/* <VscKey size={32} /> */}
               <input
                 className="w-full focus:outline-none text-sm font-thin"
@@ -140,7 +138,7 @@ function SignupStudent(props) {
               />
             </div>
             {errors.confirmPassword && (
-              <p className="text-red-700 md:text-xs">
+              <p className="text-red-800 md:text-xs">
                 <b>&#33;</b> {errors.confirmPassword}
               </p>
             )}
@@ -149,7 +147,7 @@ function SignupStudent(props) {
             type="submit"
             text-bold
             tracking-wide
-            className="mt-8 uppercase text-md mr-5 w-full text-white bg-red-700 shadow-md border border-red-700  py-2 px-6 rounded-full"
+            className="mt-8 uppercase hover:shadow-lg text-md w-64 flex items-center justify-center  text-white bg-red-800 shadow-md border border-red-800  py-2 px-6 rounded-full"
           >
             Sign Up
           </button>
@@ -157,11 +155,14 @@ function SignupStudent(props) {
             onClick={(e) => {
               props.history.push("/login");
             }}
-            className="mt-2 uppercase text-md mr-5 w-full bg-white text-red-700 text-bold tracking-wide py-2 px-6 rounded-full"
+            className="mt-4 hover:opacity-80  uppercase text-md bg-white text-red-800 text-bold tracking-wide px-6 rounded-full"
           >
             or Log in
           </button>
         </form>
+        <div className="flex flex-1 mt-4 md:m-0 items-center justify-end flex-shrink-0">
+          <img src={robotics} className="w-full" />
+        </div>
       </div>
     </div>
   );

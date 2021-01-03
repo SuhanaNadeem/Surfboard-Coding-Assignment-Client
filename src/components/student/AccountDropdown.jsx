@@ -29,7 +29,7 @@ export default function StudentAccountDropdown({ logout, props }) {
         className="focus:outline-none flex items-center justify-center"
       >
         <MdPersonOutline size={16} />
-        <p className="ml-2 mr-8">Account</p>
+        <p className="ml-2 mr-8 font-light">Account</p>
       </button>
       {isOpen && student ? (
         <>
@@ -47,7 +47,7 @@ export default function StudentAccountDropdown({ logout, props }) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                props.history.push("/studentManageAccount");
+                props.history.push("/manageAccount");
               }}
               className="text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
             >

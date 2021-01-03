@@ -5,17 +5,17 @@ import { useHistory } from "react-router-dom";
 import { StudentAuthContext } from "../../context/studentAuth";
 import { useForm } from "../../util/hooks";
 import { gql, useQuery } from "@apollo/client";
-import StudentAccountDropdown from "./StudentAccountDropdown";
+import StudentAccountDropdown from "./AccountDropdown";
 import { MdPersonOutline } from "react-icons/md";
 
-export default function StudentNavBar({ props }) {
+export default function StudentNavBar(props) {
   const history = useHistory();
   // const [navBar, setNavBar] = useState(false);
 
   const pageLinksAndTitle = [
     { title: "Dashboard", link: "/dashboard" },
     { title: "Learn", link: "/learn" },
-    { title: "Search", link: "/dashboard" },
+    { title: "Search", link: "/search" },
   ];
 
   const { student, logoutStudent } = useContext(StudentAuthContext);

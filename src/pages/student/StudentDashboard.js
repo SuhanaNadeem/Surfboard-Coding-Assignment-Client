@@ -3,7 +3,7 @@ import { StudentAuthContext } from "../../context/studentAuth";
 
 import { useForm } from "../../util/hooks";
 import { gql, useMutation } from "@apollo/client";
-import StudentNavBar from "../../components/student/StudentNavBar";
+import StudentNavBar from "../../components/student/NavBar";
 // import { MdPersonOutline } from "react-icons/md";
 // import { VscKey } from "react-icons/vsc";
 
