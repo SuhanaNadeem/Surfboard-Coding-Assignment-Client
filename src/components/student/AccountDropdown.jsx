@@ -29,7 +29,7 @@ export default function StudentAccountDropdown({ logout, props }) {
         className="focus:outline-none flex items-center justify-center"
       >
         <MdPersonOutline size={16} />
-        <p className="ml-2 mr-8 font-light">Account</p>
+        <p className="ml-2 mr-8 font-light hover:opacity-75">Account</p>
       </button>
       {isOpen && student ? (
         <>

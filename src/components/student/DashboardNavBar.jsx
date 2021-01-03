@@ -1,66 +1,37 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React from "react";
 
 import { useHistory } from "react-router-dom";
-// import NavBarDropdown from "./NavBarDropdown";
-import { StudentAuthContext } from "../../context/studentAuth";
-import { useForm } from "../../util/hooks";
-import { gql, useQuery } from "@apollo/client";
-import StudentAccountDropdown from "./AccountDropdown";
-import { MdPersonOutline } from "react-icons/md";
 
 export default function DashboardNavBar(props) {
   const history = useHistory();
-  // const [navBar, setNavBar] = useState(false);
 
-  const pageLinksAndTitle = [
-    { title: "Dashboard", link: "/dashboard" },
-    { title: "Learn", link: "/learn" },
-    { title: "Search", link: "/search" },
+  const pageLinksAndTitles = [
+    { title: "Statistics", link: "/dashboard" },
+    { title: "Badges", link: "/dashboard" },
+    { title: "Mentors", link: "/dashboard" },
+
+    { title: "Challenges", link: "/dashboard" },
   ];
 
-  const { student, logoutStudent } = useContext(StudentAuthContext);
-  // const [errors, setErrors] = useState({});
-
-  // const values = useForm(getStudentCallback);
-
-  // const [getStudent, { loading }] = useMutation(GET_STUDENT, {
-  //   onError(err) {
-  //     console.log(values);
-  //     console.log(err);
-  //     setErrors(err.graphQLErrors[0].extensions.exception.errors);
-  //     console.log(err.graphQLErrors[0].extensions.exception.errors);
-  //   },
-  //   variables: values,
-  // });
-
-  // function getStudentCallback() {
-  //   getStudent();
-  // }
-
   return (
-    <div className="bg-gray-800 border-b-2 shadow-lg flex items-center justify-center w-full z-10 text-center">
-      <nav className="py-4 px-8 md:px-0 flex items-center justify-center  w-full md:max-w-2xl xl:max-w-5xl">
-        <div className="w-full flex items-center justify-center font-light text-md text-white ">
-          <div className="items-center flex flex-1 h-full md:h-8 justify-start">
-            <StudentAccountDropdown props={props} logout={logoutStudent} />
-          </div>
-          <div className="flex items-center justify-center">
-            <p className="mr-2">LYNX Institute</p> <MdPersonOutline size={16} />
-          </div>
-          <div className="flex-1 flex items-center justify-end">
-            {pageLinksAndTitle.map((pageInfo) => (
-              <button
-                key={pageInfo.title}
-                onClick={(e) => {
-                  e.preventDefault();
-                  history.push(pageInfo.link);
-                }}
-                className="hover:opacity-75 font-light mr-4 last:mr-0 focus:outline-none"
-              >
-                {pageInfo.title}
-              </button>
-            ))}
-          </div>
+    <div className="border-gray-300 border-r-2 flex justify-center z-10 text-left h-screen w-full">
+      <nav className="flex items-start justify-start w-full md:max-w-2xl xl:max-w-5xl">
+        <div className="w-full flex items-start flex-col justify-start font-light text-md text-black py-6">
+          <p className="mb-6 font-semibold text-sm uppercase tracking-wide ">
+            My Account
+          </p>
+          {pageLinksAndTitles.map((pageInfo) => (
+            <button
+              key={pageInfo.title}
+              onClick={(e) => {
+                e.preventDefault();
+                history.push(pageInfo.link);
+              }}
+              className="hover:text-red-800 font-light mb-6 last:mb-0 focus:outline-none"
+            >
+              {pageInfo.title}
+            </button>
+          ))}
         </div>
       </nav>
     </div>
