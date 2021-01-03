@@ -3,6 +3,7 @@ import { StudentAuthContext } from "../../context/studentAuth";
 
 import { useForm } from "../../util/hooks";
 import { gql, useMutation } from "@apollo/client";
+import StudentTitleBar from "../../components/student/StudentTitleBar";
 // import { MdPersonOutline } from "react-icons/md";
 // import { VscKey } from "react-icons/vsc";
 
@@ -35,16 +36,17 @@ function LoginStudent(props) {
   }
 
   return (
-    <div className="h-full flex flex-col min-h-screen">
-      <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:my-8 md:max-w-xs">
+    <div className="flex flex-col">
+      <StudentTitleBar />
+      <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:max-w-md">
         <form
           onSubmit={onSubmit}
           noValidate
           className="md:flex-grow flex-col overflow-y-auto flex-1 p-8 w-full"
         >
           <div className="my-4 w-full">
-            <h4 className="font-thin uppercase">Email</h4>
-            <div className="border-b-2 py-4 border-gray-400 flex items-center justify-start w-full">
+            <h4 className="font-thin mt-4 uppercase tracking-wider">Email</h4>
+            <div className="border-b-2 py-2 border-gray-700 flex items-center justify-start w-full">
               {/* <MdPersonOutline size={32} /> */}
               <input
                 className="w-full focus:outline-none ml-4 text-lg"
@@ -57,15 +59,17 @@ function LoginStudent(props) {
               />
             </div>
             {errors.email && (
-              <p className="text-red-500 md:text-xs">
+              <p className="text-red-700 md:text-xs">
                 <b>&#33;</b> {errors.email}
               </p>
             )}
           </div>
           <div className="mb-4 w-full">
-            <h4 className="mt-10 font-thin uppercase">Password</h4>
+            <h4 className="font-thin mt-10 uppercase tracking-wider">
+              Password
+            </h4>
 
-            <div className="border-b-2 py-4 border-gray-400 flex items-center justify-start w-full">
+            <div className="border-b-2 py-2 border-gray-700 flex items-center justify-start w-full">
               {/* <VscKey size={32} /> */}
               <input
                 className="w-full focus:outline-none ml-4 text-lg"
@@ -78,24 +82,26 @@ function LoginStudent(props) {
               />
             </div>
             {errors.password && (
-              <p className="text-red-500 md:text-xs">
+              <p className="text-red-700 md:text-xs">
                 <b>&#33;</b> {errors.password}
               </p>
             )}
           </div>
           <button
             type="submit"
-            className="mt-8 uppercase text-xl mr-5 w-full bg-blue-700 text-white border border-blue-700 font-light py-2 px-6 rounded-full"
+            text-bold
+            tracking-wide
+            className="focus:outline-none mt-8 uppercase text-md mr-5 w-full text-white bg-red-700 shadow-md border border-red-700  py-2 px-6 rounded-full"
           >
-            Log in
+            Log In
           </button>
           <button
             onClick={(e) => {
               props.history.push("/signup");
             }}
-            className="mt-2 uppercase text-xl mr-5 w-full bg-white text-blue-700 font-light py-2 px-6 rounded-full"
+            className="mt-2 uppercase text-md mr-5 w-full bg-white text-red-700 text-bold tracking-wide py-2 px-6 rounded-full"
           >
-            or Sign up
+            or Sign Up
           </button>
         </form>
       </div>

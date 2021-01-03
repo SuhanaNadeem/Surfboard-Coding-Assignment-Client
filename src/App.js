@@ -20,9 +20,9 @@ function App() {
     <>
       <StudentAuthProvider>
         <Router>
-          <StudentAuthRoute exact path="/" component={LoginStudent} />
+          <Route exact path="/" component={LoginStudent} />
           <StudentAuthRoute exact path="/login" component={LoginStudent} />
-          <Route exact path="/signup" component={SignupStudent} />
+          <StudentAuthRoute exact path="/signup" component={SignupStudent} />
           <Route exact path="/dashboard" component={StudentDashboard} />
         </Router>
       </StudentAuthProvider>

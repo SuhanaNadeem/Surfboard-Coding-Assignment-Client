@@ -1,10 +1,10 @@
 import { ApolloProvider } from "@apollo/client";
 import React from "react";
 import App from "./App";
-import { userClient } from "./GraphqlApolloClients";
+import { studentClient } from "./GraphqlApolloClients";
 
 export default (
-  <ApolloProvider client={userClient}>
+  <ApolloProvider client={studentClient}>
     {/* <Suspense fallback={<FullPageLoadingScreen />}> */}
     <App />
     {/* </Suspense> */}

@@ -21,10 +21,6 @@ function SignupStudent(props) {
   });
 
   const [signupStudent, { loading }] = useMutation(SIGNUP_STUDENT, {
-    // refetchQueries: [
-    //   { query: FETCH_STUDENT_QUERY },
-    //   { query: FETCH_ORDERS_BY_STUDENT_QUERY, variables: { status: 0 } },
-    // ],
     update(_, { data: { signupStudent: studentData } }) {
       context.loginStudent(studentData);
 
