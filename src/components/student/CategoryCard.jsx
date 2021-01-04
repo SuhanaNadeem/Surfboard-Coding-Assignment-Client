@@ -19,14 +19,7 @@ export default function CategoryCard({ props, category }) {
     variables: { categoryId: category.id },
     client: studentClient,
   });
-  if (modules) {
-    console.log(modules);
-  } else if (loadingModules) {
-    console.log("Loading moduls");
-  } else {
-    console.log(error);
-    console.log(category.id);
-  }
+
   return modules ? (
     <div className="w-full">
       {modules.map((moduleInfo, index) => (

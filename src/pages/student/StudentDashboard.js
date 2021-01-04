@@ -1,14 +1,12 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext } from "react";
 import { StudentAuthContext } from "../../context/studentAuth";
 
-import { useForm } from "../../util/hooks";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import NavBar from "../../components/student/NavBar";
 import DashboardNavBar from "../../components/student/DashboardNavBar";
-import DashboardContent from "../../components/student/DashboardContent";
-
-// import { MdPersonOutline } from "react-icons/md";
-// import { VscKey } from "react-icons/vsc";
+import DashboardCategories from "../../components/student/DashboardCategories";
+import { studentClient } from "../../GraphqlApolloClients";
+import DashboardModules from "../../components/student/DashboardModules";
 
 export default function StudentDashboard(props) {
   const { student } = useContext(StudentAuthContext);
@@ -17,15 +15,37 @@ export default function StudentDashboard(props) {
     props.history.push("/login");
   }
 
-  const studentDasboard = student ? (
+  const {
+    data: { getInProgressModulesByStudent: inProgressModules } = {},
+    loading: loadingInProgressModules,
+  } = useQuery(GET_IN_PROGRESS_MODULES_BY_STUDENT, {
+    client: studentClient,
+  });
+
+  const {
+    data: { getCompletedModulesByStudent: completedModules } = {},
+    loading: loadingCompletedModules,
+  } = useQuery(GET_COMPLETED_BY_STUDENT, {
+    client: studentClient,
+  });
+
+  const studentDashboard = student ? (
     <div className="h-full flex flex-col min-h-screen">
       <NavBar />
       <div className="bg-red-800 w-full h-32"></div>
       <div className="h-full flex-1 flex mx-48 my-2">
         <DashboardNavBar />
-        {/* <div className="w-full"> */}
-        <DashboardContent />
-        {/* </div> */}
+        <div>
+          <DashboardCategories />
+          <DashboardModules
+            modules={inProgressModules}
+            type="In Progress Modules"
+          />
+          <DashboardModules
+            modules={completedModules}
+            type="Completed Modules"
+          />
+        </div>
       </div>
     </div>
   ) : (
@@ -35,5 +55,22 @@ export default function StudentDashboard(props) {
       </div>
     </div>
   );
-  return studentDasboard;
+  return studentDashboard;
 }
+
+export const GET_IN_PROGRESS_MODULES_BY_STUDENT = gql`
+  query getInProgressModulesByStudent {
+    getInProgressModulesByStudent {
+      name
+      id
+    }
+  }
+`;
+export const GET_COMPLETED_BY_STUDENT = gql`
+  query getCompletedModulesByStudent {
+    getCompletedModulesByStudent {
+      name
+      id
+    }
+  }
+`;

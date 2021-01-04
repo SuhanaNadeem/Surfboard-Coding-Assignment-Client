@@ -9,7 +9,6 @@ export default function DashboardNavBar(props) {
     { title: "Statistics", link: "/dashboard" },
     { title: "Badges", link: "/dashboard" },
     { title: "Mentors", link: "/dashboard" },
-
     { title: "Challenges", link: "/dashboard" },
   ];
 
