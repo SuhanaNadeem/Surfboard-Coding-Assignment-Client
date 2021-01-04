@@ -21,11 +21,11 @@ export default function StudentDashboard(props) {
     <div className="h-full flex flex-col min-h-screen">
       <NavBar />
       <div className="bg-red-800 w-full h-32"></div>
-      <div className="h-full flex flex-row ml-48 my-2 w-full md:max-w-xs">
+      <div className="h-full flex-1 flex mx-48 my-2">
         <DashboardNavBar />
-        <div className="w-full">
-          <DashboardContent />
-        </div>
+        {/* <div className="w-full"> */}
+        <DashboardContent />
+        {/* </div> */}
       </div>
     </div>
   ) : (
