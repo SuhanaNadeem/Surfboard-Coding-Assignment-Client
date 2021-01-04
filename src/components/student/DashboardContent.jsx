@@ -16,10 +16,15 @@ export default function DashboardContent(props) {
   });
 
   return categories ? (
-    <div className="text-black flex flex-row items-center justify-center">
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 mb-2 gap-4 mx-auto py-4 px-8 md:p-4 w-full md:max-w-2xl xl:max-w-6xl">
       {categories.map((category, index) => (
-        <div key={index}>
-          <p>{category.name}</p>
+        <div
+          key={index}
+          className="bg-white rounded-xl hover:shadow-md w-full h-full flex flex-col items-center justify-start py-4 px-6"
+        >
+          <p className="uppercase tracking-wide text-red-800 font-semibold text-lg w-full pb-4 border-gray-300 border-b-2">
+            {category.name}
+          </p>
           <CategoryCard category={category} />
         </div>
       ))}
