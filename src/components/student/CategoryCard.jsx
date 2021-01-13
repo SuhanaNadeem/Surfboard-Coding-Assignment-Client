@@ -56,6 +56,8 @@ export const GET_MODULES_BY_CATEGORY = gql`
     getModulesByCategory(categoryId: $categoryId) {
       id
       name
+      questions
+      categoryId
     }
   }
 `;

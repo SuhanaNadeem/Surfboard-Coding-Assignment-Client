@@ -63,6 +63,8 @@ export const GET_IN_PROGRESS_MODULES_BY_STUDENT = gql`
     getInProgressModulesByStudent {
       name
       id
+      categoryId
+      questions
     }
   }
 `;
@@ -71,6 +73,8 @@ export const GET_COMPLETED_BY_STUDENT = gql`
     getCompletedModulesByStudent {
       name
       id
+      categoryId
+      questions
     }
   }
 `;
