@@ -7,6 +7,7 @@ import DashboardNavBar from "../../components/student/DashboardNavBar";
 import DashboardCategories from "../../components/student/DashboardCategories";
 import { studentClient } from "../../GraphqlApolloClients";
 import DashboardModules from "../../components/student/DashboardModules";
+import Footer from "../../components/student/Footer";
 
 export default function StudentDashboard(props) {
   const { student } = useContext(StudentAuthContext);
@@ -33,9 +34,9 @@ export default function StudentDashboard(props) {
     <div className="h-full flex flex-col min-h-screen">
       <NavBar />
       <div className="bg-red-800 w-full h-32"></div>
-      <div className="h-full flex-1 flex mx-48 my-2">
+      <div className="h-full flex-1 flex mx-48 mt-4 mb-8">
         <DashboardNavBar />
-        <div class="md:w-4/5">
+        <div class="md:w-5/6 last:mt-4">
           <DashboardCategories />
           <DashboardModules
             modules={inProgressModules}
@@ -47,6 +48,7 @@ export default function StudentDashboard(props) {
           />
         </div>
       </div>
+      <Footer />
     </div>
   ) : (
     <div className="h-full flex flex-col min-h-screen">

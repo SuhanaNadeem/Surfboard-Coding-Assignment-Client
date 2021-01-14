@@ -19,7 +19,7 @@ export default function DashboardCategories(props) {
     <div>
       <h4 className="pt-6 pl-10 text-3xl w-full flex">Explore Modules</h4>
       <div className="relative">
-        <div className="grid sm:grid-cols-1 md:grid-cols-3 mb-2 gap-4 pt-6 pb-4 pl-10 w-full relative md:max-w-2xl xl:max-w-6xl items-stretch">
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6 pt-6 pl-10 w-full relative md:max-w-2xl xl:max-w-6xl items-stretch">
           {categories.map((category, index) => (
             <div
               key={index}
