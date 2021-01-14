@@ -23,10 +23,7 @@ export default function CategoryCard({ props, category }) {
   return modules ? (
     <div className="w-full">
       {modules.map((moduleInfo, index) => (
-        <div
-          key={index}
-          className="flex flex-row items-center justify-start mt-2"
-        >
+        <div key={index} className="flex flex-row items-center justify-start">
           {category.name === "Programming" && <BsCodeSlash size={32} />}
           {category.name === "Electrical" && (
             <RiWirelessChargingLine size={32} />
@@ -41,7 +38,7 @@ export default function CategoryCard({ props, category }) {
               <GiMorphBall size={32} />
             )}
 
-          <p className="ml-6 tracking-wide font-thin mt-4 mb-4 text-lg">
+          <p className="ml-6 tracking-wide font-thin my-4 text-md">
             {moduleInfo.name}
           </p>
         </div>

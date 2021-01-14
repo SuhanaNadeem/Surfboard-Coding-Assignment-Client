@@ -35,7 +35,7 @@ export default function StudentDashboard(props) {
       <div className="bg-red-800 w-full h-32"></div>
       <div className="h-full flex-1 flex mx-48 my-2">
         <DashboardNavBar />
-        <div>
+        <div class="md:w-4/5">
           <DashboardCategories />
           <DashboardModules
             modules={inProgressModules}
