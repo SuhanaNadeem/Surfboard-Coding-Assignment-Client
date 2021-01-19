@@ -12,7 +12,7 @@ export default function ModuleCard({ props, module }) {
     loading: loadingCategory,
     error,
   } = useQuery(GET_CATEGORY_BY_ID, {
-    variables: { categoryId: module.categoryId }, // TODO: need to call this only when module exists
+    variables: { categoryId: module.categoryId },
     client: studentClient,
   });
   return category && module ? (
@@ -27,7 +27,6 @@ export default function ModuleCard({ props, module }) {
           {module.name}
         </p>
         <p className=" text-gray-700 font-semibold text-md">{category.name}</p>
-        {/* TODO: get images from AWS? - either those of modules or based on category */}
         <p className=" text-gray-700 font-thin text-sm">
           {module.questions.length} Questions
         </p>

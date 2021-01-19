@@ -14,7 +14,6 @@ export default function StudentNavBar(props) {
 
   const pageLinksAndTitles = [
     { title: "Dashboard", link: "/dashboard" },
-    { title: "Learn", link: "/learn" },
     { title: "Search", link: "/search" },
   ];
 

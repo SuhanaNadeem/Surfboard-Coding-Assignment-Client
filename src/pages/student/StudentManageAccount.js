@@ -1,16 +1,18 @@
 import React, { useContext, useRef, useState } from "react";
-import { StudentAuthContext } from "../../context/studentAuth";
+import Footer from "../../components/student/Footer";
+import NavBar from "../../components/student/NavBar";
 
-import { useForm } from "../../util/hooks";
-import { gql, useMutation } from "@apollo/client";
-// import { MdPersonOutline } from "react-icons/md";
-// import { VscKey } from "react-icons/vsc";
+import { StudentAuthContext } from "../../context/studentAuth";
 
 function StudentManageAccount(props) {
   const context = useContext(StudentAuthContext);
 
   return (
-    <div className="h-full flex flex-col min-h-screen">MANAGE ACCOUNT</div>
+    <div className="h-full flex flex-col min-h-screen">
+      <NavBar />
+      <div className="bg-red-800 w-full h-32"></div>
+      <Footer />
+    </div>
   );
 }
 
