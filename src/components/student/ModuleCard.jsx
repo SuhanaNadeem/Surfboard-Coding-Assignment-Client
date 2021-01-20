@@ -1,12 +1,9 @@
 import React from "react";
 
-import { useHistory } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
 import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
 export default function ModuleCard({ props, module }) {
-  const history = useHistory();
-
   const {
     data: { getCategoryById: category } = {},
     loading: loadingCategory,
@@ -18,7 +15,8 @@ export default function ModuleCard({ props, module }) {
   return category && module ? (
     <button
       onClick={(e) => {
-        props.history.push("/module:/{module.id}");
+        // console.log(module.id)
+        props.history.push(`/module/${module.id}`);
       }}
     >
       {/* TODO: SEND needed variables; should it be a page or should you just go to the page, and there's a compoenent there thhat takes the variables */}
@@ -26,7 +24,9 @@ export default function ModuleCard({ props, module }) {
         <p className="uppercase tracking-wide text-red-800 font-semibold text-md">
           {module.name}
         </p>
-        <p className=" text-gray-700 font-semibold text-md">{category.name}</p>
+        <p className=" text-gray-700 font-semibold text-md leading-tight">
+          {category.name}
+        </p>
         <p className=" text-gray-700 font-thin text-sm">
           {module.questions.length} Questions
         </p>

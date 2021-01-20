@@ -11,7 +11,8 @@ import Footer from "../../components/student/Footer";
 
 export default function StudentDashboard(props) {
   const { student } = useContext(StudentAuthContext);
-
+  // console.log("in dash");
+  // console.log(props);
   if (!student) {
     props.history.push("/login");
   }
@@ -39,10 +40,12 @@ export default function StudentDashboard(props) {
         <div class="md:w-5/6 last:mt-4">
           <DashboardCategories />
           <DashboardModules
+            props={props}
             modules={inProgressModules}
             type="In Progress Modules"
           />
           <DashboardModules
+            props={props}
             modules={completedModules}
             type="Completed Modules"
           />
