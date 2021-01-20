@@ -12,6 +12,16 @@ export default function ModuleCard({ props, module }) {
     variables: { categoryId: module.categoryId },
     client: studentClient,
   });
+  if (loadingCategory) {
+    console.log(loadingCategory);
+  }
+  if (error) {
+    console.log(error);
+  }
+  if (module && module.name == "electrical stuff" && category) {
+    console.log(category);
+  }
+
   return category && module ? (
     <button
       onClick={(e) => {

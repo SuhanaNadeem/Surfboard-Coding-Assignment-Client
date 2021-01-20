@@ -31,13 +31,15 @@ export default function StudentDashboard(props) {
     client: studentClient,
   });
 
+  console.log(inProgressModules);
+
   const studentDashboard = student ? (
     <div className="h-full flex flex-col min-h-screen">
       <NavBar />
       <div className="bg-red-800 w-full h-32"></div>
       <div className="h-full flex-1 flex mx-48 mt-4 mb-8">
         <DashboardNavBar />
-        <div class="md:w-5/6 last:mt-4">
+        <div className="md:w-5/6 last:mt-4">
           <DashboardCategories />
           <DashboardModules
             props={props}

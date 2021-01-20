@@ -43,12 +43,12 @@ export default function StudentModule(props) {
     variables: { moduleId: moduleId, studentId: student.id },
     client: studentClient,
   });
+
   // console.log("student points");
   // console.log(studentPoints);
   // console.log("total points");
 
   // console.log(totalPoints);
-
   const studentModule =
     student && module ? (
       <div className="h-full flex flex-col min-h-screen">
@@ -60,6 +60,7 @@ export default function StudentModule(props) {
             questions={module.questions}
             studentPoints={studentPoints}
             totalPoints={totalPoints}
+            format={module.format}
           />
         </div>
         <Footer />
