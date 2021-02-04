@@ -14,8 +14,10 @@ export default function StudentModule(props) {
   if (!student) {
     props.history.push("/login");
   }
+  // console.log(student);
   const moduleId = props.match.params.moduleId;
   // startModule AND addInProgressModule/addCompleted must be managed
+  // console.log(moduleId);
   const {
     data: { getModuleById: module } = {},
     loading: loadingModule,
@@ -24,7 +26,8 @@ export default function StudentModule(props) {
     variables: { moduleId: moduleId },
     client: studentClient,
   });
-  // console.log(module);
+
+  console.log(module);
   // total points query
   const {
     data: { getTotalPossibleModulePoints: totalPoints } = {},
@@ -60,15 +63,13 @@ export default function StudentModule(props) {
             questions={module.questions}
             studentPoints={studentPoints}
             totalPoints={totalPoints}
-            format={module.format}
           />
           <div className="md:w-5/6 last:mt-4">
-            <div className="mt-6 pt-4 ml-10 grid bg-gray-200 gap-2 items-stretch justify-start py-1 overflow-y-auto h-96 rounded-lg shadow-md border-2 border-red-800">
+            <div className="mt-6 ml-10 grid gap-2 items-stretch justify-start pb-2 overflow-y-auto h-96 rounded-lg border-2 border-gray-300">
               {module.questions.map((questionId, index) => (
                 <QuestionCard
                   key={index}
                   props={props}
-                  format={module.format}
                   questionId={questionId}
                 />
               ))}
@@ -93,7 +94,6 @@ export const GET_MODULE_BY_ID = gql`
       name
       questions
       categoryId
-      format
     }
   }
 `;

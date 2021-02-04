@@ -12,6 +12,7 @@ import Footer from "../../components/student/Footer";
 export default function StudentDashboard(props) {
   const { student } = useContext(StudentAuthContext);
   // console.log("in dash");
+  // console.log(student);
   // console.log(props);
   if (!student) {
     props.history.push("/login");
@@ -31,7 +32,7 @@ export default function StudentDashboard(props) {
     client: studentClient,
   });
 
-  console.log(inProgressModules);
+  // console.log(inProgressModules);
 
   const studentDashboard = student ? (
     <div className="h-full flex flex-col min-h-screen">

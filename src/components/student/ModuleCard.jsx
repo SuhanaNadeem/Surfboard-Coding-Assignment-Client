@@ -16,7 +16,7 @@ export default function ModuleCard({ props, module }) {
   return category && module ? (
     <button
       onClick={(e) => {
-        // console.log(module.id)
+        // console.log(module.id);
         props.history.push(`/module/${module.id}`);
       }}
     >
