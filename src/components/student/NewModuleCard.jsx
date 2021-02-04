@@ -8,6 +8,8 @@ import { RiWirelessChargingLine } from "react-icons/ri";
 import { GrPersonalComputer } from "react-icons/gr";
 import { useForm } from "../../util/hooks";
 import { studentClient } from "../../GraphqlApolloClients";
+import { GET_IN_PROGRESS_MODULES_BY_STUDENT } from "../../pages/student/StudentDashboard";
+import { GET_INCOMPLETE_MODULES_BY_CATEGORY } from "./CategoryCard";
 
 export default function NewModuleCard({ props, categoryName, moduleInfo }) {
   const { student } = useContext(StudentAuthContext);
@@ -15,6 +17,8 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
   const [errors, setErrors] = useState({});
   const moduleId = moduleInfo.id;
   const studentId = student.id;
+  const categoryId = moduleInfo.categoryId;
+
   console.log(moduleId);
   console.log(studentId);
 
@@ -25,11 +29,36 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
       studentId,
     }
   );
+
+  const [addInProgressModule] = useMutation(ADD_IN_PROGRESS_MODULE, {
+    client: studentClient,
+    refetchQueries: [
+      {
+        query: GET_IN_PROGRESS_MODULES_BY_STUDENT,
+      },
+      {
+        query: GET_INCOMPLETE_MODULES_BY_CATEGORY,
+        variables: { categoryId, studentId },
+      },
+    ],
+    update(proxy, { data: { addInProgressModuleData: addingModuleData } }) {
+      setErrors({});
+      props.history.push(`/module/${moduleId}`);
+    },
+    onError(err) {
+      console.log(valuesStatus);
+      console.log(err);
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    },
+    variables: { moduleId },
+  });
+
   const [startModule] = useMutation(START_MODULE, {
     client: studentClient,
     update(proxy, { data: { startModuleData: startingModuleData } }) {
       startModuleCallback();
       setErrors({});
+      addInProgressModule();
     },
     onError(err) {
       console.log(valuesStatus);
@@ -44,15 +73,7 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
 
   return categoryName && moduleInfo ? (
     <form onSubmit={onSubmitStatus}>
-      <button
-        type="submit"
-        onClick={(e) => {
-          // console.log(moduleId);
-          props.history.push(`/module/${moduleId}`);
-          // startModule
-          // addInProgressModule
-        }}
-      >
+      <button type="submit">
         <div className="flex flex-row items-center justify-start">
           {categoryName === "Programming" && <BsCodeSlash size={32} />}
           {categoryName === "Electrical" && (
@@ -89,8 +110,8 @@ export const START_MODULE = gql`
   }
 `;
 
-// export const ADD_IN_PROGRESS_MODULE = gql`
-//   mutation addInProgressModule($moduleId: String!) {
-//     addInProgressModule(moduleId: $moduleId)
-//   }
-// `;
+export const ADD_IN_PROGRESS_MODULE = gql`
+  mutation addInProgressModule($moduleId: String!) {
+    addInProgressModule(moduleId: $moduleId)
+  }
+`;
