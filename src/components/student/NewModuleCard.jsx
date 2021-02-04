@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { GiMorphBall } from "react-icons/gi";
 import { BsCodeSlash } from "react-icons/bs";
 import { RiWirelessChargingLine } from "react-icons/ri";
 import { GrPersonalComputer } from "react-icons/gr";
+import { useForm } from "../../util/hooks";
 
 export default function NewModuleCard({ props, categoryName, moduleInfo }) {
+  // const [errors, setErrors] = useState({});
+
+  // const { values: valuesStatus, onSubmit: onSubmitStatus } = useForm(
+  //   startModuleCallback,
+  //   {
+  //     moduleId,
+  //   }
+  // );
+  // const [startModule] = useMutation(START_MODULE, {
+  //   client: studentClient,
+
+  //   update(proxy, { data: { moduleId: moduleId } }) {
+  //     setErrors({});
+  //   },
+  //   onError(err) {
+  //     console.log(valuesStatus);
+  //     console.log(err);
+  //     setErrors(err.graphQLErrors[0].extensions.exception.errors);
+  //   },
+  //   variables: valuesStatus,
+  // });
+  // function startModuleCallback() {
+  //   startModule();
+  // }
+
+  // // form with onSubmit={onSubmitStatus}, with button inside
+
   return categoryName && moduleInfo && props ? (
     <button
       onClick={(e) => {
