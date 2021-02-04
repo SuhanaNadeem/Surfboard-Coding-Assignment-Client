@@ -11,7 +11,6 @@ export default function QuestionCard({ props, questionId }) {
     variables: { questionId: questionId },
     client: studentClient,
   });
-  console.log(question);
 
   return question ? (
     <button

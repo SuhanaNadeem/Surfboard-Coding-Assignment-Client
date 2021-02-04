@@ -110,14 +110,3 @@ export const GET_MODULE_POINTS_BY_STUDENT = gql`
     getModulePointsByStudent(moduleId: $moduleId, studentId: $studentId)
   }
 `;
-
-export const START_MODULE = gql`
-  mutation startModule($moduleId: String!) {
-    startModule(moduleId: $moduleId) {
-      key
-      value
-      studentId
-      id
-    }
-  }
-`;

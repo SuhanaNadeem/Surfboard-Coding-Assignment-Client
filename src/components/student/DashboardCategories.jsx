@@ -5,7 +5,7 @@ import CategoryCard from "./CategoryCard";
 import { gql, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
 
-export default function DashboardCategories(props) {
+export default function DashboardCategories({ props }) {
   const history = useHistory();
 
   const {
