@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
+import { useForm } from "../../util/hooks";
 import { StudentAuthContext } from "../../context/studentAuth";
 
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useMutation } from "@apollo/client";
 import NavBar from "../../components/student/NavBar";
 import Footer from "../../components/student/Footer";
 import { studentClient } from "../../GraphqlApolloClients";
@@ -14,6 +15,7 @@ export default function StudentModule(props) {
   if (!student) {
     props.history.push("/login");
   }
+
   // console.log(student);
   const moduleId = props.match.params.moduleId;
   // startModule AND addInProgressModule/addCompleted must be managed
@@ -27,8 +29,8 @@ export default function StudentModule(props) {
     client: studentClient,
   });
 
-  console.log(module);
-  // total points query
+  // console.log(module);
+
   const {
     data: { getTotalPossibleModulePoints: totalPoints } = {},
     loading: loadingTotalPoints,
@@ -106,5 +108,16 @@ export const GET_TOTAL_POSSIBLE_MODULE_POINTS = gql`
 export const GET_MODULE_POINTS_BY_STUDENT = gql`
   query getModulePointsByStudent($moduleId: String!, $studentId: String!) {
     getModulePointsByStudent(moduleId: $moduleId, studentId: $studentId)
+  }
+`;
+
+export const START_MODULE = gql`
+  mutation startModule($moduleId: String!) {
+    startModule(moduleId: $moduleId) {
+      key
+      value
+      studentId
+      id
+    }
   }
 `;

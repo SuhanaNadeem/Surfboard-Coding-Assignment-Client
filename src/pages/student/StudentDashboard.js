@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
 import { StudentAuthContext } from "../../context/studentAuth";
-
+import React, { useState, useContext } from "react";
+import { useForm } from "../../util/hooks";
 import { gql, useQuery } from "@apollo/client";
 import NavBar from "../../components/student/NavBar";
 import DashboardNavBar from "../../components/student/DashboardNavBar";
@@ -17,6 +17,33 @@ export default function StudentDashboard(props) {
   if (!student) {
     props.history.push("/login");
   }
+
+  // const [errors, setErrors] = useState({});
+
+  // const { values: valuesStatus, onSubmit: onSubmitStatus } = useForm(
+  //   startModuleCallback,
+  //   {
+  //     moduleId,
+  //   }
+  // );
+  // const [startModule] = useMutation(START_MODULE, {
+  //   client: studentClient,
+
+  //   update(proxy, { data: { moduleId: moduleId } }) {
+  //     setErrors({});
+  //   },
+  //   onError(err) {
+  //     console.log(valuesStatus);
+  //     console.log(err);
+  //     setErrors(err.graphQLErrors[0].extensions.exception.errors);
+  //   },
+  //   variables: valuesStatus,
+  // });
+  // function startModuleCallback() {
+  //   startModule();
+  // }
+
+  // // form with onSubmit={onSubmitStatus}, with button inside
 
   const {
     data: { getInProgressModulesByStudent: inProgressModules } = {},
