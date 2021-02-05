@@ -13,13 +13,8 @@ export default function QuestionCard({ props, questionId }) {
   });
 
   return question ? (
-    <button
-      onClick={(e) => {
-        console.log("go");
-        // props.history.push(`/module/${module.id}`);
-      }}
-    >
-      <div className="bg-white w-full transition-all duration-150 md:hover:-translate-y-1 align-middle flex flex-col items-center text-center m-4 p-4 rounded-md shadow-md overflow-hidden hover:shadow-md hover:bg-gray-100 h-32 justify-center ">
+    <div className="bg-white w-96 align-middle flex flex-row items-center text-center m-4 p-4 rounded-md shadow-sm overflow-hidden h-32 justify-center hover:shadow-md ">
+      <div className="flex flex-col mr-10">
         <p className=" font-semibold text-sm uppercase tracking-wide ">
           {question.type}
         </p>
@@ -28,7 +23,16 @@ export default function QuestionCard({ props, questionId }) {
           {question.points} lynx tokens
         </p>
       </div>
-    </button>
+      <button
+        onClick={(e) => {
+          console.log("go");
+          // props.history.push(`/module/${module.id}`);
+        }}
+        className="flex border-2 border-red-800 px-4 py-2 text-red-800 rounded-lg transition-all duration-150 md:hover:-translate-y-1 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
+      >
+        START
+      </button>
+    </div>
   ) : (
     <div></div>
   );

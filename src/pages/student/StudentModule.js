@@ -53,12 +53,14 @@ export default function StudentModule(props) {
   // console.log(studentPoints);
   // console.log("total points");
 
-  // console.log(totalPoints);
+  console.log(student);
   const studentModule =
     student && module ? (
       <div className="h-full flex flex-col min-h-screen">
         <NavBar />
-        <div className="bg-red-800 w-full h-32"></div>
+        <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-36 pb-10">
+          <p className="text-4xl text-white">{module.name}</p>
+        </div>
         <div className="h-full flex-1 flex mx-36 mt-4 mb-8">
           <ModuleSummaryBar
             props={props}
@@ -67,7 +69,7 @@ export default function StudentModule(props) {
             totalPoints={totalPoints}
           />
           <div className="md:w-5/6 last:mt-4">
-            <div className="mt-6 ml-10 grid gap-2 items-stretch justify-start pb-2 overflow-y-auto h-96 rounded-lg border-2 border-gray-300">
+            <div className="mt-6 ml-10 grid gap-2 items-stretch justify-center overflow-y-auto h-96 rounded-lg border-gray-300 border-2">
               {module.questions.map((questionId, index) => (
                 <QuestionCard
                   key={index}

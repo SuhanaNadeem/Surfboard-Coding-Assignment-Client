@@ -89,7 +89,7 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
               <GiMorphBall size={32} />
             )}
 
-          <p className="ml-6 tracking-wide font-thin my-4 text-md">
+          <p className="hover:text-red-800 ml-6 tracking-wide font-thin my-4 text-md">
             {moduleInfo.name}
           </p>
         </div>
