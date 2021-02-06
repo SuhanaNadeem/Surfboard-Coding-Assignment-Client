@@ -3,11 +3,13 @@ import { StudentAuthContext } from "../../context/studentAuth";
 
 import { gql, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
+import CompletedQuestion from "./CompletedQuestion";
 export default function ModuleSummaryBar({
   props,
   questions,
   studentPoints,
   totalPoints,
+  completedQuestions,
 }) {
   const { student } = useContext(StudentAuthContext);
 
@@ -25,17 +27,23 @@ export default function ModuleSummaryBar({
     <nav className="flex flex-shrink-0 items-start justify-start md:max-w-2xl xl:max-w-5xl text-gray-800 border-gray-300 border-r-2 text-left flex-col md:static md:mt-6 md:w-1/6 my-2 w-full cursor-default z-20">
       <p className="mb-2 text-xl text-red-800">Your Progress</p>
       {/* <p className="text-md leading-none mb-6 font-light">{format} Module</p> */}
-
       <p className="text-lg leading-none">
         {studentPoints} of {totalPoints}
       </p>
       <p className="mb-4 text-sm tracking-wide uppercase font-light">
         Lynx Tokens
       </p>
-
       <p className="mb-4 text-sm tracking-wide uppercase font-light leading-snug">
         {questions.length} Questions/Skills
       </p>
+      {questions.map((questionId, index) => (
+        <CompletedQuestion
+          completedQuestions={completedQuestions}
+          props={props}
+          questionId={questionId}
+          key={index}
+        />
+      ))}
     </nav>
   ) : (
     <div></div>

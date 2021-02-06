@@ -19,8 +19,8 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
   const studentId = student.id;
   const categoryId = moduleInfo.categoryId;
 
-  console.log(moduleId);
-  console.log(studentId);
+  // console.log(moduleId);
+  // console.log(studentId);
 
   const { values: valuesStatus, onSubmit: onSubmitStatus } = useForm(
     startModuleCallback,

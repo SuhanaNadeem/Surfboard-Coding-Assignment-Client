@@ -49,11 +49,16 @@ export default function StudentModule(props) {
     variables: { moduleId: moduleId, studentId: student.id },
     client: studentClient,
   });
-  // console.log("student points");
-  // console.log(studentPoints);
-  // console.log("total points");
 
-  console.log(student);
+  const {
+    data: { getCompletedQuestionsByModule: completedQuestions } = {},
+    loading: loadingCompletedQuestionsByModule,
+    completedQuestionsByModuleError,
+  } = useQuery(GET_COMPLETED_QUESTIONS_BY_MODULE, {
+    variables: { moduleId: moduleId, studentId: student.id },
+    client: studentClient,
+  });
+
   const studentModule =
     student && module ? (
       <div className="h-full flex flex-col min-h-screen">
@@ -67,6 +72,7 @@ export default function StudentModule(props) {
             questions={module.questions}
             studentPoints={studentPoints}
             totalPoints={totalPoints}
+            completedQuestions={completedQuestions}
           />
           <div className="md:w-5/6 last:mt-4">
             <div className="mt-6 ml-10 grid gap-2 items-stretch justify-center overflow-y-auto h-96 rounded-lg border-gray-300 border-2">
@@ -75,6 +81,7 @@ export default function StudentModule(props) {
                   key={index}
                   props={props}
                   questionId={questionId}
+                  // completed={completedQuestions.includes(questionId)}
                 />
               ))}
             </div>
@@ -110,5 +117,10 @@ export const GET_TOTAL_POSSIBLE_MODULE_POINTS = gql`
 export const GET_MODULE_POINTS_BY_STUDENT = gql`
   query getModulePointsByStudent($moduleId: String!, $studentId: String!) {
     getModulePointsByStudent(moduleId: $moduleId, studentId: $studentId)
+  }
+`;
+export const GET_COMPLETED_QUESTIONS_BY_MODULE = gql`
+  query getCompletedQuestionsByModule($moduleId: String!, $studentId: String!) {
+    getCompletedQuestionsByModule(moduleId: $moduleId, studentId: $studentId)
   }
 `;

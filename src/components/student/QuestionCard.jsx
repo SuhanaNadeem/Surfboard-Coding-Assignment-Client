@@ -28,7 +28,7 @@ export default function QuestionCard({ props, questionId }) {
           console.log("go");
           // props.history.push(`/module/${module.id}`);
         }}
-        className="flex border-2 border-red-800 px-4 py-2 text-red-800 rounded-lg transition-all duration-150 md:hover:-translate-y-1 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
+        className="flex border-2 border-red-800 px-4 py-2 text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
       >
         START
       </button>
