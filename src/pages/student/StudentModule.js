@@ -60,7 +60,7 @@ export default function StudentModule(props) {
   });
 
   const studentModule =
-    student && module ? (
+    student && module && completedQuestions ? (
       <div className="h-full flex flex-col min-h-screen">
         <NavBar />
         <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-36 pb-10">
@@ -81,7 +81,7 @@ export default function StudentModule(props) {
                   key={index}
                   props={props}
                   questionId={questionId}
-                  // completed={completedQuestions.includes(questionId)}
+                  complete={completedQuestions.includes(questionId)}
                 />
               ))}
             </div>

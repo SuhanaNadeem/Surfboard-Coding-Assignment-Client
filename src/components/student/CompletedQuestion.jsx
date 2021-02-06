@@ -3,8 +3,7 @@ import { StudentAuthContext } from "../../context/studentAuth";
 
 import { gql, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
-import { BsCheckCircle } from "react-icons/bs";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { CgCloseO, CgCheckO } from "react-icons/cg";
 
 export default function CompletedQuestion({
   props,
@@ -28,10 +27,8 @@ export default function CompletedQuestion({
       <p className="text-sm tracking-wide font-light text-red-800 leading-snug mr-2 ">
         {question.questionName}
       </p>
-      {completedQuestions.includes(questionId) && <BsCheckCircle size={16} />}
-      {!completedQuestions.includes(questionId) && (
-        <IoIosCloseCircleOutline size={18} />
-      )}
+      {completedQuestions.includes(questionId) && <CgCheckO size={16} />}
+      {!completedQuestions.includes(questionId) && <CgCloseO size={16} />}
     </div>
   ) : (
     <div></div>
