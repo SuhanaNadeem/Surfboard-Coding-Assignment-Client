@@ -58,6 +58,7 @@ export default function StudentModule(props) {
     variables: { moduleId: moduleId, studentId: student.id },
     client: studentClient,
   });
+  console.log(completedQuestions);
 
   const studentModule =
     student && module && completedQuestions ? (

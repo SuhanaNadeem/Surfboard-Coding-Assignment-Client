@@ -4,9 +4,12 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
 import { StudentAuthContext } from "../../context/studentAuth";
+import { GET_COMPLETED_QUESTIONS_BY_MODULE } from "../../pages/student/StudentModule";
 export default function QuestionModal({ props, question, complete }) {
   const { student } = useContext(StudentAuthContext);
   const studentId = student.id;
+  const moduleId = question.moduleId;
+
   const questionId = question.id;
   const [errors, setErrors] = useState({});
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +23,14 @@ export default function QuestionModal({ props, question, complete }) {
   );
 
   const [startQuestion, { loading }] = useMutation(START_QUESTION, {
-    refetchQueries: [],
+    client: studentClient,
+    refetchQueries: [
+      {
+        query: GET_COMPLETED_QUESTIONS_BY_MODULE,
+        variables: { moduleId, studentId },
+      },
+    ],
+
     update(proxy, { data: { startQuestion: startQuestionData } }) {
       setIsOpen(!isOpen);
 
@@ -61,7 +71,7 @@ export default function QuestionModal({ props, question, complete }) {
 
           <div className="fixed mx-auto overflow-auto inset-0 overscroll-contain max-w-lg my-2 px-3 py-4 bg-white z-40 rounded-lg shadow-xl z-20">
             <h6 className=" font-semibold text-2xl uppercase tracking-wide ">
-              {question.questionName}
+              {question.questionName} {question.points}
             </h6>
 
             <div className="flex flex-col">
