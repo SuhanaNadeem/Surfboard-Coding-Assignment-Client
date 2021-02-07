@@ -11,28 +11,19 @@ import QuestionModalCard from "./QuestionModalCard";
 export default function QuestionModal({ props, question, complete }) {
   const { student } = useContext(StudentAuthContext);
   const studentId = student.id;
-  const moduleId = question.moduleId;
 
   const questionId = question.id;
   const [errors, setErrors] = useState({});
   const [isOpen, setIsOpen] = useState(false);
 
-  const { values, onChange, onSubmit, onArrayChange } = useForm(
-    startQuestionCallback,
-    {
-      questionId,
-      studentId,
-    }
-  );
+  const { values, onSubmit } = useForm(startQuestionCallback, {
+    questionId,
+    studentId,
+  });
 
   const [startQuestion, { loading }] = useMutation(START_QUESTION, {
     client: studentClient,
-    refetchQueries: [
-      {
-        query: GET_COMPLETED_QUESTIONS_BY_MODULE,
-        variables: { moduleId, studentId },
-      },
-    ],
+    refetchQueries: [],
 
     update(proxy, { data: { startQuestion: startQuestionData } }) {
       setIsOpen(!isOpen);
@@ -55,7 +46,6 @@ export default function QuestionModal({ props, question, complete }) {
     e.preventDefault();
     setIsOpen(!isOpen);
   }
-
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -64,7 +54,7 @@ export default function QuestionModal({ props, question, complete }) {
           type="submit"
           className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
         >
-          {`${complete ? "revisit " : "Start "}`}
+          {`${complete ? "revisit" : "start"}`}
         </button>
       </form>
 

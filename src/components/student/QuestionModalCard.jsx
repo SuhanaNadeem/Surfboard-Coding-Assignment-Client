@@ -52,7 +52,9 @@ export default function QuestionModalCard({
       },
     ],
 
-    update(proxy, { data: { handleAnswerPoints: handleAnswerPointsData } }) {
+    update(proxy, mutationResult) {
+      console.log("result");
+      console.log(mutationResult);
       values.confirmTitle = "";
       setErrors({});
     },
@@ -69,7 +71,6 @@ export default function QuestionModalCard({
   // console.log(questionId);
   // console.log(answer);
   // console.log(question);
-
   return question ? (
     <form onSubmit={onSubmit} className="flex flex-col">
       <div className="flex items-center justify-center text-center mb-6">
@@ -88,9 +89,7 @@ export default function QuestionModalCard({
       <div className="flex items-center justify-start text-left leading-snug">
         <div className="md:w-11/12">
           {/* admin will upload images, but question type will store aws link. admin will upload + we'll store yt vid links */}
-          <h6 className="text-md font-light mt-4">
-            {question.questionDescription}
-          </h6>
+          <h6 className="text-md font-light">{question.questionDescription}</h6>
           {question.videoLink !== "" && (
             <div className="mt-4 ">
               <ReactPlayer
@@ -102,7 +101,7 @@ export default function QuestionModalCard({
             </div>
           )}
           {question.type === "Question" && (
-            <div className="flex">
+            <div className="flex mt-4">
               <input
                 className="md:w-3/4 shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none mr-4"
                 name="answer"
