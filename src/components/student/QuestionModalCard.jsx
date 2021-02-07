@@ -72,15 +72,27 @@ export default function QuestionModalCard({
 
   return question ? (
     <form onSubmit={onSubmit} className="flex flex-col">
-      <h3 className="text-3xl mb-6 text-red-800">{question.questionName}</h3>
-
+      <div className="flex items-center justify-center text-center mb-6">
+        <h3 className="text-3xl text-red-800 mx-auto">
+          {question.questionName}
+        </h3>
+        {question.imageLink !== "" && (
+          <div
+            className="bg-cover w-64 flex flex-col h-32 bg-center bg-no-repeat rounded-lg hover:shadow-md mx-auto"
+            style={{
+              backgroundImage: `url(${question.image})`,
+            }}
+          ></div>
+        )}
+      </div>
       <div className="flex items-center justify-start text-left leading-snug">
         <div className="md:w-11/12">
-          <h6 className="text-md font-light mb-4">
+          {/* admin will upload images, but question type will store aws link. admin will upload + we'll store yt vid links */}
+          <h6 className="text-md font-light mt-4">
             {question.questionDescription}
           </h6>
           {question.videoLink !== "" && (
-            <div className="">
+            <div className="mt-4 ">
               <ReactPlayer
                 url={question.videoLink}
                 width={448}

@@ -76,7 +76,7 @@ export default function QuestionModal({ props, question, complete }) {
             className="fixed inset-0 h-full w-full bg-gray-800 opacity-50 cursor-default z-20"
           ></button>
 
-          <div className="fixed mx-auto overflow-auto inset-0 overflow-y-auto overscroll-contain max-w-xl my-4 py-6 px-8 bg-white z-40 rounded-lg shadow-xl ">
+          <div className="fixed mx-auto overflow-auto inset-0 overflow-y-auto overscroll-contain max-w-2xl my-4 py-6 px-8 bg-white z-40 rounded-lg shadow-xl ">
             <QuestionModalCard
               props={props}
               question={question}
