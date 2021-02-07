@@ -76,27 +76,13 @@ export default function QuestionModal({ props, question, complete }) {
             className="fixed inset-0 h-full w-full bg-gray-800 opacity-50 cursor-default z-20"
           ></button>
 
-          <div className="fixed mx-auto overflow-auto inset-0 overscroll-contain max-w-lg my-2 px-3 py-4 bg-white z-40 rounded-lg shadow-xl z-20">
-            <h6 className=" font-semibold text-2xl uppercase tracking-wide ">
-              {question.questionName} {question.points}
-            </h6>
-
-            <div className="flex flex-col">
-              <QuestionModalCard
-                props={props}
-                question={question}
-                answer=""
-                complete={complete}
-              />
-              {/* <form onSubmit={onSubmit} noValidate>
-                <button
-                  onClick={toggleIsOpen}
-                  className=" border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
-                >
-                  Cancel
-                </button>
-              </form> */}
-            </div>
+          <div className="fixed mx-auto overflow-auto inset-0 overflow-y-auto overscroll-contain max-w-xl my-4 py-6 px-8 bg-white z-40 rounded-lg shadow-xl ">
+            <QuestionModalCard
+              props={props}
+              question={question}
+              answer=""
+              complete={complete}
+            />
           </div>
         </>
       ) : (
