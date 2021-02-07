@@ -32,6 +32,14 @@ export default function QuestionModalCard({
     variables: { questionId: questionId, studentId: studentId },
     client: studentClient,
   });
+  const {
+    data: { getHintByQuestion: hint } = {},
+    loading: loadingHint,
+    hintError,
+  } = useQuery(GET_HINT_BY_QUESTION, {
+    variables: { questionId: questionId },
+    client: studentClient,
+  });
 
   const { values, onChange, onSubmit } = useForm(handleAnswerPointsCallback, {
     answer,
@@ -126,6 +134,7 @@ export default function QuestionModalCard({
         >
           <GrNext size={32} />
         </button>
+        {/* TODO toggle Hint, toggle star, and toggle correct or not */}
       </div>
     </form>
   ) : (
@@ -150,5 +159,11 @@ export const HANDLE_ANSWER_POINTS = gql`
 export const GET_SAVED_ANSWER_BY_QUESTION = gql`
   query getSavedAnswerByQuestion($questionId: String!, $studentId: String!) {
     getSavedAnswerByQuestion(questionId: $questionId, studentId: $studentId)
+  }
+`;
+
+export const GET_HINT_BY_QUESTION = gql`
+  query getHintByQuestion($questionId: String!) {
+    getHintByQuestion(questionId: $questionId)
   }
 `;

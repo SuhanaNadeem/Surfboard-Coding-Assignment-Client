@@ -50,7 +50,6 @@ export default function QuestionModal({ props, question, complete }) {
     <>
       <form onSubmit={onSubmit}>
         <button
-          onClick={toggleIsOpen}
           type="submit"
           className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
         >

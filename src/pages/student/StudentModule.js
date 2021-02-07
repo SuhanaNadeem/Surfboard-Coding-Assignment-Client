@@ -74,7 +74,7 @@ export default function StudentModule(props) {
             totalPoints={totalPoints}
             completedQuestions={completedQuestions}
           />
-          <div className="md:w-5/6 last:mt-4 overflow-y-auto mt-6 ml-10 	">
+          <div className="md:w-5/6 mt-6 ml-10">
             <div className="grid gap-4 items-stretch justify-start h-full pl-2">
               {module.questions.map((questionId, index) => (
                 <QuestionCard
