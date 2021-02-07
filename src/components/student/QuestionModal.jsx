@@ -1,10 +1,13 @@
 import React, { useContext, useState } from "react";
 
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
 import { StudentAuthContext } from "../../context/studentAuth";
 import { GET_COMPLETED_QUESTIONS_BY_MODULE } from "../../pages/student/StudentModule";
+
+import QuestionModalCard from "./QuestionModalCard";
+
 export default function QuestionModal({ props, question, complete }) {
   const { student } = useContext(StudentAuthContext);
   const studentId = student.id;
@@ -55,12 +58,16 @@ export default function QuestionModal({ props, question, complete }) {
 
   return (
     <>
-      <button
-        onClick={toggleIsOpen}
-        className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
-      >
-        {`${complete ? "Resume " : "Start "}`}
-      </button>
+      <form onSubmit={onSubmit}>
+        <button
+          onClick={toggleIsOpen}
+          type="submit"
+          className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
+        >
+          {`${complete ? "revisit " : "Start "}`}
+        </button>
+      </form>
+
       {isOpen && !loading && errors ? (
         <>
           <button
@@ -75,14 +82,20 @@ export default function QuestionModal({ props, question, complete }) {
             </h6>
 
             <div className="flex flex-col">
-              <form onSubmit={onSubmit} noValidate>
+              <QuestionModalCard
+                props={props}
+                question={question}
+                answer=""
+                complete={complete}
+              />
+              {/* <form onSubmit={onSubmit} noValidate>
                 <button
                   onClick={toggleIsOpen}
                   className=" border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
                 >
                   Cancel
                 </button>
-              </form>
+              </form> */}
             </div>
           </div>
         </>

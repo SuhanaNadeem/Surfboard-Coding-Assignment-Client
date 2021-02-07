@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 
 import { useHistory } from "react-router-dom";
 import CategoryCard from "./CategoryCard";

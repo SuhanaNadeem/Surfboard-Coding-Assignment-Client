@@ -24,7 +24,7 @@ export default function ModuleSummaryBar({
   });
 
   return studentObject ? (
-    <nav className="flex flex-shrink-0 items-start justify-start md:max-w-2xl xl:max-w-5xl text-gray-800 border-gray-300 border-r-2 text-left flex-col md:static md:mt-6 md:w-1/6 my-2 w-full cursor-default z-20">
+    <nav className="flex flex-shrink-0 items-start justify-start md:max-w-2xl xl:max-w-5xl text-gray-800 border-gray-300 border-r-2 text-left flex-col md:static md:mt-6 md:w-1/6 mt-2 w-full cursor-default z-20">
       <p className="mb-2 text-xl text-red-800">Your Progress</p>
       {/* <p className="text-md leading-none mb-6 font-light">{format} Module</p> */}
       <p className="text-lg leading-none">

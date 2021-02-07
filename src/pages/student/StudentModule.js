@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react";
-import { useForm } from "../../util/hooks";
+import React, { useContext } from "react";
 import { StudentAuthContext } from "../../context/studentAuth";
 
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import NavBar from "../../components/student/NavBar";
 import Footer from "../../components/student/Footer";
 import { studentClient } from "../../GraphqlApolloClients";
@@ -58,7 +57,7 @@ export default function StudentModule(props) {
     variables: { moduleId: moduleId, studentId: student.id },
     client: studentClient,
   });
-  console.log(completedQuestions);
+  // console.log(completedQuestions);
 
   const studentModule =
     student && module && completedQuestions ? (
@@ -75,8 +74,8 @@ export default function StudentModule(props) {
             totalPoints={totalPoints}
             completedQuestions={completedQuestions}
           />
-          <div className="md:w-5/6 last:mt-4">
-            <div className="mt-6 ml-10 grid gap-2 items-stretch justify-center overflow-y-auto h-96 rounded-lg border-gray-300 border-2">
+          <div className="md:w-5/6 last:mt-4 overflow-y-auto mt-6 ml-10 	">
+            <div className="grid gap-4 items-stretch justify-start h-full pl-2">
               {module.questions.map((questionId, index) => (
                 <QuestionCard
                   key={index}
