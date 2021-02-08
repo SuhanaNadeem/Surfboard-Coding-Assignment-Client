@@ -79,6 +79,7 @@ export default function StudentModule(props) {
               {module.questions.map((questionId, index) => (
                 <QuestionCard
                   key={index}
+                  num={index}
                   props={props}
                   questionId={questionId}
                   complete={completedQuestions.includes(questionId)}

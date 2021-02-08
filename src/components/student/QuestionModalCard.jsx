@@ -6,10 +6,11 @@ import { useForm } from "../../util/hooks";
 import { StudentAuthContext } from "../../context/studentAuth";
 import {
   GET_COMPLETED_QUESTIONS_BY_MODULE,
+  GET_MODULE_BY_ID,
   GET_MODULE_POINTS_BY_STUDENT,
 } from "../../pages/student/StudentModule";
 
-import { GrNext } from "react-icons/gr";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import ReactPlayer from "react-player";
 
 export default function QuestionModalCard({
@@ -17,6 +18,7 @@ export default function QuestionModalCard({
   question,
   answer,
   complete,
+  num,
 }) {
   const { student } = useContext(StudentAuthContext);
   const studentId = student.id;
@@ -41,6 +43,15 @@ export default function QuestionModalCard({
     client: studentClient,
   });
 
+  const {
+    data: { getModuleById: module } = {},
+    loading: loadingGetModuleById,
+    getModuleByIdError,
+  } = useQuery(GET_MODULE_BY_ID, {
+    variables: { moduleId: moduleId },
+    client: studentClient,
+  });
+
   const { values, onChange, onSubmit } = useForm(handleAnswerPointsCallback, {
     answer,
     questionId,
@@ -60,9 +71,9 @@ export default function QuestionModalCard({
       },
     ],
 
-    update(proxy, mutationResult) {
-      console.log("result");
-      console.log(mutationResult);
+    update(proxy, { data }) {
+      console.log("object");
+      console.log(data.handleAnswerPoints);
       values.confirmTitle = "";
       setErrors({});
     },
@@ -79,31 +90,36 @@ export default function QuestionModalCard({
   // console.log(questionId);
   // console.log(answer);
   // console.log(question);
+  // console.log("num");
+  // console.log(num);
   return question ? (
-    <form onSubmit={onSubmit} className="flex flex-col">
-      <div className="flex items-center justify-center text-center mb-6">
-        <h3 className="text-3xl text-red-800 mx-auto">
+    <div className="justify-between flex flex-col h-full">
+      <form
+        onSubmit={onSubmit}
+        className="flex flex-col items-center justify-center text-center"
+      >
+        <h3 className="text-3xl text-red-800 mx-auto mb-4">
           {question.questionName}
         </h3>
-        {question.imageLink !== "" && (
+        {question.image && (
           <div
-            className="bg-cover w-64 flex flex-col h-32 bg-center bg-no-repeat rounded-lg hover:shadow-md mx-auto"
+            className="bg-cover mb-6 w-64 flex flex-col h-32 bg-center bg-no-repeat rounded-lg hover:shadow-md mx-auto"
             style={{
               backgroundImage: `url(${question.image})`,
             }}
           ></div>
         )}
-      </div>
-      <div className="flex items-center justify-start text-left leading-snug">
-        <div className="md:w-11/12">
+        <div className="">
           {/* admin will upload images, but question type will store aws link. admin will upload + we'll store yt vid links */}
-          <h6 className="text-md font-light">{question.questionDescription}</h6>
-          {question.videoLink !== "" && (
+          <h6 className="text-md font-light leading-snug">
+            {question.questionDescription}
+          </h6>
+          {question.videoLink && (
             <div className="mt-4 ">
               <ReactPlayer
                 url={question.videoLink}
-                width={448}
-                height={252}
+                width={557.33}
+                height={300}
                 muted={true}
               />
             </div>
@@ -127,16 +143,26 @@ export default function QuestionModalCard({
             </div>
           )}
         </div>
-        <button
-          type={!complete && question.type === "Skill" ? `submit` : `button`}
-          className="md:w-1/12 pl-2"
-          // {!complete && question.type === "Skill" && `onClick=${console.log("hi")}`}
-        >
-          <GrNext size={32} />
-        </button>
+
         {/* TODO toggle Hint, toggle star, and toggle correct or not */}
+      </form>
+      <div className="flex mt-6">
+        {num !== 0 && (
+          <button className="mx-auto">
+            <BsChevronLeft size={32} />
+          </button>
+        )}
+        {num + 1 !== module.questions.length && (
+          <button
+            className="mx-auto"
+            type={!complete && question.type === "Skill" ? `submit` : `button`}
+            // {!complete && question.type === "Skill" && `onClick=${console.log("hi")}`}
+          >
+            <BsChevronRight size={32} />
+          </button>
+        )}
       </div>
-    </form>
+    </div>
   ) : (
     <div></div>
   );

@@ -8,10 +8,9 @@ import { GET_COMPLETED_QUESTIONS_BY_MODULE } from "../../pages/student/StudentMo
 
 import QuestionModalCard from "./QuestionModalCard";
 
-export default function QuestionModal({ props, question, complete }) {
+export default function QuestionModal({ props, question, complete, num }) {
   const { student } = useContext(StudentAuthContext);
   const studentId = student.id;
-
   const questionId = question.id;
   const [errors, setErrors] = useState({});
   const [isOpen, setIsOpen] = useState(false);
@@ -65,12 +64,13 @@ export default function QuestionModal({ props, question, complete }) {
             className="fixed inset-0 h-full w-full bg-gray-800 opacity-50 cursor-default z-20"
           ></button>
 
-          <div className="fixed mx-auto overflow-auto inset-0 overflow-y-auto overscroll-contain max-w-2xl my-4 py-6 px-8 bg-white z-40 rounded-lg shadow-xl ">
+          <div className="fixed mx-auto overflow-auto inset-0 overflow-y-auto overscroll-contain max-w-2xl my-4 p-8 bg-white z-40 rounded-lg shadow-xl ">
             <QuestionModalCard
               props={props}
               question={question}
               answer=""
               complete={complete}
+              num={num}
             />
           </div>
         </>

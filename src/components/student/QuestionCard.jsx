@@ -3,7 +3,7 @@ import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
 import QuestionModal from "./QuestionModal";
-export default function QuestionCard({ props, questionId, complete }) {
+export default function QuestionCard({ props, questionId, complete, num }) {
   const {
     data: { getQuestionById: question } = {},
     loading: loadingQuestion,
@@ -30,7 +30,12 @@ export default function QuestionCard({ props, questionId, complete }) {
           {question.points} lynx tokens
         </p>
       </div>
-      <QuestionModal props={props} question={question} complete={complete} />
+      <QuestionModal
+        props={props}
+        question={question}
+        complete={complete}
+        num={num}
+      />
     </div>
   ) : (
     <div></div>
