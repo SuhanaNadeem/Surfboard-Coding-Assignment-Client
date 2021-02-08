@@ -1,17 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { gql, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
 import QuestionModal from "./QuestionModal";
-export default function QuestionCard({ props, questionId, complete, num }) {
+export default function QuestionCard({
+  props,
+  questionId,
+  complete,
+  num,
+  parsedActiveQuestionId,
+  moduleId,
+}) {
+  const [activeQuestionId, setActiveQuestionId] = useState(
+    parsedActiveQuestionId
+  );
   const {
     data: { getQuestionById: question } = {},
     loading: loadingQuestion,
     questionError,
+    refetch: refetchQuestion,
   } = useQuery(GET_QUESTION_BY_ID, {
-    variables: { questionId: questionId },
+    variables: { questionId },
     client: studentClient,
   });
+  function handleQuestionClick(selectedQuestionId) {
+    if (selectedQuestionId) {
+      setActiveQuestionId(selectedQuestionId);
+      console.log("hihi");
+      refetchQuestion({ questionId: selectedQuestionId });
+
+      props.history.push("/module/" + moduleId + "/" + questionId);
+    } else {
+      setActiveQuestionId("");
+      props.history.push("/module/" + moduleId);
+    }
+  }
+  // if (questionId) {
+  //   refetchQuestion();
+  // }
+  // useEffect(() => {
+  //   console.log(activeQuestionId);
+  //   refetchQuestion({ questionId: activeQuestionId });
+  // }, [activeQuestionId]);
 
   return question ? (
     <div
@@ -35,6 +65,8 @@ export default function QuestionCard({ props, questionId, complete, num }) {
         question={question}
         complete={complete}
         num={num}
+        handleQuestionClick={handleQuestionClick}
+        isActiveQuestion={questionId === activeQuestionId}
       />
     </div>
   ) : (

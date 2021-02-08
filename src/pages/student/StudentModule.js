@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { StudentAuthContext } from "../../context/studentAuth";
 
 import { gql, useQuery } from "@apollo/client";
@@ -17,6 +17,13 @@ export default function StudentModule(props) {
 
   // console.log(student);
   const moduleId = props.match.params.moduleId;
+  const selectedQuestionId = props.match.params.questionId;
+
+  var parsedActiveQuestionId = "";
+  if (selectedQuestionId) {
+    parsedActiveQuestionId = selectedQuestionId;
+  }
+
   // startModule AND addInProgressModule/addCompleted must be managed
   // console.log(moduleId);
   const {
@@ -81,7 +88,9 @@ export default function StudentModule(props) {
                   key={index}
                   num={index}
                   props={props}
+                  moduleId={moduleId}
                   questionId={questionId}
+                  parsedActiveQuestionId={parsedActiveQuestionId}
                   complete={completedQuestions.includes(questionId)}
                 />
               ))}

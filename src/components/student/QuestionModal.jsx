@@ -8,12 +8,19 @@ import { GET_COMPLETED_QUESTIONS_BY_MODULE } from "../../pages/student/StudentMo
 
 import QuestionModalCard from "./QuestionModalCard";
 
-export default function QuestionModal({ props, question, complete, num }) {
+export default function QuestionModal({
+  props,
+  question,
+  complete,
+  num,
+  isActiveQuestion,
+  handleQuestionClick,
+}) {
   const { student } = useContext(StudentAuthContext);
   const studentId = student.id;
   const questionId = question.id;
   const [errors, setErrors] = useState({});
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(isActiveQuestion);
 
   const { values, onSubmit } = useForm(startQuestionCallback, {
     questionId,
@@ -25,13 +32,15 @@ export default function QuestionModal({ props, question, complete, num }) {
     refetchQueries: [],
 
     update(proxy, { data: { startQuestion: startQuestionData } }) {
-      setIsOpen(!isOpen);
+      setIsOpen(true);
 
       values.confirmTitle = "";
       setErrors({});
+      handleQuestionClick(questionId);
     },
     onError(err) {
       console.log(err);
+      console.log(err.graphQLErrors[0].extensions.exception.errors);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
@@ -41,10 +50,13 @@ export default function QuestionModal({ props, question, complete, num }) {
     startQuestion();
   }
 
-  function toggleIsOpen(e) {
-    e.preventDefault();
+  function toggleIsOpen() {
+    handleQuestionClick("");
     setIsOpen(!isOpen);
   }
+  // if (isActiveQuestion) {
+  //   startQuestion();
+  // }
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -71,6 +83,7 @@ export default function QuestionModal({ props, question, complete, num }) {
               answer=""
               complete={complete}
               num={num}
+              handleQuestionClick={handleQuestionClick}
             />
           </div>
         </>

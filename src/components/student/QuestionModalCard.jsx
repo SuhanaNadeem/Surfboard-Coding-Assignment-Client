@@ -12,6 +12,7 @@ import {
 
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import ReactPlayer from "react-player";
+import { GET_QUESTION_BY_ID } from "./CompletedQuestion";
 
 export default function QuestionModalCard({
   props,
@@ -19,6 +20,7 @@ export default function QuestionModalCard({
   answer,
   complete,
   num,
+  handleQuestionClick,
 }) {
   const { student } = useContext(StudentAuthContext);
   const studentId = student.id;
@@ -29,7 +31,6 @@ export default function QuestionModalCard({
   const {
     data: { getSavedAnswerByQuestion: savedAnswer } = {},
     loading: loadingSavedAnswer,
-    savedAnswerError,
   } = useQuery(GET_SAVED_ANSWER_BY_QUESTION, {
     variables: { questionId: questionId, studentId: studentId },
     client: studentClient,
@@ -46,7 +47,6 @@ export default function QuestionModalCard({
   const {
     data: { getModuleById: module } = {},
     loading: loadingGetModuleById,
-    getModuleByIdError,
   } = useQuery(GET_MODULE_BY_ID, {
     variables: { moduleId: moduleId },
     client: studentClient,
@@ -87,11 +87,19 @@ export default function QuestionModalCard({
   function handleAnswerPointsCallback() {
     handleAnswerPoints();
   }
-  // console.log(questionId);
-  // console.log(answer);
-  // console.log(question);
-  // console.log("num");
-  // console.log(num);
+
+  function togglePrevOpen() {
+    handleQuestionClick(
+      module && module.questions[module.questions.indexOf(questionId) - 1]
+    );
+  }
+
+  function toggleNextOpen() {
+    handleQuestionClick(
+      module && module.questions[module.questions.indexOf(questionId) + 1]
+    );
+  }
+
   return question ? (
     <div className="justify-between flex flex-col h-full">
       <form
@@ -147,20 +155,25 @@ export default function QuestionModalCard({
         {/* TODO toggle Hint, toggle star, and toggle correct or not */}
       </form>
       <div className="flex mt-6">
-        {num !== 0 && (
-          <button className="mx-auto">
+        {num != 0 && (
+          <button className="mx-auto" onClick={togglePrevOpen}>
             <BsChevronLeft size={32} />
           </button>
         )}
-        {num + 1 !== module.questions.length && (
-          <button
-            className="mx-auto"
-            type={!complete && question.type === "Skill" ? `submit` : `button`}
-            // {!complete && question.type === "Skill" && `onClick=${console.log("hi")}`}
-          >
-            <BsChevronRight size={32} />
-          </button>
-        )}
+        {module &&
+          module.questions.indexOf(questionId) + 1 !=
+            module.questions.length && (
+            <button
+              className="mx-auto"
+              type={
+                !complete && question.type === "Skill" ? `submit` : `button`
+              }
+              onClick={toggleNextOpen}
+              // {!complete && question.type === "Skill" && `onClick=${console.log("hi")}`}
+            >
+              <BsChevronRight size={32} />
+            </button>
+          )}
       </div>
     </div>
   ) : (

@@ -27,7 +27,17 @@ function App() {
           <StudentAuthRoute exact path="/signup" component={SignupStudent} />
           <Route exact path="/dashboard" component={StudentDashboard} />
           <Route exact path="/manageAccount" component={StudentManageAccount} />
-          <Route exact path="/module/:moduleId" component={StudentModule} />
+          <Route
+            exact
+            path="/module/:moduleId/:questionId?"
+            component={StudentModule}
+          />
+          {/* 
+          Question Id is an optional field
+          
+          
+          
+          */}
         </Router>
       </StudentAuthProvider>
 
