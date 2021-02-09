@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
@@ -12,21 +12,28 @@ import {
 
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import ReactPlayer from "react-player";
-import { GET_QUESTION_BY_ID } from "./CompletedQuestion";
+import { GET_QUESTION_BY_ID } from "./QuestionCard";
 
-export default function QuestionModalCard({
+function QuestionModalCard({
   props,
-  question,
+  questionId,
   answer,
   complete,
-  num,
   handleQuestionClick,
+  moduleId,
 }) {
   const { student } = useContext(StudentAuthContext);
   const studentId = student.id;
-  const moduleId = question.moduleId;
-  const questionId = question.id;
   const [errors, setErrors] = useState({});
+  const {
+    data: { getQuestionById: question } = {},
+    loading: loadingQuestion,
+    questionError,
+    refetch: refetchQuestion,
+  } = useQuery(GET_QUESTION_BY_ID, {
+    variables: { questionId },
+    client: studentClient,
+  });
 
   const {
     data: { getSavedAnswerByQuestion: savedAnswer } = {},
@@ -35,6 +42,7 @@ export default function QuestionModalCard({
     variables: { questionId: questionId, studentId: studentId },
     client: studentClient,
   });
+
   const {
     data: { getHintByQuestion: hint } = {},
     loading: loadingHint,
@@ -52,12 +60,25 @@ export default function QuestionModalCard({
     client: studentClient,
   });
 
-  const { values, onChange, onSubmit } = useForm(handleAnswerPointsCallback, {
-    answer,
-    questionId,
-    studentId,
-  });
+  console.log(questionId);
 
+  const { values, onChange, onSubmit, setValues } = useForm(
+    handleAnswerPointsCallback,
+    {
+      answer,
+      questionId,
+      studentId,
+    }
+  );
+  // if (questionId) {
+  //   setValues({ ...values, questionId });
+  // }
+  useEffect(() => {
+    if (questionId) {
+      setValues({ ...values, questionId });
+    }
+  }, [questionId]);
+  console.log(values);
   const [handleAnswerPoints, { loading }] = useMutation(HANDLE_ANSWER_POINTS, {
     client: studentClient,
     refetchQueries: [
@@ -78,7 +99,9 @@ export default function QuestionModalCard({
       setErrors({});
     },
     onError(err) {
+      console.log(values);
       console.log(err);
+      console.log(err.graphQLErrors[0].extensions.exception.errors);
       // setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
@@ -89,79 +112,84 @@ export default function QuestionModalCard({
   }
 
   function togglePrevOpen() {
-    handleQuestionClick(
-      module && module.questions[module.questions.indexOf(questionId) - 1]
-    );
+    // console.log("de");
+    var prevQuesId =
+      module && module.questions[module.questions.indexOf(question.id) - 1];
+    // refetchQuestion({ questionId: prevQuesId });
+    handleQuestionClick(prevQuesId);
   }
 
   function toggleNextOpen() {
-    handleQuestionClick(
-      module && module.questions[module.questions.indexOf(questionId) + 1]
-    );
+    // console.log("bug");
+    // console.log(module.questions[module.questions.indexOf(question.id)]);
+    var nextQuesId =
+      module && module.questions[module.questions.indexOf(question.id) + 1];
+    // refetchQuestion({ questionId: nextQuesId });
+    handleQuestionClick(nextQuesId);
   }
 
   return question ? (
     <div className="justify-between flex flex-col h-full">
       <form
         onSubmit={onSubmit}
-        className="flex flex-col items-center justify-center text-center"
+        className="flex flex-col items-center justify-start text-center overflow-y-auto "
       >
         <h3 className="text-3xl text-red-800 mx-auto mb-4">
           {question.questionName}
         </h3>
-        {question.image && (
-          <div
-            className="bg-cover mb-6 w-64 flex flex-col h-32 bg-center bg-no-repeat rounded-lg hover:shadow-md mx-auto"
-            style={{
-              backgroundImage: `url(${question.image})`,
-            }}
-          ></div>
-        )}
-        <div className="">
-          {/* admin will upload images, but question type will store aws link. admin will upload + we'll store yt vid links */}
-          <h6 className="text-md font-light leading-snug">
-            {question.questionDescription}
-          </h6>
-          {question.videoLink && (
-            <div className="mt-4 ">
-              <ReactPlayer
-                url={question.videoLink}
-                width={557.33}
-                height={300}
-                muted={true}
-              />
-            </div>
-          )}
-          {question.type === "Question" && (
-            <div className="flex mt-4">
-              <input
-                className="md:w-3/4 shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none mr-4"
-                name="answer"
-                placeholder={savedAnswer ? savedAnswer : `Enter an answer`} // should be savedanswer
-                value={values.answer}
-                onChange={onChange}
-                type="text"
-              />
-              <button
-                type="submit"
-                className="md:w-1/4 border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justif-center"
-              >
-                Submit
-              </button>
-            </div>
+        <div>
+          {question.image && (
+            <div
+              className="bg-cover mb-6 w-64 h-32 bg-center bg-no-repeat rounded-lg hover:shadow-md mx-auto"
+              style={{
+                backgroundImage: `url(${question.image})`,
+              }}
+            ></div>
           )}
         </div>
-
+        {/* admin will upload images, but question type will store aws link. admin will upload + we'll store yt vid links */}
+        <h6 className="text-md font-light leading-snug">
+          {question.questionDescription}
+        </h6>
+        {question.videoLink && (
+          <div className="mt-4 ">
+            <ReactPlayer
+              url={question.videoLink}
+              width={557.33}
+              height={300}
+              muted={true}
+            />
+          </div>
+        )}
+        {question.type === "Question" && (
+          <div className="flex mt-4">
+            <input
+              className="md:w-3/4 shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none mr-4"
+              name="answer"
+              placeholder={savedAnswer ? savedAnswer : `Enter an answer`} // should be savedanswer
+              value={values.answer}
+              onChange={onChange}
+              type="text"
+            />
+            <button
+              type="submit"
+              className="md:w-1/4 border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex"
+            >
+              Submit
+            </button>
+          </div>
+        )}
         {/* TODO toggle Hint, toggle star, and toggle correct or not */}
       </form>
-      <div className="flex mt-6">
-        {num != 0 && (
+      <form className="flex mt-6" onSubmit={onSubmit}>
+        {module && module.questions.indexOf(question.id) != 0 && (
           <button className="mx-auto" onClick={togglePrevOpen}>
             <BsChevronLeft size={32} />
           </button>
         )}
+
         {module &&
-          module.questions.indexOf(questionId) + 1 !=
+          module.questions.indexOf(question.id) + 1 !=
             module.questions.length && (
             <button
               className="mx-auto"
@@ -174,7 +202,7 @@ export default function QuestionModalCard({
               <BsChevronRight size={32} />
             </button>
           )}
-      </div>
+      </form>
     </div>
   ) : (
     <div></div>
@@ -206,3 +234,5 @@ export const GET_HINT_BY_QUESTION = gql`
     getHintByQuestion(questionId: $questionId)
   }
 `;
+
+export default QuestionModalCard;

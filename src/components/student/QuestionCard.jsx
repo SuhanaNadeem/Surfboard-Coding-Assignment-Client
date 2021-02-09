@@ -1,48 +1,60 @@
 import React, { useEffect, useState } from "react";
 
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
 import QuestionModal from "./QuestionModal";
-export default function QuestionCard({
+import { useForm } from "../../util/hooks";
+function QuestionCard({
   props,
   questionId,
   complete,
-  num,
-  parsedActiveQuestionId,
-  moduleId,
+  activeQuestionId,
+  handleQuestionClick,
+  studentId,
+  setIsOpen,
+  isOpen,
 }) {
-  const [activeQuestionId, setActiveQuestionId] = useState(
-    parsedActiveQuestionId
-  );
   const {
     data: { getQuestionById: question } = {},
     loading: loadingQuestion,
     questionError,
-    refetch: refetchQuestion,
+    // refetch: refetchQuestion,
   } = useQuery(GET_QUESTION_BY_ID, {
     variables: { questionId },
     client: studentClient,
   });
-  function handleQuestionClick(selectedQuestionId) {
-    if (selectedQuestionId) {
-      setActiveQuestionId(selectedQuestionId);
-      console.log("hihi");
-      refetchQuestion({ questionId: selectedQuestionId });
 
-      props.history.push("/module/" + moduleId + "/" + questionId);
-    } else {
-      setActiveQuestionId("");
-      props.history.push("/module/" + moduleId);
-    }
+  const [errors, setErrors] = useState({});
+
+  const { values, onSubmit } = useForm(startQuestionCallback, {
+    questionId,
+    studentId,
+  });
+
+  const [startQuestion, { loading }] = useMutation(START_QUESTION, {
+    client: studentClient,
+    refetchQueries: [],
+
+    update(proxy, { data: { startQuestion: startQuestionData } }) {
+      setIsOpen(true);
+
+      values.confirmTitle = "";
+      setErrors({});
+      handleQuestionClick(questionId);
+    },
+    onError(err) {
+      console.log(err);
+      console.log(err.graphQLErrors[0].extensions.exception.errors);
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    },
+    variables: values,
+  });
+
+  function startQuestionCallback() {
+    startQuestion();
   }
-  // if (questionId) {
-  //   refetchQuestion();
-  // }
-  // useEffect(() => {
-  //   console.log(activeQuestionId);
-  //   refetchQuestion({ questionId: activeQuestionId });
-  // }, [activeQuestionId]);
 
+  // console.log(question);
   return question ? (
     <div
       className={`${
@@ -60,19 +72,31 @@ export default function QuestionCard({
           {question.points} lynx tokens
         </p>
       </div>
-      <QuestionModal
-        props={props}
-        question={question}
-        complete={complete}
-        num={num}
-        handleQuestionClick={handleQuestionClick}
-        isActiveQuestion={questionId === activeQuestionId}
-      />
+      <form onSubmit={onSubmit}>
+        <button
+          type="submit"
+          className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
+        >
+          {`${complete ? "revisit" : "start"}`}
+        </button>
+      </form>
     </div>
   ) : (
     <div></div>
   );
 }
+
+export const START_QUESTION = gql`
+  mutation startQuestion($questionId: String!, $studentId: String!) {
+    startQuestion(questionId: $questionId, studentId: $studentId) {
+      key
+      value
+      studentId
+      id
+    }
+  }
+`;
+
 export const GET_QUESTION_BY_ID = gql`
   query getQuestionById($questionId: String!) {
     getQuestionById(questionId: $questionId) {
@@ -92,3 +116,4 @@ export const GET_QUESTION_BY_ID = gql`
     }
   }
 `;
+export default QuestionCard;

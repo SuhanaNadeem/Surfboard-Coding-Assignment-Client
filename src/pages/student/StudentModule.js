@@ -1,12 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { StudentAuthContext } from "../../context/studentAuth";
 
-import { gql, useQuery } from "@apollo/client";
+import { gql, useLazyQuery, useQuery } from "@apollo/client";
 import NavBar from "../../components/student/NavBar";
 import Footer from "../../components/student/Footer";
 import { studentClient } from "../../GraphqlApolloClients";
 import ModuleSummaryBar from "../../components/student/ModuleSummaryBar";
-import QuestionCard from "../../components/student/QuestionCard";
+import QuestionCard, {
+  GET_QUESTION_BY_ID,
+} from "../../components/student/QuestionCard";
+import QuestionModal from "../../components/student/QuestionModal";
 
 export default function StudentModule(props) {
   const { student } = useContext(StudentAuthContext);
@@ -14,18 +17,28 @@ export default function StudentModule(props) {
   if (!student) {
     props.history.push("/login");
   }
+  // const [activeQuestionId, setActiveQuestionId] = useState(
+  //   selectedQuestionId
+  // );
 
   // console.log(student);
   const moduleId = props.match.params.moduleId;
-  const selectedQuestionId = props.match.params.questionId;
+  var selectedQuestionId = props.match.params.questionId;
 
-  var parsedActiveQuestionId = "";
-  if (selectedQuestionId) {
-    parsedActiveQuestionId = selectedQuestionId;
-  }
+  // useEffect(() => {
+  //   setActiveQuestionId(selectedQuestionId);
 
-  // startModule AND addInProgressModule/addCompleted must be managed
-  // console.log(moduleId);
+  // }, [selectedQuestionId]);
+
+  const [activeQuestionId, setActiveQuestionId] = useState(selectedQuestionId);
+
+  useEffect(() => {
+    console.log(11);
+    setActiveQuestionId(selectedQuestionId);
+    // console.log(activeQuestionId);
+    // props.history.push(`/module/${moduleId}/${selectedQuestionId}`);
+  }, [setActiveQuestionId, selectedQuestionId]);
+
   const {
     data: { getModuleById: module } = {},
     loading: loadingModule,
@@ -34,8 +47,6 @@ export default function StudentModule(props) {
     variables: { moduleId: moduleId },
     client: studentClient,
   });
-
-  // console.log(module);
 
   const {
     data: { getTotalPossibleModulePoints: totalPoints } = {},
@@ -64,8 +75,33 @@ export default function StudentModule(props) {
     variables: { moduleId: moduleId, studentId: student.id },
     client: studentClient,
   });
-  // console.log(completedQuestions);
 
+  function handleQuestionClick(selectedQuestionId) {
+    console.log("passed");
+    console.log(selectedQuestionId);
+    if (selectedQuestionId) {
+      setActiveQuestionId(selectedQuestionId);
+      // refetchQuestion({ questionId: selectedQuestionId });
+      props.history.push(`/module/${moduleId}/${selectedQuestionId}`);
+    } else {
+      setActiveQuestionId("");
+      props.history.push(`/module/${moduleId}`);
+    }
+  }
+
+  const [getQuestionById, { loading, data }] = useLazyQuery(GET_QUESTION_BY_ID);
+
+  useEffect(() => {
+    console.log("selectedQuestionId: " + selectedQuestionId);
+    setActiveQuestionId(selectedQuestionId);
+    // console.log("object");
+    getQuestionById({ variables: { questionId: selectedQuestionId } });
+    // refetchQuestion({ questionId: activeQuestionId });
+  }, [selectedQuestionId]);
+
+  const [isOpen, setIsOpen] = useState(
+    activeQuestionId !== undefined && activeQuestionId !== "" ? true : false
+  );
   const studentModule =
     student && module && completedQuestions ? (
       <div className="h-full flex flex-col min-h-screen">
@@ -86,16 +122,27 @@ export default function StudentModule(props) {
               {module.questions.map((questionId, index) => (
                 <QuestionCard
                   key={index}
-                  num={index}
                   props={props}
-                  moduleId={moduleId}
+                  isOpen={isOpen}
+                  setIsOpen={setIsOpen}
+                  studentId={student.id}
                   questionId={questionId}
-                  parsedActiveQuestionId={parsedActiveQuestionId}
+                  activeQuestionId={activeQuestionId}
                   complete={completedQuestions.includes(questionId)}
+                  handleQuestionClick={handleQuestionClick}
                 />
               ))}
             </div>
           </div>
+
+          <QuestionModal
+            props={props}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            moduleId={moduleId}
+            activeQuestionId={activeQuestionId}
+            handleQuestionClick={handleQuestionClick}
+          />
         </div>
         <Footer />
       </div>

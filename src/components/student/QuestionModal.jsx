@@ -12,95 +12,42 @@ export default function QuestionModal({
   props,
   question,
   complete,
-  num,
-  isActiveQuestion,
+  activeQuestionId,
   handleQuestionClick,
+  isOpen,
+  setIsOpen,
+  moduleId,
 }) {
   const { student } = useContext(StudentAuthContext);
-  const studentId = student.id;
-  const questionId = question.id;
-  const [errors, setErrors] = useState({});
-  const [isOpen, setIsOpen] = useState(isActiveQuestion);
-
-  const { values, onSubmit } = useForm(startQuestionCallback, {
-    questionId,
-    studentId,
-  });
-
-  const [startQuestion, { loading }] = useMutation(START_QUESTION, {
-    client: studentClient,
-    refetchQueries: [],
-
-    update(proxy, { data: { startQuestion: startQuestionData } }) {
-      setIsOpen(true);
-
-      values.confirmTitle = "";
-      setErrors({});
-      handleQuestionClick(questionId);
-    },
-    onError(err) {
-      console.log(err);
-      console.log(err.graphQLErrors[0].extensions.exception.errors);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
-    variables: values,
-  });
-
-  function startQuestionCallback() {
-    startQuestion();
-  }
-
+  console.log(activeQuestionId);
   function toggleIsOpen() {
+    console.log("enters");
     handleQuestionClick("");
-    setIsOpen(!isOpen);
+    setIsOpen(false);
   }
   // if (isActiveQuestion) {
   //   startQuestion();
   // }
   return (
-    <>
-      <form onSubmit={onSubmit}>
+    isOpen && (
+      <>
         <button
-          type="submit"
-          className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
-        >
-          {`${complete ? "revisit" : "start"}`}
-        </button>
-      </form>
+          tabIndex="-1"
+          onClick={toggleIsOpen}
+          className="fixed inset-0 h-full w-full bg-gray-800 opacity-50 cursor-default z-20"
+        ></button>
 
-      {isOpen && !loading && errors ? (
-        <>
-          <button
-            tabIndex="-1"
-            onClick={toggleIsOpen}
-            className="fixed inset-0 h-full w-full bg-gray-800 opacity-50 cursor-default z-20"
-          ></button>
-
-          <div className="fixed mx-auto overflow-auto inset-0 overflow-y-auto overscroll-contain max-w-2xl my-4 p-8 bg-white z-40 rounded-lg shadow-xl ">
-            <QuestionModalCard
-              props={props}
-              question={question}
-              answer=""
-              complete={complete}
-              num={num}
-              handleQuestionClick={handleQuestionClick}
-            />
-          </div>
-        </>
-      ) : (
-        <div></div>
-      )}
-    </>
+        <div className="fixed mx-auto inset-0 overscroll-contain max-w-2xl my-4 p-8 bg-white z-40 rounded-lg shadow-xl">
+          <QuestionModalCard
+            props={props}
+            questionId={activeQuestionId}
+            answer=""
+            complete={complete}
+            moduleId={moduleId}
+            handleQuestionClick={handleQuestionClick}
+          />
+        </div>
+      </>
+    )
   );
 }
-
-export const START_QUESTION = gql`
-  mutation startQuestion($questionId: String!, $studentId: String!) {
-    startQuestion(questionId: $questionId, studentId: $studentId) {
-      key
-      value
-      studentId
-      id
-    }
-  }
-`;
