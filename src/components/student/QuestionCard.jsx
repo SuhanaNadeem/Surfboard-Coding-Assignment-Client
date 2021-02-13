@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
-import QuestionModal from "./QuestionModal";
 import { useForm } from "../../util/hooks";
 function QuestionCard({
   props,
   questionId,
   complete,
-  activeQuestionId,
   handleQuestionClick,
   studentId,
   setIsOpen,
-  isOpen,
 }) {
   const {
     data: { getQuestionById: question } = {},
@@ -37,7 +34,6 @@ function QuestionCard({
 
     update(proxy, { data: { startQuestion: startQuestionData } }) {
       setIsOpen(true);
-
       values.confirmTitle = "";
       setErrors({});
       handleQuestionClick(questionId);
@@ -51,6 +47,7 @@ function QuestionCard({
   });
 
   function startQuestionCallback() {
+    console.log("entered the callback");
     startQuestion();
   }
 

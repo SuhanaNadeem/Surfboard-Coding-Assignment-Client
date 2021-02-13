@@ -70,6 +70,7 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
   function startModuleCallback() {
     startModule();
   }
+  // startModule is done first onSubmit, and addInProgress is second (called in update of startModule) - its update pushes to new page
 
   return categoryName && moduleInfo ? (
     <form onSubmit={onSubmitStatus}>

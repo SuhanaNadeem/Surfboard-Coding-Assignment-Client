@@ -13,14 +13,15 @@ import {
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import ReactPlayer from "react-player";
 import { GET_QUESTION_BY_ID } from "./QuestionCard";
+import FeedbackModal from "./FeedbackModal";
 
 function QuestionModalCard({
   props,
   questionId,
   answer,
-  complete,
   handleQuestionClick,
   moduleId,
+  initialPoints,
 }) {
   const { student } = useContext(StudentAuthContext);
   const studentId = student.id;
@@ -38,6 +39,7 @@ function QuestionModalCard({
   const {
     data: { getSavedAnswerByQuestion: savedAnswer } = {},
     loading: loadingSavedAnswer,
+    refetch: refetchSavedAnswer,
   } = useQuery(GET_SAVED_ANSWER_BY_QUESTION, {
     variables: { questionId: questionId, studentId: studentId },
     client: studentClient,
@@ -60,8 +62,6 @@ function QuestionModalCard({
     client: studentClient,
   });
 
-  console.log(questionId);
-
   const { values, onChange, onSubmit, setValues } = useForm(
     handleAnswerPointsCallback,
     {
@@ -70,15 +70,49 @@ function QuestionModalCard({
       studentId,
     }
   );
-  // if (questionId) {
-  //   setValues({ ...values, questionId });
-  // }
+
+  const {
+    data: { getCompletedQuestionsByModule: completedQuestions } = {},
+    loading: loadingCompletedQuestionsByModule,
+    completedQuestionsByModuleError,
+  } = useQuery(GET_COMPLETED_QUESTIONS_BY_MODULE, {
+    variables: { moduleId: moduleId, studentId: studentId },
+    client: studentClient,
+  });
+  // console.log("inital: ");
+  // console.log(completedQuestions);
+  // console.log(questionId);
+  // const check = completedQuestions.includes(questionId);
+  // console.log(check);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [hintVisible, setHintVisible] = useState(false);
+  console.log(hintVisible);
+  // console.log(isOpen);
+  // setIsOpen(completedQuestions.includes(questionId))
+  function toggleIsVisible() {
+    setHintVisible(!hintVisible);
+  }
   useEffect(() => {
     if (questionId) {
-      setValues({ ...values, questionId });
+      setValues({ ...values, questionId, answer: savedAnswer });
+      setIsOpen(completedQuestions.includes(questionId));
+      setHintVisible(false);
     }
-  }, [questionId]);
-  console.log(values);
+  }, [questionId, savedAnswer, hint]);
+
+  useEffect(() => {
+    if (question && question.type === "Question") {
+      console.log("in here");
+      setIsOpen(true);
+    }
+  }, [completedQuestions]);
+
+  // useEffect(() => {
+  //   console.log("hi there");
+  // }, [data.handleAnswerPoints]);
+  var prev = initialPoints;
+  var curr = "";
   const [handleAnswerPoints, { loading }] = useMutation(HANDLE_ANSWER_POINTS, {
     client: studentClient,
     refetchQueries: [
@@ -90,13 +124,26 @@ function QuestionModalCard({
         query: GET_MODULE_POINTS_BY_STUDENT,
         variables: { moduleId, studentId },
       },
+      { query: GET_QUESTION_BY_ID, variables: { questionId } },
     ],
 
     update(proxy, { data }) {
-      console.log("object");
-      console.log(data.handleAnswerPoints);
-      values.confirmTitle = "";
+      setIsOpen(true);
+      // console.log("data ans");
+      // curr = data.handleAnswerPoints;
+      // console.log(curr);
+
+      // if (curr != prev) {
+      //   console.log("diff");
+      // }
+      // prev = data.handleAnswerPoints;
       setErrors({});
+      if (question.type === "Skill") {
+        var nextQuesId =
+          module && module.questions[module.questions.indexOf(question.id) + 1];
+        // refetchQuestion({ questionId: nextQuesId });
+        handleQuestionClick(nextQuesId);
+      }
     },
     onError(err) {
       console.log(values);
@@ -113,6 +160,7 @@ function QuestionModalCard({
 
   function togglePrevOpen() {
     // console.log("de");
+    // setIsOpen(false);
     var prevQuesId =
       module && module.questions[module.questions.indexOf(question.id) - 1];
     // refetchQuestion({ questionId: prevQuesId });
@@ -122,13 +170,19 @@ function QuestionModalCard({
   function toggleNextOpen() {
     // console.log("bug");
     // console.log(module.questions[module.questions.indexOf(question.id)]);
+    // setIsOpen(false);
+
+    console.log("q passed");
+    console.log(question);
     var nextQuesId =
       module && module.questions[module.questions.indexOf(question.id) + 1];
     // refetchQuestion({ questionId: nextQuesId });
     handleQuestionClick(nextQuesId);
   }
+  console.log("current q");
+  console.log(question);
 
-  return question ? (
+  return question && completedQuestions ? (
     <div className="justify-between flex flex-col h-full">
       <form
         onSubmit={onSubmit}
@@ -162,28 +216,56 @@ function QuestionModalCard({
           </div>
         )}
         {question.type === "Question" && (
-          <div className="flex mt-4">
-            <input
-              className="md:w-3/4 shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none mr-4"
-              name="answer"
-              placeholder={savedAnswer ? savedAnswer : `Enter an answer`} // should be savedanswer
-              value={values.answer}
-              onChange={onChange}
-              type="text"
-            />
-            <button
-              type="submit"
-              className="md:w-1/4 border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex"
+          <div className="flex flex-col">
+            <div
+              className={
+                !completedQuestions.includes(questionId)
+                  ? `flex mt-4`
+                  : `flex mt-4 items-center justify-center`
+              }
             >
-              Submit
-            </button>
+              <input
+                className="md:w-3/4 shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none"
+                name="answer"
+                placeholder="Enter an answer"
+                value={values.answer}
+                onChange={onChange}
+                type="text"
+              />
+              {!completedQuestions.includes(questionId) && (
+                <button
+                  type="submit"
+                  className="ml-4 md:w-1/4 border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex"
+                >
+                  Submit
+                </button>
+              )}
+            </div>
+            {!completedQuestions.includes(questionId) && hint && (
+              <button
+                onClick={toggleIsVisible}
+                type="button"
+                className="focus:outline-none flex mx-auto mt-2 px-4 py-2 uppercase text-black tracking-wide hover:text-red-800 text-xs"
+              >
+                <h3 className="font-semibold">Hint</h3>
+                {hintVisible && <h3 className="ml-2">{hint}</h3>}
+              </button>
+            )}
+            <FeedbackModal
+              props={props}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              isCorrect={completedQuestions.includes(questionId)}
+              moduleId={moduleId}
+              question={question}
+            />
           </div>
         )}
         {/* TODO toggle Hint, toggle star, and toggle correct or not */}
       </form>
       <form className="flex mt-6" onSubmit={onSubmit}>
         {module && module.questions.indexOf(question.id) != 0 && (
-          <button className="mx-auto" onClick={togglePrevOpen}>
+          <button className="mx-auto" onClick={togglePrevOpen} type="button">
             <BsChevronLeft size={32} />
           </button>
         )}
@@ -193,11 +275,12 @@ function QuestionModalCard({
             module.questions.length && (
             <button
               className="mx-auto"
-              type={
-                !complete && question.type === "Skill" ? `submit` : `button`
-              }
-              onClick={toggleNextOpen}
-              // {!complete && question.type === "Skill" && `onClick=${console.log("hi")}`}
+              type={question.type === "Skill" ? `submit` : `button`}
+              onClick={(e) => {
+                if (question.type !== "Skill") {
+                  toggleNextOpen(e);
+                }
+              }}
             >
               <BsChevronRight size={32} />
             </button>

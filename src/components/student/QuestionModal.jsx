@@ -1,27 +1,22 @@
 import React, { useContext, useState } from "react";
-
-import { gql, useMutation } from "@apollo/client";
-import { studentClient } from "../../GraphqlApolloClients";
-import { useForm } from "../../util/hooks";
 import { StudentAuthContext } from "../../context/studentAuth";
-import { GET_COMPLETED_QUESTIONS_BY_MODULE } from "../../pages/student/StudentModule";
 
 import QuestionModalCard from "./QuestionModalCard";
 
 export default function QuestionModal({
   props,
-  question,
-  complete,
   activeQuestionId,
   handleQuestionClick,
   isOpen,
   setIsOpen,
   moduleId,
+  initialPoints,
+  completedQuestions,
 }) {
   const { student } = useContext(StudentAuthContext);
-  console.log(activeQuestionId);
+  // console.log(activeQuestionId);
   function toggleIsOpen() {
-    console.log("enters");
+    // console.log("enters");
     handleQuestionClick("");
     setIsOpen(false);
   }
@@ -42,8 +37,8 @@ export default function QuestionModal({
             props={props}
             questionId={activeQuestionId}
             answer=""
-            complete={complete}
             moduleId={moduleId}
+            initialPoints={initialPoints}
             handleQuestionClick={handleQuestionClick}
           />
         </div>
