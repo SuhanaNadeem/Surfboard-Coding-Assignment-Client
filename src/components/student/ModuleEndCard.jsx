@@ -1,34 +1,56 @@
 import React, { useContext, useState } from "react";
 import { StudentAuthContext } from "../../context/studentAuth";
-
+import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
+import { RiArrowGoBackFill } from "react-icons/ri";
 export default function ModuleEndCard({
   props,
-  moduleId,
+  module,
   isOpen,
   setIsOpen,
   toggleQuesCard,
+  student,
 }) {
-  const { student } = useContext(StudentAuthContext);
-
   function toggleIsOpen() {
     // console.log("enters");
     setIsOpen(false);
     toggleQuesCard();
-    props.history.push(`/module/${moduleId}`);
+    props.history.push(`/module/${module.id}`);
   }
-  return (
-    isOpen && (
-      <>
-        <button
-          tabIndex="-1"
-          onClick={toggleIsOpen}
-          className="fixed inset-0 h-full w-full bg-gray-800 opacity-50 cursor-default z-20"
-        ></button>
+  function returnToDash() {
+    props.history.push("/dashboard");
+  }
+  return isOpen && module && student ? (
+    <>
+      <button
+        tabIndex="-1"
+        onClick={toggleIsOpen}
+        className="fixed inset-0 h-full w-full bg-transparent cursor-default z-20"
+      ></button>
 
-        <div className="fixed mx-auto inset-0 overscroll-contain max-w-2xl my-4 p-8 bg-red-800 z-50 rounded-lg shadow-xl">
-          <p>Congratulations</p>
+      <div className="fixed mx-auto inset-0 overscroll-contain max-w-3xl my-4 p-8 bg-white z-50 rounded-lg shadow-xl">
+        <div className="flex flex-col justify-center items-center">
+          <h3 className="text-3xl text-red-800 font-semibold mb-2">
+            Congratulations, {student.name}
+          </h3>
+          <p className="font-light tracking-wide text-xl ">
+            You completed {module.name}
+          </p>
+          <div className="w-64 mx-auto h-96 flex rounded-lg">
+            <img src={tempModuleCardImg} className="object-contain flex" />
+          </div>
+          <button
+            onClick={returnToDash}
+            className="flex items-center justify-center"
+          >
+            <p className="font-light tracking-wide text-sm uppercase mr-2">
+              Return to dashboard
+            </p>
+            <RiArrowGoBackFill size={24} />
+          </button>
         </div>
-      </>
-    )
+      </div>
+    </>
+  ) : (
+    <></>
   );
 }

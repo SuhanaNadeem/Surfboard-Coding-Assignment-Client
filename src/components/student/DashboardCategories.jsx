@@ -17,7 +17,7 @@ export default function DashboardCategories({ props }) {
 
   return categories ? (
     <div>
-      <h4 className="pt-6 pl-10 text-3xl w-full flex">New Modules</h4>
+      <h4 className="pt-6 pl-10 text-3xl w-full flex">Modules to Explore</h4>
       <div className="relative">
         <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6 pt-6 pl-10 w-full relative md:max-w-2xl xl:max-w-6xl items-stretch">
           {categories.map((category, index) => (

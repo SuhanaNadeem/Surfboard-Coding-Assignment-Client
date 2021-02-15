@@ -289,10 +289,11 @@ function QuestionModalCard({
       </form>
       <ModuleEndCard
         props={props}
-        moduleId={moduleId}
+        module={module}
         isOpen={endCardIsOpen}
         setIsOpen={setEndCardIsOpen}
         toggleQuesCard={toggleQuesCard}
+        student={studentObject}
       />
     </div>
   ) : (

@@ -36,10 +36,10 @@ export default function StudentAccountDropdown({ logout, props }) {
           <button
             tabIndex="-1"
             onClick={toggleIsOpen}
-            className="focus:outline-none fixed h-full w-full bg-transparent"
+            className="fixed inset-0 h-full w-full bg-transparent cursor-default z-20 focus:outline-none"
           ></button>
 
-          <div className="absolute left-0 w-40 mt-2 py-1 bg-white rounded-lg shadow-xl text-sm">
+          <div className="absolute left-0 w-40 mt-2 py-1 bg-white rounded-lg shadow-xl text-sm z-20">
             <h1 className="text-gray-800 text-left px-4 py-1 truncate font-semibold text-xs whitespace-no-wrap overflow-hidden">
               Hi, {student.name}
             </h1>
