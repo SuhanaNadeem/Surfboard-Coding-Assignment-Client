@@ -14,6 +14,8 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import ReactPlayer from "react-player";
 import { GET_QUESTION_BY_ID } from "./QuestionCard";
 import FeedbackModal from "./FeedbackModal";
+import StarQuestionCard from "./StarQuestionCard";
+import ModuleEndCard from "./ModuleEndCard";
 
 function QuestionModalCard({
   props,
@@ -21,11 +23,13 @@ function QuestionModalCard({
   answer,
   handleQuestionClick,
   moduleId,
+  toggleQuesCard,
   initialPoints,
 }) {
   const { student } = useContext(StudentAuthContext);
   const studentId = student.id;
   const [errors, setErrors] = useState({});
+
   const {
     data: { getQuestionById: question } = {},
     loading: loadingQuestion,
@@ -35,6 +39,14 @@ function QuestionModalCard({
     variables: { questionId },
     client: studentClient,
   });
+
+  const { data: { getStudentById: studentObject } = {} } = useQuery(
+    GET_STUDENT_BY_ID,
+    {
+      variables: { studentId },
+      client: studentClient,
+    }
+  );
 
   const {
     data: { getSavedAnswerByQuestion: savedAnswer } = {},
@@ -86,8 +98,8 @@ function QuestionModalCard({
   // console.log(check);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [endCardIsOpen, setEndCardIsOpen] = useState(false);
   const [hintVisible, setHintVisible] = useState(false);
-  console.log(hintVisible);
   // console.log(isOpen);
   // setIsOpen(completedQuestions.includes(questionId))
   function toggleIsVisible() {
@@ -103,7 +115,6 @@ function QuestionModalCard({
 
   useEffect(() => {
     if (question && question.type === "Question") {
-      console.log("in here");
       setIsOpen(true);
     }
   }, [completedQuestions]);
@@ -111,8 +122,8 @@ function QuestionModalCard({
   // useEffect(() => {
   //   console.log("hi there");
   // }, [data.handleAnswerPoints]);
-  var prev = initialPoints;
-  var curr = "";
+  // var prev = initialPoints;
+  // var curr = "";
   const [handleAnswerPoints, { loading }] = useMutation(HANDLE_ANSWER_POINTS, {
     client: studentClient,
     refetchQueries: [
@@ -125,6 +136,7 @@ function QuestionModalCard({
         variables: { moduleId, studentId },
       },
       { query: GET_QUESTION_BY_ID, variables: { questionId } },
+      { query: GET_STUDENT_BY_ID, variables: { studentId } },
     ],
 
     update(proxy, { data }) {
@@ -138,10 +150,10 @@ function QuestionModalCard({
       // }
       // prev = data.handleAnswerPoints;
       setErrors({});
+
       if (question.type === "Skill") {
         var nextQuesId =
           module && module.questions[module.questions.indexOf(question.id) + 1];
-        // refetchQuestion({ questionId: nextQuesId });
         handleQuestionClick(nextQuesId);
       }
     },
@@ -182,15 +194,21 @@ function QuestionModalCard({
   console.log("current q");
   console.log(question);
 
-  return question && completedQuestions ? (
+  function toggleEndCardIsOpen() {
+    setEndCardIsOpen(true);
+  }
+
+  return question && completedQuestions && studentObject ? (
     <div className="justify-between flex flex-col h-full">
-      <form
-        onSubmit={onSubmit}
-        className="flex flex-col items-center justify-start text-center overflow-y-auto "
-      >
-        <h3 className="text-3xl text-red-800 mx-auto mb-4">
+      <div className="flex flex-col items-center justify-start text-center overflow-y-auto ">
+        <h3 className="text-3xl text-red-800 mx-auto mb-2">
           {question.questionName}
         </h3>
+        <StarQuestionCard
+          props={props}
+          questionId={questionId}
+          studentObject={studentObject}
+        />
         <div>
           {question.image && (
             <div
@@ -217,7 +235,8 @@ function QuestionModalCard({
         )}
         {question.type === "Question" && (
           <div className="flex flex-col">
-            <div
+            <form
+              onSubmit={onSubmit}
               className={
                 !completedQuestions.includes(questionId)
                   ? `flex mt-4`
@@ -240,7 +259,7 @@ function QuestionModalCard({
                   Submit
                 </button>
               )}
-            </div>
+            </form>
             {!completedQuestions.includes(questionId) && hint && (
               <button
                 onClick={toggleIsVisible}
@@ -261,8 +280,7 @@ function QuestionModalCard({
             />
           </div>
         )}
-        {/* TODO toggle Hint, toggle star, and toggle correct or not */}
-      </form>
+      </div>
       <form className="flex mt-6" onSubmit={onSubmit}>
         {module && module.questions.indexOf(question.id) != 0 && (
           <button className="mx-auto" onClick={togglePrevOpen} type="button">
@@ -270,22 +288,33 @@ function QuestionModalCard({
           </button>
         )}
 
-        {module &&
-          module.questions.indexOf(question.id) + 1 !=
-            module.questions.length && (
-            <button
-              className="mx-auto"
-              type={question.type === "Skill" ? `submit` : `button`}
-              onClick={(e) => {
-                if (question.type !== "Skill") {
-                  toggleNextOpen(e);
-                }
-              }}
-            >
-              <BsChevronRight size={32} />
-            </button>
-          )}
+        <button
+          className="mx-auto"
+          type={question.type === "Skill" ? `submit` : `button`}
+          onClick={(e) => {
+            if (
+              module &&
+              module.questions.indexOf(question.id) + 1 ===
+                module.questions.length
+            ) {
+              console.log("open?");
+              console.log(endCardIsOpen);
+              toggleEndCardIsOpen(e);
+            } else if (question.type !== "Skill") {
+              toggleNextOpen(e);
+            }
+          }}
+        >
+          <BsChevronRight size={32} />
+        </button>
       </form>
+      <ModuleEndCard
+        props={props}
+        moduleId={moduleId}
+        isOpen={endCardIsOpen}
+        setIsOpen={setEndCardIsOpen}
+        toggleQuesCard={toggleQuesCard}
+      />
     </div>
   ) : (
     <div></div>
@@ -315,6 +344,29 @@ export const GET_SAVED_ANSWER_BY_QUESTION = gql`
 export const GET_HINT_BY_QUESTION = gql`
   query getHintByQuestion($questionId: String!) {
     getHintByQuestion(questionId: $questionId)
+  }
+`;
+
+export const GET_STUDENT_BY_ID = gql`
+  query getStudentById($studentId: String!) {
+    getStudentById(studentId: $studentId) {
+      name
+      starredQuestions
+      starredModules
+      id
+      quesAnsDict {
+        key
+        value
+        studentId
+        id
+      }
+      modulePointsDict {
+        key
+        value
+        studentId
+        id
+      }
+    }
   }
 `;
 

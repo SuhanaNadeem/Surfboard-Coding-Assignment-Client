@@ -114,6 +114,7 @@ export default function StudentModule(props) {
             studentPoints={studentPoints}
             totalPoints={totalPoints}
             completedQuestions={completedQuestions}
+            moduleId={moduleId}
           />
           <div className="md:w-5/6 mt-6 ml-10">
             <div className="grid gap-4 items-stretch justify-start h-full pl-2">

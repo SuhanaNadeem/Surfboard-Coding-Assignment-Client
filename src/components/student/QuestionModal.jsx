@@ -40,6 +40,7 @@ export default function QuestionModal({
             moduleId={moduleId}
             initialPoints={initialPoints}
             handleQuestionClick={handleQuestionClick}
+            toggleQuesCard={toggleIsOpen}
           />
         </div>
       </>

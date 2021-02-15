@@ -1,31 +1,78 @@
 import React, { useContext } from "react";
 import { StudentAuthContext } from "../../context/studentAuth";
 
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
 import CompletedQuestion from "./CompletedQuestion";
+import { BsStar, BsStarFill } from "react-icons/bs";
+import { useForm } from "../../util/hooks";
+
 export default function ModuleSummaryBar({
   props,
   questions,
   studentPoints,
   totalPoints,
   completedQuestions,
+  moduleId,
 }) {
   const { student } = useContext(StudentAuthContext);
 
-  const {
-    data: { getStudentById: studentObject } = {},
-    loading: loadingStudentObject,
-    studentObjectError,
-  } = useQuery(GET_STUDENT_BY_ID, {
-    variables: { studentId: student.id },
+  const { data: { getStudentById: studentObject } = {} } = useQuery(
+    GET_STUDENT_BY_ID,
+    {
+      variables: { studentId: student.id },
 
-    client: studentClient,
+      client: studentClient,
+    }
+  );
+
+  const { values, onSubmit } = useForm(handleStarModuleCallback, {
+    moduleId,
   });
+
+  const [handleStarModule, { loading }] = useMutation(HANDLE_STAR_MODULE, {
+    client: studentClient,
+    refetchQueries: [
+      {
+        query: GET_STUDENT_BY_ID,
+        variables: { studentId: student.id },
+      },
+    ],
+
+    update(proxy, { data: { handleStarModule: handleStarModuleData } }) {
+      values.confirmTitle = "";
+    },
+    onError(err) {
+      console.log(err);
+      console.log(err.graphQLErrors[0].extensions.exception.errors);
+    },
+    variables: values,
+  });
+
+  function handleStarModuleCallback() {
+    handleStarModule();
+  }
 
   return studentObject ? (
     <nav className="flex flex-shrink-0 items-start justify-start md:max-w-2xl xl:max-w-5xl text-gray-800 border-gray-300 border-r-2 text-left flex-col md:static md:mt-6 md:w-1/6 mt-2 w-full cursor-default z-20">
-      <p className="mb-2 text-xl text-red-800">Your Progress</p>
+      <form
+        className="mb-2 flex justify-center items-center"
+        onSubmit={onSubmit}
+      >
+        <p className="text-xl text-red-800">Your Progress</p>
+
+        <button
+          id="starModule"
+          type="submit"
+          className="focus:outline-none ml-2"
+        >
+          {studentObject.starredModules.includes(moduleId) ? (
+            <BsStarFill size={16} />
+          ) : (
+            <BsStar size={16} />
+          )}
+        </button>
+      </form>
       {/* <p className="text-md leading-none mb-6 font-light">{format} Module</p> */}
       <p className="text-lg leading-none">
         {studentPoints} of {totalPoints}
@@ -54,6 +101,8 @@ export const GET_STUDENT_BY_ID = gql`
   query getStudentById($studentId: String!) {
     getStudentById(studentId: $studentId) {
       name
+      starredQuestions
+      starredModules
       id
       quesAnsDict {
         key
@@ -68,5 +117,11 @@ export const GET_STUDENT_BY_ID = gql`
         id
       }
     }
+  }
+`;
+
+export const HANDLE_STAR_MODULE = gql`
+  mutation handleStarModule($moduleId: String!) {
+    handleStarModule(moduleId: $moduleId)
   }
 `;

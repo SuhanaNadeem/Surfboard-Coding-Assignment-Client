@@ -47,7 +47,6 @@ function QuestionCard({
   });
 
   function startQuestionCallback() {
-    console.log("entered the callback");
     startQuestion();
   }
 
