@@ -16,6 +16,7 @@ import LoginAdmin from "./pages/admin/LoginAdmin";
 import StudentDashboard from "./pages/student/StudentDashboard";
 import StudentManageAccount from "./pages/student/StudentManageAccount";
 import StudentModule from "./pages/student/StudentModule";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 
 function App() {
   return (
@@ -32,12 +33,6 @@ function App() {
             path="/module/:moduleId/:questionId?"
             component={StudentModule}
           />
-          {/* 
-          Question Id is an optional field
-          
-          
-          
-          */}
         </Router>
       </StudentAuthProvider>
 
@@ -56,6 +51,11 @@ function App() {
         <Router>
           <AdminAuthRoute exact path="/loginAdmin" component={LoginAdmin} />
           <AdminAuthRoute exact path="/signupAdmin" component={SignupAdmin} />
+          <AdminAuthRoute
+            exact
+            path="/adminDashboard"
+            component={AdminDashboard}
+          />
         </Router>
       </AdminAuthProvider>
     </>
