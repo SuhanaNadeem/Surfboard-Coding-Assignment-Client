@@ -27,7 +27,7 @@ export default function StudentDashboard(props) {
   const {
     data: { getCompletedModulesByStudent: completedModules } = {},
     loading: loadingCompletedModules,
-  } = useQuery(GET_COMPLETED_BY_STUDENT, {
+  } = useQuery(GET_COMPLETED_MODULES_BY_STUDENT, {
     client: studentClient,
   });
 
@@ -75,7 +75,7 @@ export const GET_IN_PROGRESS_MODULES_BY_STUDENT = gql`
     }
   }
 `;
-export const GET_COMPLETED_BY_STUDENT = gql`
+export const GET_COMPLETED_MODULES_BY_STUDENT = gql`
   query getCompletedModulesByStudent {
     getCompletedModulesByStudent {
       name

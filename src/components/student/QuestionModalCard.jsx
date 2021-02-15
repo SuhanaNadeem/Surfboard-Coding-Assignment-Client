@@ -9,7 +9,10 @@ import {
   GET_MODULE_BY_ID,
   GET_MODULE_POINTS_BY_STUDENT,
 } from "../../pages/student/StudentModule";
-
+import {
+  GET_COMPLETED_MODULES_BY_STUDENT,
+  GET_IN_PROGRESS_MODULES_BY_STUDENT,
+} from "../../pages/student/StudentDashboard";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import ReactPlayer from "react-player";
 import { GET_QUESTION_BY_ID } from "./QuestionCard";
@@ -91,17 +94,11 @@ function QuestionModalCard({
     variables: { moduleId: moduleId, studentId: studentId },
     client: studentClient,
   });
-  // console.log("inital: ");
-  // console.log(completedQuestions);
-  // console.log(questionId);
-  // const check = completedQuestions.includes(questionId);
-  // console.log(check);
 
   const [isOpen, setIsOpen] = useState(false);
   const [endCardIsOpen, setEndCardIsOpen] = useState(false);
   const [hintVisible, setHintVisible] = useState(false);
-  // console.log(isOpen);
-  // setIsOpen(completedQuestions.includes(questionId))
+
   function toggleIsVisible() {
     setHintVisible(!hintVisible);
   }
@@ -119,11 +116,6 @@ function QuestionModalCard({
     }
   }, [completedQuestions]);
 
-  // useEffect(() => {
-  //   console.log("hi there");
-  // }, [data.handleAnswerPoints]);
-  // var prev = initialPoints;
-  // var curr = "";
   const [handleAnswerPoints, { loading }] = useMutation(HANDLE_ANSWER_POINTS, {
     client: studentClient,
     refetchQueries: [
@@ -137,18 +129,12 @@ function QuestionModalCard({
       },
       { query: GET_QUESTION_BY_ID, variables: { questionId } },
       { query: GET_STUDENT_BY_ID, variables: { studentId } },
+      { query: GET_COMPLETED_MODULES_BY_STUDENT },
+      { query: GET_IN_PROGRESS_MODULES_BY_STUDENT },
     ],
 
     update(proxy, { data }) {
       setIsOpen(true);
-      // console.log("data ans");
-      // curr = data.handleAnswerPoints;
-      // console.log(curr);
-
-      // if (curr != prev) {
-      //   console.log("diff");
-      // }
-      // prev = data.handleAnswerPoints;
       setErrors({});
 
       if (question.type === "Skill") {
@@ -158,10 +144,8 @@ function QuestionModalCard({
       }
     },
     onError(err) {
-      console.log(values);
       console.log(err);
       console.log(err.graphQLErrors[0].extensions.exception.errors);
-      // setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
   });
@@ -171,29 +155,17 @@ function QuestionModalCard({
   }
 
   function togglePrevOpen() {
-    // console.log("de");
-    // setIsOpen(false);
     var prevQuesId =
       module && module.questions[module.questions.indexOf(question.id) - 1];
-    // refetchQuestion({ questionId: prevQuesId });
     handleQuestionClick(prevQuesId);
   }
 
   function toggleNextOpen() {
-    // console.log("bug");
-    // console.log(module.questions[module.questions.indexOf(question.id)]);
-    // setIsOpen(false);
-
-    console.log("q passed");
-    console.log(question);
     var nextQuesId =
       module && module.questions[module.questions.indexOf(question.id) + 1];
     // refetchQuestion({ questionId: nextQuesId });
     handleQuestionClick(nextQuesId);
   }
-  console.log("current q");
-  console.log(question);
-
   function toggleEndCardIsOpen() {
     setEndCardIsOpen(true);
   }
@@ -288,25 +260,32 @@ function QuestionModalCard({
           </button>
         )}
 
-        <button
-          className="mx-auto"
-          type={question.type === "Skill" ? `submit` : `button`}
-          onClick={(e) => {
-            if (
-              module &&
-              module.questions.indexOf(question.id) + 1 ===
-                module.questions.length
-            ) {
-              console.log("open?");
-              console.log(endCardIsOpen);
-              toggleEndCardIsOpen(e);
-            } else if (question.type !== "Skill") {
-              toggleNextOpen(e);
-            }
-          }}
-        >
-          <BsChevronRight size={32} />
-        </button>
+        {((module &&
+          module.questions.indexOf(question.id) + 1 ===
+            module.questions.length &&
+          studentObject.completedModules.includes(moduleId)) ||
+          (module &&
+            module.questions.indexOf(question.id) + 1 !==
+              module.questions.length)) && (
+          <button
+            className="mx-auto"
+            type={question.type === "Skill" ? `submit` : `button`}
+            onClick={(e) => {
+              if (
+                module &&
+                module.questions.indexOf(question.id) + 1 ===
+                  module.questions.length
+              ) {
+                console.log(endCardIsOpen);
+                toggleEndCardIsOpen(e);
+              } else if (question.type !== "Skill") {
+                toggleNextOpen(e);
+              }
+            }}
+          >
+            <BsChevronRight size={32} />
+          </button>
+        )}
       </form>
       <ModuleEndCard
         props={props}
@@ -352,6 +331,8 @@ export const GET_STUDENT_BY_ID = gql`
     getStudentById(studentId: $studentId) {
       name
       starredQuestions
+      completedModules
+      inProgressModules
       starredModules
       id
       quesAnsDict {

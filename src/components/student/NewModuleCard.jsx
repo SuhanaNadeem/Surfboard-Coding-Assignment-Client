@@ -50,7 +50,7 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
       console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
-    variables: { moduleId },
+    variables: { moduleId, studentId },
   });
 
   const [startModule] = useMutation(START_MODULE, {
@@ -112,7 +112,7 @@ export const START_MODULE = gql`
 `;
 
 export const ADD_IN_PROGRESS_MODULE = gql`
-  mutation addInProgressModule($moduleId: String!) {
-    addInProgressModule(moduleId: $moduleId)
+  mutation addInProgressModule($moduleId: String!, $studentId: String!) {
+    addInProgressModule(moduleId: $moduleId, studentId: $studentId)
   }
 `;
