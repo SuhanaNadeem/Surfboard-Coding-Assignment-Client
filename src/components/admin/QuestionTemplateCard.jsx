@@ -24,10 +24,10 @@ export default function QuestionTemplateCard({ props, questionTemplate }) {
         <p className="uppercase tracking-wide text-red-800 font-semibold text-md">
           {questionTemplate.name}
         </p>
-        <p className=" text-gray-700 font-semibold text-md leading-tight">
+        <p className="text-gray-700 font-semibold text-md leading-tight">
           {category.name}
         </p>
-        <p className=" text-gray-700 font-thin text-sm">
+        <p className="text-gray-700 font-thin text-sm">
           {questionTemplate.inputFields.length} Input Fields
         </p>
         {/* <img

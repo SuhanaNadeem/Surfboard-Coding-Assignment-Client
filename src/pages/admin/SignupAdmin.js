@@ -20,7 +20,7 @@ function SignupAdmin(props) {
 
   const [signupAdmin, { loading }] = useMutation(SIGNUP_ADMIN, {
     update(_, { data: { signupAdmin: adminData } }) {
-      context.loginStudent(adminData);
+      context.loginAdmin(adminData);
       props.history.push("/adminDashboard");
     },
     onError(err) {

@@ -1,11 +1,15 @@
 import React from "react";
-
+import CategoryCard from "../student/CategoryCard";
+import BadgeCard from "./BadgeCard";
+import ChallengeCard from "./ChallengeCard";
 import ModuleCard from "./ModuleCard";
+import QuestionCard from "./QuestionCard";
+import QuestionTemplateCard from "./QuestionTemplateCard";
 
-export default function DashboardCard({ props, objects, type }) {
+export default function DashboardCards({ props, objects, type }) {
   return objects ? (
     <div className="pt-8">
-      <h4 className="px-10 text-3xl">{type}</h4>
+      <h4 className="px-10 text-3xl">Your {type}</h4>
 
       {type === "Modules" && (
         <div className="pt-4 ml-10 grid grid-flow-col gap-2 items-stretch justify-start py-1 mr-2 overflow-x-auto relative">
@@ -21,7 +25,7 @@ export default function DashboardCard({ props, objects, type }) {
           ))}
         </div>
       )}
-      {type === "QuestionTemplates" && (
+      {type === "Question Templates" && (
         <div className="pt-4 ml-10 grid grid-flow-col gap-2 items-stretch justify-start py-1 mr-2 overflow-x-auto relative">
           {objects.map((questionTemplate, index) => (
             <QuestionTemplateCard
