@@ -56,8 +56,6 @@ export default function StudentDashboard(props) {
     variables: { adminId },
     client: adminClient,
   });
-  console.log(admin.id);
-  console.log(badges);
 
   const adminDashboard = admin ? (
     <div className="h-full flex flex-col min-h-screen">

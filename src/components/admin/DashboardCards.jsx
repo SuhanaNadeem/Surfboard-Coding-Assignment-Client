@@ -1,5 +1,5 @@
 import React from "react";
-import CategoryCard from "../student/CategoryCard";
+import CategoryCard from "./CategoryCard";
 import BadgeCard from "./BadgeCard";
 import ChallengeCard from "./ChallengeCard";
 import ModuleCard from "./ModuleCard";

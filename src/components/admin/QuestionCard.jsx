@@ -21,9 +21,9 @@ export default function QuestionCard({ props, question }) {
         // props.history.push(`/module/${module.id}`);
       }}
     >
-      <div className="bg-white flex-shrink-0 first:ml-2 shadow w-64 transition-all duration-150 ease-in-out md:hover:-translate-y-1 align-middle flex flex-col items-center text-center p-4 rounded-md overflow-hidden hover:shadow-md hover:bg-gray-100 h-32 justify-start">
+      <div className="bg-white flex-shrink-0 first:ml-2 shadow w-48 transition-all duration-150 ease-in-out md:hover:-translate-y-1 align-middle flex flex-col items-center text-center p-4 rounded-md overflow-hidden hover:shadow-md hover:bg-gray-100 h-full justify-start">
         <p className="uppercase tracking-wide text-red-800 font-semibold text-md">
-          {question.name}
+          {question.questionName}
         </p>
         <p className=" text-gray-700 font-semibold text-md leading-tight">
           {module.name}
@@ -36,7 +36,7 @@ export default function QuestionCard({ props, question }) {
       </div>
     </button>
   ) : (
-    <div></div>
+    <></>
   );
 }
 export const GET_MODULE_BY_ID = gql`

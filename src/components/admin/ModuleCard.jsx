@@ -20,7 +20,7 @@ export default function ModuleCard({ props, module }) {
         // props.history.push(`/module/${module.id}`);
       }}
     >
-      <div className="bg-white flex-shrink-0 first:ml-2 shadow w-48 transition-all duration-150 ease-in-out md:hover:-translate-y-1 align-middle flex flex-col items-center text-center p-4 rounded-md overflow-hidden hover:shadow-md hover:bg-gray-100 h-64 justify-start">
+      <div className="bg-white flex-shrink-0 first:ml-2 shadow w-48 transition-all duration-150 ease-in-out md:hover:-translate-y-1 align-middle flex flex-col items-center text-center p-4 rounded-md overflow-hidden hover:shadow-md hover:bg-gray-100 h-28 justify-center">
         <p className="uppercase tracking-wide text-red-800 font-semibold text-md">
           {module.name}
         </p>
