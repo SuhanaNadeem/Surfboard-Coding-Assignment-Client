@@ -10,9 +10,6 @@ import Footer from "../../components/student/Footer";
 
 export default function StudentDashboard(props) {
   const { student } = useContext(StudentAuthContext);
-  // console.log("in dash");
-  // console.log(student);
-  // console.log(props);
   if (!student) {
     props.history.push("/login");
   }

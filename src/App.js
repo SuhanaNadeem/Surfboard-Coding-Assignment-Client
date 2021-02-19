@@ -17,6 +17,7 @@ import StudentDashboard from "./pages/student/StudentDashboard";
 import StudentManageAccount from "./pages/student/StudentManageAccount";
 import StudentModule from "./pages/student/StudentModule";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminCreate from "./pages/admin/AdminCreate";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
             path="/adminDashboard"
             component={AdminDashboard}
           />
+          <AdminAuthRoute exact path="/adminCreate" component={AdminCreate} />
         </Router>
       </AdminAuthProvider>
     </>
