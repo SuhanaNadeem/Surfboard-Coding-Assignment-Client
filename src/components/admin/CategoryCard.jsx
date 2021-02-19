@@ -5,6 +5,7 @@ import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
 export default function CategoryCard({ props, category }) {
   return category ? (
     <button
+      className="focus:outline-none"
       onClick={(e) => {
         console.log("Go Somewhere");
         // props.history.push(`/module/${module.id}`);

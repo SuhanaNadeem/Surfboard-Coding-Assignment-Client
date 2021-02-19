@@ -2,7 +2,14 @@ import React from "react";
 
 import { useHistory } from "react-router-dom";
 
-export default function DashboardSideBar(props) {
+export default function DashboardSideBar({
+  numOfQuestions,
+  numOfQuestionTemplates,
+  numOfModules,
+  numOfChallenges,
+  numOfCategories,
+  numOfBadges,
+}) {
   const history = useHistory();
 
   return (
@@ -11,22 +18,25 @@ export default function DashboardSideBar(props) {
         Contributions
       </p>
       <h3 className="hover:text-red-800 font-light mb-6 last:mb-0 focus:outline-none">
-        _ Questions
+        {numOfQuestions} {numOfQuestions === 1 ? `Question` : `Questions`}
       </h3>
       <h3 className="hover:text-red-800 font-light mb-6 last:mb-0 focus:outline-none">
-        _ Modules
+        {numOfModules} {numOfModules === 1 ? `Module` : `Modules`}
       </h3>
       <h3 className="hover:text-red-800 font-light mb-6 last:mb-0 focus:outline-none">
-        _ Question Templates
+        {numOfQuestionTemplates}{" "}
+        {numOfQuestionTemplates === 1
+          ? `Question Template`
+          : `Question Templates`}
       </h3>
       <h3 className="hover:text-red-800 font-light mb-6 last:mb-0 focus:outline-none">
-        _ Badges
+        {numOfBadges} {numOfBadges === 1 ? `Badge` : `Badges`}
       </h3>
       <h3 className="hover:text-red-800 font-light mb-6 last:mb-0 focus:outline-none">
-        _ Categories
+        {numOfCategories} {numOfCategories === 1 ? `Category` : `Categories`}
       </h3>
       <h3 className="hover:text-red-800 font-light mb-6 last:mb-0 focus:outline-none">
-        _ Challenges
+        {numOfChallenges} {numOfChallenges === 1 ? `Challenge` : `Challenges`}
       </h3>
     </nav>
   );

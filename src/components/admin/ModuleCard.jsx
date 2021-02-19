@@ -15,6 +15,7 @@ export default function ModuleCard({ props, module }) {
 
   return category && module ? (
     <button
+      className="focus:outline-none"
       onClick={(e) => {
         console.log("Go Somewhere");
         // props.history.push(`/module/${module.id}`);

@@ -16,6 +16,7 @@ export default function QuestionCard({ props, question }) {
 
   return module && question ? (
     <button
+      className="focus:outline-none"
       onClick={(e) => {
         console.log("Go Somewhere");
         // props.history.push(`/module/${module.id}`);

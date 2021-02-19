@@ -8,7 +8,7 @@ import QuestionTemplateCard from "./QuestionTemplateCard";
 
 export default function DashboardCards({ props, objects, type }) {
   return objects ? (
-    <div className="pt-8">
+    <div className="pb-8">
       <h4 className="px-10 text-3xl">Your {type}</h4>
 
       {type === "Modules" && (

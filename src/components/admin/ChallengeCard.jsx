@@ -15,6 +15,7 @@ export default function ChallengeCard({ props, challenge }) {
 
   return category && challenge ? (
     <button
+      className="focus:outline-none"
       onClick={(e) => {
         console.log("Go Somewhere");
         // props.history.push(`/module/${module.id}`);

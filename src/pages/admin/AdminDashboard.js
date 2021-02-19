@@ -62,7 +62,21 @@ export default function StudentDashboard(props) {
       <NavBar />
       <div className="bg-red-800 w-full h-32"></div>
       <div className="h-full flex-1 flex mx-48 mt-4 mb-8">
-        <DashboardSideBar />
+        {modules &&
+          questions &&
+          questionTemplates &&
+          badges &&
+          categories &&
+          challenges && (
+            <DashboardSideBar
+              numOfQuestions={questions.length}
+              numOfQuestionTemplates={questionTemplates.length}
+              numOfModules={modules.length}
+              numOfCategories={categories.length}
+              numOfChallenges={challenges.length}
+              numOfBadges={badges.length}
+            />
+          )}
         <div className="md:w-5/6 last:mt-4">
           {modules && modules.length !== 0 && (
             <DashboardCards props={props} objects={modules} type="Modules" />

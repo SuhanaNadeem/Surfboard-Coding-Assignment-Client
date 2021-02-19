@@ -44,7 +44,7 @@ export default function StudentDashboard(props) {
           <DashboardModules
             props={props}
             modules={inProgressModules}
-            type="In Progress Modules"
+            type="In-Progress Modules"
           />
           <DashboardModules
             props={props}
