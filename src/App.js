@@ -58,7 +58,7 @@ function App() {
             path="/adminDashboard"
             component={AdminDashboard}
           />
-          <AdminAuthRoute exact path="/adminCreate" component={AdminCreate} />
+          <Route exact path="/adminCreate" component={AdminCreate} />
           <Route
             exact
             path="/adminEditAndPreview/:moduleId?/:questionId?"

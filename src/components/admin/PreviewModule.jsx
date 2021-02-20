@@ -13,6 +13,7 @@ export default function PreviewModule({ props, selectedQuestionId, module }) {
   }, [setActiveQuestionId, selectedQuestionId]);
 
   function handleQuestionClick(selectedQuestionId) {
+    console.log(selectedQuestionId);
     if (selectedQuestionId) {
       setActiveQuestionId(selectedQuestionId);
       props.history.push(
@@ -27,6 +28,9 @@ export default function PreviewModule({ props, selectedQuestionId, module }) {
   const [getQuestionById, { loading, data }] = useLazyQuery(GET_QUESTION_BY_ID);
 
   useEffect(() => {
+    if (selectedQuestionId) {
+      setIsOpen(true);
+    }
     setActiveQuestionId(selectedQuestionId);
     getQuestionById({ variables: { questionId: selectedQuestionId } });
   }, [selectedQuestionId]);
@@ -38,7 +42,7 @@ export default function PreviewModule({ props, selectedQuestionId, module }) {
   const previewModule = module ? (
     <>
       <div className="flex flex-col items-center justify-center text-center mx-auto">
-        <h6 className="text-xl text-red-800">Preview Module</h6>
+        <h6 className="text-xl text-red-800">Preview Module Questions</h6>
 
         <div className="grid gap-4 items-stretch justify-start h-full pl-2 mb-6">
           {module.questions.map((questionId, index) => (

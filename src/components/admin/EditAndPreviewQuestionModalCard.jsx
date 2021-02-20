@@ -99,17 +99,18 @@ function EditAndPreviewQuestionModalCard({
         )}
         {question.type === "Question" && (
           <div className="flex flex-col">
-            <form className="flex mt-4 items-center justify-center">
+            <div className="flex mt-4 items-center justify-center">
               <input
                 className="md:w-3/4 shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 font-light leading-tight focus:outline-none"
                 name="answer"
                 placeholder="Enter an answer"
                 type="text"
+                disabled
               />
               <button className="ml-4 md:w-1/4 border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex">
                 Submit
               </button>
-            </form>
+            </div>
             {hint && (
               <div className="focus:outline-none flex mx-auto mt-2 px-4 py-2 uppercase text-black tracking-wide hover:text-red-800 text-xs">
                 <h3 className="font-semibold">Hint</h3>
@@ -119,7 +120,7 @@ function EditAndPreviewQuestionModalCard({
           </div>
         )}
       </div>
-      <form className="flex mt-6">
+      <div className="flex mt-6">
         {module && module.questions.indexOf(question.id) != 0 && (
           <button className="mx-auto" onClick={togglePrevOpen} type="button">
             <BsChevronLeft size={32} />
@@ -142,7 +143,7 @@ function EditAndPreviewQuestionModalCard({
               <BsChevronRight size={32} />
             </button>
           )}
-      </form>
+      </div>
     </div>
   ) : (
     <div></div>

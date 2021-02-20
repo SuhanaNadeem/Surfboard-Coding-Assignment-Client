@@ -39,7 +39,6 @@ export default function AdminEditAndPreview(props) {
         module={module}
         selectedQuestionId={selectedQuestionId}
       />
-
       <Footer />
     </div>
   ) : (

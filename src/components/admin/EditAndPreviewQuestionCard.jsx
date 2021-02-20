@@ -19,7 +19,7 @@ function EditAndPreviewQuestionCard({
   });
 
   function onAdminClick() {
-    setIsOpen(true);
+    // setIsOpen(true);
     handleQuestionClick(questionId);
   }
 
@@ -35,14 +35,12 @@ function EditAndPreviewQuestionCard({
           {question.points} lynx tokens
         </p>
       </div>
-      <form>
-        <button
-          onClick={onAdminClick}
-          className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
-        >
-          Start
-        </button>
-      </form>
+      <button
+        onClick={onAdminClick}
+        className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
+      >
+        VIEW
+      </button>
     </div>
   ) : (
     <div></div>
