@@ -216,7 +216,7 @@ function QuestionModalCard({
               }
             >
               <input
-                className="md:w-3/4 shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none"
+                className="md:w-3/4 shadow appearance-none border rounded w-full font-light  py-1 px-2 text-gray-700 leading-tight focus:outline-none"
                 name="answer"
                 placeholder="Enter an answer"
                 value={values.answer}

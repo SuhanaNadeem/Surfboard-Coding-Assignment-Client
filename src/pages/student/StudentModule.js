@@ -34,8 +34,6 @@ export default function StudentModule(props) {
 
   useEffect(() => {
     setActiveQuestionId(selectedQuestionId);
-    // console.log(activeQuestionId);
-    // props.history.push(`/module/${moduleId}/${selectedQuestionId}`);
   }, [setActiveQuestionId, selectedQuestionId]);
 
   const {
@@ -90,11 +88,8 @@ export default function StudentModule(props) {
   const [getQuestionById, { loading, data }] = useLazyQuery(GET_QUESTION_BY_ID);
 
   useEffect(() => {
-    // console.log("selectedQuestionId: " + selectedQuestionId);
     setActiveQuestionId(selectedQuestionId);
-    // console.log("object");
     getQuestionById({ variables: { questionId: selectedQuestionId } });
-    // refetchQuestion({ questionId: activeQuestionId });
   }, [selectedQuestionId]);
 
   const [isOpen, setIsOpen] = useState(

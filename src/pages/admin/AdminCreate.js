@@ -9,7 +9,10 @@ function AdminCreate(props) {
   return (
     <div className="h-full flex flex-col min-h-screen">
       <NavBar />
-      <div className="bg-red-800 w-full h-32">ADMIN CREATE</div>
+      <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-48 pb-10">
+        <p className="text-4xl text-white">Admin Create</p>
+      </div>
+      <div className="h-full flex-1 flex mx-36 mt-4 mb-8">CREATE</div>
       <Footer />
     </div>
   );

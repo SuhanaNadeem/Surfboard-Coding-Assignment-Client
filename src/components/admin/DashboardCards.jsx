@@ -59,6 +59,6 @@ export default function DashboardCards({ props, objects, type }) {
       )}
     </div>
   ) : (
-    <div></div>
+    <></>
   );
 }

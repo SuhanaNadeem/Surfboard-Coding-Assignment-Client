@@ -45,6 +45,11 @@ export const GET_MODULE_BY_ID = gql`
     getModuleById(moduleId: $moduleId) {
       id
       name
+      categoryId
+      adminId
+      questions
+      learningObjectives
+      createdAt
     }
   }
 `;

@@ -18,6 +18,7 @@ import StudentManageAccount from "./pages/student/StudentManageAccount";
 import StudentModule from "./pages/student/StudentModule";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminCreate from "./pages/admin/AdminCreate";
+import AdminEditAndPreview from "./pages/admin/AdminEditAndPreview";
 
 function App() {
   return (
@@ -58,6 +59,11 @@ function App() {
             component={AdminDashboard}
           />
           <AdminAuthRoute exact path="/adminCreate" component={AdminCreate} />
+          <Route
+            exact
+            path="/adminEditAndPreview/:moduleId?/:questionId?"
+            component={AdminEditAndPreview}
+          />
         </Router>
       </AdminAuthProvider>
     </>

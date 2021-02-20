@@ -7,7 +7,7 @@ import { adminClient } from "../../GraphqlApolloClients";
 import DashboardCards from "../../components/admin/DashboardCards";
 import Footer from "../../components/admin/Footer";
 
-export default function StudentDashboard(props) {
+export default function AdminDashboard(props) {
   const { admin } = useContext(AdminAuthContext);
   if (!admin) {
     props.history.push("/loginAdmin");
@@ -60,7 +60,9 @@ export default function StudentDashboard(props) {
   const adminDashboard = admin ? (
     <div className="h-full flex flex-col min-h-screen">
       <NavBar />
-      <div className="bg-red-800 w-full h-32"></div>
+      <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-48 pb-10">
+        <p className="text-4xl text-white">Admin Dashboard</p>
+      </div>
       <div className="h-full flex-1 flex mx-48 mt-4 mb-8">
         {modules &&
           questions &&
