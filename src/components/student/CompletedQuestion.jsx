@@ -24,7 +24,7 @@ export default function CompletedQuestion({
 
   return question && completedQuestions ? (
     <div className="flex mr-2 items-center justify-center pb-2">
-      <p className="text-sm tracking-wide font-light text-red-800 leading-snug mr-2 ">
+      <p className="text-sm font-light text-red-800 leading-snug mr-2 ">
         {question.questionName}
       </p>
       {completedQuestions.includes(questionId) && <CgCheckO size={16} />}

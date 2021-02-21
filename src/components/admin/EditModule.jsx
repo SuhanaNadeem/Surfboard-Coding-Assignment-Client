@@ -48,7 +48,7 @@ function EditModule({
       noValidate
     >
       <h6 className="text-xl text-red-800">Edit Module</h6>
-      <p className="tracking-wider text-sm font-light ">
+      <p className="text-sm font-light ">
         Modify {newName}'s name, category, and admin.
       </p>
 

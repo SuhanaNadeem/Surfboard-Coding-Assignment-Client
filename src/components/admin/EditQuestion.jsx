@@ -63,12 +63,12 @@ function EditQuestion({
 
   return questionId ? (
     <form
-      className="w-1/3 overflow-hidden flex flex-col "
+      className="w-3/4 overflow-hidden flex flex-col "
       onSubmit={onSubmit}
       noValidate
     >
       <h6 className="text-xl text-red-800">Edit Question</h6>
-      <p className="tracking-wider text-sm font-light ">
+      <p className="text-sm font-light ">
         Modify {newQuestionName}'s name, description, image, points, module,
         type, video, admin, article, expected answer, or hint.
       </p>
@@ -83,12 +83,12 @@ function EditQuestion({
           </thead>
           <tbody>
             <tr>
-              <td className="text-xs py-2 border-b border-gray-200">
-                <label className=" font-semibold text-xs uppercase tracking-wide ">
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
                   Admin
                 </label>
               </td>
-              <td className="text-xs py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200">
                 <AdminInputDropdown
                   errors={errors}
                   currentAdminId={values.newAdminId}
@@ -102,12 +102,12 @@ function EditQuestion({
               </td>
             </tr>
             <tr>
-              <td className="text-xs py-2 border-b border-gray-200">
-                <label className=" font-semibold text-xs uppercase tracking-wide ">
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
                   Module
                 </label>
               </td>
-              <td className="text-xs py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200">
                 <ModuleInputDropdown
                   errors={errors}
                   currentModuleId={values.newModuleId}
@@ -121,12 +121,12 @@ function EditQuestion({
               </td>
             </tr>
             <tr>
-              <td className="text-xs py-2 border-b border-gray-200">
-                <label className=" font-semibold text-xs uppercase tracking-wide ">
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
                   Name
                 </label>
               </td>
-              <td className="text-xs py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.newQuestionName ? "border-red-500" : ""
@@ -147,12 +147,12 @@ function EditQuestion({
             </tr>
 
             <tr>
-              <td className="text-xs py-2 border-b border-gray-200">
-                <label className=" font-semibold text-xs uppercase tracking-wide ">
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
                   Description
                 </label>
               </td>
-              <td className="text-xs py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200">
                 <textarea
                   className={`shadow appearance-none border rounded w-full h-16 py-1 px-2 font-light focus:outline-none   ${
                     errors.newQuestionDescription ? "border-red-500" : ""
@@ -173,12 +173,12 @@ function EditQuestion({
               </td>
             </tr>
             <tr>
-              <td className="text-xs py-2 border-b border-gray-200">
-                <label className=" font-semibold text-xs uppercase tracking-wide ">
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
                   Points
                 </label>
               </td>
-              <td className="text-xs py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.newPoints ? "border-red-500" : ""
@@ -198,12 +198,12 @@ function EditQuestion({
               </td>
             </tr>
             <tr>
-              <td className="text-xs py-2 border-b border-gray-200">
-                <label className=" font-semibold text-xs uppercase tracking-wide ">
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
                   Video Link
                 </label>
               </td>
-              <td className="text-xs py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.newVideoLink ? "border-red-500" : ""
@@ -223,12 +223,12 @@ function EditQuestion({
               </td>
             </tr>
             <tr>
-              <td className="text-xs py-2 border-b border-gray-200">
-                <label className=" font-semibold text-xs uppercase tracking-wide ">
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
                   Article Link
                 </label>
               </td>
-              <td className="text-xs py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.newArticleLink ? "border-red-500" : ""
@@ -248,12 +248,12 @@ function EditQuestion({
               </td>
             </tr>
             <tr>
-              <td className="text-xs py-2 border-b border-gray-200">
-                <label className=" font-semibold text-xs uppercase tracking-wide ">
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
                   Skill Description
                 </label>
               </td>
-              <td className="text-xs py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.newSkillDescription ? "border-red-500" : ""
@@ -273,12 +273,12 @@ function EditQuestion({
               </td>
             </tr>
             <tr>
-              <td className="text-xs py-2 border-b border-gray-200">
-                <label className=" font-semibold text-xs uppercase tracking-wide ">
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
                   Type
                 </label>
               </td>
-              <td className="text-xs py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.newType ? "border-red-500" : ""
@@ -298,12 +298,12 @@ function EditQuestion({
               </td>
             </tr>
             <tr>
-              <td className="text-xs py-2 border-b border-gray-200">
-                <label className=" font-semibold text-xs uppercase tracking-wide ">
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
                   Hint
                 </label>
               </td>
-              <td className="text-xs py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.newHint ? "border-red-500" : ""
@@ -323,12 +323,12 @@ function EditQuestion({
               </td>
             </tr>
             <tr>
-              <td className="text-xs py-2 border-b border-gray-200">
-                <label className=" font-semibold text-xs uppercase tracking-wide ">
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
                   Expected Answer
                 </label>
               </td>
-              <td className="text-xs py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.newExpectedAnswer ? "border-red-500" : ""
@@ -349,10 +349,10 @@ function EditQuestion({
             </tr>
           </tbody>
         </table>
-        <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none">
+        <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none w-1/6">
           <button
             type="submit"
-            className="flex focus:outline-none border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold "
+            className="flex focus:outline-none border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm items-center justify-center font-semibold w-full"
           >
             Save
           </button>

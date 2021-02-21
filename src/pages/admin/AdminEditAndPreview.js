@@ -54,7 +54,7 @@ export default function AdminEditAndPreview(props) {
           </div>
         )}
         {givenId && question && (
-          <div className="h-full justify-center flex mx-32 my-10">
+          <div className="h-full justify-start items-center flex mx-32 my-10">
             <EditQuestion question={question} />
           </div>
         )}
