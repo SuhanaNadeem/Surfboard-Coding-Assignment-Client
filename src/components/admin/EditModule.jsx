@@ -41,13 +41,13 @@ function EditModule({
 
   return module ? (
     <form
-      className="mx-auto max-w-lg my-2 px-3 py-4 bg-white"
+      className="mx-auto w-1/3 overflow-hidden"
       onSubmit={onSubmit}
       noValidate
     >
       <div className="flex items-center justify-center">
         <div className="flex flex-col w-5/6">
-          <h6 className="text-xl text-red-800 leading-none">Edit Module</h6>
+          <h6 className="text-xl text-red-800">Edit Module</h6>
           <p className="tracking-wider text-sm font-light ">
             Modify {newName}'s name, category, and admin.
           </p>

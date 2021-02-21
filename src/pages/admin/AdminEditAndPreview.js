@@ -28,17 +28,21 @@ export default function AdminEditAndPreview(props) {
   const adminEditAndPreview = module ? (
     <div className="h-full flex flex-col min-h-screen">
       <NavBar />
-      {/* <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-48 pb-10">
+      <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-32 pb-10">
         <p className="text-4xl text-white">Admin Edit and Preview</p>
-      </div> */}
-      <div className="h-full flex-1 flex mx-48 mt-4 mb-8">
-        <EditModule props={props} module={module} />
       </div>
-      <PreviewModule
-        props={props}
-        module={module}
-        selectedQuestionId={selectedQuestionId}
-      />
+      {moduleId && (
+        <>
+          <div className="h-full justify-center flex mx-32 my-10">
+            <EditModule props={props} module={module} />
+            <PreviewModule
+              props={props}
+              module={module}
+              selectedQuestionId={selectedQuestionId}
+            />
+          </div>
+        </>
+      )}
       <Footer />
     </div>
   ) : (

@@ -38,10 +38,19 @@ export default function CompletedQuestion({
 export const GET_QUESTION_BY_ID = gql`
   query getQuestionById($questionId: String!) {
     getQuestionById(questionId: $questionId) {
+      id
       questionName
       questionDescription
+      image
+      points
+      moduleId
       type
-      id
+      videoLink
+      skillDescription
+      articleLink
+      expectedAnswer
+      hint
+      createdAt
     }
   }
 `;
