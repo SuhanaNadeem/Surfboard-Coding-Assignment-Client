@@ -57,7 +57,10 @@ export default function CategoryInputDropdown({
           <div className="absolute focus:outline-none left-50 w-40 mt-1 py-1 bg-white rounded-lg shadow-xl text-xs font-light z-20">
             {categories.map((category, index) => (
               <button
-                onClick={onChange}
+                onClick={(e) => {
+                  toggleIsOpen(e);
+                  onChange(e);
+                }}
                 type="button"
                 key={index}
                 value={category.id}
@@ -74,9 +77,6 @@ export default function CategoryInputDropdown({
         <div></div>
       )}
     </>
-    // ) : (
-    //   <></>
-    // );
   );
 }
 

@@ -12,48 +12,86 @@ export default function AdminDashboard(props) {
   if (!admin) {
     props.history.push("/loginAdmin");
   }
+
   const adminId = admin.id;
 
   const {
-    data: { getModulesByAdmin: modules } = {},
-    loading: loadingModules,
+    data: { getModulesByAdmin: adminModules } = {},
+    loading: loadingAdminModules,
   } = useQuery(GET_MODULES_BY_ADMIN, {
     variables: { adminId },
     client: adminClient,
   });
   const {
-    data: { getBadgesByAdmin: badges } = {},
-    loading: loadingBadges,
+    data: { getBadgesByAdmin: adminBadges } = {},
+    loading: loadingAdminBadges,
   } = useQuery(GET_BADGES_BY_ADMIN, {
     variables: { adminId },
     client: adminClient,
   });
   const {
-    data: { getQuestionsByAdmin: questions } = {},
-    loading: loadingQuestions,
+    data: { getQuestionsByAdmin: adminQuestions } = {},
+    loading: loadingAdminQuestions,
   } = useQuery(GET_QUESTIONS_BY_ADMIN, {
     variables: { adminId },
     client: adminClient,
   });
   const {
-    data: { getChallengesByAdmin: challenges } = {},
-    loading: loadingChallenges,
+    data: { getChallengesByAdmin: adminChallenges } = {},
+    loading: loadingAdminChallenges,
   } = useQuery(GET_CHALLENGES_BY_ADMIN, {
     variables: { adminId },
     client: adminClient,
   });
   const {
-    data: { getCategoriesByAdmin: categories } = {},
-    loading: loadingCategories,
+    data: { getCategoriesByAdmin: adminCategories } = {},
+    loading: loadingAdminCategories,
   } = useQuery(GET_CATEGORIES_BY_ADMIN, {
     variables: { adminId },
     client: adminClient,
   });
   const {
-    data: { getQuestionTemplatesByAdmin: questionTemplates } = {},
-    loading: loadingQuestionTemplates,
+    data: { getQuestionTemplatesByAdmin: adminQuestionTemplates } = {},
+    loading: loadingAdminQuestionTemplates,
   } = useQuery(GET_QUESTION_TEMPLATES_BY_ADMIN, {
     variables: { adminId },
+    client: adminClient,
+  });
+
+  const {
+    data: { getModules: modules } = {},
+    loading: loadingModules,
+  } = useQuery(GET_MODULES, {
+    client: adminClient,
+  });
+  const { data: { getBadges: badges } = {}, loading: loadingBadges } = useQuery(
+    GET_BADGES,
+    {
+      client: adminClient,
+    }
+  );
+  const {
+    data: { getQuestions: questions } = {},
+    loading: loadingQuestions,
+  } = useQuery(GET_QUESTIONS, {
+    client: adminClient,
+  });
+  const {
+    data: { getChallenges: challenges } = {},
+    loading: loadingChallenges,
+  } = useQuery(GET_CHALLENGES, {
+    client: adminClient,
+  });
+  const {
+    data: { getCategories: categories } = {},
+    loading: loadingCategories,
+  } = useQuery(GET_CATEGORIES, {
+    client: adminClient,
+  });
+  const {
+    data: { getQuestionTemplates: questionTemplates } = {},
+    loading: loadingQuestionTemplates,
+  } = useQuery(GET_QUESTION_TEMPLATES, {
     client: adminClient,
   });
 
@@ -71,22 +109,28 @@ export default function AdminDashboard(props) {
           categories &&
           challenges && (
             <DashboardSideBar
-              numOfQuestions={questions.length}
-              numOfQuestionTemplates={questionTemplates.length}
-              numOfModules={modules.length}
-              numOfCategories={categories.length}
-              numOfChallenges={challenges.length}
-              numOfBadges={badges.length}
+              numOfQuestions={adminQuestions.length}
+              numOfQuestionTemplates={adminQuestionTemplates.length}
+              numOfModules={adminModules.length}
+              numOfCategories={adminCategories.length}
+              numOfChallenges={adminChallenges.length}
+              numOfBadges={adminBadges.length}
             />
           )}
         <div className="md:w-5/6 last:mt-4">
           {modules && modules.length !== 0 && (
-            <DashboardCards props={props} objects={modules} type="Modules" />
+            <DashboardCards
+              props={props}
+              objects={modules}
+              adminObjects={adminModules}
+              type="Modules"
+            />
           )}
           {questions && questions.length !== 0 && (
             <DashboardCards
               props={props}
               objects={questions}
+              adminObjects={adminQuestions}
               type="Questions"
             />
           )}
@@ -94,6 +138,7 @@ export default function AdminDashboard(props) {
             <DashboardCards
               props={props}
               objects={questionTemplates}
+              adminObjects={adminQuestionTemplates}
               type="Question Templates"
             />
           )}
@@ -101,16 +146,23 @@ export default function AdminDashboard(props) {
             <DashboardCards
               props={props}
               objects={categories}
+              adminObjects={adminCategories}
               type="Categories"
             />
           )}
           {badges && badges.length !== 0 && (
-            <DashboardCards props={props} objects={badges} type="Badges" />
+            <DashboardCards
+              props={props}
+              objects={badges}
+              type="Badges"
+              adminObjects={adminBadges}
+            />
           )}
           {challenges && challenges.length !== 0 && (
             <DashboardCards
               props={props}
               objects={challenges}
+              adminObjects={adminChallenges}
               type="Challenges"
             />
           )}
@@ -127,6 +179,84 @@ export default function AdminDashboard(props) {
   );
   return adminDashboard;
 }
+
+export const GET_MODULES = gql`
+  query getModules {
+    getModules {
+      id
+      name
+      comments
+      questions
+      categoryId
+      createdAt
+    }
+  }
+`;
+export const GET_QUESTIONS = gql`
+  query getQuestions {
+    getQuestions {
+      id
+      questionName
+      questionDescription
+      image
+      points
+      moduleId
+      type
+      videoLink
+      skillDescription
+      articleLink
+      expectedAnswer
+      hint
+      adminId
+      createdAt
+    }
+  }
+`;
+export const GET_QUESTION_TEMPLATES = gql`
+  query getQuestionTemplates {
+    getQuestionTemplates {
+      id
+      inputFields
+      createdAt
+      name
+      categoryId
+      createdAt
+    }
+  }
+`;
+export const GET_BADGES = gql`
+  query getBadges {
+    getBadges {
+      name
+      id
+      createdAt
+      description
+      adminId
+      criteria
+    }
+  }
+`;
+export const GET_CHALLENGES = gql`
+  query getChallenges {
+    getChallenges {
+      id
+      categoryId
+      name
+      challengeDescription
+      image
+    }
+  }
+`;
+export const GET_CATEGORIES = gql`
+  query getCategories {
+    getCategories {
+      name
+      id
+      createdAt
+      adminId
+    }
+  }
+`;
 
 export const GET_MODULES_BY_ADMIN = gql`
   query getModulesByAdmin($adminId: String!) {

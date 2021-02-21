@@ -61,6 +61,7 @@ export const GET_QUESTION_BY_ID = gql`
       skillDescription
       articleLink
       expectedAnswer
+      adminId
       hint
       createdAt
     }

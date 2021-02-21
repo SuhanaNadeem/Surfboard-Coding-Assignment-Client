@@ -3,11 +3,12 @@ import { adminClient } from "../../GraphqlApolloClients";
 import { MdPersonOutline } from "react-icons/md";
 
 import { gql, useQuery } from "@apollo/client";
+import { GET_MODULE_BY_ID } from "./QuestionCard";
 
-export default function AdminInputDropdown({
+export default function ModuleInputDropdown({
   onChange,
   errors,
-  currentAdminId,
+  currentModuleId,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   function toggleIsOpen(e) {
@@ -15,19 +16,19 @@ export default function AdminInputDropdown({
     setIsOpen(!isOpen);
   }
 
-  const { data: { getAdmins: admins } = {}, loading: loadingAdmins } = useQuery(
-    GET_ADMINS,
-    {
-      client: adminClient,
-    }
-  );
+  const {
+    data: { getModules: modules } = {},
+    loading: loadingModules,
+  } = useQuery(GET_MODULES, {
+    client: adminClient,
+  });
 
   const {
-    data: { getAdminById: currentAdmin } = {},
-    loading: loadingAdmin,
+    data: { getModuleById: currentModule } = {},
+    loading: loadingModule,
     error,
-  } = useQuery(GET_ADMIN_BY_ID, {
-    variables: { adminId: currentAdminId },
+  } = useQuery(GET_MODULE_BY_ID, {
+    variables: { moduleId: currentModuleId },
     client: adminClient,
   });
 
@@ -36,16 +37,16 @@ export default function AdminInputDropdown({
       <button
         onClick={toggleIsOpen}
         className={`shadow text-left appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-          errors.newAdminId ? "border-red-500" : ""
+          errors.newModuleId ? "border-red-500" : ""
         }`}
       >
-        {currentAdmin ? (
-          <p>{currentAdmin.name}</p>
+        {currentModule ? (
+          <p>{currentModule.name}</p>
         ) : (
           <p className=" text-white">Unseen Text</p>
         )}
       </button>
-      {isOpen && admins ? (
+      {isOpen && modules ? (
         <>
           <button
             tabIndex="-1"
@@ -54,7 +55,7 @@ export default function AdminInputDropdown({
           ></button>
 
           <div className="absolute focus:outline-none left-50 w-40 mt-1 py-1 bg-white rounded-lg shadow-xl text-xs font-light z-20">
-            {admins.map((admin, index) => (
+            {modules.map((module, index) => (
               <button
                 onClick={(e) => {
                   toggleIsOpen(e);
@@ -62,12 +63,12 @@ export default function AdminInputDropdown({
                 }}
                 type="button"
                 key={index}
-                value={admin.id}
-                error={errors.newAdminId ? "true" : "false"}
-                name="newAdminId"
+                value={module.id}
+                error={errors.newModuleId ? "true" : "false"}
+                name="newModuleId"
                 className="focus:outline-none text-left font-light w-full block px-2 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               >
-                {admin.name}
+                {module.name}
               </button>
             ))}
           </div>
@@ -76,24 +77,16 @@ export default function AdminInputDropdown({
         <div></div>
       )}
     </>
+
   );
 }
 
-export const GET_ADMINS = gql`
+export const GET_MODULES = gql`
   {
-    getAdmins {
+    getModules {
       name
       id
       createdAt
-    }
-  }
-`;
-
-export const GET_ADMIN_BY_ID = gql`
-  query getAdminById($adminId: String!) {
-    getAdminById(adminId: $adminId) {
-      id
-      name
     }
   }
 `;

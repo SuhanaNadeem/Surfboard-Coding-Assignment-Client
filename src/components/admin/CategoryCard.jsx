@@ -2,7 +2,7 @@ import React from "react";
 
 import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
 
-export default function CategoryCard({ props, category }) {
+export default function CategoryCard({ props, category, created }) {
   return category ? (
     <button
       className="focus:outline-none"
@@ -11,7 +11,13 @@ export default function CategoryCard({ props, category }) {
         // props.history.push(`/module/${module.id}`);
       }}
     >
-      <div className="bg-white flex-shrink-0 first:ml-2 shadow w-32 transition-all duration-150 ease-in-out md:hover:-translate-y-1 align-middle flex flex-col items-center text-center p-4 rounded-md overflow-hidden hover:shadow-md hover:bg-gray-100 h-full justify-start">
+      <div
+        className={
+          created
+            ? `bg-gray-100 flex-shrink-0 first:ml-2 shadow w-48 transition-all duration-150 ease-in-out md:hover:-translate-y-1 align-middle flex flex-col items-center text-center p-4 rounded-md overflow-hidden hover:shadow-md hover:bg-gray-200 h-28 justify-center`
+            : `bg-white flex-shrink-0 first:ml-2 shadow w-48 transition-all duration-150 ease-in-out md:hover:-translate-y-1 align-middle flex flex-col items-center text-center p-4 rounded-md overflow-hidden hover:shadow-md hover:bg-gray-100 h-28 justify-center`
+        }
+      >
         <p className="uppercase tracking-wide text-red-800 font-semibold text-md">
           {category.name}
         </p>
