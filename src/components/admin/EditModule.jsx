@@ -2,6 +2,8 @@ import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
+import AdminInputDropdown from "./AdminInputDropdown";
+import CategoryInputDropdown from "./CategoryInputDropdown";
 
 function EditModule({
   module: {
@@ -41,27 +43,16 @@ function EditModule({
 
   return module ? (
     <form
-      className="mx-auto w-1/3 overflow-hidden"
+      className="mx-auto w-1/3 overflow-hidden flex flex-col "
       onSubmit={onSubmit}
       noValidate
     >
-      <div className="flex items-center justify-center">
-        <div className="flex flex-col w-5/6">
-          <h6 className="text-xl text-red-800">Edit Module</h6>
-          <p className="tracking-wider text-sm font-light ">
-            Modify {newName}'s name, category, and admin.
-          </p>
-        </div>
-        <div className="text-right md:text-sm w-1/6 my-2 flex focus:outline-none">
-          <button
-            type="submit"
-            className="flex border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold "
-          >
-            Save
-          </button>
-        </div>
-      </div>
-      <div className="flex flex-col">
+      <h6 className="text-xl text-red-800">Edit Module</h6>
+      <p className="tracking-wider text-sm font-light ">
+        Modify {newName}'s name, category, and admin.
+      </p>
+
+      <div className="flex flex-col mt-2">
         <table className="table-fixed w-full">
           <thead>
             <tr>
@@ -73,20 +64,14 @@ function EditModule({
             <tr>
               <td className="text-xs py-2 border-b border-gray-200">
                 <label className=" font-semibold text-xs uppercase tracking-wide ">
-                  Admin Id
+                  Admin
                 </label>
               </td>
               <td className="text-xs py-2 border-b border-gray-200">
-                <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newAdminId ? "border-red-500" : ""
-                  }`}
-                  name="newAdminId"
-                  placeholder=""
-                  value={values.newAdminId}
+                <AdminInputDropdown
+                  errors={errors}
+                  currentAdminId={values.newAdminId}
                   onChange={onChange}
-                  error={errors.newAdminId ? "true" : "false"}
-                  type="text"
                 />
                 {errors.newAdminId && (
                   <p className="text-red-500">
@@ -98,20 +83,14 @@ function EditModule({
             <tr>
               <td className="text-xs py-2 border-b border-gray-200">
                 <label className=" font-semibold text-xs uppercase tracking-wide ">
-                  Category Id
+                  Category
                 </label>
               </td>
               <td className="text-xs py-2 border-b border-gray-200">
-                <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newCategoryId ? "border-red-500" : ""
-                  }`}
-                  name="newCategoryId"
-                  placeholder=""
-                  value={values.newCategoryId}
+                <CategoryInputDropdown
+                  errors={errors}
+                  currentCategoryId={values.newCategoryId}
                   onChange={onChange}
-                  error={errors.newCategoryId ? "true" : "false"}
-                  type="text"
                 />
                 {errors.newCategoryId && (
                   <p className="text-red-500">
@@ -147,6 +126,14 @@ function EditModule({
             </tr>
           </tbody>
         </table>
+        <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none">
+          <button
+            type="submit"
+            className="flex border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold "
+          >
+            Save
+          </button>
+        </div>
       </div>
     </form>
   ) : (
