@@ -22,7 +22,12 @@ function EditQuestion({
     expectedAnswer: newExpectedAnswer,
     adminId: newAdminId,
     hint: newHint,
-    questionTemplateId,
+    extraLink: newExtraLink,
+    optionA: newOptionA,
+    optionB: newOptionB,
+    optionC: newOptionC,
+    optionD: newOptionD,
+    questionFormat,
   },
 }) {
   console.log(questionId);
@@ -44,6 +49,11 @@ function EditQuestion({
     newExpectedAnswer: newExpectedAnswer || "",
     newAdminId: newAdminId || "",
     newHint: newHint || "",
+    newExtraLink: newExtraLink || "",
+    newOptionA: newOptionA || "",
+    newOptionB: newOptionB || "",
+    newOptionC: newOptionC || "",
+    newOptionD: newOptionD || "",
   });
 
   const [editQuestion, { loading }] = useMutation(EDIT_QUESTION, {
@@ -65,17 +75,7 @@ function EditQuestion({
     editQuestion();
   }
 
-  const {
-    data: { getQuestionTemplateById: questionTemplate } = {},
-    loading: loadingQuestionTemplate,
-  } = useQuery(GET_QUESTION_TEMPLATE_BY_ID, {
-    variables: { questionTemplateId },
-    client: adminClient,
-  });
-
-  console.log(questionTemplate);
-
-  return questionId && questionTemplate ? (
+  return questionId && questionFormat ? (
     <form
       className="w-3/4 overflow-hidden flex flex-col "
       onSubmit={onSubmit}
@@ -361,6 +361,138 @@ function EditQuestion({
                 )}
               </td>
             </tr>
+            {questionFormat === "Multiple Choice" && (
+              <>
+                <tr>
+                  <td className="text-sm py-2 border-b border-gray-200">
+                    <label className=" font-semibold uppercase tracking-wide ">
+                      Option A
+                    </label>
+                  </td>
+                  <td className="text-sm py-2 border-b border-gray-200">
+                    <input
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                        errors.newOptionA ? "border-red-500" : ""
+                      }`}
+                      name="newOptionA"
+                      placeholder=""
+                      value={values.newOptionA}
+                      onChange={onChange}
+                      error={errors.newOptionA ? "true" : "false"}
+                      type="text"
+                    />
+                    {errors.newOptionA && (
+                      <p className="text-red-500">
+                        <b>&#33;</b> {errors.newOptionA}
+                      </p>
+                    )}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-sm py-2 border-b border-gray-200">
+                    <label className=" font-semibold uppercase tracking-wide ">
+                      Option B
+                    </label>
+                  </td>
+                  <td className="text-sm py-2 border-b border-gray-200">
+                    <input
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                        errors.newOptionB ? "border-red-500" : ""
+                      }`}
+                      name="newOptionB"
+                      placeholder=""
+                      value={values.newOptionB}
+                      onChange={onChange}
+                      error={errors.newOptionB ? "true" : "false"}
+                      type="text"
+                    />
+                    {errors.newOptionB && (
+                      <p className="text-red-500">
+                        <b>&#33;</b> {errors.newOptionB}
+                      </p>
+                    )}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-sm py-2 border-b border-gray-200">
+                    <label className=" font-semibold uppercase tracking-wide ">
+                      Option C
+                    </label>
+                  </td>
+                  <td className="text-sm py-2 border-b border-gray-200">
+                    <input
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                        errors.newOptionC ? "border-red-500" : ""
+                      }`}
+                      name="newOptionC"
+                      placeholder=""
+                      value={values.newOptionC}
+                      onChange={onChange}
+                      error={errors.newOptionC ? "true" : "false"}
+                      type="text"
+                    />
+                    {errors.newOptionC && (
+                      <p className="text-red-500">
+                        <b>&#33;</b> {errors.newOptionC}
+                      </p>
+                    )}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-sm py-2 border-b border-gray-200">
+                    <label className=" font-semibold uppercase tracking-wide ">
+                      Option D
+                    </label>
+                  </td>
+                  <td className="text-sm py-2 border-b border-gray-200">
+                    <input
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                        errors.newOptionD ? "border-red-500" : ""
+                      }`}
+                      name="newOptionD"
+                      placeholder=""
+                      value={values.newOptionD}
+                      onChange={onChange}
+                      error={errors.newOptionD ? "true" : "false"}
+                      type="text"
+                    />
+                    {errors.newOptionD && (
+                      <p className="text-red-500">
+                        <b>&#33;</b> {errors.newOptionD}
+                      </p>
+                    )}
+                  </td>
+                </tr>
+              </>
+            )}
+            {questionFormat !== "Multiple Choice" && (
+              <tr>
+                <td className="text-sm py-2 border-b border-gray-200">
+                  <label className=" font-semibold uppercase tracking-wide ">
+                    Resource Link
+                  </label>
+                </td>
+                <td className="text-sm py-2 border-b border-gray-200">
+                  <input
+                    className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                      errors.newExtraLink ? "border-red-500" : ""
+                    }`}
+                    name="newExtraLink"
+                    placeholder=""
+                    value={values.newExtraLink}
+                    onChange={onChange}
+                    error={errors.newExtraLink ? "true" : "false"}
+                    type="text"
+                  />
+                  {errors.newExtraLink && (
+                    <p className="text-red-500">
+                      <b>&#33;</b> {errors.newExtraLink}
+                    </p>
+                  )}
+                </td>
+              </tr>
+            )}
+
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
@@ -419,6 +551,11 @@ const EDIT_QUESTION = gql`
     $newQuestionName: String
     $newType: String
     $newAdminId: String
+    $newOptionA: String
+    $newOptionB: String
+    $newOptionC: String
+    $newOptionD: String
+    $newExtraLink: String
   ) {
     editQuestion(
       questionId: $questionId
@@ -435,6 +572,11 @@ const EDIT_QUESTION = gql`
       newQuestionName: $newQuestionName
       newType: $newType
       newAdminId: $newAdminId
+      newOptionA: $newOptionA
+      newOptionB: $newOptionB
+      newOptionC: $newOptionC
+      newOptionD: $newOptionD
+      newExtraLink: $newExtraLink
     ) {
       id
       questionName

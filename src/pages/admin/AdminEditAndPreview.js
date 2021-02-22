@@ -36,13 +36,13 @@ export default function AdminEditAndPreview(props) {
     client: adminClient,
   });
 
-  const {
-    data: { getQuestionTemplateById: questionTemplate } = {},
-    loading: loadingQuestionTemplate,
-  } = useQuery(GET_QUESTION_TEMPLATE_BY_ID, {
-    variables: { questionTemplateId: givenId },
-    client: adminClient,
-  });
+  // const {
+  //   data: { getQuestionTemplateById: questionTemplate } = {},
+  //   loading: loadingQuestionTemplate,
+  // } = useQuery(GET_QUESTION_TEMPLATE_BY_ID, {
+  //   variables: { questionTemplateId: givenId },
+  //   client: adminClient,
+  // });
 
   const {
     data: { getBadgeById: badge } = {},
@@ -61,7 +61,7 @@ export default function AdminEditAndPreview(props) {
   });
 
   const adminEditAndPreview =
-    module || question || questionTemplate ? (
+    module || question ? (
       <div className="h-full flex flex-col min-h-screen">
         <NavBar />
         <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-32 pb-10">
@@ -82,11 +82,11 @@ export default function AdminEditAndPreview(props) {
             <EditQuestion question={question} />
           </div>
         )}
-        {givenId && questionTemplate && (
+        {/* {givenId && questionTemplate && (
           <div className="h-full justify-start items-center flex mx-32 my-10">
             <EditQuestionTemplate questionTemplate={questionTemplate} />
           </div>
-        )}
+        )} */}
         <Footer />
       </div>
     ) : (
@@ -99,19 +99,19 @@ export default function AdminEditAndPreview(props) {
   return adminEditAndPreview;
 }
 
-export const GET_QUESTION_TEMPLATE_BY_ID = gql`
-  query getQuestionTemplateById($questionTemplateId: String!) {
-    getQuestionTemplateById(questionTemplateId: $questionTemplateId) {
-      id
-      inputFields
-      createdAt
-      name
-      adminId
-      categoryId
-      createdAt
-    }
-  }
-`;
+// export const GET_QUESTION_TEMPLATE_BY_ID = gql`
+//   query getQuestionTemplateById($questionTemplateId: String!) {
+//     getQuestionTemplateById(questionTemplateId: $questionTemplateId) {
+//       id
+//       inputFields
+//       createdAt
+//       name
+//       adminId
+//       categoryId
+//       createdAt
+//     }
+//   }
+// `;
 
 export const GET_BADGE_BY_ID = gql`
   query getBadgeById($badgeId: String!) {

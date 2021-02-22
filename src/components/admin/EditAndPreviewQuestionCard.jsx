@@ -53,7 +53,7 @@ export const GET_QUESTION_BY_ID = gql`
       id
       questionName
       questionDescription
-      questionTemplateId
+      questionFormat
       image
       points
       moduleId
@@ -65,6 +65,11 @@ export const GET_QUESTION_BY_ID = gql`
       adminId
       hint
       createdAt
+      extraLink
+      optionA
+      optionB
+      optionC
+      optionD
     }
   }
 `;

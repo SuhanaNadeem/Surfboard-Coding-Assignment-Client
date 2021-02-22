@@ -99,6 +99,7 @@ export const GET_QUESTION_BY_ID = gql`
       id
       questionName
       questionDescription
+      questionFormat
       image
       points
       moduleId
@@ -108,6 +109,11 @@ export const GET_QUESTION_BY_ID = gql`
       articleLink
       expectedAnswer
       hint
+      extraLink
+      optionA
+      optionB
+      optionC
+      optionD
       createdAt
     }
   }

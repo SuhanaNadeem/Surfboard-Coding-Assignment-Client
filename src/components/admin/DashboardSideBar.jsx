@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 export default function DashboardSideBar({
   numOfQuestions,
-  numOfQuestionTemplates,
+  // numOfQuestionTemplates,
   numOfModules,
   numOfChallenges,
   numOfCategories,
@@ -23,12 +23,12 @@ export default function DashboardSideBar({
       <h3 className="hover:text-red-800 font-light mb-6 last:mb-0 focus:outline-none">
         {numOfModules} {numOfModules === 1 ? `Module` : `Modules`}
       </h3>
-      <h3 className="hover:text-red-800 font-light mb-6 last:mb-0 focus:outline-none">
+      {/* <h3 className="hover:text-red-800 font-light mb-6 last:mb-0 focus:outline-none">
         {numOfQuestionTemplates}{" "}
         {numOfQuestionTemplates === 1
           ? `Question Template`
           : `Question Templates`}
-      </h3>
+      </h3> */}
       <h3 className="hover:text-red-800 font-light mb-6 last:mb-0 focus:outline-none">
         {numOfBadges} {numOfBadges === 1 ? `Badge` : `Badges`}
       </h3>

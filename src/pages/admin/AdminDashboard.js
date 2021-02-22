@@ -50,13 +50,13 @@ export default function AdminDashboard(props) {
     variables: { adminId },
     client: adminClient,
   });
-  const {
-    data: { getQuestionTemplatesByAdmin: adminQuestionTemplates } = {},
-    loading: loadingAdminQuestionTemplates,
-  } = useQuery(GET_QUESTION_TEMPLATES_BY_ADMIN, {
-    variables: { adminId },
-    client: adminClient,
-  });
+  //   const {
+  //     data: { getQuestionTemplatesByAdmin: adminQuestionTemplates } = {},
+  //     loading: loadingAdminQuestionTemplates,
+  //   } = useQuery(GET_QUESTION_TEMPLATES_BY_ADMIN, {
+  //     variables: { adminId },
+  //     client: adminClient,
+  //   });
 
   const {
     data: { getModules: modules } = {},
@@ -88,12 +88,12 @@ export default function AdminDashboard(props) {
   } = useQuery(GET_CATEGORIES, {
     client: adminClient,
   });
-  const {
-    data: { getQuestionTemplates: questionTemplates } = {},
-    loading: loadingQuestionTemplates,
-  } = useQuery(GET_QUESTION_TEMPLATES, {
-    client: adminClient,
-  });
+  //   const {
+  //     data: { getQuestionTemplates: questionTemplates } = {},
+  //     loading: loadingQuestionTemplates,
+  //   } = useQuery(GET_QUESTION_TEMPLATES, {
+  //     client: adminClient,
+  //   });
 
   const adminDashboard = admin ? (
     <div className="h-full flex flex-col min-h-screen">
@@ -104,13 +104,13 @@ export default function AdminDashboard(props) {
       <div className="h-full flex-1 flex mx-48 mt-4 mb-8">
         {adminModules &&
           adminQuestions &&
-          adminQuestionTemplates &&
+          //   adminQuestionTemplates &&
           adminBadges &&
           adminCategories &&
           adminChallenges && (
             <DashboardSideBar
               numOfQuestions={adminQuestions.length}
-              numOfQuestionTemplates={adminQuestionTemplates.length}
+              //   numOfQuestionTemplates={adminQuestionTemplates.length}
               numOfModules={adminModules.length}
               numOfCategories={adminCategories.length}
               numOfChallenges={adminChallenges.length}
@@ -134,14 +134,14 @@ export default function AdminDashboard(props) {
               type="Questions"
             />
           )}
-          {questionTemplates && questionTemplates.length !== 0 && (
+          {/* {questionTemplates && questionTemplates.length !== 0 && (
             <DashboardCards
               props={props}
               objects={questionTemplates}
               adminObjects={adminQuestionTemplates}
               type="Question Templates"
             />
-          )}
+          )} */}
           {categories && categories.length !== 0 && (
             <DashboardCards
               props={props}
@@ -212,18 +212,18 @@ export const GET_QUESTIONS = gql`
     }
   }
 `;
-export const GET_QUESTION_TEMPLATES = gql`
-  query getQuestionTemplates {
-    getQuestionTemplates {
-      id
-      inputFields
-      createdAt
-      name
-      categoryId
-      createdAt
-    }
-  }
-`;
+// export const GET_QUESTION_TEMPLATES = gql`
+//   query getQuestionTemplates {
+//     getQuestionTemplates {
+//       id
+//       inputFields
+//       createdAt
+//       name
+//       categoryId
+//       createdAt
+//     }
+//   }
+// `;
 export const GET_BADGES = gql`
   query getBadges {
     getBadges {
@@ -276,6 +276,7 @@ export const GET_QUESTIONS_BY_ADMIN = gql`
       id
       questionName
       questionDescription
+      questionFormat
       image
       points
       moduleId
@@ -286,22 +287,27 @@ export const GET_QUESTIONS_BY_ADMIN = gql`
       expectedAnswer
       hint
       adminId
+      extraLink
+      optionA
+      optionB
+      optionC
+      optionD
       createdAt
     }
   }
 `;
-export const GET_QUESTION_TEMPLATES_BY_ADMIN = gql`
-  query getQuestionTemplatesByAdmin($adminId: String!) {
-    getQuestionTemplatesByAdmin(adminId: $adminId) {
-      id
-      inputFields
-      createdAt
-      name
-      categoryId
-      createdAt
-    }
-  }
-`;
+// export const GET_QUESTION_TEMPLATES_BY_ADMIN = gql`
+//   query getQuestionTemplatesByAdmin($adminId: String!) {
+//     getQuestionTemplatesByAdmin(adminId: $adminId) {
+//       id
+//       inputFields
+//       createdAt
+//       name
+//       categoryId
+//       createdAt
+//     }
+//   }
+// `;
 export const GET_BADGES_BY_ADMIN = gql`
   query getBadgesByAdmin($adminId: String!) {
     getBadgesByAdmin(adminId: $adminId) {

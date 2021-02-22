@@ -39,7 +39,7 @@ export default function DashboardCards({ props, objects, adminObjects, type }) {
           ))}
         </div>
       )}
-      {type === "Question Templates" && (
+      {/* {type === "Question Templates" && (
         <div className=" pt-4 ml-10 grid grid-flow-col gap-2 items-stretch justify-start py-1 mr-2 overflow-x-auto relative">
           {objects.map((questionTemplate, index) => (
             <QuestionTemplateCard
@@ -52,7 +52,7 @@ export default function DashboardCards({ props, objects, adminObjects, type }) {
             />
           ))}
         </div>
-      )}
+      )} */}
       {type === "Badges" && (
         <div className="pt-4 ml-10 grid grid-flow-col gap-2 items-stretch justify-start py-1 mr-2 overflow-x-auto relative">
           {objects.map((badge, index) => (
