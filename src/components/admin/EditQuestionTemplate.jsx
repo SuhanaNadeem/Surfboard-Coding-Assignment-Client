@@ -5,51 +5,57 @@ import { useForm } from "../../util/hooks";
 import AdminInputDropdown from "./AdminInputDropdown";
 import CategoryInputDropdown from "./CategoryInputDropdown";
 
-function EditModule({
-  module: {
-    id: moduleId,
-    categoryId: newCategoryId,
+function EditQuestionTemplate({
+  questionTemplate: {
+    id: questionTemplateId,
     name: newName,
+    categoryId: newCategoryId,
+    inputFields: newInputFields,
     adminId: newAdminId,
   },
 }) {
   const [errors, setErrors] = useState({});
 
-  const { values, onChange, onSubmit } = useForm(editModuleCallback, {
-    moduleId,
-    newCategoryId,
-    newName,
-    newAdminId,
+  const { values, onChange, onSubmit } = useForm(editQuestionTemplateCallback, {
+    questionTemplateId,
+    newName: newName || "",
+    newCategoryId: newCategoryId || "",
+    newInputFields: newInputFields || [],
+    newAdminId: newAdminId || "",
   });
 
-  const [editModule, { loading }] = useMutation(EDIT_MODULE, {
-    refetchQueries: [],
-    update(proxy, { data: { editModule: moduleData } }) {
-      values.confirmTitle = "";
-      setErrors({});
-    },
-    onError(err) {
-      console.log(values);
-      console.log(err);
-      // setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
-    variables: values,
-    client: adminClient,
-  });
+  const [editQuestionTemplate, { loading }] = useMutation(
+    EDIT_QUESTION_TEMPLATE,
+    {
+      refetchQueries: [],
+      update(proxy, { data: { editQuestionTemplate: questionTemplateData } }) {
+        values.confirmTitle = "";
+        setErrors({});
+      },
+      onError(err) {
+        console.log(values);
+        console.log(err);
+        // setErrors(err.graphQLErrors[0].extensions.exception.errors);
+      },
+      variables: values,
+      client: adminClient,
+    }
+  );
 
-  function editModuleCallback() {
-    editModule();
+  function editQuestionTemplateCallback() {
+    editQuestionTemplate();
   }
 
-  return module ? (
+  return questionTemplateId ? (
     <form
-      className="mx-auto w-1/3 overflow-hidden flex flex-col "
+      className="w-3/4 overflow-hidden flex flex-col "
       onSubmit={onSubmit}
       noValidate
     >
-      <h6 className="text-xl text-red-800">Edit Module</h6>
+      <h6 className="text-xl text-red-800">Edit Question</h6>
       <p className="text-sm font-light ">
-        Modify {newName}'s name, category, and admin.
+        Modify {newName}'s name, description, image, points, module, type,
+        video, admin, article, expected answer, or hint.
       </p>
 
       <div className="flex flex-col mt-2">
@@ -124,12 +130,44 @@ function EditModule({
                 )}
               </td>
             </tr>
+
+            <tr>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
+                  Input Fields
+                </label>
+              </td>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <input
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.newInputFields ? "border-red-500" : ""
+                  }`}
+                  name="newInputFields"
+                  placeholder=""
+                  value={values.newInputFields}
+                  onChange={onChange}
+                  error={errors.newInputFields ? "true" : "false"}
+                  type="text"
+                />
+                {errors.newInputFields && (
+                  <p className="text-red-500">
+                    <b>&#33;</b> {errors.newInputFields}
+                  </p>
+                )}
+              </td>
+            </tr>
           </tbody>
         </table>
-        <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none">
+        {values.newInputFields.map((inputField, index) => (
+          <p key={index}>
+            {inputField} and
+            {values.newInputFields[values.newInputFields.indexOf(inputField)]}
+          </p>
+        ))}
+        <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none w-1/6">
           <button
             type="submit"
-            className="flex focus:outline-none border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm font-semibold "
+            className="flex focus:outline-none border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm items-center justify-center font-semibold w-full"
           >
             Save
           </button>
@@ -141,28 +179,29 @@ function EditModule({
   );
 }
 
-const EDIT_MODULE = gql`
-  mutation editModule(
-    $moduleId: String!
-    $newCategoryId: String
+const EDIT_QUESTION_TEMPLATE = gql`
+  mutation editQuestionTemplate(
+    $questionTemplateId: String!
     $newName: String
+    $newCategoryId: String
+    $newInputFields: [String]
     $newAdminId: String
   ) {
-    editModule(
+    editQuestionTemplate(
+      questionTemplateId: $questionTemplateId
+      newInputFields: $newInputFields
       newCategoryId: $newCategoryId
-      moduleId: $moduleId
       newName: $newName
       newAdminId: $newAdminId
     ) {
       id
-      name
-      categoryId
-      adminId
-      questions
-      learningObjectives
+      inputFields
       createdAt
+      name
+      adminId
+      categoryId
     }
   }
 `;
 
-export default EditModule;
+export default EditQuestionTemplate;

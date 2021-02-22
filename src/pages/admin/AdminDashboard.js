@@ -102,12 +102,12 @@ export default function AdminDashboard(props) {
         <p className="text-4xl text-white">Admin Dashboard</p>
       </div>
       <div className="h-full flex-1 flex mx-48 mt-4 mb-8">
-        {modules &&
-          questions &&
-          questionTemplates &&
-          badges &&
-          categories &&
-          challenges && (
+        {adminModules &&
+          adminQuestions &&
+          adminQuestionTemplates &&
+          adminBadges &&
+          adminCategories &&
+          adminChallenges && (
             <DashboardSideBar
               numOfQuestions={adminQuestions.length}
               numOfQuestionTemplates={adminQuestionTemplates.length}

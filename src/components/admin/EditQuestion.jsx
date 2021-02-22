@@ -1,6 +1,7 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
+import { GET_QUESTION_TEMPLATE_BY_ID } from "../../pages/admin/AdminEditAndPreview";
 import { useForm } from "../../util/hooks";
 import AdminInputDropdown from "./AdminInputDropdown";
 import ModuleInputDropdown from "./ModuleInputDropdown";
@@ -13,6 +14,7 @@ function EditQuestion({
     image: newImage,
     points: newPoints,
     moduleId: newModuleId,
+    moduleId,
     type: newType,
     videoLink: newVideoLink,
     skillDescription: newSkillDescription,
@@ -20,6 +22,7 @@ function EditQuestion({
     expectedAnswer: newExpectedAnswer,
     adminId: newAdminId,
     hint: newHint,
+    questionTemplateId,
   },
 }) {
   console.log(questionId);
@@ -27,7 +30,8 @@ function EditQuestion({
   const [errors, setErrors] = useState({});
 
   const { values, onChange, onSubmit } = useForm(editQuestionCallback, {
-    questionId: questionId || "",
+    questionId: questionId,
+    moduleId: moduleId,
     newQuestionName: newQuestionName || "",
     newQuestionDescription: newQuestionDescription || "",
     newImage: newImage || "",
@@ -44,7 +48,7 @@ function EditQuestion({
 
   const [editQuestion, { loading }] = useMutation(EDIT_QUESTION, {
     refetchQueries: [],
-    update(proxy, { data: { editModule: moduleData } }) {
+    update(proxy, { data: { editQuestion: questionData } }) {
       values.confirmTitle = "";
       setErrors({});
     },
@@ -61,7 +65,17 @@ function EditQuestion({
     editQuestion();
   }
 
-  return questionId ? (
+  const {
+    data: { getQuestionTemplateById: questionTemplate } = {},
+    loading: loadingQuestionTemplate,
+  } = useQuery(GET_QUESTION_TEMPLATE_BY_ID, {
+    variables: { questionTemplateId },
+    client: adminClient,
+  });
+
+  console.log(questionTemplate);
+
+  return questionId && questionTemplate ? (
     <form
       className="w-3/4 overflow-hidden flex flex-col "
       onSubmit={onSubmit}
@@ -343,6 +357,31 @@ function EditQuestion({
                 {errors.newExpectedAnswer && (
                   <p className="text-red-500">
                     <b>&#33;</b> {errors.newExpectedAnswer}
+                  </p>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
+                  Image
+                </label>
+              </td>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <input
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.newImage ? "border-red-500" : ""
+                  }`}
+                  name="newImage"
+                  placeholder=""
+                  value={values.newImage}
+                  onChange={onChange}
+                  error={errors.newImage ? "true" : "false"}
+                  type="text"
+                />
+                {errors.newImage && (
+                  <p className="text-red-500">
+                    <b>&#33;</b> {errors.newImage}
                   </p>
                 )}
               </td>

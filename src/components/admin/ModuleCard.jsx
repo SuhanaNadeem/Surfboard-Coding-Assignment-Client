@@ -12,7 +12,6 @@ export default function ModuleCard({ props, module, created }) {
     variables: { categoryId: module.categoryId },
     client: adminClient,
   });
-  console.log(created);
 
   return category && module ? (
     <button
