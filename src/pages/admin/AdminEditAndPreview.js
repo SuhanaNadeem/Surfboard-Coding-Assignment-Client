@@ -10,6 +10,9 @@ import PreviewModule from "../../components/admin/PreviewModule";
 import { GET_QUESTION_BY_ID } from "../../components/admin/EditAndPreviewQuestionCard";
 import EditQuestion from "../../components/admin/EditQuestion";
 import EditQuestionTemplate from "../../components/admin/EditQuestionTemplate";
+import { GET_CATEGORY_BY_ID } from "../../components/admin/ChallengeCard";
+import EditCategory from "../../components/admin/EditCategory";
+import EditBadge from "../../components/admin/EditBadge";
 
 export default function AdminEditAndPreview(props) {
   const { admin } = useContext(AdminAuthContext);
@@ -33,6 +36,14 @@ export default function AdminEditAndPreview(props) {
     loading: loadingQuestion,
   } = useQuery(GET_QUESTION_BY_ID, {
     variables: { questionId: givenId },
+    client: adminClient,
+  });
+
+  const {
+    data: { getCategoryById: category } = {},
+    loading: loadingCategory,
+  } = useQuery(GET_CATEGORY_BY_ID, {
+    variables: { categoryId: givenId },
     client: adminClient,
   });
 
@@ -61,7 +72,7 @@ export default function AdminEditAndPreview(props) {
   });
 
   const adminEditAndPreview =
-    module || question ? (
+    module || question || category || badge ? (
       <div className="h-full flex flex-col min-h-screen">
         <NavBar />
         <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-32 pb-10">
@@ -87,6 +98,17 @@ export default function AdminEditAndPreview(props) {
             <EditQuestionTemplate questionTemplate={questionTemplate} />
           </div>
         )} */}
+
+        {givenId && category && (
+          <div className="h-full justify-start items-center flex mx-32 my-10">
+            <EditCategory category={category} />
+          </div>
+        )}
+        {givenId && badge && (
+          <div className="h-full justify-start items-center flex mx-32 my-10">
+            <EditBadge badge={badge} />
+          </div>
+        )}
         <Footer />
       </div>
     ) : (
@@ -116,12 +138,16 @@ export default function AdminEditAndPreview(props) {
 export const GET_BADGE_BY_ID = gql`
   query getBadgeById($badgeId: String!) {
     getBadgeById(badgeId: $badgeId) {
+      adminId
+      categoryId
+      moduleId
+      questionId
+      points
       name
-      id
       createdAt
       description
-      adminId
-      criteria
+      image
+      id
     }
   }
 `;

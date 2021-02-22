@@ -7,8 +7,8 @@ export default function CategoryCard({ props, category, created }) {
     <button
       className="focus:outline-none"
       onClick={(e) => {
-        console.log("Go Somewhere");
-        // props.history.push(`/module/${module.id}`);
+        // console.log("Go Somewhere");
+        props.history.push(`/adminEditAndPreview/${category.id}`);
       }}
     >
       <div

@@ -50,6 +50,8 @@ export const GET_CATEGORY_BY_ID = gql`
     getCategoryById(categoryId: $categoryId) {
       id
       name
+      createdAt
+      adminId
     }
   }
 `;

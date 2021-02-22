@@ -6,8 +6,7 @@ export default function BadgeCard({ props, badge, created }) {
     <button
       className="focus:outline-none"
       onClick={(e) => {
-        console.log("Go Somewhere");
-        // props.history.push(`/module/${module.id}`);
+        props.history.push(`/adminEditAndPreview/${badge.id}`);
       }}
     >
       <div

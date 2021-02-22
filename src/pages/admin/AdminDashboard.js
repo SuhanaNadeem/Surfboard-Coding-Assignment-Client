@@ -232,7 +232,11 @@ export const GET_BADGES = gql`
       createdAt
       description
       adminId
-      criteria
+      points
+      moduleId
+      categoryId
+      questionId
+      image
     }
   }
 `;
@@ -316,7 +320,11 @@ export const GET_BADGES_BY_ADMIN = gql`
       createdAt
       description
       adminId
-      criteria
+      points
+      moduleId
+      categoryId
+      questionId
+      image
     }
   }
 `;

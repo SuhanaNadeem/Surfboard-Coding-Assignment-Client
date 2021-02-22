@@ -12,7 +12,7 @@ export default function DashboardCards({ props, objects, adminObjects, type }) {
       <h4 className="px-10 text-3xl">{type}</h4>
 
       {type === "Modules" && (
-        <div className="h-64 ml-10 grid grid-flow-row grid-cols-4 gap-2 items-stretch justify-start py-1 mr-2 overflow-y-auto relative pt-4">
+        <div className="h-64 ml-10 grid grid-flow-row grid-cols-4 gap-2 items-stretch justify-start py-1 mr-2 overflow-y-auto relative mt-3">
           {objects.map((module, index) => (
             <ModuleCard
               key={index}
@@ -26,7 +26,7 @@ export default function DashboardCards({ props, objects, adminObjects, type }) {
         </div>
       )}
       {type === "Questions" && (
-        <div className="h-64 mt-4 ml-10 grid grid-flow-row grid-cols-4 gap-2 items-stretch justify-start py-1 mr-2 overflow-y-auto relative">
+        <div className="h-64 mt-2 ml-10 grid grid-flow-row grid-cols-4 gap-2 items-stretch justify-start py-1 mr-2 overflow-y-auto relative">
           {objects.map((question, index) => (
             <QuestionCard
               key={index}
