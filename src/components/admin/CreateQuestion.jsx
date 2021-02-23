@@ -50,6 +50,22 @@ function CreateQuestion({ admin, props }) {
       setErrors({});
       console.log("in update");
       console.log(values);
+
+      values.image = "";
+      values.moduleId = "";
+      values.description = "";
+      values.expectedAnswer = "";
+      values.hint = "";
+      values.points = 0;
+      values.videoLink = "";
+      values.articleLink = "";
+      values.name = "";
+      values.type = "";
+      values.extraLink = "";
+      values.optionA = "";
+      values.optionB = "";
+      values.optionC = "";
+      values.optionD = "";
     },
     onError(err) {
       console.log(values);
@@ -244,6 +260,31 @@ function CreateQuestion({ admin, props }) {
                 {errors.description && (
                   <p className="text-red-500">
                     <b>&#33;</b> {errors.description}
+                  </p>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
+                  Image
+                </label>
+              </td>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <input
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.image ? "border-red-500" : ""
+                  }`}
+                  name="image"
+                  placeholder=""
+                  value={values.image}
+                  onChange={onChange}
+                  error={errors.image ? "true" : "false"}
+                  type="text"
+                />
+                {errors.image && (
+                  <p className="text-red-500">
+                    <b>&#33;</b> {errors.image}
                   </p>
                 )}
               </td>

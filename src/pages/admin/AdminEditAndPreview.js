@@ -90,7 +90,7 @@ export default function AdminEditAndPreview(props) {
         )}
         {givenId && question && (
           <div className="h-full justify-start items-center flex mx-32 my-10">
-            <EditQuestion question={question} />
+            <EditQuestion question={question} props={props} />
           </div>
         )}
         {/* {givenId && questionTemplate && (

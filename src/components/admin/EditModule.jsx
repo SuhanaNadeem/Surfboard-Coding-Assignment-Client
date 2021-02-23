@@ -6,6 +6,7 @@ import AdminInputDropdown from "./AdminInputDropdown";
 import CategoryInputDropdown from "./CategoryInputDropdown";
 
 function EditModule({
+  props,
   module: {
     id: moduleId,
     categoryId: newCategoryId,
@@ -27,6 +28,7 @@ function EditModule({
     update(proxy, { data: { editModule: moduleData } }) {
       values.confirmTitle = "";
       setErrors({});
+      props.history.push("/adminDashboard");
     },
     onError(err) {
       console.log(values);

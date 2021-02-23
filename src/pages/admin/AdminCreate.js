@@ -4,6 +4,7 @@ import Footer from "../../components/admin/Footer";
 import { AdminAuthContext } from "../../context/adminAuth";
 import CreateModule from "../../components/admin/CreateModule";
 import CreateQuestion from "../../components/admin/CreateQuestion";
+import CreateCategory from "../../components/admin/CreateCategory";
 
 export default function AdminCreate(props) {
   console.log("in create");
@@ -27,6 +28,11 @@ export default function AdminCreate(props) {
       {page === "question" && (
         <div className="h-full justify-start items-center flex mx-32 my-10">
           <CreateQuestion admin={admin} props={props} />
+        </div>
+      )}
+      {page === "category" && (
+        <div className="h-full justify-start items-center flex mx-32 my-10">
+          <CreateCategory admin={admin} props={props} />
         </div>
       )}
       <Footer />

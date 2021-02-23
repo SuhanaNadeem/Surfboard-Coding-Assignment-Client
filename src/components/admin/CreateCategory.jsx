@@ -2,24 +2,21 @@ import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
-import CategoryInputDropdown from "./CategoryInputDropdown";
 
-function CreateModule({ admin, props }) {
+function CreateCategory({ admin, props }) {
   const [errors, setErrors] = useState({});
   var name = "";
-  var categoryId = "";
-  const { values, onChange, onSubmit } = useForm(createNewModuleCallback, {
+
+  const { values, onChange, onSubmit } = useForm(createNewCategoryCallback, {
     name: name || "",
-    categoryId: categoryId || "",
   });
 
-  const [createNewModule, { loading }] = useMutation(CREATE_NEW_MODULE, {
+  const [createNewCategory, { loading }] = useMutation(CREATE_NEW_CATEGORY, {
     refetchQueries: [],
     update() {
       values.confirmTitle = "";
       setErrors({});
       values.name = "";
-      values.categoryId = "";
     },
     onError(err) {
       console.log(values);
@@ -30,9 +27,12 @@ function CreateModule({ admin, props }) {
     client: adminClient,
   });
 
-  function createNewModuleCallback() {
-    createNewModule();
+  function createNewCategoryCallback() {
+    createNewCategory();
   }
+
+  console.log("outside");
+  console.log(values);
 
   return module ? (
     <form
@@ -40,9 +40,9 @@ function CreateModule({ admin, props }) {
       onSubmit={onSubmit}
       noValidate
     >
-      <h6 className="text-xl text-red-800">Create a Module</h6>
+      <h6 className="text-xl text-red-800">Create a Category</h6>
       <p className="text-sm font-light ">
-        Create a new module by entering a name and category.
+        Create a new question by entering a name.
       </p>
 
       <div className="flex flex-col mt-2">
@@ -54,26 +54,6 @@ function CreateModule({ admin, props }) {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Category
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <CategoryInputDropdown
-                  errors={errors}
-                  currentCategoryId={values.categoryId}
-                  onChange={onChange}
-                  categoryType="categoryId"
-                />
-                {errors.categoryId && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.categoryId}
-                  </p>
-                )}
-              </td>
-            </tr>
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
@@ -116,18 +96,15 @@ function CreateModule({ admin, props }) {
   );
 }
 
-const CREATE_NEW_MODULE = gql`
-  mutation createNewModule($categoryId: String!, $name: String!) {
-    createNewModule(name: $name, categoryId: $categoryId) {
+const CREATE_NEW_CATEGORY = gql`
+  mutation createNewCategory($name: String!) {
+    createNewCategory(name: $name) {
       id
       name
-      categoryId
       adminId
-      questions
-      learningObjectives
       createdAt
     }
   }
 `;
 
-export default CreateModule;
+export default CreateCategory;

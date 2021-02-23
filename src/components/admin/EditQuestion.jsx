@@ -1,12 +1,12 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
-import { GET_QUESTION_TEMPLATE_BY_ID } from "../../pages/admin/AdminEditAndPreview";
 import { useForm } from "../../util/hooks";
 import AdminInputDropdown from "./AdminInputDropdown";
 import ModuleInputDropdown from "./ModuleInputDropdown";
 
 function EditQuestion({
+  props,
   question: {
     id: questionId,
     name: newName,
@@ -29,9 +29,6 @@ function EditQuestion({
     questionFormat,
   },
 }) {
-  console.log(questionId);
-  console.log("yhenr mom");
-  // console.log(question);
   const [errors, setErrors] = useState({});
 
   const { values, onChange, onSubmit } = useForm(editQuestionCallback, {
@@ -60,6 +57,7 @@ function EditQuestion({
     update(proxy, { data: { editQuestion: questionData } }) {
       values.confirmTitle = "";
       setErrors({});
+      props.history.push("/adminDashboard");
     },
     onError(err) {
       console.log(values);

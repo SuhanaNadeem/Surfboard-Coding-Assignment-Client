@@ -7,7 +7,12 @@ import QuestionTemplateCard from "./QuestionTemplateCard";
 
 import React from "react";
 export default function DashboardCards({ props, objects, adminObjects, type }) {
-  const createPage = type.slice(0, -1).toLowerCase();
+  var createPage;
+  if (type === "Categories") {
+    createPage = "category";
+  } else {
+    createPage = type.slice(0, -1).toLowerCase();
+  }
   return objects && adminObjects ? (
     <div className="pb-8">
       <div className="flex items-center justify-center">
