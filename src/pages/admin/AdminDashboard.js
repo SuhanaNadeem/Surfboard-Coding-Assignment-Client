@@ -243,11 +243,15 @@ export const GET_BADGES = gql`
 export const GET_CHALLENGES = gql`
   query getChallenges {
     getChallenges {
-      id
-      categoryId
       name
+      categoryId
       challengeDescription
       image
+      extraLink
+      dueDate
+      adminId
+      id
+      createdAt
     }
   }
 `;
@@ -331,11 +335,15 @@ export const GET_BADGES_BY_ADMIN = gql`
 export const GET_CHALLENGES_BY_ADMIN = gql`
   query getChallengesByAdmin($adminId: String!) {
     getChallengesByAdmin(adminId: $adminId) {
-      id
-      categoryId
       name
+      categoryId
       challengeDescription
       image
+      extraLink
+      dueDate
+      adminId
+      id
+      createdAt
     }
   }
 `;

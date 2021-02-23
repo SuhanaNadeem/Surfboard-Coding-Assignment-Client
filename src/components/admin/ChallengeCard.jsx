@@ -17,8 +17,7 @@ export default function ChallengeCard({ props, challenge, created }) {
     <button
       className="focus:outline-none"
       onClick={(e) => {
-        console.log("Go Somewhere");
-        // props.history.push(`/module/${module.id}`);
+        props.history.push(`/adminEditAndPreview/${challenge.id}`);
       }}
     >
       <div

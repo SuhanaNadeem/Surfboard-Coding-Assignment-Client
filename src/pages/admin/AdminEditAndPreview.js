@@ -13,6 +13,7 @@ import EditQuestionTemplate from "../../components/admin/EditQuestionTemplate";
 import { GET_CATEGORY_BY_ID } from "../../components/admin/ChallengeCard";
 import EditCategory from "../../components/admin/EditCategory";
 import EditBadge from "../../components/admin/EditBadge";
+import EditChallenge from "../../components/admin/EditChallenge";
 
 export default function AdminEditAndPreview(props) {
   const { admin } = useContext(AdminAuthContext);
@@ -72,7 +73,7 @@ export default function AdminEditAndPreview(props) {
   });
 
   const adminEditAndPreview =
-    module || question || category || badge ? (
+    module || question || category || badge || challenge ? (
       <div className="h-full flex flex-col min-h-screen">
         <NavBar />
         <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-32 pb-10">
@@ -107,6 +108,11 @@ export default function AdminEditAndPreview(props) {
         {givenId && badge && (
           <div className="h-full justify-start items-center flex mx-32 my-10">
             <EditBadge badge={badge} />
+          </div>
+        )}
+        {givenId && challenge && (
+          <div className="h-full justify-start items-center flex mx-32 my-10">
+            <EditChallenge challenge={challenge} />
           </div>
         )}
         <Footer />
@@ -155,12 +161,15 @@ export const GET_BADGE_BY_ID = gql`
 export const GET_CHALLENGE_BY_ID = gql`
   query getChallengeById($challengeId: String!) {
     getChallengeById(challengeId: $challengeId) {
-      id
-      categoryId
       name
+      categoryId
       challengeDescription
       image
+      extraLink
+      dueDate
       adminId
+      id
+      createdAt
     }
   }
 `;
