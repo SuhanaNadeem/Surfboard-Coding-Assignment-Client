@@ -20,8 +20,7 @@ export default function AdminEditAndPreview(props) {
   if (!admin) {
     props.history.push("/loginAdmin");
   }
-  const adminId = admin.id;
-  const givenId = props.match.params.moduleId;
+  const givenId = props.match.params.givenId;
   var selectedQuestionId = props.match.params.questionId;
 
   const {

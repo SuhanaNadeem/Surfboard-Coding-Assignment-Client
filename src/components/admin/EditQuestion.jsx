@@ -31,6 +31,7 @@ function EditQuestion({
   },
 }) {
   console.log(questionId);
+  console.log("yhenr mom");
   // console.log(question);
   const [errors, setErrors] = useState({});
 
@@ -74,8 +75,9 @@ function EditQuestion({
   function editQuestionCallback() {
     editQuestion();
   }
+  console.log(questionFormat);
 
-  return questionId && questionFormat ? (
+  return questionId ? (
     <form
       className="w-3/4 overflow-hidden flex flex-col "
       onSubmit={onSubmit}

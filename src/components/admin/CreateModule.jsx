@@ -2,29 +2,20 @@ import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
-import AdminInputDropdown from "./AdminInputDropdown";
 import CategoryInputDropdown from "./CategoryInputDropdown";
 
-function EditModule({
-  module: {
-    id: moduleId,
-    categoryId: newCategoryId,
-    name: newName,
-    adminId: newAdminId,
-  },
-}) {
+function CreateModule({ admin, props }) {
   const [errors, setErrors] = useState({});
-
-  const { values, onChange, onSubmit } = useForm(editModuleCallback, {
-    moduleId,
-    newCategoryId,
-    newName,
-    newAdminId,
+  var name = "";
+  var categoryId = "";
+  const { values, onChange, onSubmit } = useForm(createNewModuleCallback, {
+    name: name || "",
+    categoryId: categoryId || "",
   });
 
-  const [editModule, { loading }] = useMutation(EDIT_MODULE, {
+  const [createNewModule, { loading }] = useMutation(CREATE_NEW_MODULE, {
     refetchQueries: [],
-    update(proxy, { data: { editModule: moduleData } }) {
+    update() {
       values.confirmTitle = "";
       setErrors({});
     },
@@ -37,19 +28,19 @@ function EditModule({
     client: adminClient,
   });
 
-  function editModuleCallback() {
-    editModule();
+  function createNewModuleCallback() {
+    createNewModule();
   }
 
   return module ? (
     <form
-      className="mx-auto w-1/3 overflow-hidden flex flex-col "
+      className="w-3/4 overflow-hidden flex flex-col "
       onSubmit={onSubmit}
       noValidate
     >
-      <h6 className="text-xl text-red-800">Edit Module</h6>
+      <h6 className="text-xl text-red-800">Create a Module</h6>
       <p className="text-sm font-light ">
-        Modify {newName}'s name, category, and admin.
+        Create a new module by entering a name and category.
       </p>
 
       <div className="flex flex-col mt-2">
@@ -64,38 +55,20 @@ function EditModule({
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
-                  Admin
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <AdminInputDropdown
-                  errors={errors}
-                  currentAdminId={values.newAdminId}
-                  onChange={onChange}
-                />
-                {errors.newAdminId && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.newAdminId}
-                  </p>
-                )}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
                   Category
                 </label>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <CategoryInputDropdown
                   errors={errors}
-                  currentCategoryId={values.newCategoryId}
+                  currentCategoryId={values.categoryId}
                   onChange={onChange}
-                  categoryType="newCategoryId"
+                  categoryType="categoryId"
+
                 />
-                {errors.newCategoryId && (
+                {errors.categoryId && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.newCategoryId}
+                    <b>&#33;</b> {errors.categoryId}
                   </p>
                 )}
               </td>
@@ -109,18 +82,18 @@ function EditModule({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newName ? "border-red-500" : ""
+                    errors.name ? "border-red-500" : ""
                   }`}
-                  name="newName"
+                  name="name"
                   placeholder=""
-                  value={values.newName}
+                  value={values.name}
                   onChange={onChange}
-                  error={errors.newName ? "true" : "false"}
+                  error={errors.name ? "true" : "false"}
                   type="text"
                 />
-                {errors.newName && (
+                {errors.name && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.newName}
+                    <b>&#33;</b> {errors.name}
                   </p>
                 )}
               </td>
@@ -142,19 +115,9 @@ function EditModule({
   );
 }
 
-const EDIT_MODULE = gql`
-  mutation editModule(
-    $moduleId: String!
-    $newCategoryId: String
-    $newName: String
-    $newAdminId: String
-  ) {
-    editModule(
-      newCategoryId: $newCategoryId
-      moduleId: $moduleId
-      newName: $newName
-      newAdminId: $newAdminId
-    ) {
+const CREATE_NEW_MODULE = gql`
+  mutation createNewModule($categoryId: String!, $name: String!) {
+    createNewModule(name: $name, categoryId: $categoryId) {
       id
       name
       categoryId
@@ -166,4 +129,4 @@ const EDIT_MODULE = gql`
   }
 `;
 
-export default EditModule;
+export default CreateModule;

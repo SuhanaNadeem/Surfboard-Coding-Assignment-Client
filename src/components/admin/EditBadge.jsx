@@ -59,7 +59,7 @@ function EditBadge({
       onSubmit={onSubmit}
       noValidate
     >
-      <h6 className="text-xl text-red-800">Edit badge</h6>
+      <h6 className="text-xl text-red-800">Edit Badge</h6>
       <p className="text-sm font-light ">
         Modify {newName}'s name, admin, module, question, category, points,
         description, or image.
@@ -168,6 +168,7 @@ function EditBadge({
                   errors={errors}
                   currentCategoryId={values.newCategoryId}
                   onChange={onChange}
+                  categoryType="newCategoryId"
                 />
                 {errors.newCategoryId && (
                   <p className="text-red-500">

@@ -97,6 +97,8 @@ function EditQuestionTemplate({
                   errors={errors}
                   currentCategoryId={values.newCategoryId}
                   onChange={onChange}
+                  categoryType="newCategoryId"
+
                 />
                 {errors.newCategoryId && (
                   <p className="text-red-500">

@@ -5,22 +5,15 @@ import { MdPersonOutline } from "react-icons/md";
 import { gql, useQuery } from "@apollo/client";
 import { GET_CATEGORY_BY_ID } from "./ChallengeCard";
 
-export default function CategoryInputDropdown({
+export default function CreateCategoryInputDropdown({
   onChange,
   errors,
   currentCategoryId,
-  categoryType,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   function toggleIsOpen(e) {
     e.preventDefault();
     setIsOpen(!isOpen);
-  }
-  var categoryErrors;
-  if (categoryType === "newCategoryId") {
-    categoryErrors = errors.newCategoryId;
-  } else if (categoryType === "categoryId") {
-    categoryErrors = errors.categoryId;
   }
 
   const {
@@ -44,7 +37,7 @@ export default function CategoryInputDropdown({
       <button
         onClick={toggleIsOpen}
         className={`shadow text-left appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-          categoryErrors ? "border-red-500" : ""
+          errors.categoryId ? "border-red-500" : ""
         }`}
       >
         {currentCategory ? (
@@ -53,7 +46,7 @@ export default function CategoryInputDropdown({
           <p className=" text-white">Unseen Text</p>
         )}
       </button>
-      {isOpen && categories && categoryType ? (
+      {isOpen && categories ? (
         <>
           <button
             tabIndex="-1"
@@ -71,8 +64,8 @@ export default function CategoryInputDropdown({
                 type="button"
                 key={index}
                 value={category.id}
-                error={categoryErrors ? "true" : "false"}
-                name={categoryType}
+                error={errors.categoryId ? "true" : "false"}
+                name="categoryId"
                 className="focus:outline-none text-left font-light w-full block px-2 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               >
                 {category.name}

@@ -1,21 +1,35 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext } from "react";
 import NavBar from "../../components/admin/NavBar";
 import Footer from "../../components/admin/Footer";
 import { AdminAuthContext } from "../../context/adminAuth";
+import CreateModule from "../../components/admin/CreateModule";
 
-function AdminCreate(props) {
-  const context = useContext(AdminAuthContext);
-
-  return (
+export default function AdminCreate(props) {
+  console.log("in create");
+  const { admin } = useContext(AdminAuthContext);
+  if (!admin) {
+    props.history.push("/loginAdmin");
+  }
+  const page = props.match.params.page;
+  console.log(page);
+  return page ? (
     <div className="h-full flex flex-col min-h-screen">
       <NavBar />
-      <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-48 pb-10">
+      <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-32 pb-10">
         <p className="text-4xl text-white">Admin Create</p>
       </div>
-      <div className="h-full flex-1 flex mx-36 mt-4 mb-8">CREATE</div>
+      {page === "module" && (
+        <div className="h-full justify-start items-center flex mx-32 my-10">
+          <CreateModule admin={admin} props={props} />
+        </div>
+      )}
       <Footer />
+    </div>
+  ) : (
+    <div className="h-full flex flex-col min-h-screen">
+      <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:my-8 md:max-w-xs">
+        <p>LOADING</p>
+      </div>
     </div>
   );
 }
-
-export default AdminCreate;

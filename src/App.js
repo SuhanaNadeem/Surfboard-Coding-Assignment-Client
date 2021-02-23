@@ -58,10 +58,11 @@ function App() {
             path="/adminDashboard"
             component={AdminDashboard}
           />
-          <Route exact path="/adminCreate" component={AdminCreate} />
+          <Route exact path="/adminCreate/:page" component={AdminCreate} />
+          {/* page indicates what needs to created */}
           <Route
             exact
-            path="/adminEditAndPreview/:moduleId?/:questionId?"
+            path="/adminEditAndPreview/:givenId?/:questionId?" // givenId is any of the objects, and if it's a module, it may have an addiitonal questionId
             component={AdminEditAndPreview}
           />
         </Router>
