@@ -29,7 +29,7 @@ export default function QuestionCard({ props, question, created }) {
         }
       >
         <p className="uppercase tracking-wide text-red-800 font-semibold text-md">
-          {question.questionName}
+          {question.name}
         </p>
         <p className=" text-gray-700 font-semibold text-md leading-tight">
           {module.name}

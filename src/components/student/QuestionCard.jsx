@@ -63,7 +63,7 @@ function QuestionCard({
         <p className=" font-semibold text-sm uppercase tracking-wide ">
           {question.type}
         </p>
-        <p className="text-red-800">{question.questionName}</p>
+        <p className="text-red-800">{question.name}</p>
         <p className="tracking-wider text-sm uppercase font-light ">
           {question.points} lynx tokens
         </p>
@@ -97,15 +97,14 @@ export const GET_QUESTION_BY_ID = gql`
   query getQuestionById($questionId: String!) {
     getQuestionById(questionId: $questionId) {
       id
-      questionName
-      questionDescription
+      name
+      description
       questionFormat
       image
       points
       moduleId
       type
       videoLink
-      skillDescription
       articleLink
       expectedAnswer
       hint

@@ -149,6 +149,7 @@ function EditBadge({
                   errors={errors}
                   currentModuleId={values.newModuleId}
                   onChange={onChange}
+                  moduleType="newModuleId"
                 />
                 {errors.newModuleId && (
                   <p className="text-red-500">

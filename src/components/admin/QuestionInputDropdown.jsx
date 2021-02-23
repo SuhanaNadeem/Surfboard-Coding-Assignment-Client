@@ -44,7 +44,7 @@ export default function QuestionInputDropdown({
         }`}
       >
         {currentQuestion ? (
-          <p>{currentQuestion.questionName}</p>
+          <p>{currentQuestion.name}</p>
         ) : (
           <p className=" text-white">Unseen Text</p>
         )}
@@ -71,7 +71,7 @@ export default function QuestionInputDropdown({
                 name="newQuestionId"
                 className="focus:outline-none text-left font-light w-full block px-2 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               >
-                {question.questionName}
+                {question.name}
               </button>
             ))}
           </div>
@@ -87,14 +87,13 @@ export const GET_QUESTIONS = gql`
   {
     getQuestions {
       id
-      questionName
-      questionDescription
+      name
+      description
       image
       points
       moduleId
       type
       videoLink
-      skillDescription
       articleLink
       expectedAnswer
       hint

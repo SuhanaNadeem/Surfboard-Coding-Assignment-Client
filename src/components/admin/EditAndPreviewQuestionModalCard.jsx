@@ -71,9 +71,7 @@ function EditAndPreviewQuestionModalCard({
   return question ? (
     <div className="justify-between flex flex-col h-full">
       <div className="flex flex-col items-center justify-start text-center overflow-y-auto ">
-        <h3 className="text-3xl text-red-800 mx-auto mb-2">
-          {question.questionName}
-        </h3>
+        <h3 className="text-3xl text-red-800 mx-auto mb-2">{question.name}</h3>
         <div>
           {question.image && (
             <div
@@ -85,7 +83,7 @@ function EditAndPreviewQuestionModalCard({
           )}
         </div>
         <h6 className="text-md font-light leading-snug">
-          {question.questionDescription}
+          {question.description}
         </h6>
         {question.videoLink && (
           <div className="mt-4 ">

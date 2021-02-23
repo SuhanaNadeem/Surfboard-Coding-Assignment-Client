@@ -9,13 +9,20 @@ export default function ModuleInputDropdown({
   onChange,
   errors,
   currentModuleId,
+  moduleType,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   function toggleIsOpen(e) {
     e.preventDefault();
     setIsOpen(!isOpen);
   }
-
+  var moduleErrors;
+  if (moduleType === "newModuleId") {
+    moduleErrors = errors.newModuleId;
+  } else if (moduleType === "moduleId") {
+    moduleErrors = errors.moduleId;
+  }
+  // console.log(currentModuleId);
   const {
     data: { getModules: modules } = {},
     loading: loadingModules,
@@ -31,13 +38,16 @@ export default function ModuleInputDropdown({
     variables: { moduleId: currentModuleId },
     client: adminClient,
   });
+  console.log(modules);
+  console.log(moduleType);
+  console.log(currentModule);
 
   return (
     <>
       <button
         onClick={toggleIsOpen}
         className={`shadow text-left appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-          errors.newModuleId ? "border-red-500" : ""
+          moduleErrors ? "border-red-500" : ""
         }`}
       >
         {currentModule ? (
@@ -46,7 +56,7 @@ export default function ModuleInputDropdown({
           <p className=" text-white">Unseen Text</p>
         )}
       </button>
-      {isOpen && modules ? (
+      {isOpen && modules && moduleType ? (
         <>
           <button
             tabIndex="-1"
@@ -64,8 +74,8 @@ export default function ModuleInputDropdown({
                 type="button"
                 key={index}
                 value={module.id}
-                error={errors.newModuleId ? "true" : "false"}
-                name="newModuleId"
+                error={moduleErrors ? "true" : "false"}
+                name={moduleType}
                 className="focus:outline-none text-left font-light w-full block px-2 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               >
                 {module.name}
@@ -77,15 +87,18 @@ export default function ModuleInputDropdown({
         <div></div>
       )}
     </>
-
   );
 }
 
 export const GET_MODULES = gql`
   {
     getModules {
-      name
       id
+      name
+      categoryId
+      adminId
+      questions
+      learningObjectives
       createdAt
     }
   }

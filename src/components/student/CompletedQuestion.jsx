@@ -25,7 +25,7 @@ export default function CompletedQuestion({
   return question && completedQuestions ? (
     <div className="flex mr-2 items-center justify-center pb-2">
       <p className="text-sm font-light text-red-800 leading-snug mr-2 ">
-        {question.questionName}
+        {question.name}
       </p>
       {completedQuestions.includes(questionId) && <CgCheckO size={16} />}
       {!completedQuestions.includes(questionId) && <CgCloseO size={16} />}
@@ -39,15 +39,14 @@ export const GET_QUESTION_BY_ID = gql`
   query getQuestionById($questionId: String!) {
     getQuestionById(questionId: $questionId) {
       id
-      questionName
-      questionDescription
+      name
+      description
       questionFormat
       image
       points
       moduleId
       type
       videoLink
-      skillDescription
       articleLink
       expectedAnswer
       hint

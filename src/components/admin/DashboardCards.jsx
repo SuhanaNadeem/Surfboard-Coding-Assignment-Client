@@ -14,7 +14,6 @@ export default function DashboardCards({ props, objects, adminObjects, type }) {
         <h4 className="px-10 text-3xl mr-2 w-11/12">{type}</h4>
         <button
           onClick={(e) => {
-            console.log(createPage);
             props.history.push(`/adminCreate/${createPage}`);
           }}
           className="w-1/12 flex focus:outline-none border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm items-center justify-center font-semibold"

@@ -94,7 +94,8 @@ export default function AdminDashboard(props) {
   //   } = useQuery(GET_QUESTION_TEMPLATES, {
   //     client: adminClient,
   //   });
-
+  console.log(questions);
+  console.log(adminQuestions);
   const adminDashboard = admin ? (
     <div className="h-full flex flex-col min-h-screen">
       <NavBar />
@@ -196,14 +197,13 @@ export const GET_QUESTIONS = gql`
   query getQuestions {
     getQuestions {
       id
-      questionName
-      questionDescription
+      name
+      description
       image
       points
       moduleId
       type
       videoLink
-      skillDescription
       articleLink
       expectedAnswer
       hint
@@ -282,15 +282,14 @@ export const GET_QUESTIONS_BY_ADMIN = gql`
   query getQuestionsByAdmin($adminId: String!) {
     getQuestionsByAdmin(adminId: $adminId) {
       id
-      questionName
-      questionDescription
+      name
+      description
       questionFormat
       image
       points
       moduleId
       type
       videoLink
-      skillDescription
       articleLink
       expectedAnswer
       hint

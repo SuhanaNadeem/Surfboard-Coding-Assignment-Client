@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
-import { MdPersonOutline } from "react-icons/md";
 
 import { gql, useQuery } from "@apollo/client";
 import { GET_CATEGORY_BY_ID } from "./ChallengeCard";

@@ -9,15 +9,14 @@ import ModuleInputDropdown from "./ModuleInputDropdown";
 function EditQuestion({
   question: {
     id: questionId,
-    questionName: newQuestionName,
-    questionDescription: newQuestionDescription,
+    name: newName,
+    description: newDescription,
     image: newImage,
     points: newPoints,
     moduleId: newModuleId,
     moduleId,
     type: newType,
     videoLink: newVideoLink,
-    skillDescription: newSkillDescription,
     articleLink: newArticleLink,
     expectedAnswer: newExpectedAnswer,
     adminId: newAdminId,
@@ -38,14 +37,13 @@ function EditQuestion({
   const { values, onChange, onSubmit } = useForm(editQuestionCallback, {
     questionId: questionId,
     moduleId: moduleId,
-    newQuestionName: newQuestionName || "",
-    newQuestionDescription: newQuestionDescription || "",
+    newName: newName || "",
+    newDescription: newDescription || "",
     newImage: newImage || "",
     newPoints: newPoints || 0,
     newModuleId: newModuleId || "",
     newType: newType || "",
     newVideoLink: newVideoLink || "",
-    newSkillDescription: newSkillDescription || "",
     newArticleLink: newArticleLink || "",
     newExpectedAnswer: newExpectedAnswer || "",
     newAdminId: newAdminId || "",
@@ -75,7 +73,6 @@ function EditQuestion({
   function editQuestionCallback() {
     editQuestion();
   }
-  console.log(questionFormat);
 
   return questionId ? (
     <form
@@ -85,8 +82,8 @@ function EditQuestion({
     >
       <h6 className="text-xl text-red-800">Edit Question</h6>
       <p className="text-sm font-light ">
-        Modify {newQuestionName}'s name, description, image, points, module,
-        type, video, admin, article, expected answer, or hint.
+        Modify {newName}'s name, description, image, points, module, type,
+        video, admin, article, expected answer, or hint.
       </p>
 
       <div className="flex flex-col mt-2">
@@ -128,6 +125,7 @@ function EditQuestion({
                   errors={errors}
                   currentModuleId={values.newModuleId}
                   onChange={onChange}
+                  moduleType="newModuleId"
                 />
                 {errors.newModuleId && (
                   <p className="text-red-500">
@@ -145,18 +143,18 @@ function EditQuestion({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newQuestionName ? "border-red-500" : ""
+                    errors.newName ? "border-red-500" : ""
                   }`}
-                  name="newQuestionName"
+                  name="newName"
                   placeholder=""
-                  value={values.newQuestionName}
+                  value={values.newName}
                   onChange={onChange}
-                  error={errors.newQuestionName ? "true" : "false"}
+                  error={errors.newName ? "true" : "false"}
                   type="text"
                 />
-                {errors.newQuestionName && (
+                {errors.newName && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.newQuestionName}
+                    <b>&#33;</b> {errors.newName}
                   </p>
                 )}
               </td>
@@ -171,19 +169,19 @@ function EditQuestion({
               <td className="text-sm py-2 border-b border-gray-200">
                 <textarea
                   className={`shadow appearance-none border rounded w-full h-16 py-1 px-2 font-light focus:outline-none   ${
-                    errors.newQuestionDescription ? "border-red-500" : ""
+                    errors.newDescription ? "border-red-500" : ""
                   }`}
-                  name="newQuestionDescription"
+                  name="newDescription"
                   placeholder=""
-                  value={values.newQuestionDescription}
+                  value={values.newDescription}
                   onChange={onChange}
-                  error={errors.newQuestionDescription ? "true" : "false"}
+                  error={errors.newDescription ? "true" : "false"}
                   type="text"
                   rows="20"
                 />
-                {errors.newQuestionDescription && (
+                {errors.newDescription && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.newQuestionDescription}
+                    <b>&#33;</b> {errors.newDescription}
                   </p>
                 )}
               </td>
@@ -259,31 +257,6 @@ function EditQuestion({
                 {errors.newArticleLink && (
                   <p className="text-red-500">
                     <b>&#33;</b> {errors.newArticleLink}
-                  </p>
-                )}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Skill Description
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newSkillDescription ? "border-red-500" : ""
-                  }`}
-                  name="newSkillDescription"
-                  placeholder=""
-                  value={values.newSkillDescription}
-                  onChange={onChange}
-                  error={errors.newSkillDescription ? "true" : "false"}
-                  type="text"
-                />
-                {errors.newSkillDescription && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.newSkillDescription}
                   </p>
                 )}
               </td>
@@ -467,33 +440,35 @@ function EditQuestion({
                 </tr>
               </>
             )}
-            {questionFormat !== "Multiple Choice" && (
-              <tr>
-                <td className="text-sm py-2 border-b border-gray-200">
-                  <label className=" font-semibold uppercase tracking-wide ">
-                    Resource Link
-                  </label>
-                </td>
-                <td className="text-sm py-2 border-b border-gray-200">
-                  <input
-                    className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                      errors.newExtraLink ? "border-red-500" : ""
-                    }`}
-                    name="newExtraLink"
-                    placeholder=""
-                    value={values.newExtraLink}
-                    onChange={onChange}
-                    error={errors.newExtraLink ? "true" : "false"}
-                    type="text"
-                  />
-                  {errors.newExtraLink && (
-                    <p className="text-red-500">
-                      <b>&#33;</b> {errors.newExtraLink}
-                    </p>
-                  )}
-                </td>
-              </tr>
-            )}
+            {questionFormat !== "Multiple Choice" &&
+              questionFormat !== "" &&
+              questionFormat && (
+                <tr>
+                  <td className="text-sm py-2 border-b border-gray-200">
+                    <label className=" font-semibold uppercase tracking-wide ">
+                      Resource Link
+                    </label>
+                  </td>
+                  <td className="text-sm py-2 border-b border-gray-200">
+                    <input
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                        errors.newExtraLink ? "border-red-500" : ""
+                      }`}
+                      name="newExtraLink"
+                      placeholder=""
+                      value={values.newExtraLink}
+                      onChange={onChange}
+                      error={errors.newExtraLink ? "true" : "false"}
+                      type="text"
+                    />
+                    {errors.newExtraLink && (
+                      <p className="text-red-500">
+                        <b>&#33;</b> {errors.newExtraLink}
+                      </p>
+                    )}
+                  </td>
+                </tr>
+              )}
 
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
@@ -543,14 +518,13 @@ const EDIT_QUESTION = gql`
     $moduleId: String!
     $newModuleId: String
     $newImage: String
-    $newQuestionDescription: String
+    $newDescription: String
     $newHint: String
     $newExpectedAnswer: String
     $newPoints: Int
     $newVideoLink: String
     $newArticleLink: String
-    $newSkillDescription: String
-    $newQuestionName: String
+    $newName: String
     $newType: String
     $newAdminId: String
     $newOptionA: String
@@ -564,14 +538,13 @@ const EDIT_QUESTION = gql`
       moduleId: $moduleId
       newModuleId: $newModuleId
       newImage: $newImage
-      newQuestionDescription: $newQuestionDescription
+      newDescription: $newDescription
       newHint: $newHint
       newExpectedAnswer: $newExpectedAnswer
       newPoints: $newPoints
       newVideoLink: $newVideoLink
       newArticleLink: $newArticleLink
-      newSkillDescription: $newSkillDescription
-      newQuestionName: $newQuestionName
+      newName: $newName
       newType: $newType
       newAdminId: $newAdminId
       newOptionA: $newOptionA
@@ -581,14 +554,13 @@ const EDIT_QUESTION = gql`
       newExtraLink: $newExtraLink
     ) {
       id
-      questionName
-      questionDescription
+      name
+      description
       image
       points
       moduleId
       type
       videoLink
-      skillDescription
       articleLink
       expectedAnswer
       adminId
