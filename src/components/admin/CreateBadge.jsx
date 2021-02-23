@@ -2,43 +2,44 @@ import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
-import AdminInputDropdown from "./AdminInputDropdown";
 import CategoryInputDropdown from "./CategoryInputDropdown";
 import ModuleInputDropdown from "./ModuleInputDropdown";
 import QuestionInputDropdown from "./QuestionInputDropdown";
 
-function EditBadge({
-  badge: {
-    id: badgeId,
-    name: newName,
-    adminId: newAdminId,
-    moduleId: newModuleId,
-    questionId: newQuestionId,
-    categoryId: newCategoryId,
-    points: newPoints,
-    description: newDescription,
-    image: newImage,
-  },
-}) {
+function CreateBadge({ admin, props }) {
+  console.log("enters badge");
+
   const [errors, setErrors] = useState({});
-  console.log(newPoints);
-  const { values, onChange, onSubmit } = useForm(editBadgeCallback, {
-    badgeId: badgeId,
-    newName: newName || "",
-    newAdminId: newAdminId || "",
-    newQuestionId: newQuestionId || "",
-    newModuleId: newModuleId || "",
-    newCategoryId: newCategoryId || "",
-    newPoints: newPoints || 0,
-    newDescription: newDescription || "",
-    newImage: newImage || "",
+  var image = "";
+  var moduleId = "";
+  var description = "";
+  var questionId = "";
+  var points = 0;
+  var categoryId = "";
+  var name = "";
+
+  const { values, onChange, onSubmit } = useForm(createNewBadgeCallback, {
+    name: name || "",
+    image: image || "",
+    description: description || "",
+    moduleId: moduleId || "",
+    categoryId: categoryId || "",
+    questionId: questionId || "",
+    points: points || 0,
   });
 
-  const [editBadge, { loading }] = useMutation(EDIT_BADGE, {
+  const [createNewBadge, { loading }] = useMutation(CREATE_NEW_BADGE, {
     refetchQueries: [],
-    update(proxy, { data: { editBadge: categoryData } }) {
+    update() {
       values.confirmTitle = "";
       setErrors({});
+      values.image = "";
+      values.moduleId = "";
+      values.description = "";
+      values.categoryId = "";
+      values.questionId = "";
+      values.points = 0;
+      values.name = "";
     },
     onError(err) {
       console.log(values);
@@ -49,20 +50,20 @@ function EditBadge({
     client: adminClient,
   });
 
-  function editBadgeCallback() {
-    editBadge();
+  function createNewBadgeCallback() {
+    createNewBadge();
   }
 
-  return badgeId ? (
+  return (
     <form
       className="w-3/4 overflow-hidden flex flex-col "
       onSubmit={onSubmit}
       noValidate
     >
-      <h6 className="text-xl text-red-800">Edit Badge</h6>
+      <h6 className="text-xl text-red-800">Create a Badge</h6>
       <p className="text-sm font-light ">
-        Modify {newName}'s name, admin, module, question, category, points,
-        description, or image.
+        Create a new badge by entering a name, description, points allocation,
+        category, quesiton, module, and image.
       </p>
 
       <div className="flex flex-col mt-2">
@@ -77,18 +78,24 @@ function EditBadge({
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
-                  Admin
+                  Name
                 </label>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
-                <AdminInputDropdown
-                  errors={errors}
-                  currentAdminId={values.newAdminId}
+                <input
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.name ? "border-red-500" : ""
+                  }`}
+                  name="name"
+                  placeholder=""
+                  value={values.name}
                   onChange={onChange}
+                  error={errors.name ? "true" : "false"}
+                  type="text"
                 />
-                {errors.newAdminId && (
+                {errors.name && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.newAdminId}
+                    <b>&#33;</b> {errors.name}
                   </p>
                 )}
               </td>
@@ -97,24 +104,19 @@ function EditBadge({
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
-                  Name
+                  Category
                 </label>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
-                <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newName ? "border-red-500" : ""
-                  }`}
-                  name="newName"
-                  placeholder=""
-                  value={values.newName}
+                <CategoryInputDropdown
+                  errors={errors}
+                  currentCategoryId={values.categoryId}
                   onChange={onChange}
-                  error={errors.newName ? "true" : "false"}
-                  type="text"
+                  categoryType="categoryId"
                 />
-                {errors.newName && (
+                {errors.categoryId && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.newName}
+                    <b>&#33;</b> {errors.categoryId}
                   </p>
                 )}
               </td>
@@ -128,17 +130,18 @@ function EditBadge({
               <td className="text-sm py-2 border-b border-gray-200">
                 <QuestionInputDropdown
                   errors={errors}
-                  currentQuestionId={values.newQuestionId}
+                  currentQuestionId={values.questionId}
                   onChange={onChange}
-                  questionType="newQuestionId"
+                  questionType="questionId"
                 />
-                {errors.newQuestionId && (
+                {errors.questionId && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.newQuestionId}
+                    <b>&#33;</b> {errors.questionId}
                   </p>
                 )}
               </td>
             </tr>
+
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
@@ -148,83 +151,13 @@ function EditBadge({
               <td className="text-sm py-2 border-b border-gray-200">
                 <ModuleInputDropdown
                   errors={errors}
-                  currentModuleId={values.newModuleId}
+                  currentModuleId={values.moduleId}
                   onChange={onChange}
-                  moduleType="newModuleId"
+                  moduleType="moduleId"
                 />
-                {errors.newModuleId && (
+                {errors.moduleId && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.newModuleId}
-                  </p>
-                )}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Category
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <CategoryInputDropdown
-                  errors={errors}
-                  currentCategoryId={values.newCategoryId}
-                  onChange={onChange}
-                  categoryType="newCategoryId"
-                />
-                {errors.newCategoryId && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.newCategoryId}
-                  </p>
-                )}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Points
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newPoints ? "border-red-500" : ""
-                  }`}
-                  name="newPoints"
-                  placeholder=""
-                  value={values.newPoints}
-                  onChange={onChange}
-                  error={errors.newPoints ? "true" : "false"}
-                  type="number"
-                />
-                {errors.newPoints && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.newPoints}
-                  </p>
-                )}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Image
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newImage ? "border-red-500" : ""
-                  }`}
-                  name="newImage"
-                  placeholder=""
-                  value={values.newImage}
-                  onChange={onChange}
-                  error={errors.newImage ? "true" : "false"}
-                  type="text"
-                />
-                {errors.newImage && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.newImage}
+                    <b>&#33;</b> {errors.moduleId}
                   </p>
                 )}
               </td>
@@ -239,74 +172,144 @@ function EditBadge({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newDescription ? "border-red-500" : ""
+                    errors.description ? "border-red-500" : ""
                   }`}
-                  name="newDescription"
+                  name="description"
                   placeholder=""
-                  value={values.newDescription}
+                  value={values.description}
                   onChange={onChange}
-                  error={errors.newDescription ? "true" : "false"}
+                  error={errors.description ? "true" : "false"}
                   type="text"
                 />
-                {errors.newDescription && (
+                {errors.description && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.newDescription}
+                    <b>&#33;</b> {errors.description}
+                  </p>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
+                  Image
+                </label>
+              </td>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <input
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.image ? "border-red-500" : ""
+                  }`}
+                  name="image"
+                  placeholder=""
+                  value={values.image}
+                  onChange={onChange}
+                  error={errors.image ? "true" : "false"}
+                  type="text"
+                />
+                {errors.image && (
+                  <p className="text-red-500">
+                    <b>&#33;</b> {errors.image}
+                  </p>
+                )}
+              </td>
+            </tr>
+
+            <tr>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className="font-semibold uppercase tracking-wide ">
+                  Points
+                </label>
+              </td>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <input
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.points ? "border-red-500" : ""
+                  }`}
+                  name="points"
+                  placeholder=""
+                  value={values.points}
+                  onChange={onChange}
+                  error={errors.points ? "true" : "false"}
+                  type="number"
+                />
+                {errors.points && (
+                  <p className="text-red-500">
+                    <b>&#33;</b> {errors.points}
+                  </p>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
+                  Image
+                </label>
+              </td>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <input
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.image ? "border-red-500" : ""
+                  }`}
+                  name="image"
+                  placeholder=""
+                  value={values.image}
+                  onChange={onChange}
+                  error={errors.image ? "true" : "false"}
+                  type="text"
+                />
+                {errors.image && (
+                  <p className="text-red-500">
+                    <b>&#33;</b> {errors.image}
                   </p>
                 )}
               </td>
             </tr>
           </tbody>
         </table>
-        <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none w-1/6">
+        <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none">
           <button
             type="submit"
-            className="flex focus:outline-none border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm items-center justify-center font-semibold w-full"
+            className="flex focus:outline-none border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm font-semibold "
           >
             Save
           </button>
         </div>
       </div>
     </form>
-  ) : (
-    <></>
   );
 }
 
-const EDIT_BADGE = gql`
-  mutation editBadge(
-    $badgeId: String!
-    $newName: String
-    $newAdminId: String
-    $newCategoryId: String
-    $newQuestionId: String
-    $newModuleId: String
-    $newPoints: Int
-    $newDescription: String
-    $newImage: String
+const CREATE_NEW_BADGE = gql`
+  mutation createNewBadge(
+    $name: String!
+    $image: String!
+    $description: String!
+    $moduleId: String
+    $categoryId: String
+    $questionId: String
+    $points: Int
   ) {
-    editBadge(
-      badgeId: $badgeId
-      newName: $newName
-      newAdminId: $newAdminId
-      newModuleId: $newModuleId
-      newQuestionId: $newQuestionId
-      newCategoryId: $newCategoryId
-      newPoints: $newPoints
-      newDescription: $newDescription
-      newImage: $newImage
+    createNewBadge(
+      name: $name
+      image: $image
+      description: $description
+      moduleId: $moduleId
+      categoryId: $categoryId
+      questionId: $questionId
+      points: $points
     ) {
       id
       name
-      adminId
-      categoryId
-      moduleId
-      questionId
-      points
-      createdAt
       image
       description
+      moduleId
+      categoryId
+      questionId
+      points
+      adminId
+      createdAt
     }
   }
 `;
 
-export default EditBadge;
+export default CreateBadge;

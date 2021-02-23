@@ -38,9 +38,6 @@ export default function ModuleInputDropdown({
     variables: { moduleId: currentModuleId },
     client: adminClient,
   });
-  console.log(modules);
-  console.log(moduleType);
-  console.log(currentModule);
 
   return (
     <>
@@ -64,7 +61,7 @@ export default function ModuleInputDropdown({
             className="fixed inset-0 h-full w-full bg-transparent cursor-default z-20 focus:outline-none"
           ></button>
 
-          <div className="absolute focus:outline-none left-50 w-40 mt-1 py-1 bg-white rounded-lg shadow-xl text-xs font-light z-20">
+          <div className="absolute focus:outline-none left-50 w-1/4 mt-1 py-1 bg-white rounded-lg shadow-xl text-xs font-light z-20 max-h-32 overflow-y-auto">
             {modules.map((module, index) => (
               <button
                 onClick={(e) => {

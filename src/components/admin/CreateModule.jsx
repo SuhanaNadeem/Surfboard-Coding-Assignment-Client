@@ -34,7 +34,7 @@ function CreateModule({ admin, props }) {
     createNewModule();
   }
 
-  return module ? (
+  return (
     <form
       className="w-3/4 overflow-hidden flex flex-col "
       onSubmit={onSubmit}
@@ -111,8 +111,6 @@ function CreateModule({ admin, props }) {
         </div>
       </div>
     </form>
-  ) : (
-    <></>
   );
 }
 

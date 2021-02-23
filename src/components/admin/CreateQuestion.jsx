@@ -48,9 +48,6 @@ function CreateQuestion({ admin, props }) {
     update() {
       values.confirmTitle = "";
       setErrors({});
-      console.log("in update");
-      console.log(values);
-
       values.image = "";
       values.moduleId = "";
       values.description = "";
@@ -80,10 +77,7 @@ function CreateQuestion({ admin, props }) {
     createNewQuestion();
   }
 
-  console.log("outside");
-  console.log(values);
-
-  return module ? (
+  return (
     <form
       className="w-3/4 overflow-hidden flex flex-col "
       onSubmit={onSubmit}
@@ -564,8 +558,6 @@ function CreateQuestion({ admin, props }) {
         </div>
       </div>
     </form>
-  ) : (
-    <></>
   );
 }
 

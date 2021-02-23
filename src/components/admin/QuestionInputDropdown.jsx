@@ -9,13 +9,19 @@ export default function QuestionInputDropdown({
   onChange,
   errors,
   currentQuestionId,
+  questionType,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   function toggleIsOpen(e) {
     e.preventDefault();
     setIsOpen(!isOpen);
   }
-
+  var questionErrors;
+  if (questionType === "newQuestionId") {
+    questionErrors = errors.newQuestionId;
+  } else if (questionType === "questionId") {
+    questionErrors = errors.questionId;
+  }
   const {
     data: { getQuestions: questions } = {},
     loading: loadingQuestions,
@@ -31,16 +37,16 @@ export default function QuestionInputDropdown({
     variables: { questionId: currentQuestionId },
     client: adminClient,
   });
-  console.log(currentQuestion);
   console.log(currentQuestionId);
-  console.log(questions);
+  console.log(currentQuestion);
+  console.log(questionType);
 
   return (
     <>
       <button
         onClick={toggleIsOpen}
         className={`shadow text-left appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-          errors.newQuestionId ? "border-red-500" : ""
+          questionErrors ? "border-red-500" : ""
         }`}
       >
         {currentQuestion ? (
@@ -49,7 +55,7 @@ export default function QuestionInputDropdown({
           <p className=" text-white">Unseen Text</p>
         )}
       </button>
-      {isOpen && questions ? (
+      {isOpen && questions && questionType ? (
         <>
           <button
             tabIndex="-1"
@@ -57,7 +63,7 @@ export default function QuestionInputDropdown({
             className="fixed inset-0 h-full w-full bg-transparent cursor-default z-20 focus:outline-none"
           ></button>
 
-          <div className="absolute focus:outline-none left-50 w-40 mt-1 py-1 bg-white rounded-lg shadow-xl text-xs font-light z-20">
+          <div className="absolute focus:outline-none left-50 w-1/4 mt-1 py-1 bg-white rounded-lg shadow-xl text-xs font-light z-20 max-h-32 overflow-y-auto">
             {questions.map((question, index) => (
               <button
                 onClick={(e) => {
@@ -67,8 +73,8 @@ export default function QuestionInputDropdown({
                 type="button"
                 key={index}
                 value={question.id}
-                error={errors.newQuestionId ? "true" : "false"}
-                name="newQuestionId"
+                error={questionErrors ? "true" : "false"}
+                name={questionType}
                 className="focus:outline-none text-left font-light w-full block px-2 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               >
                 {question.name}
