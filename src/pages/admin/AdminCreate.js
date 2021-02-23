@@ -6,6 +6,7 @@ import CreateModule from "../../components/admin/CreateModule";
 import CreateQuestion from "../../components/admin/CreateQuestion";
 import CreateCategory from "../../components/admin/CreateCategory";
 import CreateBadge from "../../components/admin/CreateBadge";
+import CreateChallenge from "../../components/admin/CreateChallenge";
 
 export default function AdminCreate(props) {
   console.log("in create");
@@ -41,7 +42,11 @@ export default function AdminCreate(props) {
           <CreateBadge admin={admin} props={props} />
         </div>
       )}
-
+      {page === "challenge" && (
+        <div className="h-full justify-start items-center flex mx-32 my-10">
+          <CreateChallenge admin={admin} props={props} />
+        </div>
+      )}
       <Footer />
     </div>
   ) : (

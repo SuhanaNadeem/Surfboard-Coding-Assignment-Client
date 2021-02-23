@@ -3,43 +3,36 @@ import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
 import CategoryInputDropdown from "./CategoryInputDropdown";
-import ModuleInputDropdown from "./ModuleInputDropdown";
-import QuestionInputDropdown from "./QuestionInputDropdown";
 
-function CreateBadge({ admin, props }) {
-  console.log("enters badge");
-
+function CreateChallenge({ admin, props }) {
   const [errors, setErrors] = useState({});
   var image = "";
-  var moduleId = "";
-  var description = "";
-  var questionId = "";
-  var points = 0;
+  var challengeDescription = "";
+  var extraLink = "";
+  var dueDate = "";
   var categoryId = "";
   var name = "";
 
-  const { values, onChange, onSubmit } = useForm(createNewBadgeCallback, {
+  const { values, onChange, onSubmit } = useForm(createNewChallengeCallback, {
     name: name || "",
-    image: image || "",
-    description: description || "",
-    moduleId: moduleId || "",
     categoryId: categoryId || "",
-    questionId: questionId || "",
-    points: points || 0,
+    challengeDescription: challengeDescription || "",
+    image: image || "",
+    extraLink: extraLink || "",
+    dueDate: dueDate || "",
   });
 
-  const [createNewBadge, { loading }] = useMutation(CREATE_NEW_BADGE, {
+  const [createNewChallenge, { loading }] = useMutation(CREATE_NEW_CHALLENGE, {
     refetchQueries: [],
     update() {
       values.confirmTitle = "";
       setErrors({});
-      values.image = "";
-      values.moduleId = "";
-      values.description = "";
-      values.categoryId = "";
-      values.questionId = "";
-      values.points = 0;
       values.name = "";
+      values.categoryId = "";
+      values.challengeDescription = "";
+      values.image = "";
+      values.extraLink = "";
+      values.dueDate = "";
     },
     onError(err) {
       console.log(values);
@@ -50,8 +43,8 @@ function CreateBadge({ admin, props }) {
     client: adminClient,
   });
 
-  function createNewBadgeCallback() {
-    createNewBadge();
+  function createNewChallengeCallback() {
+    createNewChallenge();
   }
 
   return (
@@ -60,10 +53,10 @@ function CreateBadge({ admin, props }) {
       onSubmit={onSubmit}
       noValidate
     >
-      <h6 className="text-xl text-red-800">Create a Badge</h6>
+      <h6 className="text-xl text-red-800">Create a Challenge</h6>
       <p className="text-sm font-light ">
-        Create a new badge by entering a name, description, points allocation,
-        category, question, module, and image.
+        Create a new challenge by entering a name, description, link, category,
+        due date, and image.
       </p>
 
       <div className="flex flex-col mt-2">
@@ -121,47 +114,6 @@ function CreateBadge({ admin, props }) {
                 )}
               </td>
             </tr>
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Question
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <QuestionInputDropdown
-                  errors={errors}
-                  currentQuestionId={values.questionId}
-                  onChange={onChange}
-                  questionType="questionId"
-                />
-                {errors.questionId && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.questionId}
-                  </p>
-                )}
-              </td>
-            </tr>
-
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Module
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <ModuleInputDropdown
-                  errors={errors}
-                  currentModuleId={values.moduleId}
-                  onChange={onChange}
-                  moduleType="moduleId"
-                />
-                {errors.moduleId && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.moduleId}
-                  </p>
-                )}
-              </td>
-            </tr>
 
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
@@ -172,18 +124,18 @@ function CreateBadge({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.description ? "border-red-500" : ""
+                    errors.challengeDescription ? "border-red-500" : ""
                   }`}
-                  name="description"
+                  name="challengeDescription"
                   placeholder=""
-                  value={values.description}
+                  value={values.challengeDescription}
                   onChange={onChange}
-                  error={errors.description ? "true" : "false"}
+                  error={errors.challengeDescription ? "true" : "false"}
                   type="text"
                 />
-                {errors.description && (
+                {errors.challengeDescription && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.description}
+                    <b>&#33;</b> {errors.challengeDescription}
                   </p>
                 )}
               </td>
@@ -191,50 +143,50 @@ function CreateBadge({ admin, props }) {
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
-                  Image
+                  Due Date
                 </label>
+                <p>(dd/mm/yyyy)</p>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.image ? "border-red-500" : ""
+                    errors.dueDate ? "border-red-500" : ""
                   }`}
-                  name="image"
+                  name="dueDate"
                   placeholder=""
-                  value={values.image}
+                  value={values.dueDate}
                   onChange={onChange}
-                  error={errors.image ? "true" : "false"}
+                  error={errors.dueDate ? "true" : "false"}
                   type="text"
                 />
-                {errors.image && (
+                {errors.dueDate && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.image}
+                    <b>&#33;</b> {errors.dueDate}
                   </p>
                 )}
               </td>
             </tr>
-
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
-                <label className="font-semibold uppercase tracking-wide ">
-                  Points
+                <label className=" font-semibold uppercase tracking-wide ">
+                  Link
                 </label>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.points ? "border-red-500" : ""
+                    errors.extraLink ? "border-red-500" : ""
                   }`}
-                  name="points"
+                  name="extraLink"
                   placeholder=""
-                  value={values.points}
+                  value={values.extraLink}
                   onChange={onChange}
-                  error={errors.points ? "true" : "false"}
-                  type="number"
+                  error={errors.extraLink ? "true" : "false"}
+                  type="text"
                 />
-                {errors.points && (
+                {errors.extraLink && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.points}
+                    <b>&#33;</b> {errors.extraLink}
                   </p>
                 )}
               </td>
@@ -279,37 +231,34 @@ function CreateBadge({ admin, props }) {
   );
 }
 
-const CREATE_NEW_BADGE = gql`
-  mutation createNewBadge(
+const CREATE_NEW_CHALLENGE = gql`
+  mutation createNewChallenge(
     $name: String!
-    $image: String!
-    $description: String!
-    $moduleId: String
-    $categoryId: String
-    $questionId: String
-    $points: Int
+    $categoryId: String!
+    $challengeDescription: String
+    $image: String
+    $extraLink: String
+    $dueDate: String
   ) {
-    createNewBadge(
+    createNewChallenge(
       name: $name
-      image: $image
-      description: $description
-      moduleId: $moduleId
       categoryId: $categoryId
-      questionId: $questionId
-      points: $points
+      challengeDescription: $challengeDescription
+      image: $image
+      extraLink: $extraLink
+      dueDate: $dueDate
     ) {
       id
       name
-      image
-      description
-      moduleId
       categoryId
-      questionId
-      points
+      challengeDescription
+      image
+      extraLink
+      dueDate
       adminId
       createdAt
     }
   }
 `;
 
-export default CreateBadge;
+export default CreateChallenge;
