@@ -1,10 +1,19 @@
-import React from "react";
-
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useMutation } from "@apollo/client";
+import React, { useState, useContext } from "react";
+import { useForm } from "../../util/hooks";
 import { adminClient } from "../../GraphqlApolloClients";
-import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
-
+import { AdminAuthContext } from "../../context/adminAuth";
+import {
+  GET_QUESTIONS,
+  GET_QUESTIONS_BY_ADMIN,
+} from "../../pages/admin/AdminDashboard";
+import { IoMdTrash } from "react-icons/io";
+import { FaEdit } from "react-icons/fa";
 export default function QuestionCard({ props, question, created }) {
+  const { admin } = useContext(AdminAuthContext);
+
+  const [errors, setErrors] = useState({});
+
   const {
     data: { getModuleById: module } = {},
     loading: loadingModule,
@@ -14,13 +23,39 @@ export default function QuestionCard({ props, question, created }) {
     client: adminClient,
   });
 
+  const { values, onSubmit } = useForm(deleteQuestionCallback, {
+    questionId: question.id,
+  });
+
+  const [deleteQuestion, { loading }] = useMutation(DELETE_QUESTION, {
+    refetchQueries: [
+      {
+        query: GET_QUESTIONS,
+      },
+      {
+        query: GET_QUESTIONS_BY_ADMIN,
+        variables: { adminId: admin.id },
+      },
+    ],
+    update() {
+      setErrors({});
+      console.log(values);
+    },
+    onError(err) {
+      console.log(values);
+      console.log(err);
+      // setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    },
+    variables: values,
+    client: adminClient,
+  });
+
+  function deleteQuestionCallback() {
+    deleteQuestion();
+  }
+
   return module && question ? (
-    <button
-      className="focus:outline-none"
-      onClick={(e) => {
-        props.history.push(`/adminEditAndPreview/${question.id}`);
-      }}
-    >
+    <div>
       <div
         className={
           created
@@ -34,13 +69,32 @@ export default function QuestionCard({ props, question, created }) {
         <p className=" text-gray-700 font-semibold text-md leading-tight">
           {module.name}
         </p>
+
+        <form
+          onSubmit={onSubmit}
+          className="flex items-center justify-center mt-2"
+        >
+          <button
+            className="mr-4 focus:outline-none"
+            type="button"
+            onClick={(e) => {
+              props.history.push(`/adminEditAndPreview/${question.id}`);
+            }}
+          >
+            <FaEdit size={16} />
+          </button>
+          <button type="submit" className="focus:outline-none">
+            <IoMdTrash size={16} />
+          </button>
+        </form>
+
         {/* <p className=" text-gray-700 font-thin text-sm">Additional Info </p> */}
         {/* <img
           src={tempModuleCardImg}
           className="rounded-lg object-contain w-full h-32 p-2"
         /> */}
       </div>
-    </button>
+    </div>
   ) : (
     <></>
   );
@@ -55,6 +109,30 @@ export const GET_MODULE_BY_ID = gql`
       questions
       learningObjectives
       createdAt
+    }
+  }
+`;
+
+const DELETE_QUESTION = gql`
+  mutation deleteQuestion($questionId: String!) {
+    deleteQuestion(questionId: $questionId) {
+      id
+      name
+      description
+      image
+      points
+      moduleId
+      type
+      videoLink
+      articleLink
+      expectedAnswer
+      hint
+      createdAt
+      optionA
+      optionB
+      optionC
+      optionD
+      extraLink
     }
   }
 `;

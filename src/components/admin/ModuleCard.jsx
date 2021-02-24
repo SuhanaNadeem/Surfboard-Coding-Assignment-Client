@@ -3,7 +3,6 @@ import React, { useState, useContext } from "react";
 import { useForm } from "../../util/hooks";
 
 import { adminClient } from "../../GraphqlApolloClients";
-import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
 import { IoMdTrash } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
 import {
@@ -41,7 +40,6 @@ export default function ModuleCard({ props, module, created }) {
       },
     ],
     update() {
-      values.confirmTitle = "";
       setErrors({});
       console.log(values);
     },
@@ -59,7 +57,7 @@ export default function ModuleCard({ props, module, created }) {
   }
 
   return category && module ? (
-    <div onSubmit={onSubmit}>
+    <div>
       <div
         className={
           created
