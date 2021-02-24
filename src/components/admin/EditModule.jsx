@@ -12,6 +12,7 @@ function EditModule({
     categoryId: newCategoryId,
     name: newName,
     adminId: newAdminId,
+    questions,
   },
 }) {
   const [errors, setErrors] = useState({});
@@ -44,7 +45,11 @@ function EditModule({
 
   return module ? (
     <form
-      className="mx-auto w-1/3 overflow-hidden flex flex-col "
+      // className="mx-auto w-1/3 overflow-hidden flex flex-col"
+
+      className={`${
+        questions.length === 0 ? `` : `mx-auto`
+      }  w-1/3 overflow-hidden flex flex-col`}
       onSubmit={onSubmit}
       noValidate
     >

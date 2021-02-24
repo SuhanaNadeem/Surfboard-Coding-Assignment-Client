@@ -19,6 +19,7 @@ import StudentModule from "./pages/student/StudentModule";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminCreate from "./pages/admin/AdminCreate";
 import AdminEditAndPreview from "./pages/admin/AdminEditAndPreview";
+import AdminUsers from "./pages/admin/AdminUsers";
 
 function App() {
   return (
@@ -59,7 +60,8 @@ function App() {
             component={AdminDashboard}
           />
           <Route exact path="/adminCreate/:page" component={AdminCreate} />
-          {/* page indicates what needs to created */}
+          {/* page indicates what's to be created */}
+          <Route exact path="/adminUsers/:studentId?" component={AdminUsers} />
           <Route
             exact
             path="/adminEditAndPreview/:givenId?/:questionId?" // givenId is any of the objects, and if it's a module, it may have an addiitonal questionId

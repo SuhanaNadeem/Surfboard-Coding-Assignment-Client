@@ -29,6 +29,7 @@ export default function StudentDashboard(props) {
     loading: loadingCompletedModules,
   } = useQuery(GET_COMPLETED_MODULES_BY_STUDENT, {
     client: studentClient,
+    variables: { studentId: student.id },
   });
 
   // console.log(inProgressModules);
@@ -76,8 +77,8 @@ export const GET_IN_PROGRESS_MODULES_BY_STUDENT = gql`
   }
 `;
 export const GET_COMPLETED_MODULES_BY_STUDENT = gql`
-  query getCompletedModulesByStudent {
-    getCompletedModulesByStudent {
+  query getCompletedModulesByStudent($studentId: String!) {
+    getCompletedModulesByStudent(studentId: $studentId) {
       name
       id
       categoryId

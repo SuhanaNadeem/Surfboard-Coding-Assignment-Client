@@ -12,6 +12,7 @@ export default function NavBar(props) {
   const history = useHistory();
   const pageLinksAndTitles = [
     { title: "Dashboard", link: "/adminDashboard" },
+    { title: "Users", link: "/adminUsers" },
     { title: "Search", link: "/search" },
   ];
 

@@ -79,7 +79,11 @@ export default function AdminEditAndPreview(props) {
           <p className="text-4xl text-white">Admin Edit and Preview</p>
         </div>
         {givenId && module && (
-          <div className="h-full justify-center flex mx-32 my-10">
+          <div
+            className={`${
+              module.questions.length === 0 ? `justify-start` : `justify-center`
+            }  h-full items-center flex mx-32 my-10`}
+          >
             <EditModule props={props} module={module} />
             <PreviewModule
               props={props}
