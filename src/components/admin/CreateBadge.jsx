@@ -31,7 +31,6 @@ function CreateBadge({ admin, props }) {
   const [createNewBadge, { loading }] = useMutation(CREATE_NEW_BADGE, {
     refetchQueries: [],
     update() {
-      values.confirmTitle = "";
       setErrors({});
       values.image = "";
       values.moduleId = "";

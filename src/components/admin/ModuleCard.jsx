@@ -41,7 +41,6 @@ export default function ModuleCard({ props, module, created }) {
     ],
     update() {
       setErrors({});
-      console.log(values);
     },
     onError(err) {
       console.log(values);

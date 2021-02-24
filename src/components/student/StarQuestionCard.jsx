@@ -34,9 +34,10 @@ export default function StarQuestionCard({ props, questionId, studentObject }) {
         },
       ],
 
-      update(proxy, { data: { handleStarQuestion: handleStarQuestionData } }) {
-        values.confirmTitle = "";
-      },
+      update(
+        proxy,
+        { data: { handleStarQuestion: handleStarQuestionData } }
+      ) {},
       onError(err) {
         console.log(err);
         console.log(err.graphQLErrors[0].extensions.exception.errors);

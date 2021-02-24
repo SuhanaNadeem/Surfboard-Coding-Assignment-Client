@@ -46,7 +46,6 @@ function CreateQuestion({ admin, props }) {
   const [createNewQuestion, { loading }] = useMutation(CREATE_NEW_QUESTION, {
     refetchQueries: [],
     update() {
-      values.confirmTitle = "";
       setErrors({});
       values.image = "";
       values.moduleId = "";

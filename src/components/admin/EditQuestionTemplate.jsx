@@ -29,7 +29,6 @@ function EditQuestionTemplate({
     {
       refetchQueries: [],
       update(proxy, { data: { editQuestionTemplate: questionTemplateData } }) {
-        values.confirmTitle = "";
         setErrors({});
       },
       onError(err) {
@@ -98,7 +97,6 @@ function EditQuestionTemplate({
                   currentCategoryId={values.newCategoryId}
                   onChange={onChange}
                   categoryType="newCategoryId"
-
                 />
                 {errors.newCategoryId && (
                   <p className="text-red-500">

@@ -37,7 +37,6 @@ function EditBadge({
   const [editBadge, { loading }] = useMutation(EDIT_BADGE, {
     refetchQueries: [],
     update(proxy, { data: { editBadge: categoryData } }) {
-      values.confirmTitle = "";
       setErrors({});
     },
     onError(err) {

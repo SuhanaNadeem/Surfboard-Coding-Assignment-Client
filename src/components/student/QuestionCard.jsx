@@ -34,7 +34,6 @@ function QuestionCard({
 
     update(proxy, { data: { startQuestion: startQuestionData } }) {
       setIsOpen(true);
-      values.confirmTitle = "";
       setErrors({});
       handleQuestionClick(questionId);
     },

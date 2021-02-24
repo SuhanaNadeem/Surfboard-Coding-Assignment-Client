@@ -26,7 +26,6 @@ function EditModule({
   const [editModule, { loading }] = useMutation(EDIT_MODULE, {
     refetchQueries: [],
     update(proxy, { data: { editModule: moduleData } }) {
-      values.confirmTitle = "";
       setErrors({});
       props.history.push("/adminDashboard");
     },

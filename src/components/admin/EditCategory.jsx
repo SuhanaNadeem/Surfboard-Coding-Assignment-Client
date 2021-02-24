@@ -18,7 +18,6 @@ function EditCategory({
   const [editCategory, { loading }] = useMutation(EDIT_CATEGORY, {
     refetchQueries: [],
     update(proxy, { data: { editCategory: categoryData } }) {
-      values.confirmTitle = "";
       setErrors({});
     },
     onError(err) {

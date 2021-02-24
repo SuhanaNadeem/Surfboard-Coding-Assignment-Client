@@ -39,7 +39,6 @@ export default function QuestionCard({ props, question, created }) {
     ],
     update() {
       setErrors({});
-      console.log(values);
     },
     onError(err) {
       console.log(values);

@@ -16,7 +16,6 @@ function CreateModule({ admin, props }) {
   const [createNewModule, { loading }] = useMutation(CREATE_NEW_MODULE, {
     refetchQueries: [],
     update() {
-      values.confirmTitle = "";
       setErrors({});
       values.name = "";
       values.categoryId = "";

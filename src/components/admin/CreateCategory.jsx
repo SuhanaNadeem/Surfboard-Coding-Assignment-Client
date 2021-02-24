@@ -14,7 +14,6 @@ function CreateCategory({ admin, props }) {
   const [createNewCategory, { loading }] = useMutation(CREATE_NEW_CATEGORY, {
     refetchQueries: [],
     update() {
-      values.confirmTitle = "";
       setErrors({});
       values.name = "";
     },

@@ -55,7 +55,6 @@ function EditQuestion({
   const [editQuestion, { loading }] = useMutation(EDIT_QUESTION, {
     refetchQueries: [],
     update(proxy, { data: { editQuestion: questionData } }) {
-      values.confirmTitle = "";
       setErrors({});
       props.history.push("/adminDashboard");
     },

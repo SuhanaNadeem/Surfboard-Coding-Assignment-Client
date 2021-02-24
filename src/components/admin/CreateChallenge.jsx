@@ -25,7 +25,6 @@ function CreateChallenge({ admin, props }) {
   const [createNewChallenge, { loading }] = useMutation(CREATE_NEW_CHALLENGE, {
     refetchQueries: [],
     update() {
-      values.confirmTitle = "";
       setErrors({});
       values.name = "";
       values.categoryId = "";
