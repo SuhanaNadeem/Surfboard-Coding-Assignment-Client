@@ -94,8 +94,7 @@ export default function AdminDashboard(props) {
   //   } = useQuery(GET_QUESTION_TEMPLATES, {
   //     client: adminClient,
   //   });
-  console.log(questions);
-  console.log(adminQuestions);
+
   const adminDashboard = admin ? (
     <div className="h-full flex flex-col min-h-screen">
       <NavBar />
