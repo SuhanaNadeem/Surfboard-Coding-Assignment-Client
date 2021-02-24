@@ -101,17 +101,17 @@ export default function AdminEditAndPreview(props) {
 
         {givenId && category && (
           <div className="h-full justify-start items-center flex mx-32 my-10">
-            <EditCategory category={category} />
+            <EditCategory category={category} props={props} />
           </div>
         )}
         {givenId && badge && (
           <div className="h-full justify-start items-center flex mx-32 my-10">
-            <EditBadge badge={badge} />
+            <EditBadge badge={badge} props={props} />
           </div>
         )}
         {givenId && challenge && (
           <div className="h-full justify-start items-center flex mx-32 my-10">
-            <EditChallenge challenge={challenge} />
+            <EditChallenge challenge={challenge} props={props} />
           </div>
         )}
         <Footer />

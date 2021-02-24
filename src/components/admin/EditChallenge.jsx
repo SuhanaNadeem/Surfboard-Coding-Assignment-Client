@@ -6,6 +6,7 @@ import AdminInputDropdown from "./AdminInputDropdown";
 import CategoryInputDropdown from "./CategoryInputDropdown";
 
 function EditChallenge({
+  props,
   challenge: {
     id: challengeId,
     name: newName,
@@ -34,6 +35,7 @@ function EditChallenge({
     refetchQueries: [],
     update(proxy, { data: { editChallenge: categoryData } }) {
       setErrors({});
+      props.history.push("/adminDashboard");
     },
     onError(err) {
       console.log(values);

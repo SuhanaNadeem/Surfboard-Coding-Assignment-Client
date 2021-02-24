@@ -8,6 +8,7 @@ import ModuleInputDropdown from "./ModuleInputDropdown";
 import QuestionInputDropdown from "./QuestionInputDropdown";
 
 function EditBadge({
+  props,
   badge: {
     id: badgeId,
     name: newName,
@@ -38,6 +39,7 @@ function EditBadge({
     refetchQueries: [],
     update(proxy, { data: { editBadge: categoryData } }) {
       setErrors({});
+      props.history.push("/adminDashboard");
     },
     onError(err) {
       console.log(values);

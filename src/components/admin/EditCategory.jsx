@@ -5,6 +5,7 @@ import { useForm } from "../../util/hooks";
 import AdminInputDropdown from "./AdminInputDropdown";
 
 function EditCategory({
+  props,
   category: { id: categoryId, name: newName, adminId: newAdminId },
 }) {
   const [errors, setErrors] = useState({});
@@ -19,6 +20,7 @@ function EditCategory({
     refetchQueries: [],
     update(proxy, { data: { editCategory: categoryData } }) {
       setErrors({});
+      props.history.push("/adminDashboard");
     },
     onError(err) {
       console.log(values);
