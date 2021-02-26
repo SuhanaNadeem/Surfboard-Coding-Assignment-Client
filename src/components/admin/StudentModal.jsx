@@ -3,6 +3,8 @@ import { adminClient } from "../../GraphqlApolloClients";
 import { useQuery, gql } from "@apollo/client";
 import { GET_STUDENT_BY_ID } from "../student/QuestionModalCard";
 import CompletedModules from "./CompletedModules";
+import InProgressModules from "./InProgressModules";
+import Badges from "./Badges";
 
 export default function StudentModal({
   props,
@@ -38,9 +40,12 @@ export default function StudentModal({
           <h3 className="text-xl my-1 font-semibold">{student.orgName}</h3>
           <h3 className="text-lg mb-4 font-light">{student.email}</h3>
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex mt-2 items-center justify-start">
+          <InProgressModules student={student} />
           <CompletedModules student={student} />
-          {/* <InProgressModules student={student} /> */}
+        </div>
+        <div className="flex mt-4 items-center justify-start">
+          <Badges student={student} />
         </div>
       </div>
     </>

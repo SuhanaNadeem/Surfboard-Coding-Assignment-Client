@@ -22,6 +22,7 @@ export default function StudentDashboard(props) {
     loading: loadingInProgressModules,
   } = useQuery(GET_IN_PROGRESS_MODULES_BY_STUDENT, {
     client: studentClient,
+    variables: { studentId: student.id },
   });
 
   const {
@@ -33,6 +34,7 @@ export default function StudentDashboard(props) {
   });
 
   // console.log(inProgressModules);
+  // console.log(student.id);
 
   const studentDashboard = student ? (
     <div className="h-full flex flex-col min-h-screen">
@@ -67,8 +69,8 @@ export default function StudentDashboard(props) {
 }
 
 export const GET_IN_PROGRESS_MODULES_BY_STUDENT = gql`
-  query getInProgressModulesByStudent {
-    getInProgressModulesByStudent {
+  query getInProgressModulesByStudent($studentId: String!) {
+    getInProgressModulesByStudent(studentId: $studentId) {
       name
       id
       categoryId
