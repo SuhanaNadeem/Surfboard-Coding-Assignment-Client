@@ -5,9 +5,7 @@ import { useForm } from "../../util/hooks";
 import { adminClient } from "../../GraphqlApolloClients";
 import { IoMdTrash } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
-import { AdminAuthContext } from "../../context/adminAuth";
 import { GET_STUDENTS } from "../../pages/admin/AdminUsers";
-import StudentModal from "./StudentModal";
 
 export default function StudentCard({
   props,
@@ -15,8 +13,6 @@ export default function StudentCard({
   setIsOpen,
   handleStudentClick,
 }) {
-  const { admin } = useContext(AdminAuthContext);
-
   const [errors, setErrors] = useState({});
 
   const { values, onSubmit } = useForm(deleteStudentCallback, {

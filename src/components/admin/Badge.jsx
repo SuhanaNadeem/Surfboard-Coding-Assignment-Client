@@ -8,7 +8,7 @@ import { BiAward } from "react-icons/bi";
 import { GET_CATEGORY_BY_ID } from "../student/ModuleCard";
 import { GET_QUESTION_BY_ID } from "../student/CompletedQuestion";
 function Badge({ badge }) {
-  console.log(badge);
+  // console.log(badge);
 
   const {
     data: { getQuestionById: question } = {},

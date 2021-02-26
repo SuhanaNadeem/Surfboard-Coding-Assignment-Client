@@ -5,6 +5,8 @@ import { GET_STUDENT_BY_ID } from "../student/QuestionModalCard";
 import CompletedModules from "./CompletedModules";
 import InProgressModules from "./InProgressModules";
 import Badges from "./Badges";
+import Mentors from "./Mentors";
+import QuesAnsPairs from "./QuesAnsPairs";
 
 export default function StudentModal({
   props,
@@ -44,9 +46,11 @@ export default function StudentModal({
           <InProgressModules student={student} />
           <CompletedModules student={student} />
         </div>
-        <div className="flex mt-4 items-center justify-start">
+        <div className="flex mt-4 items-start justify-start">
           <Badges student={student} />
+          <Mentors student={student} />
         </div>
+        <QuesAnsPairs student={student} />
       </div>
     </>
   ) : (
