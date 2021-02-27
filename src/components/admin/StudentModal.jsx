@@ -7,6 +7,7 @@ import InProgressModules from "./InProgressModules";
 import Badges from "./Badges";
 import Mentors from "./Mentors";
 import QuesAnsPairs from "./QuesAnsPairs";
+import EditStudent from "./EditStudent";
 
 export default function StudentModal({
   props,
@@ -36,21 +37,24 @@ export default function StudentModal({
         className="fixed inset-0 h-full w-full bg-gray-800 opacity-50 cursor-default z-20"
       ></button>
 
-      <div className="fixed mx-auto inset-0 overscroll-contain max-w-2xl my-4 p-8 bg-white z-40 rounded-lg shadow-xl">
+      <div className="fixed mx-auto inset-0 overscroll-contain overflow-y-auto max-w-2xl my-4 p-8 bg-white z-40 rounded-lg shadow-xl">
         <div className="flex flex-col items-center justify-center">
           <h3 className="text-3xl text-red-800">{student.name}</h3>
           <h3 className="text-xl my-1 font-semibold">{student.orgName}</h3>
           <h3 className="text-lg mb-4 font-light">{student.email}</h3>
         </div>
-        <div className="flex mt-2 items-center justify-start">
+        <div className="flex items-center justify-start">
           <InProgressModules student={student} />
           <CompletedModules student={student} />
         </div>
-        <div className="flex mt-4 items-start justify-start">
+        <div className="flex items-start justify-start">
           <Badges student={student} />
           <Mentors student={student} />
         </div>
         <QuesAnsPairs student={student} />
+        <div className="flex justify-start items-center mt-6">
+          <EditStudent student={student} props={props} />
+        </div>
       </div>
     </>
   ) : (

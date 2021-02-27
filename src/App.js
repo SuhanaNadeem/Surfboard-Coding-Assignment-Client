@@ -61,7 +61,7 @@ function App() {
           />
           <Route exact path="/adminCreate/:page" component={AdminCreate} />
           {/* page indicates what's to be created */}
-          <Route exact path="/adminUsers/:studentId?" component={AdminUsers} />
+          <Route exact path="/adminUsers/:userId?" component={AdminUsers} />
           <Route
             exact
             path="/adminEditAndPreview/:givenId?/:questionId?" // givenId is any of the objects, and if it's a module, it may have an addiitonal questionId

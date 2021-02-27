@@ -7,21 +7,61 @@ import StudentCard from "../../components/admin/StudentCard";
 import MentorCard from "../../components/admin/MentorCard";
 import Footer from "../../components/admin/Footer";
 import StudentModal from "../../components/admin/StudentModal";
+import { GET_STUDENT_BY_ID } from "../../components/student/ModuleSummaryBar";
+import MentorModal from "../../components/admin/MentorModal";
 
 export default function AdminUsers(props) {
   const { admin } = useContext(AdminAuthContext);
   if (!admin) {
     props.history.push("/loginAdmin");
   }
-  var selectedStudentId = props.match.params.studentId;
+  var selectedStudentId;
+  var selectedMentorId;
+  var selectedId = props.match.params.userId;
+  const {
+    data: { getStudentById: student } = {},
+    loading: loadingStudent,
+  } = useQuery(GET_STUDENT_BY_ID, {
+    client: adminClient,
+    variables: { studentId: selectedId },
+  });
+  const {
+    data: { getMentorById: mentor } = {},
+    loading: loadingMentor,
+  } = useQuery(GET_MENTOR_BY_ID, {
+    client: adminClient,
+    variables: { mentorId: selectedId },
+  });
+  if (student) {
+    selectedStudentId = selectedId;
+  } else if (mentor) {
+    selectedMentorId = selectedId;
+  }
   const [activeStudentId, setActiveStudentId] = useState(selectedStudentId);
+  const [activeMentorId, setActiveMentorId] = useState(selectedMentorId);
+  console.log(selectedId);
+  console.log(selectedMentorId);
+  console.log(activeMentorId);
   useEffect(() => {
+    console.log("in student's useEffect");
+
     setActiveStudentId(selectedStudentId);
   }, [setActiveStudentId, selectedStudentId]);
 
+  useEffect(() => {
+    console.log("in mentor's useEffect");
+    setActiveMentorId(selectedMentorId);
+  }, [setActiveMentorId, selectedMentorId]);
+  console.log(activeMentorId);
   const [isOpen, setIsOpen] = useState(
     activeStudentId !== undefined && activeStudentId !== "" ? true : false
   );
+
+  const [isMentorOpen, setIsMentorOpen] = useState(
+    activeMentorId !== undefined && activeMentorId !== ""
+  );
+  console.log(activeMentorId !== undefined && activeMentorId !== "");
+  console.log(isMentorOpen);
 
   const {
     data: { getStudents: students } = {},
@@ -37,13 +77,28 @@ export default function AdminUsers(props) {
   });
 
   function handleStudentClick(selectedStudentId) {
-    // console.log("passed");
+    console.log("wb here?");
+    setActiveMentorId("");
     if (selectedStudentId) {
       setActiveStudentId(selectedStudentId);
       // refetchStudent({ questionId: selectedStudentId });
       props.history.push(`/adminUsers/${selectedStudentId}`);
     } else {
       setActiveStudentId("");
+      props.history.push(`/adminUsers/`);
+    }
+  }
+
+  function handleMentorClick(selectedMentorId) {
+    console.log("comes in here?");
+    setActiveStudentId("");
+
+    if (selectedMentorId) {
+      setActiveMentorId(selectedMentorId);
+      // refetchMentor({ questionId: selectedMentorId });
+      props.history.push(`/adminUsers/${selectedMentorId}`);
+    } else {
+      setActiveMentorId("");
       props.history.push(`/adminUsers/`);
     }
   }
@@ -74,7 +129,13 @@ export default function AdminUsers(props) {
 
           <div className="pt-4  grid grid-flow-col gap-2 items-stretch justify-start py-1 overflow-x-auto relative">
             {mentors.map((mentor, index) => (
-              <MentorCard key={index} props={props} mentor={mentor} />
+              <MentorCard
+                key={index}
+                props={props}
+                mentor={mentor}
+                setIsMentorOpen={setIsMentorOpen}
+                handleMentorClick={handleMentorClick}
+              />
             ))}
           </div>
         </div>
@@ -86,6 +147,13 @@ export default function AdminUsers(props) {
         setIsOpen={setIsOpen}
         activeStudentId={activeStudentId}
         handleStudentClick={handleStudentClick}
+      />
+      <MentorModal
+        props={props}
+        isMentorOpen={isMentorOpen}
+        setIsMentorOpen={setIsMentorOpen}
+        activeMentorId={activeMentorId}
+        handleMentorClick={handleMentorClick}
       />
     </div>
   ) : (
@@ -130,6 +198,19 @@ export const GET_STUDENTS = gql`
 export const GET_MENTORS = gql`
   query getMentors {
     getMentors {
+      id
+      name
+      orgName
+      password
+      email
+      createdAt
+      token
+    }
+  }
+`;
+export const GET_MENTOR_BY_ID = gql`
+  query getMentorById($mentorId: String!) {
+    getMentorById(mentorId: $mentorId) {
       id
       name
       orgName

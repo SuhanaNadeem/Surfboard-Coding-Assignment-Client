@@ -5,8 +5,6 @@ import { GET_IN_PROGRESS_MODULES_BY_STUDENT } from "../../pages/student/StudentD
 import InProgressModule from "./InProgressModule";
 
 function InProgressModules({ student }) {
-  console.log("entered in-progress");
-  console.log(student);
   const { data: { getInProgressModulesByStudent: modules } = {} } = useQuery(
     GET_IN_PROGRESS_MODULES_BY_STUDENT,
     {
@@ -17,8 +15,8 @@ function InProgressModules({ student }) {
 
   console.log(modules);
   // console.log(student);
-  return modules ? (
-    <div className="mr-2 flex flex-col w-1/2">
+  return modules && modules.length !== 0 ? (
+    <div className="mr-2 flex flex-col w-1/2 mt-2">
       <h2 className="text-lg mb-2 text-red-800 ">In-Progress Modules</h2>
 
       {modules.map((module, index) => (

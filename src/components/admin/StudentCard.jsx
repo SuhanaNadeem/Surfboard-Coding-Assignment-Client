@@ -79,11 +79,6 @@ export default function StudentCard({
 }
 const DELETE_STUDENT = gql`
   mutation deleteStudent($studentId: String!) {
-    deleteStudent(studentId: $studentId) {
-      name
-      id
-      orgName
-      createdAt
-    }
+    deleteStudent(studentId: $studentId)
   }
 `;

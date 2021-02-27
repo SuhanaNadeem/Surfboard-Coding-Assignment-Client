@@ -13,7 +13,7 @@ function Mentors({ student }) {
   );
   console.log(mentors);
   return mentors && mentors.length !== 0 ? (
-    <div className="mr-2 flex flex-col w-1/2">
+    <div className="mr-2 flex flex-col w-1/2 mt-4">
       <h2 className="text-lg mb-2 text-red-800 ">Mentors</h2>
 
       {mentors.map((mentor, index) => (

@@ -8,9 +8,12 @@ import { FaEdit } from "react-icons/fa";
 import { AdminAuthContext } from "../../context/adminAuth";
 import { GET_MENTORS } from "../../pages/admin/AdminUsers";
 
-export default function MentorCard({ props, mentor }) {
-  const { admin } = useContext(AdminAuthContext);
-
+export default function MentorCard({
+  props,
+  mentor,
+  setIsMentorOpen,
+  handleMentorClick,
+}) {
   const [errors, setErrors] = useState({});
 
   const { values, onSubmit } = useForm(deleteMentorCallback, {
@@ -57,9 +60,12 @@ export default function MentorCard({ props, mentor }) {
             className="mr-4 focus:outline-none"
             type="button"
             // have to toggle the pop up and only get edit field to show
-            // onClick={(e) => {
-            //   props.history.push(`/adminEditAndPreview/${student.id}`);
-            // }}
+            onClick={(e) => {
+              console.log("inhere");
+              setIsMentorOpen(true);
+              handleMentorClick(mentor.id);
+              props.history.push(`/adminUsers/${mentor.id}`);
+            }}
           >
             <FaEdit size={16} />
           </button>
@@ -75,12 +81,6 @@ export default function MentorCard({ props, mentor }) {
 }
 const DELETE_MENTOR = gql`
   mutation deleteMentor($mentorId: String!) {
-    deleteMentor(mentorId: $mentorId) {
-      name
-      id
-      orgName
-      createdAt
-      createdAt
-    }
+    deleteMentor(mentorId: $mentorId)
   }
 `;

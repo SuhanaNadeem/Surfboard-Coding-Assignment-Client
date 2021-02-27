@@ -24,7 +24,7 @@ function EditBadge({
   const [errors, setErrors] = useState({});
   console.log(newPoints);
   const { values, onChange, onSubmit } = useForm(editBadgeCallback, {
-    badgeId: badgeId,
+    badgeId,
     newName: newName || "",
     newAdminId: newAdminId || "",
     newQuestionId: newQuestionId || "",
