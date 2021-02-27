@@ -52,17 +52,9 @@ export default function AdminUsers(props) {
     console.log("in mentor's useEffect");
     setActiveMentorId(selectedMentorId);
   }, [setActiveMentorId, selectedMentorId]);
-  console.log(activeMentorId);
-  const [isOpen, setIsOpen] = useState(
-    activeStudentId !== undefined && activeStudentId !== "" ? true : false
-  );
+  const [isOpen, setIsOpen] = useState(true);
 
-  const [isMentorOpen, setIsMentorOpen] = useState(
-    activeMentorId !== undefined && activeMentorId !== ""
-  );
-  console.log(activeMentorId !== undefined && activeMentorId !== "");
-  console.log(isMentorOpen);
-
+  const [isMentorOpen, setIsMentorOpen] = useState(true);
   const {
     data: { getStudents: students } = {},
     loading: loadingStudents,
