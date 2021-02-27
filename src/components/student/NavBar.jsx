@@ -59,7 +59,6 @@ export default function StudentNavBar(props) {
                 {pageInfo.title}
               </button>
             ))}
-            <VscSearch size={15} />
           </div>
         </div>
       </nav>

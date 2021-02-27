@@ -94,6 +94,10 @@ export const GET_ADMIN_BY_ID = gql`
     getAdminById(adminId: $adminId) {
       id
       name
+      password
+      email
+      token
+      createdAt
     }
   }
 `;

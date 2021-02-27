@@ -51,7 +51,7 @@ export default function StudentAccountDropdown({ logout, props }) {
               }}
               className="text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
             >
-              Manage Account
+              Edit Account
             </button>
             <button
               className="text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"

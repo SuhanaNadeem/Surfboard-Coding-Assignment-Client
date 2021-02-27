@@ -18,7 +18,7 @@ export default function AdminCreate(props) {
   console.log(page);
   return page ? (
     <div className="h-full flex flex-col min-h-screen">
-      <NavBar />
+      <NavBar props={props} />
       <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-32 pb-10">
         <p className="text-4xl text-white">Admin Create</p>
       </div>

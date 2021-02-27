@@ -97,7 +97,7 @@ export default function AdminUsers(props) {
 
   return students && mentors ? (
     <div className="h-full flex flex-col min-h-screen">
-      <NavBar />
+      <NavBar props={props} />
       <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-48 pb-10">
         <p className="text-4xl text-white">Admin Users</p>
       </div>

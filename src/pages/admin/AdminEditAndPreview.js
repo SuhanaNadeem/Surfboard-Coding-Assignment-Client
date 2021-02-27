@@ -74,7 +74,7 @@ export default function AdminEditAndPreview(props) {
   const adminEditAndPreview =
     module || question || category || badge || challenge ? (
       <div className="h-full flex flex-col min-h-screen">
-        <NavBar />
+        <NavBar props={props} />
         <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-32 pb-10">
           <p className="text-4xl text-white">Admin Edit and Preview</p>
         </div>

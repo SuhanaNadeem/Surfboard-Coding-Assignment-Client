@@ -1,14 +1,13 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useContext } from "react";
 
 import { useHistory } from "react-router-dom";
-// import NavBarDropdown from "./NavBarDropdown";
+
 import { AdminAuthContext } from "../../context/adminAuth";
-import { useForm } from "../../util/hooks";
-import { gql, useQuery } from "@apollo/client";
+
 import AdminAccountDropdown from "./AccountDropdown";
 import { MdPersonOutline } from "react-icons/md";
-import { VscSearch } from "react-icons/vsc";
-export default function NavBar(props) {
+
+export default function NavBar({ props }) {
   const history = useHistory();
   const pageLinksAndTitles = [
     { title: "Dashboard", link: "/adminDashboard" },
@@ -41,7 +40,6 @@ export default function NavBar(props) {
                 {pageInfo.title}
               </button>
             ))}
-            <VscSearch size={15} />
           </div>
         </div>
       </nav>

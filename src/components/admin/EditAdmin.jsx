@@ -15,7 +15,7 @@ function EditAdmin({
     newEmail: newEmail || "",
     newName: newName || "",
     newPassword: newPassword || "",
-    newConfirmPassword: newConfirmPassword || "",
+    confirmNewPassword: confirmNewPassword || "",
   });
 
   const [editAdmin, { loading }] = useMutation(EDIT_ADMIN, {

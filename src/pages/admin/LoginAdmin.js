@@ -88,8 +88,6 @@ function LoginAdmin(props) {
           </div>
           <button
             type="submit"
-            text-bold
-            tracking-wide
             className="mt-8 uppercase hover:shadow-lg text-md w-64 flex items-center justify-center  text-white bg-red-800 shadow-md border border-red-800  py-2 px-6 rounded-full"
           >
             Log In

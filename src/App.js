@@ -20,6 +20,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminCreate from "./pages/admin/AdminCreate";
 import AdminEditAndPreview from "./pages/admin/AdminEditAndPreview";
 import AdminUsers from "./pages/admin/AdminUsers";
+import AdminEditAccount from "./pages/admin/AdminEditAccount";
 
 function App() {
   return (
@@ -59,6 +60,8 @@ function App() {
             path="/adminDashboard"
             component={AdminDashboard}
           />
+          <Route exact path="/adminEditAccount" component={AdminEditAccount} />
+
           <Route exact path="/adminCreate/:page" component={AdminCreate} />
           {/* page indicates what's to be created */}
           <Route exact path="/adminUsers/:userId?" component={AdminUsers} />
