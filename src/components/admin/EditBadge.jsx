@@ -1,9 +1,16 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
+import { useContext } from "react";
+import { AdminAuthContext } from "../../context/adminAuth";
 import { adminClient } from "../../GraphqlApolloClients";
+import {
+  GET_BADGES,
+  GET_BADGES_BY_ADMIN,
+} from "../../pages/admin/AdminDashboard";
 import { useForm } from "../../util/hooks";
 import AdminInputDropdown from "./AdminInputDropdown";
 import CategoryInputDropdown from "./CategoryInputDropdown";
+import ImageUploadBox from "./ImageUploadBox";
 import ModuleInputDropdown from "./ModuleInputDropdown";
 import QuestionInputDropdown from "./QuestionInputDropdown";
 
@@ -18,12 +25,12 @@ function EditBadge({
     categoryId: newCategoryId,
     points: newPoints,
     description: newDescription,
-    image: newImage,
+    image,
   },
 }) {
   const [errors, setErrors] = useState({});
-  console.log(newPoints);
-  const { values, onChange, onSubmit } = useForm(editBadgeCallback, {
+  const { admin } = useContext(AdminAuthContext);
+  const { values, onChange, onSubmit, setValues } = useForm(editBadgeCallback, {
     badgeId,
     newName: newName || "",
     newAdminId: newAdminId || "",
@@ -32,11 +39,19 @@ function EditBadge({
     newCategoryId: newCategoryId || "",
     newPoints: newPoints || 0,
     newDescription: newDescription || "",
-    newImage: newImage || "",
+    newImageFile: null,
   });
 
   const [editBadge, { loading }] = useMutation(EDIT_BADGE, {
-    refetchQueries: [],
+    refetchQueries: [
+      {
+        query: GET_BADGES,
+      },
+      {
+        query: GET_BADGES_BY_ADMIN,
+        variables: { adminId: admin.id },
+      },
+    ],
     update(proxy, { data: { editBadge: categoryData } }) {
       setErrors({});
       props.history.push("/adminDashboard");
@@ -53,6 +68,25 @@ function EditBadge({
   function editBadgeCallback() {
     editBadge();
   }
+
+  const setImagePreview = (imageTempUrl, imageName, imageFile) => {
+    setPreviewImages({
+      ...previewImages,
+      [imageName]: imageTempUrl,
+    });
+    // bannerLogoFile;
+
+    if (imageFile) {
+      console.log(previewImages);
+      setValues({
+        ...values,
+        [imageName + "File"]: imageFile,
+      });
+    }
+  };
+  const [previewImages, setPreviewImages] = useState({
+    newImage: image,
+  });
 
   return badgeId ? (
     <form
@@ -205,31 +239,6 @@ function EditBadge({
                 )}
               </td>
             </tr>
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Image
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newImage ? "border-red-500" : ""
-                  }`}
-                  name="newImage"
-                  placeholder=""
-                  value={values.newImage}
-                  onChange={onChange}
-                  error={errors.newImage ? "true" : "false"}
-                  type="text"
-                />
-                {errors.newImage && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.newImage}
-                  </p>
-                )}
-              </td>
-            </tr>
 
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
@@ -253,6 +262,49 @@ function EditBadge({
                   <p className="text-red-500">
                     <b>&#33;</b> {errors.newDescription}
                   </p>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
+                  Image
+                </label>
+              </td>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <ImageUploadBox
+                  setImagePreviewCallback={setImagePreview}
+                  imageName="newImage"
+                  previewImages={previewImages}
+                  setErrorsCallback={setErrors}
+                  errors={errors}
+                />
+
+                {/* <input
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.image ? "border-red-500" : ""
+                  }`}
+                  name="image"
+                  placeholder=""
+                  value={values.image}
+                  onChange={onChange}
+                  error={errors.image ? "true" : "false"}
+                  type="text"
+                />
+                 */}
+                {errors.newImageFile && (
+                  <p className="text-red-500">
+                    <b>&#33;</b> {errors.newImageFile}
+                  </p>
+                )}
+                {previewImages.newImage && (
+                  <div className="h-20 w-full">
+                    <img
+                      className="h-full w-full object-contain rounded mt-2"
+                      alt=""
+                      src={`${previewImages.newImage}`}
+                    />
+                  </div>
                 )}
               </td>
             </tr>

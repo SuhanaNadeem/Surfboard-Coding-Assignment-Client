@@ -1,6 +1,10 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
+import {
+  GET_QUESTIONS,
+  GET_QUESTIONS_BY_ADMIN,
+} from "../../pages/admin/AdminDashboard";
 import { useForm } from "../../util/hooks";
 import CategoryInputDropdown from "./CategoryInputDropdown";
 import ImageUploadBox from "./ImageUploadBox";
@@ -30,7 +34,15 @@ function CreateBadge({ admin, props }) {
   );
 
   const [createNewBadge, { loading }] = useMutation(CREATE_NEW_BADGE, {
-    refetchQueries: [],
+    refetchQueries: [
+      {
+        query: GET_QUESTIONS,
+      },
+      {
+        query: GET_QUESTIONS_BY_ADMIN,
+        variables: { adminId: admin.id },
+      },
+    ],
     update() {
       setErrors({});
       values.imageFile = null;
@@ -42,8 +54,6 @@ function CreateBadge({ admin, props }) {
       values.name = "";
     },
     onError(err) {
-      console.log(values.imageFile);
-
       console.log(values);
       console.log(err);
       // setErrors(err.graphQLErrors[0].extensions.exception.errors);
@@ -290,6 +300,15 @@ function CreateBadge({ admin, props }) {
                   <p className="text-red-500">
                     <b>&#33;</b> {errors.imageFile}
                   </p>
+                )}
+                {previewImages.image && (
+                  <div className="h-20 w-full">
+                    <img
+                      className="h-full w-full object-contain rounded mt-2"
+                      alt=""
+                      src={`${previewImages.image}`}
+                    />
+                  </div>
                 )}
               </td>
             </tr>

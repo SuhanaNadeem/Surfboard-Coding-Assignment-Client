@@ -4,6 +4,7 @@ import { adminClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
 import AdminInputDropdown from "./AdminInputDropdown";
 import CategoryInputDropdown from "./CategoryInputDropdown";
+import ImageUploadBox from "./ImageUploadBox";
 
 function EditChallenge({
   props,
@@ -14,22 +15,25 @@ function EditChallenge({
     categoryId: newCategoryId,
     extraLink: newExtraLink,
     dueDate: newDueDate,
-    image: newImage,
+    image,
     challengeDescription: newChallengeDescription,
   },
 }) {
   const [errors, setErrors] = useState({});
 
-  const { values, onChange, onSubmit } = useForm(editChallengeCallback, {
-    challengeId: challengeId,
-    newName: newName || "",
-    newAdminId: newAdminId || "",
-    newCategoryId: newCategoryId || "",
-    newImage: newImage || "",
-    newExtraLink: newExtraLink || "",
-    newDueDate: newDueDate || "",
-    newChallengeDescription: newChallengeDescription || "",
-  });
+  const { values, onChange, onSubmit, setValues } = useForm(
+    editChallengeCallback,
+    {
+      challengeId: challengeId,
+      newName: newName || "",
+      newAdminId: newAdminId || "",
+      newCategoryId: newCategoryId || "",
+      newImageFile: null,
+      newExtraLink: newExtraLink || "",
+      newDueDate: newDueDate || "",
+      newChallengeDescription: newChallengeDescription || "",
+    }
+  );
 
   const [editChallenge, { loading }] = useMutation(EDIT_CHALLENGE, {
     refetchQueries: [],
@@ -50,6 +54,24 @@ function EditChallenge({
     editChallenge();
   }
 
+  const setImagePreview = (imageTempUrl, imageName, imageFile) => {
+    setPreviewImages({
+      ...previewImages,
+      [imageName]: imageTempUrl,
+    });
+    // bannerLogoFile;
+
+    if (imageFile) {
+      console.log(previewImages);
+      setValues({
+        ...values,
+        [imageName + "File"]: imageFile,
+      });
+    }
+  };
+  const [previewImages, setPreviewImages] = useState({
+    newImage: image,
+  });
   return challengeId ? (
     <form
       className="w-3/4 overflow-hidden flex flex-col "
@@ -212,6 +234,7 @@ function EditChallenge({
                 )}
               </td>
             </tr>
+
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
@@ -219,21 +242,39 @@ function EditChallenge({
                 </label>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
-                <input
+                <ImageUploadBox
+                  setImagePreviewCallback={setImagePreview}
+                  imageName="newImage"
+                  previewImages={previewImages}
+                  setErrorsCallback={setErrors}
+                  errors={errors}
+                />
+
+                {/* <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newImage ? "border-red-500" : ""
+                    errors.image ? "border-red-500" : ""
                   }`}
-                  name="newImage"
+                  name="image"
                   placeholder=""
-                  value={values.newImage}
+                  value={values.image}
                   onChange={onChange}
-                  error={errors.newImage ? "true" : "false"}
+                  error={errors.image ? "true" : "false"}
                   type="text"
                 />
-                {errors.newImage && (
+                 */}
+                {errors.newImageFile && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.newImage}
+                    <b>&#33;</b> {errors.newImageFile}
                   </p>
+                )}
+                {previewImages.newImage && (
+                  <div className="h-20 w-full">
+                    <img
+                      className="h-full w-full object-contain rounded mt-2"
+                      alt=""
+                      src={`${previewImages.newImage}`}
+                    />
+                  </div>
                 )}
               </td>
             </tr>
@@ -260,7 +301,7 @@ const EDIT_CHALLENGE = gql`
     $newCategoryId: String
     $newChallengeDescription: String
     $newName: String
-    $newImage: String
+    $newImageFile: Upload
     $newExtraLink: String
     $newDueDate: String
     $newAdminId: String
@@ -270,7 +311,7 @@ const EDIT_CHALLENGE = gql`
       newCategoryId: $newCategoryId
       newChallengeDescription: $newChallengeDescription
       newName: $newName
-      newImage: $newImage
+      newImageFile: $newImageFile
       newExtraLink: $newExtraLink
       newDueDate: $newDueDate
       newAdminId: $newAdminId

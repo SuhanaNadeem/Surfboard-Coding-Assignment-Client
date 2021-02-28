@@ -26,7 +26,6 @@ export default function ImageUploadBox({
 
   //   return result.base64img;
   // }
-
   const onDrop = async ([file]) => {
     setErrorsCallback({
       ...errors,
@@ -95,7 +94,7 @@ export default function ImageUploadBox({
       // isDragAccept,
       // isDragReject,
       // }
-      className="overflow-hidden w-full"
+      className="overflow-hidden w-full focus:outline-none"
     >
       <input {...getInputProps()} />
       {/* {isDragActive ? ( */}
@@ -109,13 +108,13 @@ export default function ImageUploadBox({
 
       previewImages && previewImages[imageName] ? (
         <p
-          className={`break-words font-normal w-full text-center hover:text-blue-500 cursor-pointer border-dashed p-2 border-2 rounded bg-green-100 border-green-500`}
+          className={`focus:outline-none break-words text-sm font-light w-full text-center hover:text-red-800 cursor-pointer border-dashed p-2 border-2 rounded bg-red-100 border-red-800`}
         >
           Drop file or click to change the file
         </p>
       ) : (
         <p
-          className={`break-words font-normal w-full text-center hover:text-blue-500 cursor-pointer border-dashed p-2 border-2 rounded bg-gray-100 border-gray-500`}
+          className={`focus:outline-none break-words text-sm font-light w-full text-center hover:text-red-800 cursor-pointer border-dashed p-2 border-2 rounded bg-gray-100 border-gray-500`}
         >
           Drop file or click to select the file
         </p>

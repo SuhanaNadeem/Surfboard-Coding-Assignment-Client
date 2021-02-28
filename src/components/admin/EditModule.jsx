@@ -1,9 +1,16 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
+import { useContext } from "react";
+import { AdminAuthContext } from "../../context/adminAuth";
 import { adminClient } from "../../GraphqlApolloClients";
+import {
+  GET_MODULES,
+  GET_MODULES_BY_ADMIN,
+} from "../../pages/admin/AdminDashboard";
 import { useForm } from "../../util/hooks";
 import AdminInputDropdown from "./AdminInputDropdown";
 import CategoryInputDropdown from "./CategoryInputDropdown";
+import ImageUploadBox from "./ImageUploadBox";
 
 function EditModule({
   props,
@@ -13,21 +20,37 @@ function EditModule({
     name: newName,
     adminId: newAdminId,
     questions,
+    image,
   },
 }) {
+  const { admin } = useContext(AdminAuthContext);
   const [errors, setErrors] = useState({});
 
-  const { values, onChange, onSubmit } = useForm(editModuleCallback, {
-    moduleId,
-    newCategoryId,
-    newName,
-    newAdminId,
-  });
+  const { values, onChange, onSubmit, setValues } = useForm(
+    editModuleCallback,
+    {
+      moduleId,
+      newCategoryId,
+      newName,
+      newAdminId,
+      newImageFile: null,
+    }
+  );
 
   const [editModule, { loading }] = useMutation(EDIT_MODULE, {
-    refetchQueries: [],
+    refetchQueries: [
+      {
+        query: GET_MODULES,
+      },
+      {
+        query: GET_MODULES_BY_ADMIN,
+        variables: { adminId: admin.id },
+      },
+    ],
     update(proxy, { data: { editModule: moduleData } }) {
       setErrors({});
+      console.log(previewImages);
+
       props.history.push("/adminDashboard");
     },
     onError(err) {
@@ -43,10 +66,27 @@ function EditModule({
     editModule();
   }
 
+  const setImagePreview = (imageTempUrl, imageName, imageFile) => {
+    setPreviewImages({
+      ...previewImages,
+      [imageName]: imageTempUrl,
+    });
+    // bannerLogoFile;
+
+    if (imageFile) {
+      console.log(previewImages);
+      setValues({
+        ...values,
+        [imageName + "File"]: imageFile,
+      });
+    }
+  };
+  const [previewImages, setPreviewImages] = useState({
+    newImage: image,
+  });
+
   return module ? (
     <form
-      // className="mx-auto w-1/3 overflow-hidden flex flex-col"
-
       className={`${
         questions.length === 0 ? `` : `mx-auto`
       }  w-1/3 overflow-hidden flex flex-col`}
@@ -131,6 +171,49 @@ function EditModule({
                 )}
               </td>
             </tr>
+            <tr>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
+                  Image
+                </label>
+              </td>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <ImageUploadBox
+                  setImagePreviewCallback={setImagePreview}
+                  imageName="newImage"
+                  previewImages={previewImages}
+                  setErrorsCallback={setErrors}
+                  errors={errors}
+                />
+
+                {/* <input
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.image ? "border-red-500" : ""
+                  }`}
+                  name="image"
+                  placeholder=""
+                  value={values.image}
+                  onChange={onChange}
+                  error={errors.image ? "true" : "false"}
+                  type="text"
+                />
+                 */}
+                {errors.newImageFile && (
+                  <p className="text-red-500">
+                    <b>&#33;</b> {errors.newImageFile}
+                  </p>
+                )}
+                {previewImages.newImage && (
+                  <div className="h-20 w-full">
+                    <img
+                      className="h-full w-full object-contain rounded mt-2"
+                      alt=""
+                      src={`${previewImages.newImage}`}
+                    />
+                  </div>
+                )}
+              </td>
+            </tr>
           </tbody>
         </table>
         <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none">
@@ -154,12 +237,14 @@ const EDIT_MODULE = gql`
     $newCategoryId: String
     $newName: String
     $newAdminId: String
+    $newImageFile: Upload
   ) {
     editModule(
       newCategoryId: $newCategoryId
       moduleId: $moduleId
       newName: $newName
       newAdminId: $newAdminId
+      newImageFile: $newImageFile
     ) {
       id
       name

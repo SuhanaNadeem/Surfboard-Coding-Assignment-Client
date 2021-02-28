@@ -37,6 +37,9 @@ function CreateModule({ admin, props }) {
       values.name = "";
       values.categoryId = "";
       values.imageFile = null;
+      setPreviewImages({
+        image: "",
+      });
     },
     onError(err) {
       console.log(values);
@@ -165,6 +168,15 @@ function CreateModule({ admin, props }) {
                   <p className="text-red-500">
                     <b>&#33;</b> {errors.imageFile}
                   </p>
+                )}
+                {previewImages.image && (
+                  <div className="h-20 w-full">
+                    <img
+                      className="h-full w-full object-contain rounded mt-2"
+                      alt=""
+                      src={`${previewImages.image}`}
+                    />
+                  </div>
                 )}
               </td>
             </tr>

@@ -1,8 +1,15 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
+import { useContext } from "react";
+import { AdminAuthContext } from "../../context/adminAuth";
 import { adminClient } from "../../GraphqlApolloClients";
+import {
+  GET_QUESTIONS,
+  GET_QUESTIONS_BY_ADMIN,
+} from "../../pages/admin/AdminDashboard";
 import { useForm } from "../../util/hooks";
 import AdminInputDropdown from "./AdminInputDropdown";
+import ImageUploadBox from "./ImageUploadBox";
 import ModuleInputDropdown from "./ModuleInputDropdown";
 
 function EditQuestion({
@@ -11,7 +18,6 @@ function EditQuestion({
     id: questionId,
     name: newName,
     description: newDescription,
-    image: newImage,
     points: newPoints,
     moduleId: newModuleId,
     moduleId,
@@ -27,33 +33,47 @@ function EditQuestion({
     optionC: newOptionC,
     optionD: newOptionD,
     questionFormat,
+    image,
   },
 }) {
+  const { admin } = useContext(AdminAuthContext);
+
   const [errors, setErrors] = useState({});
 
-  const { values, onChange, onSubmit } = useForm(editQuestionCallback, {
-    questionId: questionId,
-    moduleId: moduleId,
-    newName: newName || "",
-    newDescription: newDescription || "",
-    newImage: newImage || "",
-    newPoints: newPoints || 0,
-    newModuleId: newModuleId || "",
-    newType: newType || "",
-    newVideoLink: newVideoLink || "",
-    newArticleLink: newArticleLink || "",
-    newExpectedAnswer: newExpectedAnswer || "",
-    newAdminId: newAdminId || "",
-    newHint: newHint || "",
-    newExtraLink: newExtraLink || "",
-    newOptionA: newOptionA || "",
-    newOptionB: newOptionB || "",
-    newOptionC: newOptionC || "",
-    newOptionD: newOptionD || "",
-  });
+  const { values, onChange, onSubmit, setValues } = useForm(
+    editQuestionCallback,
+    {
+      questionId: questionId,
+      moduleId: moduleId,
+      newName: newName || "",
+      newDescription: newDescription || "",
+      newImageFile: null,
+      newPoints: newPoints || 0,
+      newModuleId: newModuleId || "",
+      newType: newType || "",
+      newVideoLink: newVideoLink || "",
+      newArticleLink: newArticleLink || "",
+      newExpectedAnswer: newExpectedAnswer || "",
+      newAdminId: newAdminId || "",
+      newHint: newHint || "",
+      newExtraLink: newExtraLink || "",
+      newOptionA: newOptionA || "",
+      newOptionB: newOptionB || "",
+      newOptionC: newOptionC || "",
+      newOptionD: newOptionD || "",
+    }
+  );
 
   const [editQuestion, { loading }] = useMutation(EDIT_QUESTION, {
-    refetchQueries: [],
+    refetchQueries: [
+      {
+        query: GET_QUESTIONS,
+      },
+      {
+        query: GET_QUESTIONS_BY_ADMIN,
+        variables: { adminId: admin.id },
+      },
+    ],
     update(proxy, { data: { editQuestion: questionData } }) {
       setErrors({});
       props.history.push("/adminDashboard");
@@ -70,6 +90,25 @@ function EditQuestion({
   function editQuestionCallback() {
     editQuestion();
   }
+
+  const setImagePreview = (imageTempUrl, imageName, imageFile) => {
+    setPreviewImages({
+      ...previewImages,
+      [imageName]: imageTempUrl,
+    });
+    // bannerLogoFile;
+
+    if (imageFile) {
+      console.log(previewImages);
+      setValues({
+        ...values,
+        [imageName + "File"]: imageFile,
+      });
+    }
+  };
+  const [previewImages, setPreviewImages] = useState({
+    newImage: image,
+  });
 
   return questionId ? (
     <form
@@ -474,21 +513,39 @@ function EditQuestion({
                 </label>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
-                <input
+                <ImageUploadBox
+                  setImagePreviewCallback={setImagePreview}
+                  imageName="newImage"
+                  previewImages={previewImages}
+                  setErrorsCallback={setErrors}
+                  errors={errors}
+                />
+
+                {/* <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newImage ? "border-red-500" : ""
+                    errors.image ? "border-red-500" : ""
                   }`}
-                  name="newImage"
+                  name="image"
                   placeholder=""
-                  value={values.newImage}
+                  value={values.image}
                   onChange={onChange}
-                  error={errors.newImage ? "true" : "false"}
+                  error={errors.image ? "true" : "false"}
                   type="text"
                 />
-                {errors.newImage && (
+                 */}
+                {errors.newImageFile && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.newImage}
+                    <b>&#33;</b> {errors.newImageFile}
                   </p>
+                )}
+                {previewImages.newImage && (
+                  <div className="h-20 w-full">
+                    <img
+                      className="h-full w-full object-contain rounded mt-2"
+                      alt=""
+                      src={`${previewImages.newImage}`}
+                    />
+                  </div>
                 )}
               </td>
             </tr>
@@ -514,7 +571,7 @@ const EDIT_QUESTION = gql`
     $questionId: String!
     $moduleId: String!
     $newModuleId: String
-    $newImage: String
+    $newImageFile: Upload
     $newDescription: String
     $newHint: String
     $newExpectedAnswer: String
@@ -534,7 +591,7 @@ const EDIT_QUESTION = gql`
       questionId: $questionId
       moduleId: $moduleId
       newModuleId: $newModuleId
-      newImage: $newImage
+      newImageFile: $newImageFile
       newDescription: $newDescription
       newHint: $newHint
       newExpectedAnswer: $newExpectedAnswer

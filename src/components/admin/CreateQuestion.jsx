@@ -67,10 +67,14 @@ function CreateQuestion({ admin, props }) {
       values.optionC = "";
       values.optionD = "";
       values.questionFormat = "";
+      setPreviewImages({
+        image: "",
+      });
     },
     onError(err) {
       console.log(values);
       console.log(err);
+
       // setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
@@ -275,38 +279,6 @@ function CreateQuestion({ admin, props }) {
                 {errors.description && (
                   <p className="text-red-500">
                     <b>&#33;</b> {errors.description}
-                  </p>
-                )}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Image
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                {/* <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.image ? "border-red-500" : ""
-                  }`}
-                  name="image"
-                  placeholder=""
-                  value={values.image}
-                  onChange={onChange}
-                  error={errors.image ? "true" : "false"}
-                  type="text"
-                /> */}
-                <ImageUploadBox
-                  setImagePreviewCallback={setImagePreview}
-                  imageName="image"
-                  previewImages={previewImages}
-                  setErrorsCallback={setErrors}
-                  errors={errors}
-                />
-                {errors.imageFile && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.imageFile}
                   </p>
                 )}
               </td>
@@ -574,6 +546,47 @@ function CreateQuestion({ admin, props }) {
                   </td>
                 </tr>
               )}
+            <tr>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
+                  Image
+                </label>
+              </td>
+              <td className="text-sm py-2 border-b border-gray-200">
+                {/* <input
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.image ? "border-red-500" : ""
+                  }`}
+                  name="image"
+                  placeholder=""
+                  value={values.image}
+                  onChange={onChange}
+                  error={errors.image ? "true" : "false"}
+                  type="text"
+                /> */}
+                <ImageUploadBox
+                  setImagePreviewCallback={setImagePreview}
+                  imageName="image"
+                  previewImages={previewImages}
+                  setErrorsCallback={setErrors}
+                  errors={errors}
+                />
+                {errors.imageFile && (
+                  <p className="text-red-500">
+                    <b>&#33;</b> {errors.imageFile}
+                  </p>
+                )}
+                {previewImages.image && (
+                  <div className="h-20 w-full">
+                    <img
+                      className="h-full w-full object-contain rounded mt-2"
+                      alt=""
+                      src={`${previewImages.image}`}
+                    />
+                  </div>
+                )}
+              </td>
+            </tr>
           </tbody>
         </table>
         <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none">
