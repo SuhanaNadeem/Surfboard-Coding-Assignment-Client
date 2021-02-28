@@ -187,6 +187,7 @@ export const GET_MODULES = gql`
       name
       comments
       questions
+      image
       categoryId
       createdAt
     }
@@ -272,6 +273,7 @@ export const GET_MODULES_BY_ADMIN = gql`
       name
       comments
       questions
+      image
       categoryId
       createdAt
     }

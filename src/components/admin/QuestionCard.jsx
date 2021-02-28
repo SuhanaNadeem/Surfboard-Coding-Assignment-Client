@@ -107,6 +107,7 @@ export const GET_MODULE_BY_ID = gql`
       categoryId
       adminId
       questions
+      image
       learningObjectives
       createdAt
     }

@@ -10,6 +10,7 @@ import {
   GET_MODULES_BY_ADMIN,
 } from "../../pages/admin/AdminDashboard";
 import { AdminAuthContext } from "../../context/adminAuth";
+import tempSvg from "../../images/tempSvg.svg";
 
 export default function ModuleCard({ props, module, created }) {
   const { admin } = useContext(AdminAuthContext);
@@ -73,6 +74,10 @@ export default function ModuleCard({ props, module, created }) {
         <p className=" text-gray-700 font-thin text-sm mr-2">
           {module.questions.length} Questions
         </p>
+        <img
+          src={module.image && module.image !== "" ? module.image : tempSvg}
+          className="rounded-lg object-contain w-full h-32 p-2"
+        />
         <form
           onSubmit={onSubmit}
           className="flex items-center justify-center mt-2"

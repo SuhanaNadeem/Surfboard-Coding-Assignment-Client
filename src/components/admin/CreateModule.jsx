@@ -1,24 +1,42 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
+import {
+  GET_MODULES,
+  GET_MODULES_BY_ADMIN,
+} from "../../pages/admin/AdminDashboard";
 import { useForm } from "../../util/hooks";
 import CategoryInputDropdown from "./CategoryInputDropdown";
+import ImageUploadBox from "./ImageUploadBox";
 
 function CreateModule({ admin, props }) {
   const [errors, setErrors] = useState({});
   var name = "";
   var categoryId = "";
-  const { values, onChange, onSubmit } = useForm(createNewModuleCallback, {
-    name: name || "",
-    categoryId: categoryId || "",
-  });
+  const { values, onChange, onSubmit, setValues } = useForm(
+    createNewModuleCallback,
+    {
+      name: name || "",
+      categoryId: categoryId || "",
+      imageFile: null,
+    }
+  );
 
   const [createNewModule, { loading }] = useMutation(CREATE_NEW_MODULE, {
-    refetchQueries: [],
+    refetchQueries: [
+      {
+        query: GET_MODULES,
+      },
+      {
+        query: GET_MODULES_BY_ADMIN,
+        variables: { adminId: admin.id },
+      },
+    ],
     update() {
       setErrors({});
       values.name = "";
       values.categoryId = "";
+      values.imageFile = null;
     },
     onError(err) {
       console.log(values);
@@ -32,6 +50,24 @@ function CreateModule({ admin, props }) {
   function createNewModuleCallback() {
     createNewModule();
   }
+
+  const setImagePreview = (imageTempUrl, imageName, imageFile) => {
+    setPreviewImages({
+      ...previewImages,
+      [imageName]: imageTempUrl,
+    });
+    // bannerLogoFile;
+
+    if (imageFile) {
+      setValues({
+        ...values,
+        [imageName + "File"]: imageFile,
+      });
+    }
+  };
+  const [previewImages, setPreviewImages] = useState({
+    image: "",
+  });
 
   return (
     <form
@@ -98,6 +134,40 @@ function CreateModule({ admin, props }) {
                 )}
               </td>
             </tr>
+            <tr>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
+                  Image
+                </label>
+              </td>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <ImageUploadBox
+                  setImagePreviewCallback={setImagePreview}
+                  imageName="image"
+                  previewImages={previewImages}
+                  setErrorsCallback={setErrors}
+                  errors={errors}
+                />
+
+                {/* <input
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.image ? "border-red-500" : ""
+                  }`}
+                  name="image"
+                  placeholder=""
+                  value={values.image}
+                  onChange={onChange}
+                  error={errors.image ? "true" : "false"}
+                  type="text"
+                />
+                 */}
+                {errors.imageFile && (
+                  <p className="text-red-500">
+                    <b>&#33;</b> {errors.imageFile}
+                  </p>
+                )}
+              </td>
+            </tr>
           </tbody>
         </table>
         <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none">
@@ -114,13 +184,22 @@ function CreateModule({ admin, props }) {
 }
 
 const CREATE_NEW_MODULE = gql`
-  mutation createNewModule($categoryId: String!, $name: String!) {
-    createNewModule(name: $name, categoryId: $categoryId) {
+  mutation createNewModule(
+    $categoryId: String!
+    $name: String!
+    $imageFile: Upload
+  ) {
+    createNewModule(
+      name: $name
+      categoryId: $categoryId
+      imageFile: $imageFile
+    ) {
       id
       name
       categoryId
       adminId
       questions
+      image
       learningObjectives
       createdAt
     }
