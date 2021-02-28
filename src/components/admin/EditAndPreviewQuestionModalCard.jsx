@@ -73,19 +73,48 @@ function EditAndPreviewQuestionModalCard({
       <div className="flex flex-col items-center justify-start text-center overflow-y-auto ">
         <h3 className="text-3xl text-red-800 mx-auto mb-2">{question.name}</h3>
         <div>
-          {question.image && (
+          {question.image && question.image !== "" && (
             <div
-              className="bg-cover mb-6 w-64 h-32 bg-center bg-no-repeat rounded-lg hover:shadow-md mx-auto"
+              className="bg-cover mb-2 w-64 h-32 bg-center bg-no-repeat rounded-lg mx-auto"
               style={{
                 backgroundImage: `url(${question.image})`,
               }}
             ></div>
           )}
         </div>
+
+        {question.articleLink && question.articleLink !== "" && (
+          <div className="flex justify-center items-center mb-2 w-full">
+            <h5 className="font-semibold uppercase tracking-wide text-xs mr-2">
+              Article:
+            </h5>
+            <a
+              className="font-light text-sm truncate"
+              href={question.articleLink}
+              target="_blank"
+            >
+              {question.articleLink}
+            </a>
+          </div>
+        )}
         <h6 className="text-md font-light leading-snug">
           {question.description}
         </h6>
-        {question.videoLink && (
+        {question.extraLink && question.extraLink !== "" && (
+          <div className="flex justify-center items-center mb-2 w-full">
+            <h5 className="font-semibold uppercase tracking-wide text-xs mr-2">
+              Visit:
+            </h5>
+            <a
+              className="font-light text-sm truncate"
+              href={question.extraLink}
+              target="_blank"
+            >
+              {question.extraLink}
+            </a>
+          </div>
+        )}
+        {question.videoLink && question.videoLink !== "" && (
           <div className="mt-4 ">
             <ReactPlayer
               url={question.videoLink}
@@ -98,18 +127,74 @@ function EditAndPreviewQuestionModalCard({
         {question.type === "Question" && (
           <div className="flex flex-col">
             <div className="flex mt-4 items-center justify-center">
-              <input
-                className="md:w-3/4 shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 font-light leading-tight focus:outline-none"
-                name="answer"
-                placeholder="Enter an answer"
-                type="text"
-                disabled
-              />
-              <button className="ml-4 md:w-1/4 border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex">
+              {question.questionFormat === "Multiple Choice" ? (
+                <div className="flex flex-col text-md font-light justify-center items-start">
+                  <div>
+                    <input
+                      name="answer"
+                      value="A"
+                      disabled
+                      type="radio"
+                      id="A"
+                      className="mr-2"
+                    />
+                    <label htmlFor="A">{question.optionA}</label>
+                  </div>
+                  <div>
+                    <input
+                      name="answer"
+                      value="B"
+                      disabled
+                      type="radio"
+                      id="B"
+                      className="mr-2"
+                    />
+                    <label htmlFor="B">{question.optionB}</label>
+                  </div>
+                  <div>
+                    <input
+                      name="answer"
+                      value="C"
+                      disabled
+                      type="radio"
+                      id="C"
+                      className="mr-2"
+                    />
+                    <label htmlFor="C">{question.optionC}</label>
+                  </div>
+                  <div>
+                    <input
+                      name="answer"
+                      value="D"
+                      disabled
+                      type="radio"
+                      id="D"
+                      className="mr-2"
+                    />
+                    <label htmlFor="D">{question.optionD}</label>
+                  </div>
+                </div>
+              ) : (
+                <input
+                  className="md:w-3/4 shadow appearance-none border rounded w-full font-light  py-1 px-2 text-gray-700 leading-tight focus:outline-none"
+                  name="answer"
+                  placeholder="Enter an answer"
+                  disabled
+                  type="text"
+                />
+              )}
+              <button
+                type="button"
+                className={`${
+                  question.questionFormat === "Multiple Choice"
+                    ? `mt-4 w-16`
+                    : `ml-4 w-20`
+                }  border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex`}
+              >
                 Submit
               </button>
             </div>
-            {hint && (
+            {hint && hint !== "" && (
               <div className="focus:outline-none flex mx-auto mt-2 px-4 py-2 uppercase text-black tracking-wide hover:text-red-800 text-xs">
                 <h3 className="font-semibold">Hint</h3>
                 <h3 className="ml-2">{hint}</h3>

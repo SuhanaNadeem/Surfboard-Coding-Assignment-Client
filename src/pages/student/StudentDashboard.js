@@ -75,6 +75,7 @@ export const GET_IN_PROGRESS_MODULES_BY_STUDENT = gql`
       id
       categoryId
       questions
+      image
     }
   }
 `;
@@ -83,6 +84,7 @@ export const GET_COMPLETED_MODULES_BY_STUDENT = gql`
     getCompletedModulesByStudent(studentId: $studentId) {
       name
       id
+      image
       categoryId
       questions
     }

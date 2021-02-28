@@ -183,7 +183,7 @@ function QuestionModalCard({
         <div>
           {question.image && question.image !== "" && (
             <div
-              className="bg-cover mb-6 w-64 h-32 bg-center bg-no-repeat rounded-lg hover:shadow-md mx-auto"
+              className="bg-cover mb-2 w-64 h-32 bg-center bg-no-repeat rounded-lg  mx-auto"
               style={{
                 backgroundImage: `url(${question.image})`,
               }}
@@ -254,6 +254,7 @@ function QuestionModalCard({
                       error={errors.type ? "true" : "false"}
                       type="radio"
                       id="A"
+                      className="mr-2"
                     />
                     <label htmlFor="A">{question.optionA}</label>
                   </div>
@@ -265,6 +266,7 @@ function QuestionModalCard({
                       error={errors.type ? "true" : "false"}
                       type="radio"
                       id="B"
+                      className="mr-2"
                     />
                     <label htmlFor="B">{question.optionB}</label>
                   </div>
@@ -276,6 +278,7 @@ function QuestionModalCard({
                       error={errors.type ? "true" : "false"}
                       type="radio"
                       id="C"
+                      className="mr-2"
                     />
                     <label htmlFor="C">{question.optionC}</label>
                   </div>
@@ -287,6 +290,7 @@ function QuestionModalCard({
                       error={errors.type ? "true" : "false"}
                       type="radio"
                       id="D"
+                      className="mr-2"
                     />
                     <label htmlFor="D">{question.optionD}</label>
                   </div>
@@ -315,7 +319,7 @@ function QuestionModalCard({
                 </button>
               )}
             </form>
-            {!completedQuestions.includes(questionId) && hint && (
+            {!completedQuestions.includes(questionId) && hint && hint !== "" && (
               <button
                 onClick={toggleIsVisible}
                 type="button"

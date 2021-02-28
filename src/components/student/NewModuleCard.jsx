@@ -35,6 +35,7 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
     refetchQueries: [
       {
         query: GET_IN_PROGRESS_MODULES_BY_STUDENT,
+        variables: { studentId },
       },
       {
         query: GET_INCOMPLETE_MODULES_BY_CATEGORY,

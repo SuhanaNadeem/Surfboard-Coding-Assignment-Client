@@ -42,7 +42,7 @@ export default function PreviewModule({ props, selectedQuestionId, module }) {
   const previewModule =
     module && module.questions.length !== 0 ? (
       <>
-        <div className="flex w-2/3 flex-col items-center justify-start text-center mx-auto h-96 overflow-y-scroll">
+        <div className="flex w-2/3 flex-col items-center justify-start text-center mx-auto h-96 overflow-y-auto">
           <h6 className="text-xl text-red-800">Preview Module Questions</h6>
 
           <div className="grid gap-4 items-stretch justify-start pl-2 pt-4 pb-6">

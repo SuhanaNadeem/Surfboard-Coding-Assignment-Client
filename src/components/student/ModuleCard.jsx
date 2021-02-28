@@ -3,6 +3,8 @@ import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
 import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
+import tempSvg from "../../images/tempSvg.svg";
+
 export default function ModuleCard({ props, module }) {
   const {
     data: { getCategoryById: category } = {},
@@ -20,18 +22,18 @@ export default function ModuleCard({ props, module }) {
         props.history.push(`/module/${module.id}`);
       }}
     >
-      <div className="bg-white flex-shrink-0 first:ml-2 shadow w-48 transition-all duration-150 ease-in-out md:hover:-translate-y-1 align-middle flex flex-col items-center text-center p-4 rounded-md overflow-hidden hover:shadow-md hover:bg-gray-100 h-64 justify-start">
-        <p className="uppercase tracking-wide text-red-800 font-semibold text-md">
+      <div className="bg-white flex-shrink-0 first:ml-2 shadow w-48 transition-all duration-150 ease-in-out md:hover:-translate-y-1 align-middle flex flex-col items-center text-center p-4 rounded-md overflow-hidden hover:shadow-md hover:bg-gray-100 h-full justify-start">
+        <p className="uppercase tracking-wide text-red-800 font-semibold text-md w-40 truncate">
           {module.name}
         </p>
-        <p className=" text-gray-700 font-semibold text-md leading-tight">
+        <p className=" text-gray-700 font-semibold text-md leading-tight   w-40 truncate">
           {category.name}
         </p>
-        <p className=" text-gray-700 font-thin text-sm">
+        <p className=" text-gray-700 font-thin text-sm   w-40 truncate">
           {module.questions.length} Questions
         </p>
         <img
-          src={tempModuleCardImg}
+          src={module.image && module.image !== "" ? module.image : tempSvg}
           className="rounded-lg object-contain w-full h-32 p-2"
         />
       </div>
