@@ -70,7 +70,12 @@ export default function QuestionCard({ props, question, created }) {
         <p className=" text-gray-700 font-semibold text-md leading-tight w-40 truncate">
           {module.name}
         </p>
-
+        <img
+          src={
+            question.image && question.image !== "" ? question.image : tempSvg
+          }
+          className="rounded-lg object-contain w-full h-32 p-2"
+        />
         <form
           onSubmit={onSubmit}
           className="flex items-center justify-center mt-2"
@@ -88,12 +93,6 @@ export default function QuestionCard({ props, question, created }) {
             <IoMdTrash size={16} />
           </button>
         </form>
-        <img
-          src={
-            question.image && question.image !== "" ? question.image : tempSvg
-          }
-          className="rounded-lg object-contain w-full h-32 p-2"
-        />
       </div>
     </div>
   ) : (

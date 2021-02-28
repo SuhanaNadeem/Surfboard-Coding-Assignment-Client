@@ -3,24 +3,27 @@ import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
 import CategoryInputDropdown from "./CategoryInputDropdown";
+import ImageUploadBox from "./ImageUploadBox";
 
 function CreateChallenge({ admin, props }) {
   const [errors, setErrors] = useState({});
-  var image = "";
   var challengeDescription = "";
   var extraLink = "";
   var dueDate = "";
   var categoryId = "";
   var name = "";
 
-  const { values, onChange, onSubmit } = useForm(createNewChallengeCallback, {
-    name: name || "",
-    categoryId: categoryId || "",
-    challengeDescription: challengeDescription || "",
-    image: image || "",
-    extraLink: extraLink || "",
-    dueDate: dueDate || "",
-  });
+  const { values, onChange, onSubmit, setValues } = useForm(
+    createNewChallengeCallback,
+    {
+      name: name || "",
+      categoryId: categoryId || "",
+      challengeDescription: challengeDescription || "",
+      imageFile: null,
+      extraLink: extraLink || "",
+      dueDate: dueDate || "",
+    }
+  );
 
   const [createNewChallenge, { loading }] = useMutation(CREATE_NEW_CHALLENGE, {
     refetchQueries: [],
@@ -45,7 +48,23 @@ function CreateChallenge({ admin, props }) {
   function createNewChallengeCallback() {
     createNewChallenge();
   }
+  const setImagePreview = (imageTempUrl, imageName, imageFile) => {
+    setPreviewImages({
+      ...previewImages,
+      [imageName]: imageTempUrl,
+    });
+    // bannerLogoFile;
 
+    if (imageFile) {
+      setValues({
+        ...values,
+        [imageName + "File"]: imageFile,
+      });
+    }
+  };
+  const [previewImages, setPreviewImages] = useState({
+    image: "",
+  });
   return (
     <form
       className="w-3/4 overflow-hidden flex flex-col "
@@ -197,7 +216,14 @@ function CreateChallenge({ admin, props }) {
                 </label>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
-                <input
+                <ImageUploadBox
+                  setImagePreviewCallback={setImagePreview}
+                  imageName="image"
+                  previewImages={previewImages}
+                  setErrorsCallback={setErrors}
+                  errors={errors}
+                />
+                {/* <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.image ? "border-red-500" : ""
                   }`}
@@ -207,7 +233,7 @@ function CreateChallenge({ admin, props }) {
                   onChange={onChange}
                   error={errors.image ? "true" : "false"}
                   type="text"
-                />
+                /> */}
                 {errors.image && (
                   <p className="text-red-500">
                     <b>&#33;</b> {errors.image}
@@ -235,7 +261,7 @@ const CREATE_NEW_CHALLENGE = gql`
     $name: String!
     $categoryId: String!
     $challengeDescription: String
-    $image: String
+    $imageFile: Upload
     $extraLink: String
     $dueDate: String
   ) {
@@ -243,7 +269,7 @@ const CREATE_NEW_CHALLENGE = gql`
       name: $name
       categoryId: $categoryId
       challengeDescription: $challengeDescription
-      image: $image
+      imageFile: $imageFile
       extraLink: $extraLink
       dueDate: $dueDate
     ) {

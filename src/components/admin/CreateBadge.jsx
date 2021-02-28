@@ -285,11 +285,12 @@ function CreateBadge({ admin, props }) {
                   error={errors.image ? "true" : "false"}
                   type="text"
                 />
-                {errors.image && (
+                 */}
+                {errors.imageFile && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.image}
+                    <b>&#33;</b> {errors.imageFile}
                   </p>
-                )} */}
+                )}
               </td>
             </tr>
           </tbody>

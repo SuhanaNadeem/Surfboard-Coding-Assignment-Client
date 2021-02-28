@@ -73,7 +73,9 @@ export default function ChallengeCard({ props, challenge, created }) {
         </p>
         <img
           src={
-            category.image && category.image !== "" ? category.image : tempSvg
+            challenge.image && challenge.image !== ""
+              ? challenge.image
+              : tempSvg
           }
           className="rounded-lg object-contain w-full h-32 p-2"
         />
