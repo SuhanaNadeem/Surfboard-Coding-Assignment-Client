@@ -8,10 +8,7 @@ import ModuleInputDropdown from "./ModuleInputDropdown";
 import QuestionInputDropdown from "./QuestionInputDropdown";
 
 function CreateBadge({ admin, props }) {
-  console.log("enters badge");
-
   const [errors, setErrors] = useState({});
-  var imageFile = {};
   var moduleId = "";
   var description = "";
   var questionId = "";
@@ -23,7 +20,7 @@ function CreateBadge({ admin, props }) {
     createNewBadgeCallback,
     {
       name: name || "",
-      imageFile: imageFile || {},
+      imageFile: null,
       description: description || "",
       moduleId: moduleId || "",
       categoryId: categoryId || "",
@@ -36,7 +33,7 @@ function CreateBadge({ admin, props }) {
     refetchQueries: [],
     update() {
       setErrors({});
-      values.imageFile = {};
+      values.imageFile = null;
       values.moduleId = "";
       values.description = "";
       values.categoryId = "";
@@ -313,7 +310,7 @@ function CreateBadge({ admin, props }) {
 const CREATE_NEW_BADGE = gql`
   mutation createNewBadge(
     $name: String!
-    $imageFile: Upload!
+    $imageFile: Upload
     $description: String!
     $moduleId: String
     $categoryId: String

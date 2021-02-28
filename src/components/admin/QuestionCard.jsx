@@ -9,6 +9,8 @@ import {
 } from "../../pages/admin/AdminDashboard";
 import { IoMdTrash } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
+import tempSvg from "../../images/tempSvg.svg";
+
 export default function QuestionCard({ props, question, created }) {
   const { admin } = useContext(AdminAuthContext);
 
@@ -62,10 +64,10 @@ export default function QuestionCard({ props, question, created }) {
             : `bg-white h-full flex-shrink-0 first:ml-2 shadow w-48 transition-all duration-150 ease-in-out md:hover:-translate-y-1 align-middle flex flex-col items-center text-center p-4 rounded-md overflow-hidden hover:shadow-md hover:bg-gray-100 justify-center`
         }
       >
-        <p className="uppercase tracking-wide text-red-800 font-semibold text-md">
+        <p className="uppercase tracking-wide text-red-800 font-semibold text-md w-40 truncate">
           {question.name}
         </p>
-        <p className=" text-gray-700 font-semibold text-md leading-tight">
+        <p className=" text-gray-700 font-semibold text-md leading-tight w-40 truncate">
           {module.name}
         </p>
 
@@ -86,12 +88,12 @@ export default function QuestionCard({ props, question, created }) {
             <IoMdTrash size={16} />
           </button>
         </form>
-
-        {/* <p className=" text-gray-700 font-thin text-sm">Additional Info </p> */}
-        {/* <img
-          src={tempModuleCardImg}
+        <img
+          src={
+            question.image && question.image !== "" ? question.image : tempSvg
+          }
           className="rounded-lg object-contain w-full h-32 p-2"
-        /> */}
+        />
       </div>
     </div>
   ) : (

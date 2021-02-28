@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
 import CategoryInputDropdown from "./CategoryInputDropdown";
+import ImageUploadBox from "./ImageUploadBox";
 import ModuleInputDropdown from "./ModuleInputDropdown";
 
 function CreateQuestion({ admin, props }) {
   const [errors, setErrors] = useState({});
-  var image = "";
   var moduleId = "";
   var description = "";
   var expectedAnswer = "";
@@ -25,30 +25,33 @@ function CreateQuestion({ admin, props }) {
   var optionD = "";
   // console.log(values.points);
 
-  const { values, onChange, onSubmit } = useForm(createNewQuestionCallback, {
-    image: image || "",
-    moduleId: moduleId || "",
-    description: description || "",
-    expectedAnswer: expectedAnswer || "",
-    hint: hint || "",
-    questionFormat: questionFormat || "",
-    points: points || 0,
-    videoLink: videoLink || "",
-    articleLink: articleLink || "",
-    name: name || "",
-    type: type || "",
-    extraLink: extraLink || "",
-    optionA: optionA || "",
-    optionB: optionB || "",
-    optionC: optionC || "",
-    optionD: optionD || "",
-  });
+  const { values, onChange, onSubmit, setValues } = useForm(
+    createNewQuestionCallback,
+    {
+      imageFile: null,
+      moduleId: moduleId || "",
+      description: description || "",
+      expectedAnswer: expectedAnswer || "",
+      hint: hint || "",
+      questionFormat: questionFormat || "",
+      points: points || 0,
+      videoLink: videoLink || "",
+      articleLink: articleLink || "",
+      name: name || "",
+      type: type || "",
+      extraLink: extraLink || "",
+      optionA: optionA || "",
+      optionB: optionB || "",
+      optionC: optionC || "",
+      optionD: optionD || "",
+    }
+  );
 
   const [createNewQuestion, { loading }] = useMutation(CREATE_NEW_QUESTION, {
     refetchQueries: [],
     update() {
       setErrors({});
-      values.image = "";
+      values.imageFile = null;
       values.moduleId = "";
       values.description = "";
       values.expectedAnswer = "";
@@ -77,7 +80,23 @@ function CreateQuestion({ admin, props }) {
   function createNewQuestionCallback() {
     createNewQuestion();
   }
+  const setImagePreview = (imageTempUrl, imageName, imageFile) => {
+    setPreviewImages({
+      ...previewImages,
+      [imageName]: imageTempUrl,
+    });
+    // bannerLogoFile;
 
+    if (imageFile) {
+      setValues({
+        ...values,
+        [imageName + "File"]: imageFile,
+      });
+    }
+  };
+  const [previewImages, setPreviewImages] = useState({
+    image: "",
+  });
   return (
     <form
       className="w-3/4 overflow-hidden flex flex-col "
@@ -267,7 +286,7 @@ function CreateQuestion({ admin, props }) {
                 </label>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
-                <input
+                {/* <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.image ? "border-red-500" : ""
                   }`}
@@ -277,10 +296,17 @@ function CreateQuestion({ admin, props }) {
                   onChange={onChange}
                   error={errors.image ? "true" : "false"}
                   type="text"
+                /> */}
+                <ImageUploadBox
+                  setImagePreviewCallback={setImagePreview}
+                  imageName="image"
+                  previewImages={previewImages}
+                  setErrorsCallback={setErrors}
+                  errors={errors}
                 />
-                {errors.image && (
+                {errors.imageFile && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.image}
+                    <b>&#33;</b> {errors.imageFile}
                   </p>
                 )}
               </td>
@@ -565,7 +591,7 @@ function CreateQuestion({ admin, props }) {
 
 const CREATE_NEW_QUESTION = gql`
   mutation createNewQuestion(
-    $image: String
+    $imageFile: Upload
     $moduleId: String!
     $description: String
     $expectedAnswer: String
@@ -583,7 +609,7 @@ const CREATE_NEW_QUESTION = gql`
     $optionD: String
   ) {
     createNewQuestion(
-      image: $image
+      imageFile: $imageFile
       moduleId: $moduleId
       description: $description
       expectedAnswer: $expectedAnswer
