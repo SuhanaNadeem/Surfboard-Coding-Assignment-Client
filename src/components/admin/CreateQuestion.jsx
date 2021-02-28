@@ -23,6 +23,7 @@ function CreateQuestion({ admin, props }) {
   var optionB = "";
   var optionC = "";
   var optionD = "";
+  // console.log(values.points);
 
   const { values, onChange, onSubmit } = useForm(createNewQuestionCallback, {
     image: image || "",
@@ -56,12 +57,13 @@ function CreateQuestion({ admin, props }) {
       values.videoLink = "";
       values.articleLink = "";
       values.name = "";
-      values.type = "";
+      // values.type = "";
       values.extraLink = "";
       values.optionA = "";
       values.optionB = "";
       values.optionC = "";
       values.optionD = "";
+      values.questionFormat = "";
     },
     onError(err) {
       console.log(values);
@@ -239,10 +241,11 @@ function CreateQuestion({ admin, props }) {
                 </label>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
-                <input
+                <textarea
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.description ? "border-red-500" : ""
                   }`}
+                  rows="3"
                   name="description"
                   placeholder=""
                   value={values.description}

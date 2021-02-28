@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
 import CategoryInputDropdown from "./CategoryInputDropdown";
+import ImageUploadBox from "./ImageUploadBox";
 import ModuleInputDropdown from "./ModuleInputDropdown";
 import QuestionInputDropdown from "./QuestionInputDropdown";
 
@@ -10,7 +11,7 @@ function CreateBadge({ admin, props }) {
   console.log("enters badge");
 
   const [errors, setErrors] = useState({});
-  var image = "";
+  var imageFile = {};
   var moduleId = "";
   var description = "";
   var questionId = "";
@@ -18,21 +19,24 @@ function CreateBadge({ admin, props }) {
   var categoryId = "";
   var name = "";
 
-  const { values, onChange, onSubmit } = useForm(createNewBadgeCallback, {
-    name: name || "",
-    image: image || "",
-    description: description || "",
-    moduleId: moduleId || "",
-    categoryId: categoryId || "",
-    questionId: questionId || "",
-    points: points || 0,
-  });
+  const { values, onChange, onSubmit, setValues } = useForm(
+    createNewBadgeCallback,
+    {
+      name: name || "",
+      imageFile: imageFile || {},
+      description: description || "",
+      moduleId: moduleId || "",
+      categoryId: categoryId || "",
+      questionId: questionId || "",
+      points: points || 0,
+    }
+  );
 
   const [createNewBadge, { loading }] = useMutation(CREATE_NEW_BADGE, {
     refetchQueries: [],
     update() {
       setErrors({});
-      values.image = "";
+      values.imageFile = {};
       values.moduleId = "";
       values.description = "";
       values.categoryId = "";
@@ -41,6 +45,8 @@ function CreateBadge({ admin, props }) {
       values.name = "";
     },
     onError(err) {
+      console.log(values.imageFile);
+
       console.log(values);
       console.log(err);
       // setErrors(err.graphQLErrors[0].extensions.exception.errors);
@@ -52,6 +58,24 @@ function CreateBadge({ admin, props }) {
   function createNewBadgeCallback() {
     createNewBadge();
   }
+
+  const setImagePreview = (imageTempUrl, imageName, imageFile) => {
+    setPreviewImages({
+      ...previewImages,
+      [imageName]: imageTempUrl,
+    });
+    // bannerLogoFile;
+
+    if (imageFile) {
+      setValues({
+        ...values,
+        [imageName + "File"]: imageFile,
+      });
+    }
+  };
+  const [previewImages, setPreviewImages] = useState({
+    image: "",
+  });
 
   return (
     <form
@@ -187,7 +211,7 @@ function CreateBadge({ admin, props }) {
                 )}
               </td>
             </tr>
-            <tr>
+            {/* <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Image
@@ -212,7 +236,7 @@ function CreateBadge({ admin, props }) {
                 )}
               </td>
             </tr>
-
+ */}
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className="font-semibold uppercase tracking-wide ">
@@ -245,7 +269,15 @@ function CreateBadge({ admin, props }) {
                 </label>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
-                <input
+                <ImageUploadBox
+                  setImagePreviewCallback={setImagePreview}
+                  imageName="image"
+                  previewImages={previewImages}
+                  setErrorsCallback={setErrors}
+                  errors={errors}
+                />
+
+                {/* <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.image ? "border-red-500" : ""
                   }`}
@@ -260,7 +292,7 @@ function CreateBadge({ admin, props }) {
                   <p className="text-red-500">
                     <b>&#33;</b> {errors.image}
                   </p>
-                )}
+                )} */}
               </td>
             </tr>
           </tbody>
@@ -281,7 +313,7 @@ function CreateBadge({ admin, props }) {
 const CREATE_NEW_BADGE = gql`
   mutation createNewBadge(
     $name: String!
-    $image: String!
+    $imageFile: Upload!
     $description: String!
     $moduleId: String
     $categoryId: String
@@ -290,7 +322,7 @@ const CREATE_NEW_BADGE = gql`
   ) {
     createNewBadge(
       name: $name
-      image: $image
+      imageFile: $imageFile
       description: $description
       moduleId: $moduleId
       categoryId: $categoryId

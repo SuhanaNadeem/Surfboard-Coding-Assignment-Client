@@ -129,11 +129,12 @@ function QuestionModalCard({
       },
       { query: GET_QUESTION_BY_ID, variables: { questionId } },
       { query: GET_STUDENT_BY_ID, variables: { studentId } },
-      { query: GET_COMPLETED_MODULES_BY_STUDENT },
-      { query: GET_IN_PROGRESS_MODULES_BY_STUDENT },
+      { query: GET_COMPLETED_MODULES_BY_STUDENT, variables: { studentId } },
+      { query: GET_IN_PROGRESS_MODULES_BY_STUDENT, variables: { studentId } },
     ],
 
     update(proxy, { data }) {
+      console.log(values);
       setIsOpen(true);
       setErrors({});
 
@@ -169,7 +170,7 @@ function QuestionModalCard({
   function toggleEndCardIsOpen() {
     setEndCardIsOpen(true);
   }
-
+  // console.log(question);
   return question && completedQuestions && studentObject ? (
     <div className="justify-between flex flex-col h-full">
       <div className="flex flex-col items-center justify-start text-center overflow-y-auto ">
@@ -180,7 +181,7 @@ function QuestionModalCard({
           studentObject={studentObject}
         />
         <div>
-          {question.image && (
+          {question.image && question.image !== "" && (
             <div
               className="bg-cover mb-6 w-64 h-32 bg-center bg-no-repeat rounded-lg hover:shadow-md mx-auto"
               style={{
@@ -189,11 +190,41 @@ function QuestionModalCard({
             ></div>
           )}
         </div>
+        {question.articleLink && question.articleLink !== "" && (
+          <div className="flex justify-center items-center mb-2 w-full">
+            <h5 className="font-semibold uppercase tracking-wide text-xs mr-2">
+              Article:
+            </h5>
+            <a
+              className="font-light text-sm truncate"
+              href={question.articleLink}
+              target="_blank"
+            >
+              {question.articleLink}
+            </a>
+          </div>
+        )}
+
         {/* admin will upload images, but question type will store aws link. admin will upload + we'll store yt vid links */}
         <h6 className="text-md font-light leading-snug">
           {question.description}
         </h6>
-        {question.videoLink && (
+        {question.extraLink && question.extraLink !== "" && (
+          <div className="flex justify-center items-center mb-2 w-full">
+            <h5 className="font-semibold uppercase tracking-wide text-xs mr-2">
+              Visit:
+            </h5>
+            <a
+              className="font-light text-sm truncate"
+              href={question.extraLink}
+              target="_blank"
+            >
+              {question.extraLink}
+            </a>
+          </div>
+        )}
+
+        {question.videoLink && question.videoLink !== "" && (
           <div className="mt-4 ">
             <ReactPlayer
               url={question.videoLink}
@@ -207,24 +238,78 @@ function QuestionModalCard({
           <div className="flex flex-col">
             <form
               onSubmit={onSubmit}
-              className={
-                !completedQuestions.includes(questionId)
-                  ? `flex mt-4`
-                  : `flex mt-4 items-center justify-center`
-              }
+              className={`${
+                !completedQuestions.includes(questionId) ? `items-center ` : ``
+              }  flex mt-4 justify-center ${
+                question.questionFormat === "Multiple Choice" ? `flex-col` : ``
+              }`}
             >
-              <input
-                className="md:w-3/4 shadow appearance-none border rounded w-full font-light  py-1 px-2 text-gray-700 leading-tight focus:outline-none"
-                name="answer"
-                placeholder="Enter an answer"
-                value={values.answer}
-                onChange={onChange}
-                type="text"
-              />
+              {question.questionFormat === "Multiple Choice" ? (
+                <div className="flex flex-col text-md font-light justify-center items-start">
+                  <div>
+                    <input
+                      name="answer"
+                      value="A"
+                      onChange={onChange}
+                      error={errors.type ? "true" : "false"}
+                      type="radio"
+                      id="A"
+                    />
+                    <label htmlFor="A">{question.optionA}</label>
+                  </div>
+                  <div>
+                    <input
+                      name="answer"
+                      value="B"
+                      onChange={onChange}
+                      error={errors.type ? "true" : "false"}
+                      type="radio"
+                      id="B"
+                    />
+                    <label htmlFor="B">{question.optionB}</label>
+                  </div>
+                  <div>
+                    <input
+                      name="answer"
+                      value="C"
+                      onChange={onChange}
+                      error={errors.type ? "true" : "false"}
+                      type="radio"
+                      id="C"
+                    />
+                    <label htmlFor="C">{question.optionC}</label>
+                  </div>
+                  <div>
+                    <input
+                      name="answer"
+                      value="D"
+                      onChange={onChange}
+                      error={errors.type ? "true" : "false"}
+                      type="radio"
+                      id="D"
+                    />
+                    <label htmlFor="D">{question.optionD}</label>
+                  </div>
+                </div>
+              ) : (
+                <input
+                  className="md:w-3/4 shadow appearance-none border rounded w-full font-light  py-1 px-2 text-gray-700 leading-tight focus:outline-none"
+                  name="answer"
+                  placeholder="Enter an answer"
+                  value={values.answer}
+                  onChange={onChange}
+                  type="text"
+                />
+              )}
               {!completedQuestions.includes(questionId) && (
                 <button
+                  onClick={console.log(values)}
                   type="submit"
-                  className="ml-4 md:w-1/4 border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex"
+                  className={`${
+                    question.questionFormat === "Multiple Choice"
+                      ? `mt-4 w-16`
+                      : `ml-4 w-20`
+                  }  border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex`}
                 >
                   Submit
                 </button>
@@ -274,7 +359,7 @@ function QuestionModalCard({
                 module.questions.indexOf(question.id) + 1 ===
                   module.questions.length
               ) {
-                console.log(endCardIsOpen);
+                // console.log(endCardIsOpen);
                 toggleEndCardIsOpen(e);
               } else if (question.type !== "Skill") {
                 toggleNextOpen(e);
