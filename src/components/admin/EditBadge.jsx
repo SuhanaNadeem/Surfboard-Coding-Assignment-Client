@@ -193,24 +193,24 @@ function EditBadge({
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
-                  Points
+                  Required Amount
                 </label>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newPoints ? "border-red-500" : ""
+                    errors.newRequiredAmount ? "border-red-500" : ""
                   }`}
-                  name="newPoints"
+                  name="newRequiredAmount"
                   placeholder=""
-                  value={values.newPoints}
+                  value={values.newRequiredAmount}
                   onChange={onChange}
-                  error={errors.newPoints ? "true" : "false"}
+                  error={errors.newRequiredAmount ? "true" : "false"}
                   type="number"
                 />
-                {errors.newPoints && (
+                {errors.newRequiredAmount && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.newPoints}
+                    <b>&#33;</b> {errors.newRequiredAmount}
                   </p>
                 )}
               </td>
