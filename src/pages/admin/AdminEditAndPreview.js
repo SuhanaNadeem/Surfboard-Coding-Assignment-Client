@@ -22,7 +22,7 @@ export default function AdminEditAndPreview(props) {
   }
   const givenId = props.match.params.givenId;
   var selectedQuestionId = props.match.params.questionId;
-
+  console.log(givenId);
   const {
     data: { getModuleById: module } = {},
     loading: loadingModules,
@@ -148,10 +148,8 @@ export const GET_BADGE_BY_ID = gql`
   query getBadgeById($badgeId: String!) {
     getBadgeById(badgeId: $badgeId) {
       adminId
-      categoryId
-      moduleId
-      questionId
-      points
+      requiredAmount
+      type
       name
       createdAt
       description

@@ -1,6 +1,10 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
+import {
+  GET_QUESTIONS,
+  GET_QUESTIONS_BY_ADMIN,
+} from "../../pages/admin/AdminDashboard";
 import { useForm } from "../../util/hooks";
 import CategoryInputDropdown from "./CategoryInputDropdown";
 import ImageUploadBox from "./ImageUploadBox";
@@ -48,7 +52,15 @@ function CreateQuestion({ admin, props }) {
   );
 
   const [createNewQuestion, { loading }] = useMutation(CREATE_NEW_QUESTION, {
-    refetchQueries: [],
+    refetchQueries: [
+      {
+        query: GET_QUESTIONS,
+      },
+      {
+        query: GET_QUESTIONS_BY_ADMIN,
+        variables: { adminId: admin.id },
+      },
+    ],
     update() {
       setErrors({});
       values.imageFile = null;

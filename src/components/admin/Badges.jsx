@@ -32,9 +32,12 @@ export const GET_BADGES_BY_STUDENT = gql`
     getBadgesByStudent(studentId: $studentId) {
       id
       name
-      categoryId
-      moduleId
-      questionId
+      type
+      requiredAmount
+      adminId
+      image
+      createdAt
+      description
     }
   }
 `;

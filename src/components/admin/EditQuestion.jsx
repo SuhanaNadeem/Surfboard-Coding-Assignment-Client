@@ -21,7 +21,7 @@ function EditQuestion({
     points: newPoints,
     moduleId: newModuleId,
     moduleId,
-    type: newType,
+    type,
     videoLink: newVideoLink,
     articleLink: newArticleLink,
     expectedAnswer: newExpectedAnswer,
@@ -50,7 +50,6 @@ function EditQuestion({
       newImageFile: null,
       newPoints: newPoints || 0,
       newModuleId: newModuleId || "",
-      newType: newType || "",
       newVideoLink: newVideoLink || "",
       newArticleLink: newArticleLink || "",
       newExpectedAnswer: newExpectedAnswer || "",
@@ -118,8 +117,8 @@ function EditQuestion({
     >
       <h6 className="text-xl text-red-800">Edit Question</h6>
       <p className="text-sm font-light ">
-        Modify {newName}'s name, description, image, points, module, type,
-        video, admin, article, expected answer, or hint.
+        Modify {newName}'s name, description, image, points, module, video,
+        admin, article, expected answer, or hint.
       </p>
 
       <div className="flex flex-col mt-2">
@@ -195,7 +194,6 @@ function EditQuestion({
                 )}
               </td>
             </tr>
-
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
@@ -300,31 +298,6 @@ function EditQuestion({
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
-                  Type
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newType ? "border-red-500" : ""
-                  }`}
-                  name="newType"
-                  placeholder=""
-                  value={values.newType}
-                  onChange={onChange}
-                  error={errors.newType ? "true" : "false"}
-                  type="text"
-                />
-                {errors.newType && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.newType}
-                  </p>
-                )}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
                   Hint
                 </label>
               </td>
@@ -347,32 +320,35 @@ function EditQuestion({
                 )}
               </td>
             </tr>
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Expected Answer
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newExpectedAnswer ? "border-red-500" : ""
-                  }`}
-                  name="newExpectedAnswer"
-                  placeholder=""
-                  value={values.newExpectedAnswer}
-                  onChange={onChange}
-                  error={errors.newExpectedAnswer ? "true" : "false"}
-                  type="text"
-                />
-                {errors.newExpectedAnswer && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.newExpectedAnswer}
-                  </p>
-                )}
-              </td>
-            </tr>
-            {questionFormat === "Multiple Choice" && (
+            {/* if type is ques, may have specific answer; must if MC, handled in backend */}
+            {type === "Question" && (
+              <tr>
+                <td className="text-sm py-2 border-b border-gray-200">
+                  <label className=" font-semibold uppercase tracking-wide ">
+                    Expected Answer
+                  </label>
+                </td>
+                <td className="text-sm py-2 border-b border-gray-200">
+                  <input
+                    className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                      errors.newExpectedAnswer ? "border-red-500" : ""
+                    }`}
+                    name="newExpectedAnswer"
+                    placeholder=""
+                    value={values.newExpectedAnswer}
+                    onChange={onChange}
+                    error={errors.newExpectedAnswer ? "true" : "false"}
+                    type="text"
+                  />
+                  {errors.newExpectedAnswer && (
+                    <p className="text-red-500">
+                      <b>&#33;</b> {errors.newExpectedAnswer}
+                    </p>
+                  )}
+                </td>
+              </tr>
+            )}{" "}
+            {type === "Question" && questionFormat === "Multiple Choice" && (
               <>
                 <tr>
                   <td className="text-sm py-2 border-b border-gray-200">
@@ -478,7 +454,8 @@ function EditQuestion({
             )}
             {questionFormat !== "Multiple Choice" &&
               questionFormat !== "" &&
-              questionFormat && (
+              questionFormat &&
+              type === "Question" && (
                 <tr>
                   <td className="text-sm py-2 border-b border-gray-200">
                     <label className=" font-semibold uppercase tracking-wide ">
@@ -505,7 +482,6 @@ function EditQuestion({
                   </td>
                 </tr>
               )}
-
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
@@ -579,7 +555,6 @@ const EDIT_QUESTION = gql`
     $newVideoLink: String
     $newArticleLink: String
     $newName: String
-    $newType: String
     $newAdminId: String
     $newOptionA: String
     $newOptionB: String
@@ -599,7 +574,6 @@ const EDIT_QUESTION = gql`
       newVideoLink: $newVideoLink
       newArticleLink: $newArticleLink
       newName: $newName
-      newType: $newType
       newAdminId: $newAdminId
       newOptionA: $newOptionA
       newOptionB: $newOptionB
@@ -616,6 +590,7 @@ const EDIT_QUESTION = gql`
       type
       videoLink
       articleLink
+      questionFormat
       expectedAnswer
       adminId
       hint

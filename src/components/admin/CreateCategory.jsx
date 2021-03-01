@@ -1,7 +1,9 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
+import { GET_CATEGORIES_BY_ADMIN } from "../../pages/admin/AdminDashboard";
 import { useForm } from "../../util/hooks";
+import { GET_CATEGORIES } from "../student/DashboardCategories";
 
 function CreateCategory({ admin, props }) {
   const [errors, setErrors] = useState({});
@@ -12,7 +14,15 @@ function CreateCategory({ admin, props }) {
   });
 
   const [createNewCategory, { loading }] = useMutation(CREATE_NEW_CATEGORY, {
-    refetchQueries: [],
+    refetchQueries: [
+      {
+        query: GET_CATEGORIES,
+      },
+      {
+        query: GET_CATEGORIES_BY_ADMIN,
+        variables: { adminId: admin.id },
+      },
+    ],
     update() {
       setErrors({});
       values.name = "";

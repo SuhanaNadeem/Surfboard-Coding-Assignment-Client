@@ -1,6 +1,10 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
+import {
+  GET_CHALLENGES,
+  GET_CHALLENGES_BY_ADMIN,
+} from "../../pages/admin/AdminDashboard";
 import { useForm } from "../../util/hooks";
 import CategoryInputDropdown from "./CategoryInputDropdown";
 import ImageUploadBox from "./ImageUploadBox";
@@ -26,7 +30,15 @@ function CreateChallenge({ admin, props }) {
   );
 
   const [createNewChallenge, { loading }] = useMutation(CREATE_NEW_CHALLENGE, {
-    refetchQueries: [],
+    refetchQueries: [
+      {
+        query: GET_CHALLENGES,
+      },
+      {
+        query: GET_CHALLENGES_BY_ADMIN,
+        variables: { adminId: admin.id },
+      },
+    ],
     update() {
       setErrors({});
       values.name = "";

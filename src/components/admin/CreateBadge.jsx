@@ -2,22 +2,17 @@ import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
 import {
-  GET_QUESTIONS,
-  GET_QUESTIONS_BY_ADMIN,
+  GET_BADGES,
+  GET_BADGES_BY_ADMIN,
 } from "../../pages/admin/AdminDashboard";
 import { useForm } from "../../util/hooks";
-import CategoryInputDropdown from "./CategoryInputDropdown";
 import ImageUploadBox from "./ImageUploadBox";
-import ModuleInputDropdown from "./ModuleInputDropdown";
-import QuestionInputDropdown from "./QuestionInputDropdown";
 
 function CreateBadge({ admin, props }) {
   const [errors, setErrors] = useState({});
-  var moduleId = "";
+  var type = "";
   var description = "";
-  var questionId = "";
-  var points = 0;
-  var categoryId = "";
+  var requiredAmount = 0;
   var name = "";
 
   const { values, onChange, onSubmit, setValues } = useForm(
@@ -26,32 +21,30 @@ function CreateBadge({ admin, props }) {
       name: name || "",
       imageFile: null,
       description: description || "",
-      moduleId: moduleId || "",
-      categoryId: categoryId || "",
-      questionId: questionId || "",
-      points: points || 0,
+      type: type || "",
+      requiredAmount: requiredAmount || 0,
     }
   );
 
   const [createNewBadge, { loading }] = useMutation(CREATE_NEW_BADGE, {
     refetchQueries: [
       {
-        query: GET_QUESTIONS,
+        query: GET_BADGES,
       },
       {
-        query: GET_QUESTIONS_BY_ADMIN,
+        query: GET_BADGES_BY_ADMIN,
         variables: { adminId: admin.id },
       },
     ],
     update() {
       setErrors({});
       values.imageFile = null;
-      values.moduleId = "";
       values.description = "";
-      values.categoryId = "";
-      values.questionId = "";
-      values.points = 0;
+      values.requiredAmount = 0;
       values.name = "";
+      setPreviewImages({
+        image: "",
+      });
     },
     onError(err) {
       console.log(values);
@@ -130,64 +123,40 @@ function CreateBadge({ admin, props }) {
                 )}
               </td>
             </tr>
-
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
-                  Category
+                  Type
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <CategoryInputDropdown
-                  errors={errors}
-                  currentCategoryId={values.categoryId}
-                  onChange={onChange}
-                  categoryType="categoryId"
-                />
-                {errors.categoryId && (
+              <td className="font-light text-sm px-2 py-2 border-b border-gray-200">
+                <div>
+                  <input
+                    className="mr-2"
+                    name="type"
+                    value="Question"
+                    onChange={onChange}
+                    error={errors.type ? "true" : "false"}
+                    type="radio"
+                    id="Question"
+                  />
+                  <label htmlFor="Question">Question</label>
+                </div>
+                <div>
+                  <input
+                    className="mr-2"
+                    name="type"
+                    value="Module"
+                    onChange={onChange}
+                    error={errors.type ? "true" : "false"}
+                    type="radio"
+                    id="Module"
+                  />
+                  <label htmlFor="Module">Module</label>
+                </div>
+                {errors.type && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.categoryId}
-                  </p>
-                )}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Question
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <QuestionInputDropdown
-                  errors={errors}
-                  currentQuestionId={values.questionId}
-                  onChange={onChange}
-                  questionType="questionId"
-                />
-                {errors.questionId && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.questionId}
-                  </p>
-                )}
-              </td>
-            </tr>
-
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Module
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <ModuleInputDropdown
-                  errors={errors}
-                  currentModuleId={values.moduleId}
-                  onChange={onChange}
-                  moduleType="moduleId"
-                />
-                {errors.moduleId && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.moduleId}
+                    <b>&#33;</b> {errors.type}
                   </p>
                 )}
               </td>
@@ -247,24 +216,24 @@ function CreateBadge({ admin, props }) {
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className="font-semibold uppercase tracking-wide ">
-                  Points
+                  Required Amount
                 </label>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.points ? "border-red-500" : ""
+                    errors.requiredAmount ? "border-red-500" : ""
                   }`}
-                  name="points"
+                  name="requiredAmount"
                   placeholder=""
-                  value={values.points}
+                  value={values.requiredAmount}
                   onChange={onChange}
-                  error={errors.points ? "true" : "false"}
+                  error={errors.requiredAmount ? "true" : "false"}
                   type="number"
                 />
-                {errors.points && (
+                {errors.requiredAmount && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.points}
+                    <b>&#33;</b> {errors.requiredAmount}
                   </p>
                 )}
               </td>
@@ -332,30 +301,24 @@ const CREATE_NEW_BADGE = gql`
     $name: String!
     $imageFile: Upload
     $description: String!
-    $moduleId: String
-    $categoryId: String
-    $questionId: String
-    $points: Int
+    $type: String!
+    $requiredAmount: Int!
   ) {
     createNewBadge(
       name: $name
       imageFile: $imageFile
       description: $description
-      moduleId: $moduleId
-      categoryId: $categoryId
-      questionId: $questionId
-      points: $points
+      requiredAmount: $requiredAmount
+      type: $type
     ) {
       id
       name
+      adminId
+      requiredAmount
+      type
+      createdAt
       image
       description
-      moduleId
-      categoryId
-      questionId
-      points
-      adminId
-      createdAt
     }
   }
 `;

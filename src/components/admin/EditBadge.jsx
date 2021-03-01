@@ -20,24 +20,21 @@ function EditBadge({
     id: badgeId,
     name: newName,
     adminId: newAdminId,
-    moduleId: newModuleId,
-    questionId: newQuestionId,
-    categoryId: newCategoryId,
-    points: newPoints,
+    type: newType,
+    requiredAmount: newRequiredAmount,
     description: newDescription,
     image,
   },
 }) {
+  console.log("reaches here");
   const [errors, setErrors] = useState({});
   const { admin } = useContext(AdminAuthContext);
   const { values, onChange, onSubmit, setValues } = useForm(editBadgeCallback, {
     badgeId,
     newName: newName || "",
     newAdminId: newAdminId || "",
-    newQuestionId: newQuestionId || "",
-    newModuleId: newModuleId || "",
-    newCategoryId: newCategoryId || "",
-    newPoints: newPoints || 0,
+    newType: newType || "",
+    newRequiredAmount: newRequiredAmount || 0,
     newDescription: newDescription || "",
     newImageFile: null,
   });
@@ -96,8 +93,8 @@ function EditBadge({
     >
       <h6 className="text-xl text-red-800">Edit Badge</h6>
       <p className="text-sm font-light ">
-        Modify {newName}'s name, admin, module, question, category, points,
-        description, or image.
+        Modify {newName}'s name, admin, module, question, category,
+        requiredAmount, description, or image.
       </p>
 
       <div className="flex flex-col mt-2">
@@ -157,63 +154,42 @@ function EditBadge({
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
-                  Question
+                  Type
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <QuestionInputDropdown
-                  errors={errors}
-                  currentQuestionId={values.newQuestionId}
-                  onChange={onChange}
-                  questionType="newQuestionId"
-                />
-                {errors.newQuestionId && (
+              <td className="font-light text-sm px-2 py-2 border-b border-gray-200">
+                <div>
+                  <input
+                    className="mr-2"
+                    name="newType"
+                    value="Question"
+                    onChange={onChange}
+                    error={errors.newType ? "true" : "false"}
+                    type="radio"
+                    id="Question"
+                  />
+                  <label htmlFor="Question">Question</label>
+                </div>
+                <div>
+                  <input
+                    className="mr-2"
+                    name="newType"
+                    value="Module"
+                    onChange={onChange}
+                    error={errors.newType ? "true" : "false"}
+                    type="radio"
+                    id="Module"
+                  />
+                  <label htmlFor="Module">Module</label>
+                </div>
+                {errors.newType && (
                   <p className="text-red-500">
-                    <b>&#33;</b> {errors.newQuestionId}
+                    <b>&#33;</b> {errors.newType}
                   </p>
                 )}
               </td>
             </tr>
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Module
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <ModuleInputDropdown
-                  errors={errors}
-                  currentModuleId={values.newModuleId}
-                  onChange={onChange}
-                  moduleType="newModuleId"
-                />
-                {errors.newModuleId && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.newModuleId}
-                  </p>
-                )}
-              </td>
-            </tr>
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Category
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                <CategoryInputDropdown
-                  errors={errors}
-                  currentCategoryId={values.newCategoryId}
-                  onChange={onChange}
-                  categoryType="newCategoryId"
-                />
-                {errors.newCategoryId && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.newCategoryId}
-                  </p>
-                )}
-              </td>
-            </tr>
+
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
@@ -330,31 +306,25 @@ const EDIT_BADGE = gql`
     $badgeId: String!
     $newName: String
     $newAdminId: String
-    $newCategoryId: String
-    $newQuestionId: String
-    $newModuleId: String
-    $newPoints: Int
+    $newRequiredAmount: Int
     $newDescription: String
-    $newImage: String
+    $newType: String
+    $newImageFile: Upload
   ) {
     editBadge(
       badgeId: $badgeId
       newName: $newName
       newAdminId: $newAdminId
-      newModuleId: $newModuleId
-      newQuestionId: $newQuestionId
-      newCategoryId: $newCategoryId
-      newPoints: $newPoints
+      newType: $newType
+      newRequiredAmount: $newRequiredAmount
       newDescription: $newDescription
-      newImage: $newImage
+      newImageFile: $newImageFile
     ) {
       id
       name
       adminId
-      categoryId
-      moduleId
-      questionId
-      points
+      requiredAmount
+      type
       createdAt
       image
       description

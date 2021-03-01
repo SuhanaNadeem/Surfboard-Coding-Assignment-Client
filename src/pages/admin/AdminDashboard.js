@@ -227,16 +227,14 @@ export const GET_QUESTIONS = gql`
 export const GET_BADGES = gql`
   query getBadges {
     getBadges {
-      name
       id
-      createdAt
-      description
+      name
+      type
+      requiredAmount
       adminId
-      points
-      moduleId
-      categoryId
-      questionId
+      createdAt
       image
+      description
     }
   }
 `;
@@ -319,15 +317,13 @@ export const GET_QUESTIONS_BY_ADMIN = gql`
 export const GET_BADGES_BY_ADMIN = gql`
   query getBadgesByAdmin($adminId: String!) {
     getBadgesByAdmin(adminId: $adminId) {
-      name
       id
+      name
+      type
+      requiredAmount
+      adminId
       createdAt
       description
-      adminId
-      points
-      moduleId
-      categoryId
-      questionId
       image
     }
   }
