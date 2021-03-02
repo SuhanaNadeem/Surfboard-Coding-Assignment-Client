@@ -100,9 +100,9 @@ export default function ImageUploadBox({
       {/* {isDragActive ? ( */}
       {isDragActive ? (
         <p
-          className={`break-words font-normal w-full text-center border-dashed p-2 border-2 rounded bg-blue-100 border-blue-500`}
+          className={`break-words font-normal w-full text-center border-dashed p-2 border-2 rounded bg-red-100 border-red-800`}
         >
-          Drop the file here ...
+          Drop the file here...
         </p>
       ) : // {/* {isDragAccept && !isDragActive && (
 

@@ -6,8 +6,7 @@ export default function DashboardNavBar(props) {
   const history = useHistory();
 
   const pageLinksAndTitles = [
-    { title: "Statistics", link: "/dashboard" },
-    { title: "Badges", link: "/dashboard" },
+    { title: "Badges", link: "/badges" },
     { title: "Mentors", link: "/dashboard" },
     { title: "Challenges", link: "/dashboard" },
   ];

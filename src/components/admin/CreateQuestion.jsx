@@ -591,7 +591,7 @@ function CreateQuestion({ admin, props }) {
                 {previewImages.image && (
                   <div className="h-20 w-full">
                     <img
-                      className="h-full w-full object-contain rounded mt-2"
+                      className="h-full w-full object-contain rounded mt-2 bg-gray-200 p-1"
                       alt=""
                       src={`${previewImages.image}`}
                     />

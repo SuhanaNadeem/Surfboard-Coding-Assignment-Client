@@ -22,16 +22,18 @@ export default function StudentAccountDropdown({ logout, props }) {
     logout();
     studentClient.cache.reset();
   }
-  return (
+  return student ? (
     <div className="relative items-center justify-center inline-block">
       <button
         onClick={toggleIsOpen}
         className="focus:outline-none flex items-center justify-center"
       >
         <MdPersonOutline size={16} />
-        <p className="ml-2 mr-8 font-light hover:opacity-75">Account</p>
+        <p className="ml-2 mr-8 font-light hover:opacity-75">
+          Hi, {student.name}
+        </p>
       </button>
-      {isOpen && student ? (
+      {isOpen ? (
         <>
           <button
             tabIndex="-1"
@@ -40,7 +42,7 @@ export default function StudentAccountDropdown({ logout, props }) {
           ></button>
 
           <div className="absolute left-0 w-40 mt-2 py-1 bg-white rounded-lg shadow-xl text-sm z-20">
-            <h1 className="text-gray-800 text-left px-4 py-1 truncate font-semibold text-xs whitespace-no-wrap overflow-hidden">
+            <h1 className="text-gray-800 text-left px-4 py-1 font-semibold text-xs whitespace-no-wrap overflow-hidden w-36 truncate">
               Hi, {student.name}
             </h1>
             <button
@@ -65,9 +67,11 @@ export default function StudentAccountDropdown({ logout, props }) {
           </div>
         </>
       ) : (
-        <div></div>
+        <></>
       )}
     </div>
+  ) : (
+    <div>LOADING...</div>
   );
 }
 

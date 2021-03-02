@@ -9,10 +9,7 @@ import {
 } from "../../pages/admin/AdminDashboard";
 import { useForm } from "../../util/hooks";
 import AdminInputDropdown from "./AdminInputDropdown";
-import CategoryInputDropdown from "./CategoryInputDropdown";
 import ImageUploadBox from "./ImageUploadBox";
-import ModuleInputDropdown from "./ModuleInputDropdown";
-import QuestionInputDropdown from "./QuestionInputDropdown";
 
 function EditBadge({
   props,
@@ -26,7 +23,7 @@ function EditBadge({
     image,
   },
 }) {
-  console.log("reaches here");
+  console.log(newType);
   const [errors, setErrors] = useState({});
   const { admin } = useContext(AdminAuthContext);
   const { values, onChange, onSubmit, setValues } = useForm(editBadgeCallback, {
@@ -167,6 +164,7 @@ function EditBadge({
                     error={errors.newType ? "true" : "false"}
                     type="radio"
                     id="Question"
+                    checked={values.newType === "Question" ? "checked" : ""}
                   />
                   <label htmlFor="Question">Question</label>
                 </div>
@@ -179,6 +177,7 @@ function EditBadge({
                     error={errors.newType ? "true" : "false"}
                     type="radio"
                     id="Module"
+                    checked={values.newType === "Module" ? "checked" : ""}
                   />
                   <label htmlFor="Module">Module</label>
                 </div>
@@ -276,7 +275,7 @@ function EditBadge({
                 {previewImages.newImage && (
                   <div className="h-20 w-full">
                     <img
-                      className="h-full w-full object-contain rounded mt-2"
+                      className="h-full w-full object-contain rounded mt-2 bg-gray-200 p-1"
                       alt=""
                       src={`${previewImages.newImage}`}
                     />

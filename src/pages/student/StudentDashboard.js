@@ -7,7 +7,8 @@ import DashboardCategories from "../../components/student/DashboardCategories";
 import { studentClient } from "../../GraphqlApolloClients";
 import DashboardModules from "../../components/student/DashboardModules";
 import Footer from "../../components/student/Footer";
-
+import tempIcon from "../../images/tempIcon.svg";
+import DashboardBadges from "../../components/student/DashboardBadges";
 export default function StudentDashboard(props) {
   const { student } = useContext(StudentAuthContext);
   // console.log("in dash");
@@ -32,6 +33,13 @@ export default function StudentDashboard(props) {
     client: studentClient,
     variables: { studentId: student.id },
   });
+  const {
+    data: { getBadgesByStudent: badges } = {},
+    loading: loadingBadges,
+  } = useQuery(GET_BADGES_BY_STUDENT, {
+    client: studentClient,
+    variables: { studentId: student.id },
+  });
 
   // console.log(inProgressModules);
   // console.log(student.id);
@@ -39,7 +47,15 @@ export default function StudentDashboard(props) {
   const studentDashboard = student ? (
     <div className="h-full flex flex-col min-h-screen">
       <NavBar />
-      <div className="bg-red-800 w-full h-32"></div>
+      <div className="bg-red-800 w-full h-40 flex items-center justify-start ">
+        <div
+          className="bg-cover w-28 h-28 bg-center bg-no-repeat ml-44 mr-4"
+          style={{
+            backgroundImage: `url(${tempIcon})`,
+          }}
+        ></div>
+        <DashboardBadges props={props} badges={badges} />
+      </div>
       <div className="h-full flex-1 flex mx-48 mt-4 mb-8">
         <DashboardNavBar />
         <div className="md:w-5/6 last:mt-4">
@@ -87,6 +103,19 @@ export const GET_COMPLETED_MODULES_BY_STUDENT = gql`
       image
       categoryId
       questions
+    }
+  }
+`;
+export const GET_BADGES_BY_STUDENT = gql`
+  query getBadgesByStudent($studentId: String!) {
+    getBadgesByStudent(studentId: $studentId) {
+      name
+      id
+      image
+      type
+      requiredAmount
+      adminId
+      description
     }
   }
 `;
