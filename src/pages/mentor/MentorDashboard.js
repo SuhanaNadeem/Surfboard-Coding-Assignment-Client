@@ -12,8 +12,10 @@ export default function MentorDashboard(props) {
   const { mentor } = useContext(MentorAuthContext);
 
   if (!mentor) {
-    props.history.push("/login");
+    props.history.push("/loginMentor");
   }
+  var selectedStudentId = props.match.params.studentId;
+
   const {
     data: { getMentorById: mentorObject } = {},
     loading: loadingMentor,
@@ -42,6 +44,7 @@ export default function MentorDashboard(props) {
           props={props}
           addedStudents={addedStudents}
           mentor={mentorObject}
+          selectedStudentId={selectedStudentId}
         />
       </div>
       <Footer />

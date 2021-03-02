@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import tempSvg from "../../images/tempSvg.svg";
-
-export default function DashboardStudentCard({ props, student, added }) {
+import { AiOutlineFundView, AiOutlineUserAdd } from "react-icons/ai";
+import { useForm } from "../../util/hooks";
+import { GET_STUDENTS_BY_MENTOR } from "../admin/Students";
+import { GET_STUDENTS_BY_ORG_NAME } from "./DashboardStudents";
+import { mentorClient } from "../../GraphqlApolloClients";
+import { gql, useMutation } from "@apollo/client";
+import AddStudent from "./AddStudent";
+import RemoveStudent from "./RemoveStudent";
+export default function DashboardStudentCard({
+  props,
+  student,
+  added,
+  mentor,
+  setIsOpen,
+  handleStudentClick,
+}) {
+  {
+    /* Should be able to (1) view the stats from student, inProg + completedMods + answers from admin, 
+      (2) add the student, (3) remove the student, (4) see that the student is already "added." */
+  }
   return student ? (
     <div>
       <div
@@ -15,8 +33,25 @@ export default function DashboardStudentCard({ props, student, added }) {
         <p className="text-red-800 uppercase font-sm leading-tight w-32 truncate">
           {student.name}
         </p>
-        <p className="font-light my-1 w-32">SUMN ELSE</p>
-        <p className=" w-32 truncate">SUMN</p>
+        <p className="font-light mt-1 mb-3 w-32 truncate ">{student.email}</p>
+        <div className="flex items-center justify-center">
+          <button
+            className="hover:text-red-800 focus:outline-none mr-3"
+            onClick={(e) => {
+              console.log("clicked");
+              setIsOpen(true);
+              handleStudentClick(student.id);
+              props.history.push(`/mentorDashboard/${student.id}`);
+            }}
+          >
+            <AiOutlineFundView size={20} />
+          </button>
+          {added ? (
+            <RemoveStudent mentor={mentor} student={student} />
+          ) : (
+            <AddStudent mentor={mentor} student={student} />
+          )}
+        </div>
         {/* <img
           src={badge.image && badge.image !== "" ? badge.image : tempSvg}
           className="object-contain w-full h-14 mt-1"

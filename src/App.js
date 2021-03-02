@@ -51,7 +51,11 @@ function App() {
             path="/signupMentor"
             component={SignupMentor}
           />
-          <Route exact path="/mentorDashboard" component={MentorDashboard} />
+          <Route
+            exact
+            path="/mentorDashboard/:studentId?"
+            component={MentorDashboard}
+          />
           <Route exact path="/mentorAccount" component={MentorAccount} />
         </Router>
       </MentorAuthProvider>

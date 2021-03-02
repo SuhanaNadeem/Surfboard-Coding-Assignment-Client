@@ -420,6 +420,7 @@ export const GET_STUDENT_BY_ID = gql`
       name
       email
       orgName
+      completedQuestions
       starredQuestions
       completedModules
       inProgressModules

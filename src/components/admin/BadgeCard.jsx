@@ -13,7 +13,6 @@ import {
 } from "../../pages/admin/AdminDashboard";
 
 export default function BadgeCard({ props, badge, created }) {
-  console.log(badge);
   const { admin } = useContext(AdminAuthContext);
 
   const [errors, setErrors] = useState({});

@@ -39,12 +39,8 @@ export default function AdminUsers(props) {
   }
   const [activeStudentId, setActiveStudentId] = useState(selectedStudentId);
   const [activeMentorId, setActiveMentorId] = useState(selectedMentorId);
-  console.log(selectedId);
-  console.log(selectedMentorId);
-  console.log(activeMentorId);
-  useEffect(() => {
-    console.log("in student's useEffect");
 
+  useEffect(() => {
     setActiveStudentId(selectedStudentId);
   }, [setActiveStudentId, selectedStudentId]);
 
