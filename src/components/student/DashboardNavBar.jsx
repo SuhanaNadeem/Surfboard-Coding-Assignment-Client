@@ -2,13 +2,14 @@ import React from "react";
 import { BiLock } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 
-export default function DashboardNavBar(props) {
+export default function DashboardNavBar({ props }) {
   const history = useHistory();
 
   const pageLinksAndTitles = [
-    { title: "Progress", link: "/studentAccount" },
-    { title: "Badges", link: "/studentAccount" },
-    { title: "Mentors", link: "/studentAccount" },
+    { title: "Progress", link: "/studentAccount#ProgessOrMentors" },
+    { title: "Mentors", link: "/studentAccount#ProgessOrMentors" },
+    { title: "Badges", link: "/studentAccount#Badges" },
+
     // { title: "Challenges", link: "/dashboard" },
   ];
 
@@ -22,7 +23,7 @@ export default function DashboardNavBar(props) {
           key={pageInfo.title}
           onClick={(e) => {
             e.preventDefault();
-            history.push(pageInfo.link);
+            props.history.push(pageInfo.link);
           }}
           className="hover:text-red-800 font-light mb-6 last:mb-0 focus:outline-none"
         >

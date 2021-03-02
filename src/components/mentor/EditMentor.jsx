@@ -1,25 +1,19 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { studentClient } from "../../GraphqlApolloClients";
-import { GET_STUDENTS } from "../../pages/admin/AdminUsers";
+import { mentorClient } from "../../GraphqlApolloClients";
+import { GET_MENTOR_BY_ID } from "../../pages/admin/AdminUsers";
 import { useForm } from "../../util/hooks";
-import { GET_STUDENT_BY_ID } from "../student/ModuleSummaryBar";
 
-function EditStudent({
+function EditMentor({
   props,
-  student: {
-    id: studentId,
-    name: newName,
-    email: newEmail,
-    orgName: newOrgName,
-  },
+  mentor: { id: mentorId, name: newName, email: newEmail, orgName: newOrgName },
 }) {
   var confirmNewPassword = "";
   var newPassword = "";
 
   const [errors, setErrors] = useState({});
-  const { onChange, onSubmit, values } = useForm(editStudentCallback, {
-    studentId,
+  const { onChange, onSubmit, values } = useForm(editMentorCallback, {
+    mentorId,
     newEmail: newEmail || "",
     newName: newName || "",
     newOrgName: newOrgName || "",
@@ -28,8 +22,8 @@ function EditStudent({
     confirmNewPassword: confirmNewPassword || "",
   });
 
-  const [editStudent, { loading }] = useMutation(EDIT_STUDENT, {
-    update(_, { data: { editStudent: adminData } }) {
+  const [editMentor, { loading }] = useMutation(EDIT_MENTOR, {
+    update(_, { data: { editMentor: adminData } }) {
       setErrors({});
       console.log("done");
       values.confirmNewPassword = "";
@@ -37,11 +31,8 @@ function EditStudent({
     },
     refetchQueries: [
       {
-        query: GET_STUDENTS,
-      },
-      {
-        query: GET_STUDENT_BY_ID,
-        variables: { studentId },
+        query: GET_MENTOR_BY_ID,
+        variables: { mentorId },
       },
     ],
     onError(err) {
@@ -52,14 +43,14 @@ function EditStudent({
       // console.log(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
-    client: studentClient,
+    client: mentorClient,
   });
 
-  function editStudentCallback() {
-    editStudent();
+  function editMentorCallback() {
+    editMentor();
   }
 
-  return studentId ? (
+  return mentorId ? (
     <form
       className="w-3/4 overflow-hidden flex flex-col mt-4"
       onSubmit={onSubmit}
@@ -207,17 +198,17 @@ function EditStudent({
     <></>
   );
 }
-const EDIT_STUDENT = gql`
-  mutation editStudent(
-    $studentId: String!
+const EDIT_MENTOR = gql`
+  mutation editMentor(
+    $mentorId: String!
     $newEmail: String
     $newPassword: String
     $confirmNewPassword: String
     $newName: String
     $newOrgName: String
   ) {
-    editStudent(
-      studentId: $studentId
+    editMentor(
+      mentorId: $mentorId
 
       newEmail: $newEmail
       newPassword: $newPassword
@@ -228,10 +219,11 @@ const EDIT_STUDENT = gql`
       id
       email
       name
+      orgName
       createdAt
       token
     }
   }
 `;
 
-export default EditStudent;
+export default EditMentor;

@@ -98,7 +98,7 @@ export default function StudentModule(props) {
   const studentModule =
     student && module && completedQuestions ? (
       <div className="h-full flex flex-col min-h-screen">
-        <NavBar />
+        <NavBar props={props} />
         <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-36 pb-10">
           <p className="text-4xl text-white">{module.name}</p>
         </div>

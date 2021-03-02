@@ -1,28 +1,28 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
-import { studentClient } from "../../GraphqlApolloClients";
+import { mentorClient } from "../../GraphqlApolloClients";
 import { MdPersonOutline } from "react-icons/md";
 
 import { gql, useQuery } from "@apollo/client";
 
-export default function StudentAccountDropdown({ logout, props }) {
+export default function MentorAccountDropdown({ logout, props }) {
   const [isOpen, setIsOpen] = useState(false);
   function toggleIsOpen(e) {
     e.preventDefault();
     setIsOpen(!isOpen);
   }
 
-  const {
-    data: { getStudent: student } = {},
-    loading: loadingStudent,
-  } = useQuery(GET_STUDENT, {
-    client: studentClient,
-  });
+  const { data: { getMentor: mentor } = {}, loading: loadingMentor } = useQuery(
+    GET_MENTOR,
+    {
+      client: mentorClient,
+    }
+  );
 
-  if (!loadingStudent && !student) {
+  if (!loadingMentor && !mentor) {
     logout();
-    studentClient.cache.reset();
+    mentorClient.cache.reset();
   }
-  return student ? (
+  return mentor ? (
     <div className="relative items-center justify-center inline-block">
       <button
         onClick={toggleIsOpen}
@@ -30,7 +30,7 @@ export default function StudentAccountDropdown({ logout, props }) {
       >
         <MdPersonOutline size={16} />
         <p className="ml-2 mr-8 font-light hover:opacity-75">
-          Hi, {student.name}
+          Hi, {mentor.name}
         </p>
       </button>
       {isOpen ? (
@@ -43,13 +43,13 @@ export default function StudentAccountDropdown({ logout, props }) {
 
           <div className="focus:outline-none absolute left-0 w-40 mt-2 py-1 bg-white rounded-lg shadow-xl text-sm z-20">
             <h1 className="text-gray-800 text-left px-4 py-1 font-semibold text-xs whitespace-no-wrap overflow-hidden w-36 truncate">
-              Hi, {student.name}
+              Hi, {mentor.name}
             </h1>
             <button
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                props.history.push("/studentAccount#EditAccount");
+                props.history.push("/mentorAccount");
               }}
               className="focus:outline-none text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
             >
@@ -59,7 +59,7 @@ export default function StudentAccountDropdown({ logout, props }) {
               className="text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               onClick={(e) => {
                 logout();
-                studentClient.cache.reset();
+                mentorClient.cache.reset();
               }}
             >
               Log Out
@@ -75,22 +75,13 @@ export default function StudentAccountDropdown({ logout, props }) {
   );
 }
 
-export const GET_STUDENT = gql`
+export const GET_MENTOR = gql`
   {
-    getStudent {
+    getMentor {
       id
       name
       email
-      quesAnsDict {
-        key
-        value
-        id
-      }
-      modulePointsDict {
-        key
-        value
-        id
-      }
+      orgName
     }
   }
 `;

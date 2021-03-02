@@ -11,6 +11,8 @@ import LoginStudent from "./pages/student/LoginStudent";
 import SignupStudent from "./pages/student/SignupStudent";
 import SignupMentor from "./pages/mentor/SignupMentor";
 import LoginMentor from "./pages/mentor/LoginMentor";
+import MentorDashboard from "./pages/mentor/MentorDashboard";
+
 import SignupAdmin from "./pages/admin/SignupAdmin";
 import LoginAdmin from "./pages/admin/LoginAdmin";
 import StudentDashboard from "./pages/student/StudentDashboard";
@@ -21,6 +23,7 @@ import AdminEditAndPreview from "./pages/admin/AdminEditAndPreview";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminEditAccount from "./pages/admin/AdminEditAccount";
 import StudentAccount from "./pages/student/StudentAccount";
+import MentorAccount from "./pages/mentor/MentorAccount";
 
 function App() {
   return (
@@ -48,6 +51,8 @@ function App() {
             path="/signupMentor"
             component={SignupMentor}
           />
+          <Route exact path="/mentorDashboard" component={MentorDashboard} />
+          <Route exact path="/mentorAccount" component={MentorAccount} />
         </Router>
       </MentorAuthProvider>
 

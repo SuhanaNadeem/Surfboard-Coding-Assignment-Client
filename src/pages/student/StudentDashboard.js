@@ -46,7 +46,7 @@ export default function StudentDashboard(props) {
 
   const studentDashboard = student ? (
     <div className="h-full flex flex-col min-h-screen">
-      <NavBar />
+      <NavBar props={props} />
       <div className="bg-red-800 w-full h-40 flex items-center justify-start ">
         <div
           className="bg-cover w-28 h-28 bg-center bg-no-repeat ml-44 mr-4"
@@ -57,7 +57,7 @@ export default function StudentDashboard(props) {
         <DashboardBadges props={props} badges={badges} />
       </div>
       <div className="h-full flex-1 flex mx-48 mt-4 mb-8">
-        <DashboardNavBar />
+        <DashboardNavBar props={props} />
         <div className="md:w-5/6 last:mt-4">
           <DashboardCategories props={props} />
           <DashboardModules
