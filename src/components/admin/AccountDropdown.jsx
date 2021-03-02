@@ -47,7 +47,7 @@ export default function AdminAccountDropdown({ logout, props }) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log("pushing");
+                // console.log("pushing");
                 props.history.push("/adminEditAccount");
               }}
               className="text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"

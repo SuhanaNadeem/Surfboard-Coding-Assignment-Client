@@ -101,7 +101,11 @@ export const GET_STUDENT_BY_ID = gql`
       name
       starredQuestions
       starredModules
+      completedQuestions
       id
+      orgName
+      email
+      password
       quesAnsDict {
         key
         value

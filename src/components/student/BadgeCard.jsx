@@ -7,12 +7,7 @@ import tempSvg from "../../images/tempSvg.svg";
 
 export default function BadgeCard({ props, badge }) {
   return badge ? (
-    <button
-      onClick={(e) => {
-        // console.log(module.id);
-        props.history.push(`/module/${module.id}`);
-      }}
-    >
+    <div>
       <div className=" text-white  bg-black flex-shrink-0 first:ml-2 shadow w-24 transition-all duration-150 ease-in-out md:hover:-translate-y-1 align-middle flex flex-col items-center text-center p-4 rounded-md overflow-hidden hover:shadow-lg hover:bg-white h-full justify-start hover:text-black">
         {/* <p className="uppercase tracking-wide text-red-800 font-semibold text-md w-40 truncate">
           {badge.name}
@@ -29,16 +24,8 @@ export default function BadgeCard({ props, badge }) {
           className="object-contain w-full h-14 mt-1"
         />
       </div>
-    </button>
+    </div>
   ) : (
     <div></div>
   );
 }
-export const GET_CATEGORY_BY_ID = gql`
-  query getCategoryById($categoryId: String!) {
-    getCategoryById(categoryId: $categoryId) {
-      id
-      name
-    }
-  }
-`;

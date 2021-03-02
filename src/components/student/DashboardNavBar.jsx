@@ -1,14 +1,15 @@
 import React from "react";
-
+import { BiLock } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 
 export default function DashboardNavBar(props) {
   const history = useHistory();
 
   const pageLinksAndTitles = [
-    { title: "Badges", link: "/badges" },
-    { title: "Mentors", link: "/dashboard" },
-    { title: "Challenges", link: "/dashboard" },
+    { title: "Progress", link: "/studentAccount" },
+    { title: "Badges", link: "/studentAccount" },
+    { title: "Mentors", link: "/studentAccount" },
+    // { title: "Challenges", link: "/dashboard" },
   ];
 
   return (
@@ -28,6 +29,13 @@ export default function DashboardNavBar(props) {
           {pageInfo.title}
         </button>
       ))}
+      <button
+        className=" cursor-auto hover:text-red-800 font-light mb-6 last:mb-0 focus:outline-none flex items-center justify-center"
+        disabled
+      >
+        <p className="mr-2">Challenges</p>
+        <BiLock size={16} />
+      </button>
     </nav>
   );
 }

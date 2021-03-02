@@ -14,13 +14,13 @@ import LoginMentor from "./pages/mentor/LoginMentor";
 import SignupAdmin from "./pages/admin/SignupAdmin";
 import LoginAdmin from "./pages/admin/LoginAdmin";
 import StudentDashboard from "./pages/student/StudentDashboard";
-import StudentManageAccount from "./pages/student/StudentManageAccount";
 import StudentModule from "./pages/student/StudentModule";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminCreate from "./pages/admin/AdminCreate";
 import AdminEditAndPreview from "./pages/admin/AdminEditAndPreview";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminEditAccount from "./pages/admin/AdminEditAccount";
+import StudentAccount from "./pages/student/StudentAccount";
 
 function App() {
   return (
@@ -31,7 +31,7 @@ function App() {
           <StudentAuthRoute exact path="/login" component={LoginStudent} />
           <StudentAuthRoute exact path="/signup" component={SignupStudent} />
           <Route exact path="/dashboard" component={StudentDashboard} />
-          <Route exact path="/manageAccount" component={StudentManageAccount} />
+          <Route exact path="/studentAccount" component={StudentAccount} />
           <Route
             exact
             path="/module/:moduleId/:questionId?"

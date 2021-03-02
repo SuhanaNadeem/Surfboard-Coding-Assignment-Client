@@ -1,5 +1,5 @@
 import React from "react";
-import { adminClient } from "../../GraphqlApolloClients";
+import { studentClient } from "../../GraphqlApolloClients";
 import Mentor from "./Mentor";
 import { gql, useQuery } from "@apollo/client";
 
@@ -8,12 +8,13 @@ function Mentors({ student }) {
     GET_MENTORS_BY_STUDENT,
     {
       variables: { studentId: student.id },
-      client: adminClient,
+      client: studentClient,
     }
   );
+
   return mentors && mentors.length !== 0 ? (
-    <div className="mr-2 flex flex-col w-1/2 mt-4">
-      <h2 className="text-lg mb-2 text-red-800 ">Mentors</h2>
+    <div className="flex flex-col w-1/2">
+      <h2 className="text-3xl mb-2 font-normal">Mentors</h2>
 
       {mentors.map((mentor, index) => (
         <Mentor key={index} mentor={mentor} />
