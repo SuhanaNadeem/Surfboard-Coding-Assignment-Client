@@ -1,35 +1,28 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useContext } from "react";
 
 import { useHistory } from "react-router-dom";
-// import NavBarDropdown from "./NavBarDropdown";
 import { MentorAuthContext } from "../../context/mentorAuth";
-import { useForm } from "../../util/hooks";
-import { gql, useQuery } from "@apollo/client";
 import MentorAccountDropdown from "./AccountDropdown";
-import { MdPersonOutline } from "react-icons/md";
-import { VscSearch } from "react-icons/vsc";
 import tempWhiteLogo from "../../images/tempSvgWhite.png";
 
 export default function MentorNavBar({ props }) {
   const history = useHistory();
-  // const [navBar, setNavBar] = useState(false);
-
   const pageLinksAndTitles = [
     { title: "Dashboard", link: "/mentorDashboard" },
     { title: "Search", link: "/search" },
   ];
 
   const { mentor, logoutMentor } = useContext(MentorAuthContext);
+
   return (
-    <div className="bg-black shadow-lg flex items-center justify-center w-full z-10 text-center">
+    <div className="bg-black shadow-lg flex items-center justify-center w-full z-10 text-center md:h-14 h-16">
       <nav className="py-4 px-8 md:px-0 flex items-center justify-center  w-full md:max-w-2xl xl:max-w-5xl">
         <div className="w-full flex items-center justify-center font-light text-md text-white ">
           <div className="items-center flex flex-1 h-full md:h-8 justify-start">
             <MentorAccountDropdown props={props} logout={logoutMentor} />
           </div>
-          <div className="flex items-center justify-center">
+          <div className="hidden md:flex items-center justify-center">
             <p className="mr-2">LYNX Institute</p>
-            {/* <MdPersonOutline size={16} /> */}
             <img src={tempWhiteLogo} className="w-5 h-full" />
           </div>
           <div className="flex-1 flex items-center justify-end">
@@ -40,7 +33,7 @@ export default function MentorNavBar({ props }) {
                   e.preventDefault();
                   history.push(pageInfo.link);
                 }}
-                className="hover:opacity-75 font-light mr-4 last:mr-2 focus:outline-none"
+                className="hidden md:block hover:opacity-75 font-light mr-4 last:mr-2 focus:outline-none"
               >
                 {pageInfo.title}
               </button>

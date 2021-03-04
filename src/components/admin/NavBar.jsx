@@ -25,7 +25,7 @@ export default function NavBar({ props }) {
           <div className="items-center flex flex-1 h-full md:h-8 justify-start">
             <AdminAccountDropdown props={props} logout={logoutAdmin} />
           </div>
-          <div className="flex items-center justify-center">
+          <div className="hidden md:flex items-center justify-center">
             <p className="mr-2">LYNX Institute</p>
             {/* <MdPersonOutline size={16} /> */}
             <img src={tempWhiteLogo} className="w-5 h-full" />
@@ -38,7 +38,7 @@ export default function NavBar({ props }) {
                   e.preventDefault();
                   history.push(pageInfo.link);
                 }}
-                className="hover:opacity-75 font-light mr-4 last:mr-2 focus:outline-none"
+                className="hidden md:block hover:opacity-75 font-light mr-4 last:mr-2 focus:outline-none"
               >
                 {pageInfo.title}
               </button>

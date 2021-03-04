@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { mentorClient } from "../../GraphqlApolloClients";
 import { MdPersonOutline } from "react-icons/md";
+import tempWhiteLogo from "../../images/tempSvgWhite.png";
 
 import { gql, useQuery } from "@apollo/client";
 
@@ -28,9 +29,13 @@ export default function MentorAccountDropdown({ logout, props }) {
         onClick={toggleIsOpen}
         className="focus:outline-none flex items-center justify-center"
       >
-        <MdPersonOutline size={16} />
-        <p className="ml-2 mr-8 font-light hover:opacity-75">
-          Hi, {mentor.name}
+        <MdPersonOutline className="mr-2 hidden md:flex" size={16} />
+        <img
+          src={tempWhiteLogo}
+          className="flex w-5 md:w-0 md:hidden h-full mr-2"
+        />{" "}
+        <p className="w-44 text-left truncate font-light hover:opacity-75">
+          {mentor.name}
         </p>
       </button>
       {isOpen ? (
@@ -45,6 +50,26 @@ export default function MentorAccountDropdown({ logout, props }) {
             <h1 className="text-gray-800 text-left px-4 py-1 font-semibold text-xs whitespace-no-wrap overflow-hidden w-36 truncate">
               Hi, {mentor.name}
             </h1>
+            <button
+              className="block focus:outline-none text-left font-light w-full md:hidden px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
+              onClick={(e) => {
+                // e.preventDefault();
+                setIsOpen(false);
+                props.history.push("/mentorDashboard");
+              }}
+            >
+              Dashboard
+            </button>
+            <button
+              className="block focus:outline-none text-left font-light w-full md:hidden px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
+              onClick={(e) => {
+                // e.preventDefault();
+                setIsOpen(false);
+                props.history.push("/search");
+              }}
+            >
+              Search
+            </button>
             <button
               onClick={(e) => {
                 e.preventDefault();

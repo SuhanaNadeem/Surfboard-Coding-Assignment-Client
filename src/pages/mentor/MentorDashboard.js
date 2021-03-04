@@ -37,7 +37,7 @@ export default function MentorDashboard(props) {
     <div className="h-full flex flex-col min-h-screen">
       <NavBar props={props} />
       <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-48 pb-10">
-        <p className="text-4xl text-white">Admin Dashboard</p>
+        <p className="text-4xl text-white">Mentor Dashboard</p>
       </div>
       <div className="h-full flex-1 flex mx-48 my-8">
         <DashboardStudents
