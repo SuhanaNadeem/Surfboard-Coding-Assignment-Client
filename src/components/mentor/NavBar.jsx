@@ -8,6 +8,8 @@ import { gql, useQuery } from "@apollo/client";
 import MentorAccountDropdown from "./AccountDropdown";
 import { MdPersonOutline } from "react-icons/md";
 import { VscSearch } from "react-icons/vsc";
+import tempWhiteLogo from "../../images/tempSvgWhite.png";
+
 export default function MentorNavBar({ props }) {
   const history = useHistory();
   // const [navBar, setNavBar] = useState(false);
@@ -26,7 +28,9 @@ export default function MentorNavBar({ props }) {
             <MentorAccountDropdown props={props} logout={logoutMentor} />
           </div>
           <div className="flex items-center justify-center">
-            <p className="mr-2">LYNX Institute</p> <MdPersonOutline size={16} />
+            <p className="mr-2">LYNX Institute</p>
+            {/* <MdPersonOutline size={16} /> */}
+            <img src={tempWhiteLogo} className="w-5 h-full" />
           </div>
           <div className="flex-1 flex items-center justify-end">
             {pageLinksAndTitles.map((pageInfo) => (

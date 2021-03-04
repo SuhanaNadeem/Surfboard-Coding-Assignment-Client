@@ -8,6 +8,8 @@ import { gql, useQuery } from "@apollo/client";
 import StudentAccountDropdown from "./AccountDropdown";
 import { MdPersonOutline } from "react-icons/md";
 import { VscSearch } from "react-icons/vsc";
+import tempWhiteLogo from "../../images/tempSvgWhite.png";
+
 export default function StudentNavBar({ props }) {
   const history = useHistory();
   // const [navBar, setNavBar] = useState(false);
@@ -18,23 +20,6 @@ export default function StudentNavBar({ props }) {
   ];
 
   const { student, logoutStudent } = useContext(StudentAuthContext);
-  // const [errors, setErrors] = useState({});
-
-  // const values = useForm(getStudentCallback);
-
-  // const [getStudent, { loading }] = useMutation(GET_STUDENT, {
-  //   onError(err) {
-  //     console.log(values);
-  //     console.log(err);
-  //     setErrors(err.graphQLErrors[0].extensions.exception.errors);
-  //     console.log(err.graphQLErrors[0].extensions.exception.errors);
-  //   },
-  //   variables: values,
-  // });
-
-  // function getStudentCallback() {
-  //   getStudent();
-  // }
 
   return (
     <div className="bg-black shadow-lg flex items-center justify-center w-full z-10 text-center">
@@ -44,7 +29,9 @@ export default function StudentNavBar({ props }) {
             <StudentAccountDropdown props={props} logout={logoutStudent} />
           </div>
           <div className="flex items-center justify-center">
-            <p className="mr-2">LYNX Institute</p> <MdPersonOutline size={16} />
+            <p className="mr-2">LYNX Institute</p>
+            {/* <MdPersonOutline size={16} /> */}
+            <img src={tempWhiteLogo} className="w-5 h-full" />
           </div>
           <div className="flex-1 flex items-center justify-end">
             {pageLinksAndTitles.map((pageInfo) => (

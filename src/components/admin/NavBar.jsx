@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import { AdminAuthContext } from "../../context/adminAuth";
+import tempWhiteLogo from "../../images/tempSvgWhite.png";
 
 import AdminAccountDropdown from "./AccountDropdown";
 import { MdPersonOutline } from "react-icons/md";
@@ -25,7 +26,9 @@ export default function NavBar({ props }) {
             <AdminAccountDropdown props={props} logout={logoutAdmin} />
           </div>
           <div className="flex items-center justify-center">
-            <p className="mr-2">LYNX Institute</p> <MdPersonOutline size={16} />
+            <p className="mr-2">LYNX Institute</p>
+            {/* <MdPersonOutline size={16} /> */}
+            <img src={tempWhiteLogo} className="w-5 h-full" />
           </div>
           <div className="flex-1 flex items-center justify-end">
             {pageLinksAndTitles.map((pageInfo) => (

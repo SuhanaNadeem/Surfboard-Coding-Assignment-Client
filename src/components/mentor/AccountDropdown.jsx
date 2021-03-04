@@ -71,7 +71,7 @@ export default function MentorAccountDropdown({ logout, props }) {
       )}
     </div>
   ) : (
-    <div>LOADING...</div>
+    <></>
   );
 }
 

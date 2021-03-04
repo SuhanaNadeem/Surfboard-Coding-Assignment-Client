@@ -71,7 +71,7 @@ export default function StudentAccountDropdown({ logout, props }) {
       )}
     </div>
   ) : (
-    <div>LOADING...</div>
+    <></>
   );
 }
 
