@@ -170,7 +170,6 @@ function QuestionModalCard({
   function toggleEndCardIsOpen() {
     setEndCardIsOpen(true);
   }
-  // console.log(question);
   return question && completedQuestions && studentObject ? (
     <div className="justify-between flex flex-col h-full">
       <div className="flex flex-col items-center justify-start text-center overflow-y-auto ">
@@ -245,6 +244,7 @@ function QuestionModalCard({
               }`}
             >
               {question.questionFormat === "Multiple Choice" ? (
+                // && !completedQuestions.includes(question.id)
                 <div className="flex flex-col text-md font-light justify-center items-start">
                   <div>
                     <input
@@ -255,6 +255,12 @@ function QuestionModalCard({
                       type="radio"
                       id="A"
                       className="mr-2"
+                      checked={
+                        completedQuestions.includes(question.id) &&
+                        savedAnswer === "A"
+                          ? true
+                          : false
+                      }
                     />
                     <label htmlFor="A">{question.optionA}</label>
                   </div>
@@ -267,6 +273,13 @@ function QuestionModalCard({
                       type="radio"
                       id="B"
                       className="mr-2"
+                      checked={
+                        completedQuestions.includes(question.id) &&
+                        savedAnswer === "B"
+                          ? true
+                          : false
+                      }
+                      // checked={true}
                     />
                     <label htmlFor="B">{question.optionB}</label>
                   </div>
@@ -278,6 +291,12 @@ function QuestionModalCard({
                       error={errors.type ? "true" : "false"}
                       type="radio"
                       id="C"
+                      checked={
+                        completedQuestions.includes(question.id) &&
+                        savedAnswer === "C"
+                          ? true
+                          : false
+                      }
                       className="mr-2"
                     />
                     <label htmlFor="C">{question.optionC}</label>
@@ -290,6 +309,12 @@ function QuestionModalCard({
                       error={errors.type ? "true" : "false"}
                       type="radio"
                       id="D"
+                      checked={
+                        completedQuestions.includes(question.id) &&
+                        savedAnswer === "D"
+                          ? true
+                          : false
+                      }
                       className="mr-2"
                     />
                     <label htmlFor="D">{question.optionD}</label>

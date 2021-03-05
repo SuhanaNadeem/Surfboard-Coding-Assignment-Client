@@ -49,10 +49,13 @@ export default function StudentDashboard(props) {
   const studentDashboard = student ? (
     <div className="h-full flex flex-col min-h-screen w-full">
       <NavBar props={props} />
-      <div className="bg-red-800 w-full h-40 flex items-center justify-start overflow-hidden">
-        <div className="flex ml-8 sm:ml-24 md:ml-32 lg:ml-48 items-center justify-center">
+      {/* mx-8 sm:mx-24 md:mx-32 lg:mx-48     ml-8 sm:ml-24 md:ml-32 lg:ml-48*/}
+
+      <div className="bg-red-800 w-full h-40 flex items-center justify-start overflow-hidden ">
+        <div className="flex w-full items-center justify-start mx-8 sm:mx-24 md:mx-32 lg:mx-48 overflow-x-hidden">
+          {/* <div className="bg-red-800 w-full h-40 flex items-center justify-start overflow-hidden mx-8 sm:mx-24 md:mx-32 lg:mx-48"> */}
           <div
-            className="bg-cover w-28 h-28 bg-center bg-no-repeat mr-4"
+            className="bg-cover w-28 h-28 bg-center bg-no-repeat mr-4 flex-shrink-0 flex"
             style={{
               backgroundImage: `url(${tempIcon})`,
             }}
