@@ -9,6 +9,8 @@ import DashboardModules from "../../components/student/DashboardModules";
 import Footer from "../../components/student/Footer";
 import tempIcon from "../../images/tempIcon.svg";
 import DashboardBadges from "../../components/student/DashboardBadges";
+import LoadingIcon from "../../images/tempModuleCardImg.PNG";
+
 export default function StudentDashboard(props) {
   const { student } = useContext(StudentAuthContext);
   // console.log("in dash");
@@ -77,9 +79,13 @@ export default function StudentDashboard(props) {
       <Footer />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen w-full">
-      <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:my-8 md:max-w-xs">
-        <p>LOADING</p>
+    <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
+      <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
+        {/* <p>loading...</p> */}
+        <img
+          src={LoadingIcon}
+          className="rounded-lg object-contain w-full h-32 p-2"
+        />
       </div>
     </div>
   );

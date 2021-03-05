@@ -79,12 +79,12 @@ function EditStudent({
           </thead>
           <tbody>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Name
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <input
                   className="shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none "
                   name="newName"
@@ -96,12 +96,12 @@ function EditStudent({
               </td>
             </tr>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Organization
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <input
                   className="shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none "
                   name="newOrgName"
@@ -114,12 +114,12 @@ function EditStudent({
             </tr>
 
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Email
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.newEmail ? "border-red-500" : ""
@@ -140,12 +140,12 @@ function EditStudent({
             </tr>
 
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Password
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.newPassword ? "border-red-500" : ""
@@ -166,12 +166,12 @@ function EditStudent({
             </tr>
 
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Confirm Password
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
                     errors.confirmNewPassword ? "border-red-500" : ""
