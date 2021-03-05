@@ -96,12 +96,12 @@ export default function AdminDashboard(props) {
   //   });
 
   const adminDashboard = admin ? (
-    <div className="h-full flex flex-col min-h-screen">
+    <div className="h-full flex flex-col min-h-screen w-full">
       <NavBar props={props} />
       <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-48 pb-10">
         <p className="text-4xl text-white">Admin Dashboard</p>
       </div>
-      <div className="h-full flex-1 flex mx-48 mt-4 mb-8">
+      <div className="h-full flex-1 flex mx-32 lg:mx-48 mt-4 mb-8">
         {adminModules &&
           adminQuestions &&
           //   adminQuestionTemplates &&
@@ -171,7 +171,7 @@ export default function AdminDashboard(props) {
       <Footer />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen">
+    <div className="h-full flex flex-col min-h-screen w-full">
       <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:my-8 md:max-w-xs">
         <p>LOADING</p>
       </div>

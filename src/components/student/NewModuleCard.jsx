@@ -75,8 +75,8 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
 
   return categoryName && moduleInfo ? (
     <form onSubmit={onSubmitStatus}>
-      <button type="submit">
-        <div className="flex flex-row items-center justify-start">
+      <button type="submit" className="w-full">
+        <div className="flex flex-row items-center justify-start w-full">
           {categoryName === "Programming" && <BsCodeSlash size={32} />}
           {categoryName === "Electrical" && (
             <RiWirelessChargingLine size={32} />
@@ -84,14 +84,12 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
           {categoryName === "Computer-Aided Design" && (
             <GrPersonalComputer size={32} />
           )}
-
           {categoryName !== "Programming" &&
             categoryName !== "Electrical" &&
             categoryName !== "Computer-Aided Design" && (
-              <GiMorphBall size={32} />
+              <GiMorphBall size={32} className="w-1/6" />
             )}
-
-          <p className="hover:text-red-800 ml-6 tracking-wide font-thin my-4 text-md">
+          <p className="hover:text-red-800 ml-3 truncate w-5/6 tracking-wide font-thin my-2 md:my-4 text-md text-left">
             {moduleInfo.name}
           </p>
         </div>

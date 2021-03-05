@@ -26,10 +26,10 @@ export default function ModuleCard({ props, module }) {
         <p className="uppercase tracking-wide text-red-800 font-semibold text-md w-40 truncate">
           {module.name}
         </p>
-        <p className=" text-gray-700 font-semibold text-md leading-tight   w-40 truncate">
+        <p className="  text-gray-700 font-semibold text-md leading-tight   w-40 truncate">
           {category.name}
         </p>
-        <p className=" text-gray-700 font-thin text-sm   w-40 truncate">
+        <p className="  text-gray-700 font-thin text-sm   w-40 truncate">
           {module.questions.length} Questions
         </p>
         <img

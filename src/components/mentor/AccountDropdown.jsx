@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef, useContext } from "react";
 import { mentorClient } from "../../GraphqlApolloClients";
 import { MdPersonOutline } from "react-icons/md";
 import tempWhiteLogo from "../../images/tempSvgWhite.png";
-
 import { gql, useQuery } from "@apollo/client";
+import { MdMenu } from "react-icons/md";
 
 export default function MentorAccountDropdown({ logout, props }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,16 +27,16 @@ export default function MentorAccountDropdown({ logout, props }) {
     <div className="relative items-center justify-center inline-block">
       <button
         onClick={toggleIsOpen}
-        className="focus:outline-none flex items-center justify-center"
+        className="hover:opacity-75 focus:outline-none flex items-center justify-center"
       >
         <MdPersonOutline className="mr-2 hidden md:flex" size={16} />
-        <img
+        {/* <img
           src={tempWhiteLogo}
           className="flex w-5 md:w-0 md:hidden h-full mr-2"
-        />{" "}
-        <p className="w-44 text-left truncate font-light hover:opacity-75">
-          {mentor.name}
-        </p>
+        /> */}
+        <MdMenu size={16} className="block md:hidden mr-2" />
+
+        <p className="w-44 text-left truncate font-light">{mentor.name}</p>
       </button>
       {isOpen ? (
         <>

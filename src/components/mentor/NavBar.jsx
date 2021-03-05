@@ -21,10 +21,18 @@ export default function MentorNavBar({ props }) {
           <div className="items-center flex flex-1 h-full md:h-8 justify-start">
             <MentorAccountDropdown props={props} logout={logoutMentor} />
           </div>
-          <div className="hidden md:flex items-center justify-center">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              props.history.push("/loginMentor");
+            }}
+            className="hover:opacity-75 hidden md:flex font-light items-center justify-center"
+          >
             <p className="mr-2">LYNX Institute</p>
+
             <img src={tempWhiteLogo} className="w-5 h-full" />
-          </div>
+          </button>
+
           <div className="flex-1 flex items-center justify-end">
             {pageLinksAndTitles.map((pageInfo) => (
               <button
@@ -38,6 +46,18 @@ export default function MentorNavBar({ props }) {
                 {pageInfo.title}
               </button>
             ))}
+            <button
+              className=" md:hidden flex focus:outline-none"
+              onClick={(e) => {
+                e.preventDefault();
+                props.history.push("/loginMentor");
+              }}
+            >
+              <img
+                src={tempWhiteLogo}
+                className="focus:outline-none w-5 h-full"
+              />
+            </button>
           </div>
         </div>
       </nav>

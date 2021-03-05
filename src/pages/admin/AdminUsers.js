@@ -92,7 +92,7 @@ export default function AdminUsers(props) {
   }
 
   return students && mentors ? (
-    <div className="h-full flex flex-col min-h-screen">
+    <div className="h-full flex flex-col min-h-screen w-full">
       <NavBar props={props} />
       <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-48 pb-10">
         <p className="text-4xl text-white">Admin Users</p>
@@ -145,7 +145,7 @@ export default function AdminUsers(props) {
       />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen">
+    <div className="h-full flex flex-col min-h-screen w-full">
       <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:my-8 md:max-w-xs">
         <p>LOADING</p>
       </div>

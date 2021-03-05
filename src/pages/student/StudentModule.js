@@ -97,12 +97,12 @@ export default function StudentModule(props) {
   );
   const studentModule =
     student && module && completedQuestions ? (
-      <div className="h-full flex flex-col min-h-screen">
+      <div className="h-full flex flex-col min-h-screen w-full">
         <NavBar props={props} />
         <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-36 pb-10">
           <p className="text-4xl text-white">{module.name}</p>
         </div>
-        <div className="h-full flex-1 flex mx-36 mt-4 mb-8">
+        <div className="h-full flex-1 flex mx-32 lg:mx-48 mt-4 mb-8">
           <ModuleSummaryBar
             props={props}
             questions={module.questions}
@@ -142,7 +142,7 @@ export default function StudentModule(props) {
         <Footer />
       </div>
     ) : (
-      <div className="h-full flex flex-col min-h-screen">
+      <div className="h-full flex flex-col min-h-screen w-full">
         <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:my-8 md:max-w-xs">
           <p>LOADING</p>
         </div>

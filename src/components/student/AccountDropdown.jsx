@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useContext } from "react";
 import { studentClient } from "../../GraphqlApolloClients";
 import { MdPersonOutline } from "react-icons/md";
 import tempWhiteLogo from "../../images/tempSvgWhite.png";
+import { MdMenu } from "react-icons/md";
 
 import { gql, useQuery } from "@apollo/client";
 
@@ -27,16 +28,16 @@ export default function StudentAccountDropdown({ logout, props }) {
     <div className="relative items-center justify-center inline-block">
       <button
         onClick={toggleIsOpen}
-        className="focus:outline-none flex items-center justify-center"
+        className="hover:opacity-75 focus:outline-none flex items-center justify-center"
       >
         <MdPersonOutline className="mr-2 hidden md:flex" size={16} />
-        <img
+        {/* <img
           src={tempWhiteLogo}
           className="flex w-5 md:w-0 md:hidden h-full mr-2"
-        />
-        <p className="w-44 text-left truncate font-light hover:opacity-75">
-          {student.name}
-        </p>
+        /> */}
+        <MdMenu size={16} className="block md:hidden mr-2" />
+
+        <p className="w-44 text-left truncate font-light">{student.name}</p>
       </button>
       {isOpen ? (
         <>

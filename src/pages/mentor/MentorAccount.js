@@ -22,7 +22,7 @@ export default function MentorAccount(props) {
   );
 
   const mentorAccount = mentorObject ? (
-    <div className="h-full flex flex-col min-h-screen">
+    <div className="h-full flex flex-col min-h-screen w-full">
       <NavBar props={props} />
       <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-48 pb-10">
         <p className="text-4xl text-white">Your Account</p>
@@ -35,7 +35,7 @@ export default function MentorAccount(props) {
       <Footer />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen">
+    <div className="h-full flex flex-col min-h-screen w-full">
       <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:my-8 md:max-w-xs">
         <p>LOADING</p>
       </div>

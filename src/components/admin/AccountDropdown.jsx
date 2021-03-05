@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useContext } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
 import { MdPersonOutline } from "react-icons/md";
 import tempWhiteLogo from "../../images/tempSvgWhite.png";
+import { MdMenu } from "react-icons/md";
 
 import { gql, useQuery } from "@apollo/client";
 
@@ -27,18 +28,20 @@ export default function AdminAccountDropdown({ logout, props }) {
     <div className="relative items-center justify-center inline-block">
       <button
         onClick={toggleIsOpen}
-        className="focus:outline-none flex items-center justify-center"
+        className="hover:opacity-75 focus:outline-none flex items-center justify-center"
       >
         <MdPersonOutline className="mr-2 hidden md:flex" size={16} />
-        <img
+        {/* <img
           src={tempWhiteLogo}
           className="flex w-5 md:w-0 md:hidden h-full mr-2"
-        />
+        /> */}
+        <MdMenu size={16} className="block md:hidden mr-2" />
+
         <p className="w-44 text-left truncate font-light hover:opacity-75">
           {admin.name}
         </p>
       </button>
-      {isOpen && admin ? (
+      {isOpen ? (
         <>
           <button
             tabIndex="-1"
@@ -48,7 +51,6 @@ export default function AdminAccountDropdown({ logout, props }) {
 
           <div className="focus:outline-none absolute left-0 w-40 mt-2 py-1 bg-white rounded-lg shadow-xl text-sm z-20">
             <h1 className="text-gray-800 text-left px-4 py-1 font-semibold text-xs whitespace-no-wrap overflow-hidden w-36 truncate">
-              {" "}
               Hi, {admin.name}
             </h1>
             <button
