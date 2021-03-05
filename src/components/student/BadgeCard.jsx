@@ -3,7 +3,7 @@ import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
 import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
-import tempSvg from "../../images/tempSvg.svg";
+import tempSvg from "../../images/tempSvg.png";
 
 export default function BadgeCard({ props, badge }) {
   return badge ? (
@@ -20,7 +20,11 @@ export default function BadgeCard({ props, badge }) {
           {`${badge.type === "Module" ? `Modules` : `Questions`}`}
         </p>
         <img
-          src={badge.image && badge.image !== "" ? badge.image : tempSvg}
+          src={
+            badge.image && badge.image !== ""
+              ? badge.image
+              : "https://li-images.s3.amazonaws.com/3206906234/tempSvg.png"
+          }
           className="object-contain w-full h-14 mt-1"
         />
       </div>

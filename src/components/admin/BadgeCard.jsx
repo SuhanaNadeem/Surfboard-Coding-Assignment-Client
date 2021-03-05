@@ -6,7 +6,7 @@ import { adminClient } from "../../GraphqlApolloClients";
 import { IoMdTrash } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
 import { AdminAuthContext } from "../../context/adminAuth";
-import tempSvg from "../../images/tempSvg.svg";
+import tempSvg from "../../images/tempSvg.png";
 import {
   GET_BADGES,
   GET_BADGES_BY_ADMIN,
@@ -64,7 +64,11 @@ export default function BadgeCard({ props, badge, created }) {
       </p> */}
         {/* <p className=" text-gray-700 font-thin text-sm">{badge.createdAt} </p> */}
         <img
-          src={badge.image && badge.image !== "" ? badge.image : tempSvg}
+          src={
+            badge.image && badge.image !== ""
+              ? badge.image
+              : "https://li-images.s3.amazonaws.com/3206906234/tempSvg.png"
+          }
           className="rounded-lg object-contain w-full h-32 p-2"
         />
         <form

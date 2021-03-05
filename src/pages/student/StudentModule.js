@@ -10,7 +10,7 @@ import QuestionCard, {
   GET_QUESTION_BY_ID,
 } from "../../components/student/QuestionCard";
 import QuestionModal from "../../components/student/QuestionModal";
-
+import LoadingIcon from "../../images/tempModuleCardImg.PNG";
 export default function StudentModule(props) {
   const { student } = useContext(StudentAuthContext);
 
@@ -99,10 +99,10 @@ export default function StudentModule(props) {
     student && module && completedQuestions ? (
       <div className="h-full flex flex-col min-h-screen w-full">
         <NavBar props={props} />
-        <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-36 pb-10">
+        <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-10 lg:pl-32 xl:pl-48 pb-10 ">
           <p className="text-4xl text-white">{module.name}</p>
         </div>
-        <div className="h-full flex-1 flex mx-32 lg:mx-48 mt-4 mb-8">
+        <div className="h-full md:flex-1 md:flex mx-10 lg:mx-32 xl:mx-48 mt-4 mb-8">
           <ModuleSummaryBar
             props={props}
             questions={module.questions}
@@ -111,8 +111,12 @@ export default function StudentModule(props) {
             completedQuestions={completedQuestions}
             moduleId={moduleId}
           />
-          <div className="md:w-5/6 mt-6 ml-10">
-            <div className="grid gap-4 items-stretch justify-start h-full pl-2">
+          <div className="w-3/4 lg:w-5/6 mt-6 md:ml-10">
+            <img
+              src="https://li-images.s3.amazonaws.com/3206906234/tempSvg.png"
+              className="absolute right-12 xl:right-40 my-auto h-full fill-current opacity-0 lg:opacity-25 "
+            />
+            <div className="grid gap-4 items-stretch justify-start h-full md:pl-2 relative">
               {module.questions.map((questionId, index) => (
                 <QuestionCard
                   key={index}
@@ -142,9 +146,13 @@ export default function StudentModule(props) {
         <Footer />
       </div>
     ) : (
-      <div className="h-full flex flex-col min-h-screen w-full">
-        <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:my-8 md:max-w-xs">
-          <p>LOADING</p>
+      <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
+        <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
+          {/* <p>loading...</p> */}
+          <img
+            src={LoadingIcon}
+            className="rounded-lg object-contain w-full h-32 p-2"
+          />
         </div>
       </div>
     );

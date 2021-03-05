@@ -54,15 +54,15 @@ function QuestionCard({
     <div
       className={`${
         complete
-          ? "bg-gray-100 w-96 align-middle flex flex-row items-center text-center p-4 rounded-md shadow-sm overflow-hidden h-32 justify-center hover:shadow-md "
-          : "bg-white w-96 align-middle flex flex-row items-center text-center p-4 rounded-md shadow-sm overflow-hidden h-32 justify-center hover:shadow-md "
+          ? "bg-gray-100 w-72 md:w-96 align-middle flex flex-row items-center text-center p-4 rounded-md shadow-sm overflow-hidden h-32 justify-center hover:shadow-md "
+          : "bg-white w-72 md:w-96 align-middle flex flex-row items-center text-center p-4 rounded-md shadow-sm overflow-hidden h-32 justify-center hover:shadow-md "
       }`}
     >
       <div className="flex flex-col mr-10">
         <p className=" font-semibold text-sm uppercase tracking-wide ">
           {question.type}
         </p>
-        <p className="text-red-800">{question.name}</p>
+        <p className="text-red-800 w-32 md:w-full truncate">{question.name}</p>
         <p className="tracking-wider text-sm uppercase font-light ">
           {question.points} lynx tokens
         </p>

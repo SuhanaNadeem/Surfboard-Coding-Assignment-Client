@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import tempSvg from "../../images/tempSvg.svg";
+import tempSvg from "../../images/tempSvg.png";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
 import { useForm } from "../../util/hooks";
 import { GET_STUDENTS_BY_MENTOR } from "../admin/Students";

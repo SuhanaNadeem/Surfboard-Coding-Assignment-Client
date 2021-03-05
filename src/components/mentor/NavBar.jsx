@@ -29,8 +29,10 @@ export default function MentorNavBar({ props }) {
             className="hover:opacity-75 hidden md:flex font-light items-center justify-center"
           >
             <p className="mr-2">LYNX Institute</p>
-
-            <img src={tempWhiteLogo} className="w-5 h-full" />
+            <img
+              src="https://li-images.s3.amazonaws.com/8945722254/tempSvgWhite.png"
+              className="w-6 h-full"
+            />{" "}
           </button>
 
           <div className="flex-1 flex items-center justify-end">

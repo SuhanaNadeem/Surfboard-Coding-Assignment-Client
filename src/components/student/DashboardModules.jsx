@@ -5,9 +5,9 @@ import ModuleCard from "./ModuleCard";
 export default function DashboardModules({ props, modules, type }) {
   return modules ? (
     <div className="pt-8">
-      <h4 className="md:px-10 text-3xl">{type}</h4>
+      <h4 className="text-3xl">{type}</h4>
 
-      <div className="pt-4 md:ml-10 grid grid-flow-col gap-2 items-stretch justify-start py-1 mr-2 overflow-x-auto relative">
+      <div className="pt-4 grid grid-flow-col gap-2 items-stretch justify-start py-1 mr-2 overflow-x-auto relative">
         {modules.map((module, index) => (
           <ModuleCard key={index} props={props} module={module} />
         ))}

@@ -9,7 +9,7 @@ import {
 } from "../../pages/admin/AdminDashboard";
 import { IoMdTrash } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
-import tempSvg from "../../images/tempSvg.svg";
+import tempSvg from "../../images/tempSvg.png";
 
 export default function QuestionCard({ props, question, created }) {
   const { admin } = useContext(AdminAuthContext);
@@ -72,7 +72,9 @@ export default function QuestionCard({ props, question, created }) {
         </p>
         <img
           src={
-            question.image && question.image !== "" ? question.image : tempSvg
+            question.image && question.image !== ""
+              ? question.image
+              : "https://li-images.s3.amazonaws.com/3206906234/tempSvg.png"
           }
           className="rounded-lg object-contain w-full h-32 p-2"
         />

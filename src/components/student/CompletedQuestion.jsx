@@ -23,12 +23,16 @@ export default function CompletedQuestion({
   });
 
   return question && completedQuestions ? (
-    <div className="flex mr-2 items-center justify-center pb-2">
-      <p className="text-sm font-light text-red-800 leading-snug mr-2 ">
+    <div className="flex items-center justify-start w-full overflow-hidden pb-2 ">
+      <p className="text-sm font-light text-red-800 leading-snug mr-2 md:w-3/4 truncate">
         {question.name}
       </p>
-      {completedQuestions.includes(questionId) && <CgCheckO size={16} />}
-      {!completedQuestions.includes(questionId) && <CgCloseO size={16} />}
+      {completedQuestions.includes(questionId) && (
+        <CgCheckO size={16} className="md:w-1/4" />
+      )}
+      {!completedQuestions.includes(questionId) && (
+        <CgCloseO size={16} className="md:w-1/4" />
+      )}
     </div>
   ) : (
     <div></div>

@@ -7,7 +7,7 @@ import { IoMdTrash } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
 
 import { AdminAuthContext } from "../../context/adminAuth";
-import tempSvg from "../../images/tempSvg.svg";
+import tempSvg from "../../images/tempSvg.png";
 import {
   GET_CHALLENGES,
   GET_CHALLENGES_BY_ADMIN,

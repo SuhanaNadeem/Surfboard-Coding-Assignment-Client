@@ -52,17 +52,19 @@ export default function ModuleSummaryBar({
   }
 
   return studentObject ? (
-    <nav className="flex flex-shrink-0 items-start justify-start md:max-w-2xl xl:max-w-5xl text-gray-800 border-gray-300 border-r-2 text-left flex-col md:static md:mt-6 md:w-1/6 mt-2 w-full cursor-default z-20">
+    <nav className="flex flex-shrink-0  items-start justify-start text-gray-800 border-gray-300 border-b-2 md:border-r-2 md:border-b-0 text-left flex-col md:mt-6 md:w-1/4 lg:w-1/6 mt-2 cursor-default z-20 bg-white xl:pr-0 pr-2 w-full pb-2 md:pb-0">
       <form
-        className="mb-2 flex justify-center items-center"
+        className="mb-2 flex justify-start items-center w-full"
         onSubmit={onSubmit}
       >
-        <p className="text-xl text-red-800">Your Progress</p>
+        <p className="text-xl md:text-lg text-red-800 truncate xl:text-xl md:w-5/6">
+          Your Progress
+        </p>
 
         <button
           id="starModule"
           type="submit"
-          className="focus:outline-none ml-2"
+          className="focus:outline-none md:w-1/6 ml-2"
         >
           {studentObject.starredModules.includes(moduleId) ? (
             <BsStarFill size={16} />
@@ -78,7 +80,7 @@ export default function ModuleSummaryBar({
       <p className="mb-4 text-sm tracking-wide uppercase font-light">
         Lynx Tokens
       </p>
-      <p className="mb-4 text-sm tracking-wide uppercase font-light leading-snug">
+      <p className="mb-4 text-sm tracking-wide uppercase font-light leading-snug w-full truncate">
         {questions.length} Questions/Skills
       </p>
       {questions.map((questionId, index) => (

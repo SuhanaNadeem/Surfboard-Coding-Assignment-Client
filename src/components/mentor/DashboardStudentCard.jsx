@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import tempSvg from "../../images/tempSvg.svg";
+import tempSvg from "../../images/tempSvg.png";
 import { AiOutlineFundView, AiOutlineUserAdd } from "react-icons/ai";
 import { useForm } from "../../util/hooks";
 import { GET_STUDENTS_BY_MENTOR } from "../admin/Students";
@@ -53,7 +53,7 @@ export default function DashboardStudentCard({
           )}
         </div>
         {/* <img
-          src={badge.image && badge.image !== "" ? badge.image : tempSvg}
+          src={badge.image && badge.image !== "" ? badge.image : "https://li-images.s3.amazonaws.com/3206906234/tempSvg.png"}
           className="object-contain w-full h-14 mt-1"
         /> */}
       </div>
