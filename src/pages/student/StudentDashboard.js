@@ -2,7 +2,7 @@ import { StudentAuthContext } from "../../context/studentAuth";
 import React, { useContext } from "react";
 import { gql, useQuery } from "@apollo/client";
 import NavBar from "../../components/student/NavBar";
-import DashboardNavBar from "../../components/student/DashboardNavBar";
+import DashboardSideBar from "../../components/student/DashboardSideBar";
 import DashboardCategories from "../../components/student/DashboardCategories";
 import { studentClient } from "../../GraphqlApolloClients";
 import DashboardModules from "../../components/student/DashboardModules";
@@ -64,8 +64,8 @@ export default function StudentDashboard(props) {
         </div>
       </div>
       <div className="h-full flex-col flex md:flex-1 md:flex-row mx-8 sm:mx-24 md:mx-32 lg:mx-48 mt-4 mb-8">
-        <DashboardNavBar props={props} />
-        <div className="md:w-5/6 w-full last:mt-4 lg:pl-10 md:pl-8">
+        <DashboardSideBar props={props} />
+        <div className="md:w-5/6 w-full mt-4 lg:pl-10 md:pl-8">
           <DashboardCategories props={props} />
           <DashboardModules
             props={props}

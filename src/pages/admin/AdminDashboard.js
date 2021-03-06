@@ -98,10 +98,10 @@ export default function AdminDashboard(props) {
   const adminDashboard = admin ? (
     <div className="h-full flex flex-col min-h-screen w-full">
       <NavBar props={props} />
-      <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-48 pb-10">
+      <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-16 lg:pl-32 xl:pl-48 pb-10">
         <p className="text-4xl text-white">Admin Dashboard</p>
       </div>
-      <div className="h-full flex-1 flex mx-32 lg:mx-48 mt-4 mb-8">
+      <div className="h-full md:flex-1 md:flex-row flex-col flex mx-16 lg:mx-32 xl:mx-48 mt-4 mb-8">
         {adminModules &&
           adminQuestions &&
           //   adminQuestionTemplates &&
@@ -117,7 +117,7 @@ export default function AdminDashboard(props) {
               numOfBadges={adminBadges.length}
             />
           )}
-        <div className="md:w-5/6 last:mt-4">
+        <div className="md:w-5/6 w-full mt-4 lg:pl-10 md:pl-8">
           {modules && modules.length !== 0 && (
             <DashboardCards
               props={props}
