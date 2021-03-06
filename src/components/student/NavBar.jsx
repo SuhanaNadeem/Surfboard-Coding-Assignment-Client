@@ -9,7 +9,7 @@ export default function StudentNavBar({ props }) {
   const history = useHistory();
   const pageLinksAndTitles = [
     { title: "Dashboard", link: "/dashboard" },
-    { title: "Search", link: "/search" },
+    // { title: "Search", link: "/search" },
   ];
 
   const { student, logoutStudent } = useContext(StudentAuthContext);

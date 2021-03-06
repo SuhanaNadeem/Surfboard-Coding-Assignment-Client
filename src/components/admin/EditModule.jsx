@@ -44,7 +44,7 @@ function EditModule({
       },
       {
         query: GET_MODULES_BY_ADMIN,
-        variables: { adminId: admin.id },
+        variables: { adminId: admin && admin.id },
       },
     ],
     update(proxy, { data: { editModule: moduleData } }) {

@@ -7,13 +7,20 @@ export default function ModuleEndCard({
   module,
   isOpen,
   setIsOpen,
-  toggleQuesCard,
+  // toggleQuesCard,
+  selectedQuestionId,
+  setQuesIsOpen,
   student,
 }) {
+  if (selectedQuestionId === "end") {
+    setIsOpen(true);
+  }
   function toggleIsOpen() {
     // console.log("enters");
+    setQuesIsOpen(false);
     setIsOpen(false);
-    toggleQuesCard();
+    // toggleQuesCard();
+
     props.history.push(`/module/${module.id}`);
   }
   function returnToDash() {
@@ -27,8 +34,8 @@ export default function ModuleEndCard({
         className="fixed inset-0 h-full w-full bg-transparent cursor-default z-20"
       ></button>
 
-      <div className="fixed mx-auto inset-0 overscroll-contain max-w-3xl my-4 p-8 bg-white z-50 rounded-lg shadow-xl">
-        <div className="flex flex-col justify-center items-center">
+      <div className="fixed mx-2 md:mx-auto inset-0 overscroll-contain max-w-3xl my-4 p-8 bg-white z-50 rounded-lg shadow-xl ">
+        <div className="flex flex-col justify-start items-center h-full overflow-y-auto">
           <h3 className="text-3xl text-red-800 font-semibold mb-2">
             Congratulations, {student.name}
           </h3>

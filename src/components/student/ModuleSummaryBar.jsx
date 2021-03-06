@@ -20,7 +20,7 @@ export default function ModuleSummaryBar({
   const { data: { getStudentById: studentObject } = {} } = useQuery(
     GET_STUDENT_BY_ID,
     {
-      variables: { studentId: student.id },
+      variables: { studentId: student && student.id },
 
       client: studentClient,
     }
@@ -35,7 +35,7 @@ export default function ModuleSummaryBar({
     refetchQueries: [
       {
         query: GET_STUDENT_BY_ID,
-        variables: { studentId: student.id },
+        variables: { studentId: student && student.id },
       },
     ],
 

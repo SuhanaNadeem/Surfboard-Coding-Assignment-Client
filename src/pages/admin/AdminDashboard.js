@@ -10,11 +10,12 @@ import LoadingIcon from "../../images/tempModuleCardImg.PNG";
 
 export default function AdminDashboard(props) {
   const { admin } = useContext(AdminAuthContext);
+  var adminId;
   if (!admin) {
     props.history.push("/loginAdmin");
+  } else {
+    adminId = admin.id;
   }
-
-  const adminId = admin.id;
 
   const {
     data: { getModulesByAdmin: adminModules } = {},

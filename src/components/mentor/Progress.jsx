@@ -6,7 +6,7 @@ function Progress({ student }) {
   const { data: { getTotalPointsByStudent: totalPoints } = {} } = useQuery(
     GET_TOTAL_POINTS_BY_STUDENT,
     {
-      variables: { studentId: student.id },
+      variables: { studentId: student && student.id },
       client: mentorClient,
     }
   );

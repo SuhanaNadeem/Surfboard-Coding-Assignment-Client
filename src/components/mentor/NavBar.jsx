@@ -9,7 +9,7 @@ export default function MentorNavBar({ props }) {
   const history = useHistory();
   const pageLinksAndTitles = [
     { title: "Dashboard", link: "/mentorDashboard" },
-    { title: "Search", link: "/search" },
+    // { title: "Search", link: "/search" },
   ];
 
   const { mentor, logoutMentor } = useContext(MentorAuthContext);

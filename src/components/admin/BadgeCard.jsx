@@ -28,7 +28,7 @@ export default function BadgeCard({ props, badge, created }) {
       },
       {
         query: GET_BADGES_BY_ADMIN,
-        variables: { adminId: admin.id },
+        variables: { adminId: admin && admin.id },
       },
     ],
     update() {

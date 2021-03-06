@@ -42,11 +42,11 @@ export default function StudentModal({
           <h3 className="text-xl my-1 font-semibold">{student.orgName}</h3>
           <h3 className="text-lg mb-4 font-light">{student.email}</h3>
         </div>
-        <div className="flex items-start md:items-center justify-start flex-col md:flex-row">
+        <div className="flex items-start justify-start flex-col md:flex-row">
           <InProgressModules student={student} />
           <CompletedModules student={student} />
         </div>
-        <div className="flex items-start md:items-center justify-start flex-col md:flex-row">
+        <div className="flex items-start justify-start flex-col md:flex-row">
           <Badges student={student} />
           <Progress student={student} />
         </div>

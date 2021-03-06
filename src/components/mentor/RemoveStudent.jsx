@@ -10,8 +10,8 @@ export default function RemoveStudent({ mentor, student }) {
   const [errors, setErrors] = useState({});
 
   const { values, onSubmit } = useForm(removeMentorCallback, {
-    studentId: student.id,
-    mentorId: mentor.id,
+    studentId: student && student.id,
+    mentorId: mentor && mentor.id,
   });
 
   const [removeMentor, { loading }] = useMutation(REMOVE_MENTOR, {
@@ -22,7 +22,7 @@ export default function RemoveStudent({ mentor, student }) {
       },
       {
         query: GET_STUDENTS_BY_MENTOR,
-        variables: { mentorId: mentor.id },
+        variables: { mentorId: mentor && mentor.id },
       },
     ],
     update() {

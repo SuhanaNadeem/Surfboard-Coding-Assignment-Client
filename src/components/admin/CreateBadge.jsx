@@ -33,7 +33,7 @@ function CreateBadge({ admin, props }) {
       },
       {
         query: GET_BADGES_BY_ADMIN,
-        variables: { adminId: admin.id },
+        variables: { adminId: admin && admin.id },
       },
     ],
     update() {

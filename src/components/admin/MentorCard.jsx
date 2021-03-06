@@ -17,7 +17,7 @@ export default function MentorCard({
   const [errors, setErrors] = useState({});
 
   const { values, onSubmit } = useForm(deleteMentorCallback, {
-    mentorId: mentor.id,
+    mentorId: mentor && mentor.id,
   });
 
   const [deleteMentor, { loading }] = useMutation(DELETE_MENTOR, {

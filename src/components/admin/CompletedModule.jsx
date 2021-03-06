@@ -11,7 +11,7 @@ function CompletedModule({ student, module }) {
     loading: loadingPoints,
     pointsError,
   } = useQuery(GET_MODULE_POINTS_BY_STUDENT, {
-    variables: { moduleId: module.id, studentId: student.id },
+    variables: { moduleId: module.id, studentId: student && student.id },
     client: adminClient,
   });
 

@@ -6,9 +6,9 @@ export default function DashboardSideBar({ props }) {
   const history = useHistory();
 
   const pageLinksAndTitles = [
-    { title: "Progress", link: "/studentAccount#ProgessOrMentors" },
-    { title: "Mentors", link: "/studentAccount#ProgessOrMentors" },
-    { title: "Badges", link: "/studentAccount#Badges" },
+    { title: "Progress", link: "/studentAccount" },
+    { title: "Mentors", link: "/studentAccount" },
+    { title: "Badges", link: "/studentAccount" },
 
     // { title: "Challenges", link: "/dashboard" },
   ];

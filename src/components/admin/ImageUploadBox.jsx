@@ -116,7 +116,7 @@ export default function ImageUploadBox({
         <p
           className={`focus:outline-none break-words text-sm font-light w-full text-center hover:text-red-800 cursor-pointer border-dashed p-2 border-2 rounded bg-gray-100 border-gray-500`}
         >
-          Drop file or click to select the file
+          Drop or click to select file
         </p>
       )}
     </div>

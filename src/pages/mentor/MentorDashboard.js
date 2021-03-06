@@ -23,14 +23,14 @@ export default function MentorDashboard(props) {
     mentorError,
     refetch: refetchMentor,
   } = useQuery(GET_MENTOR_BY_ID, {
-    variables: { mentorId: mentor.id },
+    variables: { mentorId: mentor && mentor.id },
     client: mentorClient,
   });
   const {
     data: { getStudentsByMentor: addedStudents } = {},
     loading: loadingAddedStudents,
   } = useQuery(GET_STUDENTS_BY_MENTOR, {
-    variables: { mentorId: mentor.id },
+    variables: { mentorId: mentor && mentor.id },
     client: mentorClient,
   });
 

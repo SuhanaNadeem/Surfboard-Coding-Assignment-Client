@@ -60,7 +60,7 @@ export default function MentorAccountDropdown({ logout, props }) {
             >
               Dashboard
             </button>
-            <button
+            {/* <button
               className="block focus:outline-none text-left font-light w-full md:hidden px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               onClick={(e) => {
                 // e.preventDefault();
@@ -69,7 +69,7 @@ export default function MentorAccountDropdown({ logout, props }) {
               }}
             >
               Search
-            </button>
+            </button> */}
             <button
               onClick={(e) => {
                 e.preventDefault();

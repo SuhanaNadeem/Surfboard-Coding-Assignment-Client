@@ -23,7 +23,7 @@ export default function Footer() {
           ></object> */}
         </button>
         <p className="ml-4 leading-none text-sm">
-          Developed by Suhana Nadeem &#169;
+          Developed by Suhana Nadeem &#169; 2021
         </p>
       </nav>
     </div>

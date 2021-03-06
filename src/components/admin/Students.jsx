@@ -8,7 +8,7 @@ function Students({ mentor }) {
   const { data: { getStudentsByMentor: students } = {} } = useQuery(
     GET_STUDENTS_BY_MENTOR,
     {
-      variables: { mentorId: mentor.id },
+      variables: { mentorId: mentor && mentor.id },
       client: adminClient,
     }
   );

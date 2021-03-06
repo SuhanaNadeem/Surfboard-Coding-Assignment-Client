@@ -15,7 +15,7 @@ export default function CategoryCard({ category, props }) {
     loading: loadingModules,
     error,
   } = useQuery(GET_INCOMPLETE_MODULES_BY_CATEGORY, {
-    variables: { categoryId: category.id, studentId: student.id },
+    variables: { categoryId: category.id, studentId: student && student.id },
     client: studentClient,
   });
   return modules ? (

@@ -26,11 +26,12 @@ function QuestionModalCard({
   answer,
   handleQuestionClick,
   moduleId,
-  toggleQuesCard,
-  initialPoints,
 }) {
   const { student } = useContext(StudentAuthContext);
-  const studentId = student.id;
+  var studentId;
+  if (student) {
+    studentId = student.id;
+  }
   const [errors, setErrors] = useState({});
 
   const {
@@ -96,7 +97,6 @@ function QuestionModalCard({
   });
 
   const [isOpen, setIsOpen] = useState(false);
-  const [endCardIsOpen, setEndCardIsOpen] = useState(false);
   const [hintVisible, setHintVisible] = useState(false);
 
   function toggleIsVisible() {
@@ -167,9 +167,7 @@ function QuestionModalCard({
     // refetchQuestion({ questionId: nextQuesId });
     handleQuestionClick(nextQuesId);
   }
-  function toggleEndCardIsOpen() {
-    setEndCardIsOpen(true);
-  }
+
   return question && completedQuestions && studentObject ? (
     <div className="justify-between flex flex-col h-full">
       <div className="flex flex-col items-center justify-start text-center overflow-y-auto ">
@@ -388,8 +386,9 @@ function QuestionModalCard({
                 module.questions.indexOf(question.id) + 1 ===
                   module.questions.length
               ) {
-                // console.log(endCardIsOpen);
-                toggleEndCardIsOpen(e);
+                // console.log("endCardIsOpen");
+                props.history.push(`/module/${module.id}/end`);
+                // used to toggle here
               } else if (question.type !== "Skill") {
                 toggleNextOpen(e);
               }
@@ -399,14 +398,14 @@ function QuestionModalCard({
           </button>
         )}
       </form>
-      <ModuleEndCard
+      {/* <ModuleEndCard
         props={props}
         module={module}
         isOpen={endCardIsOpen}
         setIsOpen={setEndCardIsOpen}
         toggleQuesCard={toggleQuesCard}
         student={studentObject}
-      />
+      /> */}
     </div>
   ) : (
     <div></div>

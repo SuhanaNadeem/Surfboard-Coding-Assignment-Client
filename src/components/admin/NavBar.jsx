@@ -12,7 +12,7 @@ export default function NavBar({ props }) {
   const pageLinksAndTitles = [
     { title: "Dashboard", link: "/adminDashboard" },
     { title: "Users", link: "/adminUsers" },
-    { title: "Search", link: "/search" },
+    // { title: "Search", link: "/search" },
   ];
 
   const { admin, logoutAdmin } = useContext(AdminAuthContext);

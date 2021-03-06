@@ -36,7 +36,7 @@ export default function QuestionCard({ props, question, created }) {
       },
       {
         query: GET_QUESTIONS_BY_ADMIN,
-        variables: { adminId: admin.id },
+        variables: { adminId: admin && admin.id },
       },
     ],
     update() {

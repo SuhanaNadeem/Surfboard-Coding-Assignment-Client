@@ -29,7 +29,7 @@ function CreateModule({ admin, props }) {
       },
       {
         query: GET_MODULES_BY_ADMIN,
-        variables: { adminId: admin.id },
+        variables: { adminId: admin && admin.id },
       },
     ],
     update() {

@@ -30,7 +30,7 @@ export default function StarQuestionCard({ props, questionId, studentObject }) {
       refetchQueries: [
         {
           query: GET_STUDENT_BY_ID,
-          variables: { studentId: student.id },
+          variables: { studentId: student && student.id },
         },
       ],
 

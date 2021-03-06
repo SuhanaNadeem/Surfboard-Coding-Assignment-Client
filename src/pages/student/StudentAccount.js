@@ -22,7 +22,7 @@ export default function StudentAccount(props) {
   const { data: { getStudentById: studentObject } = {} } = useQuery(
     GET_STUDENT_BY_ID,
     {
-      variables: { studentId: student.id },
+      variables: { studentId: student && student.id },
 
       client: studentClient,
     }
@@ -30,14 +30,14 @@ export default function StudentAccount(props) {
   const { data: { getMentorsByStudent: mentors } = {} } = useQuery(
     GET_MENTORS_BY_STUDENT,
     {
-      variables: { studentId: student.id },
+      variables: { studentId: student && student.id },
       client: studentClient,
     }
   );
   const { data: { getBadgesByStudent: studentBadges } = {} } = useQuery(
     GET_BADGES_BY_STUDENT,
     {
-      variables: { studentId: student.id },
+      variables: { studentId: student && student.id },
       client: studentClient,
     }
   );
@@ -59,14 +59,11 @@ export default function StudentAccount(props) {
           <p className="text-4xl text-white">Your Account</p>
         </div>
         <div className="flex flex-col mx-16 lg:mx-48 mt-4 mb-8 justify-center items-center">
-          <div
-            className="flex flex-col md:flex-row items-start w-full mt-4 mb-6 justify-start"
-            id="ProgessOrMentors"
-          >
+          <div className="flex flex-col md:flex-row items-start w-full mt-4 mb-6 justify-start">
             <Progress student={studentObject} />
             <Mentors student={studentObject} />
           </div>
-          <div id="Badges" className="w-full">
+          <div className="w-full">
             {allBadges && allBadges.length !== 0 && (
               <AccountBadges
                 props={props}

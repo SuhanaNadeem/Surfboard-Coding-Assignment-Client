@@ -58,7 +58,7 @@ function CreateQuestion({ admin, props }) {
       },
       {
         query: GET_QUESTIONS_BY_ADMIN,
-        variables: { adminId: admin.id },
+        variables: { adminId: admin && admin.id },
       },
     ],
     update() {

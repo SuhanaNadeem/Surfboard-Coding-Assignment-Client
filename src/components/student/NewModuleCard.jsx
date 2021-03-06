@@ -16,7 +16,10 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
 
   const [errors, setErrors] = useState({});
   const moduleId = moduleInfo.id;
-  const studentId = student.id;
+  var studentId;
+  if (student) {
+    studentId = student.id;
+  }
   const categoryId = moduleInfo.categoryId;
 
   // console.log(moduleId);

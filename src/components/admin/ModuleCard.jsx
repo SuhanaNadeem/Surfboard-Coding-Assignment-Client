@@ -37,7 +37,7 @@ export default function ModuleCard({ props, module, created }) {
       },
       {
         query: GET_MODULES_BY_ADMIN,
-        variables: { adminId: admin.id },
+        variables: { adminId: admin && admin.id },
       },
     ],
     update() {

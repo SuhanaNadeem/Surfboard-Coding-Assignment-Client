@@ -38,7 +38,7 @@ export default function QuesAnsPair({
       refetchQueries: [
         {
           query: GET_STRING_STRING_DICTS_BY_STUDENT,
-          variables: { studentId: student.id },
+          variables: { studentId: student && student.id },
         },
       ],
       update() {

@@ -19,7 +19,7 @@ export default function AdminEditAccount(props) {
     loading: loadingAdmin,
     error,
   } = useQuery(GET_ADMIN_BY_ID, {
-    variables: { adminId: admin.id },
+    variables: { adminId: admin && admin.id },
     client: adminClient,
   });
   return adminObject ? (

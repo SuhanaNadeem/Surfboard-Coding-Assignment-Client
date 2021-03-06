@@ -43,7 +43,7 @@ function EditBadge({
       },
       {
         query: GET_BADGES_BY_ADMIN,
-        variables: { adminId: admin.id },
+        variables: { adminId: admin && admin.id },
       },
     ],
     update(proxy, { data: { editBadge: categoryData } }) {

@@ -20,7 +20,7 @@ function CreateCategory({ admin, props }) {
       },
       {
         query: GET_CATEGORIES_BY_ADMIN,
-        variables: { adminId: admin.id },
+        variables: { adminId: admin && admin.id },
       },
     ],
     update() {

@@ -16,7 +16,7 @@ export default function MentorAccount(props) {
   const { data: { getMentorById: mentorObject } = {} } = useQuery(
     GET_MENTOR_BY_ID,
     {
-      variables: { mentorId: mentor.id },
+      variables: { mentorId: mentor && mentor.id },
 
       client: mentorClient,
     }

@@ -5,12 +5,15 @@ import { gql, useLazyQuery, useQuery } from "@apollo/client";
 import NavBar from "../../components/student/NavBar";
 import Footer from "../../components/student/Footer";
 import { studentClient } from "../../GraphqlApolloClients";
-import ModuleSummaryBar from "../../components/student/ModuleSummaryBar";
+import ModuleSummaryBar, {
+  GET_STUDENT_BY_ID,
+} from "../../components/student/ModuleSummaryBar";
 import QuestionCard, {
   GET_QUESTION_BY_ID,
 } from "../../components/student/QuestionCard";
 import QuestionModal from "../../components/student/QuestionModal";
 import LoadingIcon from "../../images/tempModuleCardImg.PNG";
+import ModuleEndCard from "../../components/student/ModuleEndCard";
 
 export default function StudentModule(props) {
   const { student } = useContext(StudentAuthContext);
@@ -21,11 +24,16 @@ export default function StudentModule(props) {
   // const [activeQuestionId, setActiveQuestionId] = useState(
   //   selectedQuestionId
   // );
-
+  const [endCardIsOpen, setEndCardIsOpen] = useState(false);
+  // function toggleEndCardIsOpen() {
+  //   setEndCardIsOpen(true);
+  // }
   // console.log(student);
   const moduleId = props.match.params.moduleId;
   var selectedQuestionId = props.match.params.questionId;
-
+  // if (selectedQuestionId === "end") {
+  //   toggleEndCardIsOpen();
+  // }
   // useEffect(() => {
   //   setActiveQuestionId(selectedQuestionId);
 
@@ -45,6 +53,13 @@ export default function StudentModule(props) {
     variables: { moduleId: moduleId },
     client: studentClient,
   });
+  const { data: { getStudentById: studentObject } = {} } = useQuery(
+    GET_STUDENT_BY_ID,
+    {
+      variables: { studentId: student && student.id },
+      client: studentClient,
+    }
+  );
 
   const {
     data: { getTotalPossibleModulePoints: totalPoints } = {},
@@ -61,7 +76,7 @@ export default function StudentModule(props) {
     loading: loadingStudentPoints,
     studentPointsError,
   } = useQuery(GET_MODULE_POINTS_BY_STUDENT, {
-    variables: { moduleId: moduleId, studentId: student.id },
+    variables: { moduleId: moduleId, studentId: student && student.id },
     client: studentClient,
   });
 
@@ -70,7 +85,7 @@ export default function StudentModule(props) {
     loading: loadingCompletedQuestionsByModule,
     completedQuestionsByModuleError,
   } = useQuery(GET_COMPLETED_QUESTIONS_BY_MODULE, {
-    variables: { moduleId: moduleId, studentId: student.id },
+    variables: { moduleId: moduleId, studentId: student && student.id },
     client: studentClient,
   });
 
@@ -144,6 +159,16 @@ export default function StudentModule(props) {
             handleQuestionClick={handleQuestionClick}
           />
         </div>
+        <ModuleEndCard
+          props={props}
+          module={module}
+          isOpen={endCardIsOpen}
+          setQuesIsOpen={setIsOpen}
+          setIsOpen={setEndCardIsOpen}
+          // toggleQuesCard={toggleQuesCard}
+          selectedQuestionId={selectedQuestionId}
+          student={studentObject}
+        />
         <Footer />
       </div>
     ) : (

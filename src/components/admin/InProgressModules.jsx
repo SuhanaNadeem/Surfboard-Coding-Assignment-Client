@@ -8,7 +8,7 @@ function InProgressModules({ student }) {
   const { data: { getInProgressModulesByStudent: modules } = {} } = useQuery(
     GET_IN_PROGRESS_MODULES_BY_STUDENT,
     {
-      variables: { studentId: student.id },
+      variables: { studentId: student && student.id },
       client: adminClient,
     }
   );

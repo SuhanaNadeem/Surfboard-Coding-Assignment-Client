@@ -37,7 +37,7 @@ export default function ChallengeCard({ props, challenge, created }) {
       },
       {
         query: GET_CHALLENGES_BY_ADMIN,
-        variables: { adminId: admin.id },
+        variables: { adminId: admin && admin.id },
       },
     ],
     update() {

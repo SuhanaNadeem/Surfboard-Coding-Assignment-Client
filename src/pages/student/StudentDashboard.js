@@ -25,7 +25,7 @@ export default function StudentDashboard(props) {
     loading: loadingInProgressModules,
   } = useQuery(GET_IN_PROGRESS_MODULES_BY_STUDENT, {
     client: studentClient,
-    variables: { studentId: student.id },
+    variables: { studentId: student && student.id },
   });
 
   const {
@@ -33,14 +33,14 @@ export default function StudentDashboard(props) {
     loading: loadingCompletedModules,
   } = useQuery(GET_COMPLETED_MODULES_BY_STUDENT, {
     client: studentClient,
-    variables: { studentId: student.id },
+    variables: { studentId: student && student.id },
   });
   const {
     data: { getBadgesByStudent: badges } = {},
     loading: loadingBadges,
   } = useQuery(GET_BADGES_BY_STUDENT, {
     client: studentClient,
-    variables: { studentId: student.id },
+    variables: { studentId: student && student.id },
   });
 
   // console.log(inProgressModules);

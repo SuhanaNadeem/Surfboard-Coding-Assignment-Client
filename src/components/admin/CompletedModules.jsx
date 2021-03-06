@@ -8,7 +8,7 @@ function CompletedModules({ student }) {
   const { data: { getCompletedModulesByStudent: modules } = {} } = useQuery(
     GET_COMPLETED_MODULES_BY_STUDENT,
     {
-      variables: { studentId: student.id },
+      variables: { studentId: student && student.id },
       client: adminClient,
     }
   );

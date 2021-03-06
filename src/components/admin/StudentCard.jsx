@@ -16,7 +16,7 @@ export default function StudentCard({
   const [errors, setErrors] = useState({});
 
   const { values, onSubmit } = useForm(deleteStudentCallback, {
-    studentId: student.id,
+    studentId: student && student.id,
   });
 
   const [deleteStudent, { loading }] = useMutation(DELETE_STUDENT, {
