@@ -295,6 +295,31 @@ function CreateQuestion({ admin, props }) {
                 )}
               </td>
             </tr>
+            <tr>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className="font-semibold uppercase tracking-wide ">
+                  Points
+                </label>
+              </td>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <input
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.points ? "border-red-500" : ""
+                  }`}
+                  name="points"
+                  placeholder=""
+                  value={values.points}
+                  onChange={onChange}
+                  error={errors.points ? "true" : "false"}
+                  type="number"
+                />
+                {errors.points && (
+                  <p className="text-red-500">
+                    <b>&#33;</b> {errors.points}
+                  </p>
+                )}
+              </td>
+            </tr>
 
             {values.type === "Question" && (
               <>
@@ -394,31 +419,6 @@ function CreateQuestion({ admin, props }) {
                     {errors.hint && (
                       <p className="text-red-500">
                         <b>&#33;</b> {errors.hint}
-                      </p>
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-sm py-2 border-b border-gray-200">
-                    <label className="text-red-800 font-semibold uppercase tracking-wide ">
-                      Points
-                    </label>
-                  </td>
-                  <td className="text-sm py-2 border-b border-gray-200">
-                    <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                        errors.points ? "border-red-500" : ""
-                      }`}
-                      name="points"
-                      placeholder=""
-                      value={values.points}
-                      onChange={onChange}
-                      error={errors.points ? "true" : "false"}
-                      type="number"
-                    />
-                    {errors.points && (
-                      <p className="text-red-500">
-                        <b>&#33;</b> {errors.points}
                       </p>
                     )}
                   </td>

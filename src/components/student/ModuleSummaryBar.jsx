@@ -105,6 +105,7 @@ export const GET_STUDENT_BY_ID = gql`
       starredModules
       completedQuestions
       id
+      icon
       orgName
       email
       password

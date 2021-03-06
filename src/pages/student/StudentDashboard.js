@@ -7,9 +7,10 @@ import DashboardCategories from "../../components/student/DashboardCategories";
 import { studentClient } from "../../GraphqlApolloClients";
 import DashboardModules from "../../components/student/DashboardModules";
 import Footer from "../../components/student/Footer";
-import tempIcon from "../../images/tempIcon.svg";
+import tempIcon from "../../images/icon1.png";
 import DashboardBadges from "../../components/student/DashboardBadges";
 import LoadingIcon from "../../images/tempModuleCardImg.PNG";
+import { GET_STUDENT_BY_ID } from "../../components/student/ModuleSummaryBar";
 
 export default function StudentDashboard(props) {
   const { student } = useContext(StudentAuthContext);
@@ -19,7 +20,14 @@ export default function StudentDashboard(props) {
   if (!student) {
     props.history.push("/login");
   }
+  const { data: { getStudentById: studentObject } = {} } = useQuery(
+    GET_STUDENT_BY_ID,
+    {
+      variables: { studentId: student && student.id },
 
+      client: studentClient,
+    }
+  );
   const {
     data: { getInProgressModulesByStudent: inProgressModules } = {},
     loading: loadingInProgressModules,
@@ -46,7 +54,7 @@ export default function StudentDashboard(props) {
   // console.log(inProgressModules);
   // console.log(student.id);
 
-  const studentDashboard = student ? (
+  const studentDashboard = studentObject ? (
     <div className="h-full flex flex-col min-h-screen w-full">
       <NavBar props={props} />
       {/* mx-8 sm:mx-24 md:mx-32 lg:mx-48     ml-8 sm:ml-24 md:ml-32 lg:ml-48*/}
@@ -54,12 +62,20 @@ export default function StudentDashboard(props) {
       <div className="bg-red-800 w-full h-40 flex items-center justify-start overflow-hidden ">
         <div className="flex w-full items-center justify-start mx-8 sm:mx-24 md:mx-32 lg:mx-48 overflow-x-hidden">
           {/* <div className="bg-red-800 w-full h-40 flex items-center justify-start overflow-hidden mx-8 sm:mx-24 md:mx-32 lg:mx-48"> */}
-          <div
+          {/* <div
             className="bg-cover w-28 h-28 bg-center bg-no-repeat mr-4 flex-shrink-0 flex"
             style={{
               backgroundImage: `url(${tempIcon})`,
             }}
-          ></div>
+          ></div> */}
+          <img
+            className="mr-4 w-24 flex-shrink-0 flex h-full object-contain"
+            src={
+              studentObject.icon && studentObject.icon !== ""
+                ? `${studentObject.icon}`
+                : `${tempIcon}`
+            }
+          />
           <DashboardBadges props={props} badges={badges} />
         </div>
       </div>

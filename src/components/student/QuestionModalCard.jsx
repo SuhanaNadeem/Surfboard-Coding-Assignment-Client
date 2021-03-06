@@ -137,6 +137,7 @@ function QuestionModalCard({
       console.log(values);
       setIsOpen(true);
       setErrors({});
+      console.log("is a skill");
 
       if (question.type === "Skill") {
         var nextQuesId =
@@ -167,8 +168,12 @@ function QuestionModalCard({
     // refetchQuestion({ questionId: nextQuesId });
     handleQuestionClick(nextQuesId);
   }
+  if (module && question) {
+    console.log(module.questions.indexOf(question.id) + 1);
+    console.log(module.questions.length);
+  }
 
-  return question && completedQuestions && studentObject ? (
+  return question && completedQuestions && studentObject && module ? (
     <div className="justify-between flex flex-col h-full">
       <div className="flex flex-col items-center justify-start text-center overflow-y-auto ">
         <h3 className="text-3xl text-red-800 mx-auto mb-2">{question.name}</h3>
@@ -364,19 +369,20 @@ function QuestionModalCard({
         )}
       </div>
       <form className="flex mt-6" onSubmit={onSubmit}>
-        {module && module.questions.indexOf(question.id) != 0 && (
+        {module.questions.indexOf(question.id) != 0 && (
           <button className="mx-auto" onClick={togglePrevOpen} type="button">
             <BsChevronLeft size={32} />
           </button>
         )}
 
-        {((module &&
-          module.questions.indexOf(question.id) + 1 ===
-            module.questions.length &&
+        {((module.questions.indexOf(question.id) + 1 ===
+          module.questions.length &&
           studentObject.completedModules.includes(moduleId)) ||
-          (module &&
-            module.questions.indexOf(question.id) + 1 !==
-              module.questions.length)) && (
+          module.questions.indexOf(question.id) + 1 !==
+            module.questions.length ||
+          (module.questions.indexOf(question.id) + 1 ===
+            module.questions.length &&
+            module.questions.length === 1)) && (
           <button
             className="mx-auto"
             type={question.type === "Skill" ? `submit` : `button`}
