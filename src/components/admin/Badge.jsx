@@ -34,9 +34,6 @@ function Badge({ badge }) {
       <BiAward size={24} />
       <div className="flex flex-col items-start justify-start ml-1">
         <h3 className="font-semibold text-sm uppercase">{badge.name}</h3>
-        {category && <h2 className="font-light text-xs">{category.name}</h2>}
-        {module && <h2 className="font-light text-xs">{module.name}</h2>}
-        {question && <h2 className="font-light text-xs">{question.name}</h2>}
       </div>
     </div>
   ) : (

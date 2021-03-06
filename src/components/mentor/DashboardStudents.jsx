@@ -39,7 +39,7 @@ export default function DashboardStudents({
     }
   }
   return allStudents && addedStudents ? (
-    <div className="flex items-start justify-start flex-col w-full">
+    <div className="mt-3 flex items-start justify-start flex-col w-full">
       <h6 className="text-3xl mb-1">Students</h6>
       <p className="font-light text-lg">
         Add or remove students who have signed up with your organization,{" "}

@@ -6,6 +6,7 @@ import { mentorClient } from "../../GraphqlApolloClients";
 import Footer from "../../components/mentor/Footer";
 import { GET_MENTOR_BY_ID } from "../admin/AdminUsers";
 import EditMentor from "../../components/mentor/EditMentor";
+import LoadingIcon from "../../images/tempModuleCardImg.PNG";
 
 export default function MentorAccount(props) {
   const { mentor } = useContext(MentorAuthContext);
@@ -24,10 +25,10 @@ export default function MentorAccount(props) {
   const mentorAccount = mentorObject ? (
     <div className="h-full flex flex-col min-h-screen w-full">
       <NavBar props={props} />
-      <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-48 pb-10">
-        <p className="text-4xl text-white">Your Account</p>
+      <div className="bg-red-800 w-full h-32 flex flex-col justify-end px-12 md:px-32 lg:px-48 pb-10">
+        <p className="text-4xl truncate text-white">Mentor Account</p>
       </div>
-      <div className="flex flex-col mx-48 mt-4 mb-8 justify-center items-center">
+      <div className="flex flex-1 flex-col mx-12 md:mx-32 lg:mx-48 mt-4 mb-8 justify-start items-center">
         <div className="flex justify-start items-center mb-1">
           <EditMentor mentor={mentorObject} props={props} />
         </div>
@@ -35,9 +36,13 @@ export default function MentorAccount(props) {
       <Footer />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen w-full">
-      <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:my-8 md:max-w-xs">
-        <p>LOADING</p>
+    <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
+      <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
+        {/* <p>loading...</p> */}
+        <img
+          src={LoadingIcon}
+          className="rounded-lg object-contain w-full h-32 p-2"
+        />
       </div>
     </div>
   );

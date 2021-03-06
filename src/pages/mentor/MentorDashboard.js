@@ -7,6 +7,7 @@ import Footer from "../../components/mentor/Footer";
 import { GET_STUDENTS_BY_MENTOR } from "../../components/admin/Students";
 import { GET_MENTOR_BY_ID } from "../../pages/admin/AdminUsers";
 import DashboardStudents from "../../components/mentor/DashboardStudents";
+import LoadingIcon from "../../images/tempModuleCardImg.PNG";
 
 export default function MentorDashboard(props) {
   const { mentor } = useContext(MentorAuthContext);
@@ -36,10 +37,10 @@ export default function MentorDashboard(props) {
   const mentorDashboard = mentorObject ? (
     <div className="h-full flex flex-col min-h-screen w-full">
       <NavBar props={props} />
-      <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-48 pb-10">
-        <p className="text-4xl text-white">Mentor Dashboard</p>
+      <div className="bg-red-800 w-full h-32 flex flex-col justify-end px-12 md:px-32 lg:px-48 pb-10">
+        <p className="text-4xl truncate text-white">Mentor Dashboard</p>
       </div>
-      <div className="h-full flex-1 flex mx-48 mt-4 my-8">
+      <div className="h-full flex-1 flex mx-12 md:mx-32 lg:mx-48 mt-4 my-8">
         <DashboardStudents
           props={props}
           addedStudents={addedStudents}
@@ -50,9 +51,13 @@ export default function MentorDashboard(props) {
       <Footer />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen w-full">
-      <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:my-8 md:max-w-xs">
-        <p>LOADING</p>
+    <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
+      <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
+        {/* <p>loading...</p> */}
+        <img
+          src={LoadingIcon}
+          className="rounded-lg object-contain w-full h-32 p-2"
+        />
       </div>
     </div>
   );

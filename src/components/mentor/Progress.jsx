@@ -12,10 +12,10 @@ function Progress({ student }) {
   );
   return totalPoints && student ? (
     <div
-      className="mr-2 w-1/2 flex flex-col mt-4 font-semibold text-sm 
+      className="mr-2 w-full md:w-1/2 flex flex-col mt-2 md:mt-4 font-semibold text-sm 
     "
     >
-      <h2 className="text-lg mb-1 text-red-800 ">Progress</h2>
+      <h2 className="text-lg mb-1 text-red-800 font-normal">Progress</h2>
       <div className="flex items-center justify-start ">
         <p className=" mr-1">{student.completedQuestions.length}</p>
         <p className="font-light">Questions Completed</p>

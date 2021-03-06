@@ -126,7 +126,13 @@ function EditAndPreviewQuestionModalCard({
         )}
         {question.type === "Question" && (
           <div className="flex flex-col">
-            <div className="flex mt-4 items-center justify-center">
+            <div
+              className={`${
+                question.questionFormat === "Multiple Choice"
+                  ? `flex-col`
+                  : `flex-row`
+              } flex mt-4 items-center justify-center`}
+            >
               {question.questionFormat === "Multiple Choice" ? (
                 <div className="flex flex-col text-md font-light justify-center items-start">
                   <div>

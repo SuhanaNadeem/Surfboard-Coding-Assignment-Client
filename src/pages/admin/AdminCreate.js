@@ -23,27 +23,27 @@ export default function AdminCreate(props) {
         <p className="text-4xl text-white">Admin Create</p>
       </div>
       {page === "module" && (
-        <div className="h-full justify-start items-center flex mx-12 md:mx-32 lg:mx-48 xl:mx-56 my-10">
+        <div className="flex-1 h-full justify-start items-center flex mx-12 md:mx-32 lg:mx-48 xl:mx-56 my-10">
           <CreateModule admin={admin} props={props} />
         </div>
       )}
       {page === "question" && (
-        <div className="h-full justify-start items-center flex mx-12 md:mx-32 lg:mx-48 xl:mx-56 my-10">
+        <div className="flex-1 h-full justify-start items-center flex mx-12 md:mx-32 lg:mx-48 xl:mx-56 my-10">
           <CreateQuestion admin={admin} props={props} />
         </div>
       )}
       {page === "category" && (
-        <div className="h-full justify-start items-center flex mx-12 md:mx-32 lg:mx-48 xl:mx-56 my-10">
+        <div className="flex-1 h-full justify-start items-center flex mx-12 md:mx-32 lg:mx-48 xl:mx-56 my-10">
           <CreateCategory admin={admin} props={props} />
         </div>
       )}
       {page === "badge" && (
-        <div className="h-full justify-start items-center flex mx-12 md:mx-32 lg:mx-48 xl:mx-56 my-10">
+        <div className="flex-1 h-full justify-start items-center flex mx-12 md:mx-32 lg:mx-48 xl:mx-56 my-10">
           <CreateBadge admin={admin} props={props} />
         </div>
       )}
       {page === "challenge" && (
-        <div className="h-full justify-start items-center flex mx-12 md:mx-32 lg:mx-48 xl:mx-56 my-10">
+        <div className="flex-1 h-full justify-start items-center flex mx-12 md:mx-32 lg:mx-48 xl:mx-56 my-10">
           <CreateChallenge admin={admin} props={props} />
         </div>
       )}

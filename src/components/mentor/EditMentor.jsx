@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { mentorClient } from "../../GraphqlApolloClients";
 import { GET_MENTOR_BY_ID } from "../../pages/admin/AdminUsers";
 import { useForm } from "../../util/hooks";
+import LoadingIcon from "../../images/tempModuleCardImg.PNG";
 
 function EditMentor({
   props,
@@ -88,7 +89,7 @@ function EditMentor({
               </td>
             </tr>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm w-full truncate pr-3 py-2 border-b border-gray-200">
                 <label className="text-red-800 font-semibold uppercase tracking-wide ">
                   Organization
                 </label>
@@ -195,7 +196,15 @@ function EditMentor({
       </div>
     </form>
   ) : (
-    <></>
+    <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
+      <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
+        {/* <p>loading...</p> */}
+        <img
+          src={LoadingIcon}
+          className="rounded-lg object-contain w-full h-32 p-2"
+        />
+      </div>
+    </div>
   );
 }
 const EDIT_MENTOR = gql`

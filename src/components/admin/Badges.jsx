@@ -11,9 +11,8 @@ function Badges({ student }) {
       client: adminClient,
     }
   );
-  console.log(badges);
   return badges && badges.length !== 0 ? (
-    <div className="mr-2 flex flex-col w-1/2  mt-4">
+    <div className="mr-2 flex flex-col w-full md:w-1/2 mt-2 md:mt-4">
       <h2 className="text-lg mb-2 text-red-800 ">Badges</h2>
 
       {badges.map((badge, index) => (

@@ -28,7 +28,7 @@ export default function AdminEditAccount(props) {
       <div className="bg-red-800 w-full h-32 flex flex-col justify-end px-12 lg:px-48  pb-10">
         <p className="text-4xl text-white truncate">Admin Edit Account</p>
       </div>
-      <div className="flex justify-start items-center my-6 mx-12 lg:mx-48 ">
+      <div className="flex flex-1 justify-start items-start my-6 mx-12 lg:mx-48 ">
         <EditAdmin admin={adminObject} props={props} />
       </div>
       <Footer />
