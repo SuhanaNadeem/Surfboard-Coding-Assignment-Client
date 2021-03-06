@@ -42,10 +42,12 @@ export default function PreviewModule({ props, selectedQuestionId, module }) {
   const previewModule =
     module && module.questions.length !== 0 ? (
       <>
-        <div className="flex w-2/3 flex-col items-center justify-start text-center mx-auto h-96 overflow-y-auto">
-          <h6 className="text-xl text-red-800">Preview Module Questions</h6>
+        <div className="flex md:mx-auto w-full md:w-2/3 flex-col items-start md:items-center justify-start text-center pt-8 md:pt-0">
+          <h6 className="text-xl text-red-800 pb-4">
+            Preview Module Questions
+          </h6>
 
-          <div className="grid gap-4 items-stretch justify-start pl-2 pt-4 pb-6">
+          <div className="grid gap-4 items-stretch justify-start md:pl-2 pb-6 h-96 overflow-y-auto ">
             {module.questions.map((questionId, index) => (
               <EditAndPreviewQuestionCard
                 key={index}

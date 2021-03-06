@@ -88,8 +88,8 @@ function EditModule({
   return module ? (
     <form
       className={`${
-        questions.length === 0 ? `` : `mx-auto`
-      }  w-1/3 overflow-hidden flex flex-col`}
+        questions.length === 0 ? `` : `md:mx-auto md:w-1/3`
+      }   w-full  overflow-hidden flex flex-col`}
       onSubmit={onSubmit}
       noValidate
     >
@@ -127,7 +127,7 @@ function EditModule({
               </td>
             </tr>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Category
                 </label>

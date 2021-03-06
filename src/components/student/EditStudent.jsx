@@ -61,7 +61,7 @@ function EditStudent({
 
   return studentId ? (
     <form
-      className="w-3/4 overflow-hidden flex flex-col mt-4"
+      className="w-full overflow-hidden flex flex-col mt-4"
       onSubmit={onSubmit}
       noValidate
     >
@@ -193,7 +193,7 @@ function EditStudent({
             </tr>
           </tbody>
         </table>
-        <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none w-1/6">
+        <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none w-1/4 md:w-1/6">
           <button
             type="submit"
             className="flex w-16 focus:outline-none border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm items-center justify-center font-semibold md:w-full"

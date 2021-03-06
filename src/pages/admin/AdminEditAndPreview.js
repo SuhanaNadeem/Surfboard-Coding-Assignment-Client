@@ -14,6 +14,7 @@ import { GET_CATEGORY_BY_ID } from "../../components/admin/ChallengeCard";
 import EditCategory from "../../components/admin/EditCategory";
 import EditBadge from "../../components/admin/EditBadge";
 import EditChallenge from "../../components/admin/EditChallenge";
+import LoadingIcon from "../../images/tempModuleCardImg.PNG";
 
 export default function AdminEditAndPreview(props) {
   const { admin } = useContext(AdminAuthContext);
@@ -75,14 +76,14 @@ export default function AdminEditAndPreview(props) {
     module || question || category || badge || challenge ? (
       <div className="h-full flex flex-col min-h-screen w-full">
         <NavBar props={props} />
-        <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-32 pb-10">
-          <p className="text-4xl text-white">Admin Edit and Preview</p>
+        <div className="bg-red-800 w-full h-32 flex flex-col justify-end px-12 lg:px-48  pb-10">
+          <p className="text-4xl text-white truncate">Admin Edit and Preview</p>
         </div>
         {givenId && module && (
           <div
             className={`${
               module.questions.length === 0 ? `justify-start` : `justify-center`
-            }  h-full items-start flex mx-32 my-10`}
+            }  h-full items-start flex md:flex-row flex-col lg:mx-48 mx-12 my-10`}
           >
             <EditModule props={props} module={module} />
             <PreviewModule
@@ -93,37 +94,41 @@ export default function AdminEditAndPreview(props) {
           </div>
         )}
         {givenId && question && (
-          <div className="h-full justify-start items-center flex mx-32 my-10">
+          <div className="h-full justify-start items-center flex  lg:mx-48 mx-12 my-10">
             <EditQuestion question={question} props={props} />
           </div>
         )}
         {/* {givenId && questionTemplate && (
-          <div className="h-full justify-start items-center flex mx-32 my-10">
+          <div className="h-full justify-start items-center flex  lg:mx-48 mx-12 my-10">
             <EditQuestionTemplate questionTemplate={questionTemplate} />
           </div>
         )} */}
 
         {givenId && category && (
-          <div className="h-full justify-start items-center flex mx-32 my-10">
+          <div className="h-full justify-start items-center flex  lg:mx-48 mx-12 my-10">
             <EditCategory category={category} props={props} />
           </div>
         )}
         {givenId && badge && (
-          <div className="h-full justify-start items-center flex mx-32 my-10">
+          <div className="h-full justify-start items-center flex  lg:mx-48 mx-12 my-10">
             <EditBadge badge={badge} props={props} />
           </div>
         )}
         {givenId && challenge && (
-          <div className="h-full justify-start items-center flex mx-32 my-10">
+          <div className="h-full justify-start items-center flex  lg:mx-48 mx-12 my-10">
             <EditChallenge challenge={challenge} props={props} />
           </div>
         )}
         <Footer />
       </div>
     ) : (
-      <div className="h-full flex flex-col min-h-screen w-full">
-        <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:my-8 md:max-w-xs">
-          <p>LOADING</p>
+      <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
+        <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
+          {/* <p>loading...</p> */}
+          <img
+            src={LoadingIcon}
+            className="rounded-lg object-contain w-full h-32 p-2"
+          />
         </div>
       </div>
     );

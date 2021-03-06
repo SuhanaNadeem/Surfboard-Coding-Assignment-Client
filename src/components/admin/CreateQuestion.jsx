@@ -115,7 +115,7 @@ function CreateQuestion({ admin, props }) {
   });
   return (
     <form
-      className="w-3/4 overflow-hidden flex flex-col "
+      className="w-full overflow-hidden flex flex-col "
       onSubmit={onSubmit}
       noValidate
     >
@@ -136,7 +136,7 @@ function CreateQuestion({ admin, props }) {
           </thead>
           <tbody>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Type
                 </label>
@@ -174,7 +174,7 @@ function CreateQuestion({ admin, props }) {
               </td>
             </tr>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Name
                 </label>
@@ -199,7 +199,7 @@ function CreateQuestion({ admin, props }) {
               </td>
             </tr>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Module
                 </label>
@@ -219,7 +219,7 @@ function CreateQuestion({ admin, props }) {
               </td>
             </tr>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Video Link
                 </label>
@@ -244,7 +244,7 @@ function CreateQuestion({ admin, props }) {
               </td>
             </tr>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Article Link
                 </label>
@@ -270,7 +270,7 @@ function CreateQuestion({ admin, props }) {
             </tr>
 
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Description
                 </label>
@@ -559,7 +559,7 @@ function CreateQuestion({ admin, props }) {
                 </tr>
               )}
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Image
                 </label>

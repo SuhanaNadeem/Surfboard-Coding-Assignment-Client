@@ -79,7 +79,7 @@ function CreateChallenge({ admin, props }) {
   });
   return (
     <form
-      className="w-3/4 overflow-hidden flex flex-col "
+      className="w-full overflow-hidden flex flex-col "
       onSubmit={onSubmit}
       noValidate
     >
@@ -99,7 +99,7 @@ function CreateChallenge({ admin, props }) {
           </thead>
           <tbody>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Name
                 </label>
@@ -125,7 +125,7 @@ function CreateChallenge({ admin, props }) {
             </tr>
 
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Category
                 </label>
@@ -146,7 +146,7 @@ function CreateChallenge({ admin, props }) {
             </tr>
 
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Description
                 </label>
@@ -171,11 +171,11 @@ function CreateChallenge({ admin, props }) {
               </td>
             </tr>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Due Date
                 </label>
-                <p>(dd/mm/yyyy)</p>
+                <p className="w-full pr-3 truncate">(dd/mm/yyyy)</p>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
@@ -197,7 +197,7 @@ function CreateChallenge({ admin, props }) {
               </td>
             </tr>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Link
                 </label>
@@ -222,7 +222,7 @@ function CreateChallenge({ admin, props }) {
               </td>
             </tr>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Image
                 </label>

@@ -6,6 +6,7 @@ import DashboardSideBar from "../../components/admin/DashboardSideBar";
 import { adminClient } from "../../GraphqlApolloClients";
 import DashboardCards from "../../components/admin/DashboardCards";
 import Footer from "../../components/admin/Footer";
+import LoadingIcon from "../../images/tempModuleCardImg.PNG";
 
 export default function AdminDashboard(props) {
   const { admin } = useContext(AdminAuthContext);
@@ -171,9 +172,13 @@ export default function AdminDashboard(props) {
       <Footer />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen w-full">
-      <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:my-8 md:max-w-xs">
-        <p>LOADING</p>
+    <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
+      <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
+        {/* <p>loading...</p> */}
+        <img
+          src={LoadingIcon}
+          className="rounded-lg object-contain w-full h-32 p-2"
+        />
       </div>
     </div>
   );

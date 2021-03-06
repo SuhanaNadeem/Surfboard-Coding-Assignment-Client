@@ -9,6 +9,7 @@ import Footer from "../../components/admin/Footer";
 import StudentModal from "../../components/admin/StudentModal";
 import { GET_STUDENT_BY_ID } from "../../components/student/ModuleSummaryBar";
 import MentorModal from "../../components/admin/MentorModal";
+import LoadingIcon from "../../images/tempModuleCardImg.PNG";
 
 export default function AdminUsers(props) {
   const { admin } = useContext(AdminAuthContext);
@@ -94,10 +95,10 @@ export default function AdminUsers(props) {
   return students && mentors ? (
     <div className="h-full flex flex-col min-h-screen w-full">
       <NavBar props={props} />
-      <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-48 pb-10">
+      <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-12 md:pl-32 lg:pl-48 pb-10">
         <p className="text-4xl text-white">Admin Users</p>
       </div>
-      <div className="flex flex-col mx-48 mt-4 mb-8 justify-center items-center">
+      <div className="flex flex-col mx-12 md:mx-32 lg:mx-48 mt-4 mb-8 justify-center items-center">
         <div className="w-full justify-start ">
           <h4 className="text-3xl mt-4">Students</h4>
           <div className="pt-4  grid grid-flow-col gap-2 items-stretch justify-start py-1 overflow-x-auto relative">
@@ -145,9 +146,13 @@ export default function AdminUsers(props) {
       />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen w-full">
-      <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:my-8 md:max-w-xs">
-        <p>LOADING</p>
+    <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
+      <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
+        {/* <p>loading...</p> */}
+        <img
+          src={LoadingIcon}
+          className="rounded-lg object-contain w-full h-32 p-2"
+        />
       </div>
     </div>
   );

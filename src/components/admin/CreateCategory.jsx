@@ -40,12 +40,12 @@ function CreateCategory({ admin, props }) {
     createNewCategory();
   }
 
-  console.log("outside");
-  console.log(values);
+  // console.log("outside");
+  // console.log(values);
 
   return module ? (
     <form
-      className="w-3/4 overflow-hidden flex flex-col "
+      className="w-full overflow-hidden flex flex-col "
       onSubmit={onSubmit}
       noValidate
     >

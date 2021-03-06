@@ -79,7 +79,7 @@ function CreateBadge({ admin, props }) {
 
   return (
     <form
-      className="w-3/4 overflow-hidden flex flex-col "
+      className="w-full overflow-hidden flex flex-col "
       onSubmit={onSubmit}
       noValidate
     >
@@ -99,7 +99,7 @@ function CreateBadge({ admin, props }) {
           </thead>
           <tbody>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Name
                 </label>
@@ -124,7 +124,7 @@ function CreateBadge({ admin, props }) {
               </td>
             </tr>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Type
                 </label>
@@ -163,7 +163,7 @@ function CreateBadge({ admin, props }) {
             </tr>
 
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Description
                 </label>
@@ -188,7 +188,7 @@ function CreateBadge({ admin, props }) {
               </td>
             </tr>
             {/* <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Image
                 </label>
@@ -214,7 +214,7 @@ function CreateBadge({ admin, props }) {
             </tr>
  */}
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className="font-semibold uppercase tracking-wide ">
                   Required Amount
                 </label>
@@ -239,7 +239,7 @@ function CreateBadge({ admin, props }) {
               </td>
             </tr>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Image
                 </label>

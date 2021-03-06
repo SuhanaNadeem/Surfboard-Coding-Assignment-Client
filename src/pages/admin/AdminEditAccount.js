@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { gql, useQuery } from "@apollo/client";
+import LoadingIcon from "../../images/tempModuleCardImg.PNG";
 
 import NavBar from "../../components/admin/NavBar";
 import Footer from "../../components/admin/Footer";
@@ -21,22 +22,25 @@ export default function AdminEditAccount(props) {
     variables: { adminId: admin.id },
     client: adminClient,
   });
-  console.log("on right page");
   return adminObject ? (
     <div className="h-full flex flex-col min-h-screen w-full">
       <NavBar props={props} />
-      <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-32 pb-10">
-        <p className="text-4xl text-white">Admin Edit Account</p>
+      <div className="bg-red-800 w-full h-32 flex flex-col justify-end px-12 lg:px-48  pb-10">
+        <p className="text-4xl text-white truncate">Admin Edit Account</p>
       </div>
-      <div className="flex justify-start items-center my-6 mx-32">
+      <div className="flex justify-start items-center my-6 mx-12 lg:mx-48 ">
         <EditAdmin admin={adminObject} props={props} />
       </div>
       <Footer />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen w-full">
-      <div className="flex w-full flex-grow content-start mx-auto flex-wrap md:my-8 md:max-w-xs">
-        <p>LOADING</p>
+    <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
+      <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
+        {/* <p>loading...</p> */}
+        <img
+          src={LoadingIcon}
+          className="rounded-lg object-contain w-full h-32 p-2"
+        />
       </div>
     </div>
   );

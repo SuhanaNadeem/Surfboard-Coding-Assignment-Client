@@ -74,7 +74,7 @@ function EditChallenge({
   });
   return challengeId ? (
     <form
-      className="w-3/4 overflow-hidden flex flex-col "
+      className="w-full overflow-hidden flex flex-col "
       onSubmit={onSubmit}
       noValidate
     >
@@ -159,7 +159,7 @@ function EditChallenge({
               </td>
             </tr>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="w-full pr-3 truncate text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Description
                 </label>
@@ -188,7 +188,7 @@ function EditChallenge({
                 <label className=" font-semibold uppercase tracking-wide ">
                   Due Date
                 </label>
-                <p>(dd/mm/yyyy)</p>
+                <p className="w-full pr-3 truncate">(dd/mm/yyyy)</p>
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
@@ -280,7 +280,7 @@ function EditChallenge({
             </tr>
           </tbody>
         </table>
-        <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none w-1/6">
+        <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none w-1/4 md:w-1/6">
           <button
             type="submit"
             className="flex focus:outline-none border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm items-center justify-center font-semibold w-full"
