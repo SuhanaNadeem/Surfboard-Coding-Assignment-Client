@@ -37,7 +37,7 @@ export default function StudentModal({
         className="fixed inset-0 h-full w-full bg-gray-800 opacity-50 cursor-default z-20"
       ></button>
 
-      <div className="fixed mx-auto inset-0 overscroll-contain overflow-y-auto max-w-2xl my-4 p-8 bg-white z-40 rounded-lg shadow-xl">
+      <div className="fixed mx-2 md:mx-auto inset-0 overscroll-contain overflow-y-auto max-w-2xl my-4 p-8 bg-white z-40 rounded-lg shadow-xl">
         <div className="flex flex-col items-center justify-center">
           <h3 className="text-3xl text-red-800">{student.name}</h3>
           <h3 className="text-xl my-1 font-semibold">{student.orgName}</h3>
