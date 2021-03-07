@@ -84,10 +84,10 @@ function CreateQuestion({ admin, props }) {
       });
     },
     onError(err) {
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
       console.log(values);
+      console.log(errors);
       console.log(err);
-
-      // setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
     client: adminClient,
@@ -113,7 +113,8 @@ function CreateQuestion({ admin, props }) {
   const [previewImages, setPreviewImages] = useState({
     image: "",
   });
-  return (
+  console.log(errors);
+  return errors ? (
     <form
       className="w-full overflow-hidden flex flex-col "
       onSubmit={onSubmit}
@@ -167,7 +168,7 @@ function CreateQuestion({ admin, props }) {
                   <label htmlFor="Skill">Skill</label>
                 </div>
                 {errors.type && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.type}
                   </p>
                 )}
@@ -182,7 +183,7 @@ function CreateQuestion({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.name ? "border-red-500" : ""
+                    errors.name ? "border-red-800" : ""
                   }`}
                   name="name"
                   placeholder=""
@@ -192,7 +193,7 @@ function CreateQuestion({ admin, props }) {
                   type="text"
                 />
                 {errors.name && (
-                  <p className="text-red-500">
+                  <p className="text-red-800  font-light">
                     <b>&#33;</b> {errors.name}
                   </p>
                 )}
@@ -212,7 +213,7 @@ function CreateQuestion({ admin, props }) {
                   moduleType="moduleId"
                 />
                 {errors.moduleId && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.moduleId}
                   </p>
                 )}
@@ -227,7 +228,7 @@ function CreateQuestion({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.videoLink ? "border-red-500" : ""
+                    errors.videoLink ? "border-red-800" : ""
                   }`}
                   name="videoLink"
                   placeholder=""
@@ -237,7 +238,7 @@ function CreateQuestion({ admin, props }) {
                   type="text"
                 />
                 {errors.videoLink && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.videoLink}
                   </p>
                 )}
@@ -252,7 +253,7 @@ function CreateQuestion({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.articleLink ? "border-red-500" : ""
+                    errors.articleLink ? "border-red-800" : ""
                   }`}
                   name="articleLink"
                   placeholder=""
@@ -262,7 +263,7 @@ function CreateQuestion({ admin, props }) {
                   type="text"
                 />
                 {errors.articleLink && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.articleLink}
                   </p>
                 )}
@@ -278,7 +279,7 @@ function CreateQuestion({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <textarea
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.description ? "border-red-500" : ""
+                    errors.description ? "border-red-800" : ""
                   }`}
                   rows="3"
                   name="description"
@@ -289,7 +290,7 @@ function CreateQuestion({ admin, props }) {
                   type="text"
                 />
                 {errors.description && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.description}
                   </p>
                 )}
@@ -304,7 +305,7 @@ function CreateQuestion({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.points ? "border-red-500" : ""
+                    errors.points ? "border-red-800" : ""
                   }`}
                   name="points"
                   placeholder=""
@@ -314,9 +315,39 @@ function CreateQuestion({ admin, props }) {
                   type="number"
                 />
                 {errors.points && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.points}
                   </p>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
+                <label className=" font-semibold uppercase tracking-wide ">
+                  Image
+                </label>
+              </td>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <ImageUploadBox
+                  setImagePreviewCallback={setImagePreview}
+                  imageName="image"
+                  previewImages={previewImages}
+                  setErrorsCallback={setErrors}
+                  errors={errors}
+                />
+                {errors.imageFile && (
+                  <p className="text-red-800 font-light">
+                    <b>&#33;</b> {errors.imageFile}
+                  </p>
+                )}
+                {previewImages.image && (
+                  <div className="h-20 w-full">
+                    <img
+                      className="h-full w-full object-contain rounded mt-2 bg-gray-200 p-1"
+                      alt=""
+                      src={`${previewImages.image}`}
+                    />
+                  </div>
                 )}
               </td>
             </tr>
@@ -367,7 +398,7 @@ function CreateQuestion({ admin, props }) {
                       <label htmlFor="Link">Link</label>
                     </div>
                     {errors.questionFormat && (
-                      <p className="text-red-500">
+                      <p className="text-red-800 font-light">
                         <b>&#33;</b> {errors.questionFormat}
                       </p>
                     )}
@@ -379,24 +410,82 @@ function CreateQuestion({ admin, props }) {
                       Expected Answer
                     </label>
                   </td>
-                  <td className="text-sm py-2 border-b border-gray-200">
-                    <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                        errors.expectedAnswer ? "border-red-500" : ""
-                      }`}
-                      name="expectedAnswer"
-                      placeholder=""
-                      value={values.expectedAnswer}
-                      onChange={onChange}
-                      error={errors.expectedAnswer ? "true" : "false"}
-                      type="text"
-                    />
-                    {errors.expectedAnswer && (
-                      <p className="text-red-500">
-                        <b>&#33;</b> {errors.expectedAnswer}
-                      </p>
-                    )}
-                  </td>
+                  {values.questionFormat === "Multiple Choice" ? (
+                    <td className="font-light text-sm px-2 py-2 border-b border-gray-200">
+                      <div>
+                        <input
+                          className="mr-2"
+                          name="expectedAnswer"
+                          value="A"
+                          onChange={onChange}
+                          error={errors.expectedAnswer ? "true" : "false"}
+                          type="radio"
+                          id="A"
+                        />
+                        <label htmlFor="A">A</label>
+                      </div>
+                      <div>
+                        <input
+                          className="mr-2"
+                          name="expectedAnswer"
+                          value="B"
+                          onChange={onChange}
+                          error={errors.expectedAnswer ? "true" : "false"}
+                          type="radio"
+                          id="B"
+                        />
+                        <label htmlFor="B">B</label>
+                      </div>
+                      <div>
+                        <input
+                          className="mr-2"
+                          name="expectedAnswer"
+                          value="C"
+                          onChange={onChange}
+                          error={errors.expectedAnswer ? "true" : "false"}
+                          type="radio"
+                          id="C"
+                        />
+                        <label htmlFor="C">C</label>
+                      </div>
+                      <div>
+                        <input
+                          className="mr-2"
+                          name="expectedAnswer"
+                          value="D"
+                          onChange={onChange}
+                          error={errors.expectedAnswer ? "true" : "false"}
+                          type="radio"
+                          id="D"
+                        />
+                        <label htmlFor="D">D</label>
+                      </div>
+                      {errors.expectedAnswer && (
+                        <p className="text-red-800 font-light">
+                          <b>&#33;</b> {errors.expectedAnswer}
+                        </p>
+                      )}
+                    </td>
+                  ) : (
+                    <td className="text-sm py-2 border-b border-gray-200">
+                      <input
+                        className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                          errors.expectedAnswer ? "border-red-800" : ""
+                        }`}
+                        name="expectedAnswer"
+                        placeholder=""
+                        value={values.expectedAnswer}
+                        onChange={onChange}
+                        error={errors.expectedAnswer ? "true" : "false"}
+                        type="text"
+                      />
+                      {errors.expectedAnswer && (
+                        <p className="text-red-800 font-light">
+                          <b>&#33;</b> {errors.expectedAnswer}
+                        </p>
+                      )}
+                    </td>
+                  )}
                 </tr>
                 <tr>
                   <td className="text-sm py-2 border-b border-gray-200">
@@ -407,7 +496,7 @@ function CreateQuestion({ admin, props }) {
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
                       className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                        errors.hint ? "border-red-500" : ""
+                        errors.hint ? "border-red-800" : ""
                       }`}
                       name="hint"
                       placeholder=""
@@ -417,7 +506,7 @@ function CreateQuestion({ admin, props }) {
                       type="text"
                     />
                     {errors.hint && (
-                      <p className="text-red-500">
+                      <p className="text-red-800 font-light">
                         <b>&#33;</b> {errors.hint}
                       </p>
                     )}
@@ -436,7 +525,7 @@ function CreateQuestion({ admin, props }) {
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
                       className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                        errors.optionA ? "border-red-500" : ""
+                        errors.optionA ? "border-red-800" : ""
                       }`}
                       name="optionA"
                       placeholder=""
@@ -446,7 +535,7 @@ function CreateQuestion({ admin, props }) {
                       type="text"
                     />
                     {errors.optionA && (
-                      <p className="text-red-500">
+                      <p className="text-red-800 font-light">
                         <b>&#33;</b> {errors.optionA}
                       </p>
                     )}
@@ -461,7 +550,7 @@ function CreateQuestion({ admin, props }) {
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
                       className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                        errors.optionB ? "border-red-500" : ""
+                        errors.optionB ? "border-red-800" : ""
                       }`}
                       name="optionB"
                       placeholder=""
@@ -471,7 +560,7 @@ function CreateQuestion({ admin, props }) {
                       type="text"
                     />
                     {errors.optionB && (
-                      <p className="text-red-500">
+                      <p className="text-red-800 font-light">
                         <b>&#33;</b> {errors.optionB}
                       </p>
                     )}
@@ -486,7 +575,7 @@ function CreateQuestion({ admin, props }) {
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
                       className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                        errors.optionC ? "border-red-500" : ""
+                        errors.optionC ? "border-red-800" : ""
                       }`}
                       name="optionC"
                       placeholder=""
@@ -496,7 +585,7 @@ function CreateQuestion({ admin, props }) {
                       type="text"
                     />
                     {errors.optionC && (
-                      <p className="text-red-500">
+                      <p className="text-red-800 font-light">
                         <b>&#33;</b> {errors.optionC}
                       </p>
                     )}
@@ -511,7 +600,7 @@ function CreateQuestion({ admin, props }) {
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
                       className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                        errors.optionD ? "border-red-500" : ""
+                        errors.optionD ? "border-red-800" : ""
                       }`}
                       name="optionD"
                       placeholder=""
@@ -521,7 +610,7 @@ function CreateQuestion({ admin, props }) {
                       type="text"
                     />
                     {errors.optionD && (
-                      <p className="text-red-500">
+                      <p className="text-red-800 font-light">
                         <b>&#33;</b> {errors.optionD}
                       </p>
                     )}
@@ -541,7 +630,7 @@ function CreateQuestion({ admin, props }) {
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
                       className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                        errors.extraLink ? "border-red-500" : ""
+                        errors.extraLink ? "border-red-800" : ""
                       }`}
                       name="extraLink"
                       placeholder=""
@@ -551,54 +640,13 @@ function CreateQuestion({ admin, props }) {
                       type="text"
                     />
                     {errors.extraLink && (
-                      <p className="text-red-500">
+                      <p className="text-red-800 font-light">
                         <b>&#33;</b> {errors.extraLink}
                       </p>
                     )}
                   </td>
                 </tr>
               )}
-            <tr>
-              <td className="text-sm py-2 border-b border-gray-200 w-full pr-3 truncate ">
-                <label className=" font-semibold uppercase tracking-wide ">
-                  Image
-                </label>
-              </td>
-              <td className="text-sm py-2 border-b border-gray-200">
-                {/* <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.image ? "border-red-500" : ""
-                  }`}
-                  name="image"
-                  placeholder=""
-                  value={values.image}
-                  onChange={onChange}
-                  error={errors.image ? "true" : "false"}
-                  type="text"
-                /> */}
-                <ImageUploadBox
-                  setImagePreviewCallback={setImagePreview}
-                  imageName="image"
-                  previewImages={previewImages}
-                  setErrorsCallback={setErrors}
-                  errors={errors}
-                />
-                {errors.imageFile && (
-                  <p className="text-red-500">
-                    <b>&#33;</b> {errors.imageFile}
-                  </p>
-                )}
-                {previewImages.image && (
-                  <div className="h-20 w-full">
-                    <img
-                      className="h-full w-full object-contain rounded mt-2 bg-gray-200 p-1"
-                      alt=""
-                      src={`${previewImages.image}`}
-                    />
-                  </div>
-                )}
-              </td>
-            </tr>
           </tbody>
         </table>
         <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none">
@@ -611,6 +659,8 @@ function CreateQuestion({ admin, props }) {
         </div>
       </div>
     </form>
+  ) : (
+    <></>
   );
 }
 

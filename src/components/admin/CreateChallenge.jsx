@@ -51,7 +51,7 @@ function CreateChallenge({ admin, props }) {
     onError(err) {
       console.log(values);
       console.log(err);
-      // setErrors(err.graphQLErrors[0].extensions.exception.errors);
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
     client: adminClient,
@@ -107,7 +107,7 @@ function CreateChallenge({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.name ? "border-red-500" : ""
+                    errors.name ? "border-red-800" : ""
                   }`}
                   name="name"
                   placeholder=""
@@ -117,7 +117,7 @@ function CreateChallenge({ admin, props }) {
                   type="text"
                 />
                 {errors.name && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.name}
                   </p>
                 )}
@@ -138,7 +138,7 @@ function CreateChallenge({ admin, props }) {
                   categoryType="categoryId"
                 />
                 {errors.categoryId && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.categoryId}
                   </p>
                 )}
@@ -154,7 +154,7 @@ function CreateChallenge({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.challengeDescription ? "border-red-500" : ""
+                    errors.challengeDescription ? "border-red-800" : ""
                   }`}
                   name="challengeDescription"
                   placeholder=""
@@ -164,7 +164,7 @@ function CreateChallenge({ admin, props }) {
                   type="text"
                 />
                 {errors.challengeDescription && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.challengeDescription}
                   </p>
                 )}
@@ -180,7 +180,7 @@ function CreateChallenge({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.dueDate ? "border-red-500" : ""
+                    errors.dueDate ? "border-red-800" : ""
                   }`}
                   name="dueDate"
                   placeholder=""
@@ -190,7 +190,7 @@ function CreateChallenge({ admin, props }) {
                   type="text"
                 />
                 {errors.dueDate && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.dueDate}
                   </p>
                 )}
@@ -205,7 +205,7 @@ function CreateChallenge({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.extraLink ? "border-red-500" : ""
+                    errors.extraLink ? "border-red-800" : ""
                   }`}
                   name="extraLink"
                   placeholder=""
@@ -215,7 +215,7 @@ function CreateChallenge({ admin, props }) {
                   type="text"
                 />
                 {errors.extraLink && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.extraLink}
                   </p>
                 )}
@@ -237,7 +237,7 @@ function CreateChallenge({ admin, props }) {
                 />
                 {/* <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.image ? "border-red-500" : ""
+                    errors.image ? "border-red-800" : ""
                   }`}
                   name="image"
                   placeholder=""
@@ -247,7 +247,7 @@ function CreateChallenge({ admin, props }) {
                   type="text"
                 /> */}
                 {errors.image && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.image}
                   </p>
                 )}

@@ -33,7 +33,7 @@ export default function AdminCreate(props) {
         </div>
       )}
       {page === "category" && (
-        <div className="flex-1 h-full justify-start items-center flex mx-12 md:mx-32 lg:mx-48 xl:mx-56 my-10">
+        <div className="flex-1 h-full justify-start items-start flex mx-12 md:mx-32 lg:mx-48 xl:mx-56 my-10">
           <CreateCategory admin={admin} props={props} />
         </div>
       )}

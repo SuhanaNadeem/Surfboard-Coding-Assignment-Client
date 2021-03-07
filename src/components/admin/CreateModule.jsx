@@ -44,7 +44,7 @@ function CreateModule({ admin, props }) {
     onError(err) {
       console.log(values);
       console.log(err);
-      // setErrors(err.graphQLErrors[0].extensions.exception.errors);
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
     client: adminClient,
@@ -106,7 +106,7 @@ function CreateModule({ admin, props }) {
                   categoryType="categoryId"
                 />
                 {errors.categoryId && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.categoryId}
                   </p>
                 )}
@@ -121,7 +121,7 @@ function CreateModule({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.name ? "border-red-500" : ""
+                    errors.name ? "border-red-800" : ""
                   }`}
                   name="name"
                   placeholder=""
@@ -131,7 +131,7 @@ function CreateModule({ admin, props }) {
                   type="text"
                 />
                 {errors.name && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.name}
                   </p>
                 )}
@@ -154,7 +154,7 @@ function CreateModule({ admin, props }) {
 
                 {/* <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.image ? "border-red-500" : ""
+                    errors.image ? "border-red-800" : ""
                   }`}
                   name="image"
                   placeholder=""
@@ -165,7 +165,7 @@ function CreateModule({ admin, props }) {
                 />
                  */}
                 {errors.imageFile && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.imageFile}
                   </p>
                 )}

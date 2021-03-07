@@ -43,7 +43,7 @@ export default function CategoryInputDropdown({
       <button
         onClick={toggleIsOpen}
         className={`shadow text-left appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-          categoryErrors ? "border-red-500" : ""
+          categoryErrors ? "border-red-800" : ""
         }`}
       >
         {currentCategory ? (

@@ -49,7 +49,7 @@ function CreateBadge({ admin, props }) {
     onError(err) {
       console.log(values);
       console.log(err);
-      // setErrors(err.graphQLErrors[0].extensions.exception.errors);
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
     client: adminClient,
@@ -107,7 +107,7 @@ function CreateBadge({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.name ? "border-red-500" : ""
+                    errors.name ? "border-red-800" : ""
                   }`}
                   name="name"
                   placeholder=""
@@ -117,7 +117,7 @@ function CreateBadge({ admin, props }) {
                   type="text"
                 />
                 {errors.name && (
-                  <p className="text-red-500">
+                  <p className="font-light text-red-800">
                     <b>&#33;</b> {errors.name}
                   </p>
                 )}
@@ -155,7 +155,7 @@ function CreateBadge({ admin, props }) {
                   <label htmlFor="Module">Module</label>
                 </div>
                 {errors.type && (
-                  <p className="text-red-500">
+                  <p className="font-light text-red-800">
                     <b>&#33;</b> {errors.type}
                   </p>
                 )}
@@ -171,7 +171,7 @@ function CreateBadge({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.description ? "border-red-500" : ""
+                    errors.description ? "border-red-800" : ""
                   }`}
                   name="description"
                   placeholder=""
@@ -181,7 +181,7 @@ function CreateBadge({ admin, props }) {
                   type="text"
                 />
                 {errors.description && (
-                  <p className="text-red-500">
+                  <p className="font-light text-red-800">
                     <b>&#33;</b> {errors.description}
                   </p>
                 )}
@@ -196,7 +196,7 @@ function CreateBadge({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.image ? "border-red-500" : ""
+                    errors.image ? "border-red-800" : ""
                   }`}
                   name="image"
                   placeholder=""
@@ -206,7 +206,7 @@ function CreateBadge({ admin, props }) {
                   type="text"
                 />
                 {errors.image && (
-                  <p className="text-red-500">
+                  <p className="font-light text-red-800">
                     <b>&#33;</b> {errors.image}
                   </p>
                 )}
@@ -222,7 +222,7 @@ function CreateBadge({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.requiredAmount ? "border-red-500" : ""
+                    errors.requiredAmount ? "border-red-800" : ""
                   }`}
                   name="requiredAmount"
                   placeholder=""
@@ -232,7 +232,7 @@ function CreateBadge({ admin, props }) {
                   type="number"
                 />
                 {errors.requiredAmount && (
-                  <p className="text-red-500">
+                  <p className="font-light text-red-800">
                     <b>&#33;</b> {errors.requiredAmount}
                   </p>
                 )}
@@ -255,7 +255,7 @@ function CreateBadge({ admin, props }) {
 
                 {/* <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.image ? "border-red-500" : ""
+                    errors.image ? "border-red-800" : ""
                   }`}
                   name="image"
                   placeholder=""
@@ -266,7 +266,7 @@ function CreateBadge({ admin, props }) {
                 />
                  */}
                 {errors.imageFile && (
-                  <p className="text-red-500">
+                  <p className="font-light text-red-800">
                     <b>&#33;</b> {errors.imageFile}
                   </p>
                 )}

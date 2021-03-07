@@ -30,7 +30,7 @@ function CreateCategory({ admin, props }) {
     onError(err) {
       console.log(values);
       console.log(err);
-      // setErrors(err.graphQLErrors[0].extensions.exception.errors);
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
     client: adminClient,
@@ -72,7 +72,7 @@ function CreateCategory({ admin, props }) {
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.name ? "border-red-500" : ""
+                    errors.name ? "border-red-800" : ""
                   }`}
                   name="name"
                   placeholder=""
@@ -82,7 +82,7 @@ function CreateCategory({ admin, props }) {
                   type="text"
                 />
                 {errors.name && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.name}
                   </p>
                 )}
