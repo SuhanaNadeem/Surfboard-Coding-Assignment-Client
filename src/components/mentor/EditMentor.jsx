@@ -41,7 +41,7 @@ function EditMentor({
 
       console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
-      // console.log(err.graphQLErrors[0].extensions.exception.errors);
+      console.log(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
     client: mentorClient,
@@ -79,13 +79,20 @@ function EditMentor({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className="shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none "
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.newName ? "border-red-800" : ""
+                  }`}
                   name="newName"
                   placeholder=""
                   value={values.newName}
                   onChange={onChange}
                   type="text"
                 />
+                {errors.newName && (
+                  <p className="font-light text-red-800">
+                    <b>&#33;</b> {errors.newName}
+                  </p>
+                )}
               </td>
             </tr>
             <tr>
@@ -96,13 +103,20 @@ function EditMentor({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className="shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none "
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.newOrgName ? "border-red-800" : ""
+                  }`}
                   name="newOrgName"
                   placeholder=""
                   value={values.newOrgName}
                   onChange={onChange}
                   type="text"
                 />
+                {errors.newOrgName && (
+                  <p className="font-light text-red-800">
+                    <b>&#33;</b> {errors.newOrgName}
+                  </p>
+                )}
               </td>
             </tr>
 

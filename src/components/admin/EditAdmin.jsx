@@ -65,13 +65,20 @@ function EditAdmin({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className="shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none "
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    errors.newName ? "border-red-800" : ""
+                  }`}
                   name="newName"
                   placeholder=""
                   value={values.newName}
                   onChange={onChange}
                   type="text"
                 />
+                {errors.newName && (
+                  <p className="font-light text-red-800">
+                    <b>&#33;</b> {errors.newName}
+                  </p>
+                )}
               </td>
             </tr>
 
@@ -117,7 +124,7 @@ function EditAdmin({
                   value={values.newPassword}
                   onChange={onChange}
                   error={errors.newPassword ? "true" : "false"}
-                  type="text"
+                  type="password"
                 />
                 {errors.newPassword && (
                   <p className="text-red-800 font-light">
@@ -143,7 +150,7 @@ function EditAdmin({
                   value={values.confirmNewPassword}
                   onChange={onChange}
                   error={errors.confirmNewPassword ? "true" : "false"}
-                  type="text"
+                  type="password"
                 />
                 {errors.confirmNewPassword && (
                   <p className="text-red-800 font-light">

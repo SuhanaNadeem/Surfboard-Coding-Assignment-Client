@@ -147,7 +147,7 @@ function QuestionModalCard({
     },
     onError(err) {
       console.log(err);
-      console.log(err.graphQLErrors[0].extensions.exception.errors);
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
   });
@@ -248,7 +248,11 @@ function QuestionModalCard({
             >
               {question.questionFormat === "Multiple Choice" ? (
                 // && !completedQuestions.includes(question.id)
-                <div className="flex flex-col text-md font-light justify-center items-start">
+                <div
+                  className={`flex flex-col text-md font-light justify-center items-start ${
+                    errors.answer ? "text-red-800" : ""
+                  }`}
+                >
                   <div>
                     <input
                       name="answer"
@@ -322,6 +326,11 @@ function QuestionModalCard({
                     />
                     <label htmlFor="D">{question.optionD}</label>
                   </div>
+                  {errors.answer && (
+                    <p className="font-light text-red-800">
+                      <b>&#33;</b> {errors.answer}
+                    </p>
+                  )}
                 </div>
               ) : (
                 <input
