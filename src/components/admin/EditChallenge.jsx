@@ -44,7 +44,7 @@ function EditChallenge({
     onError(err) {
       console.log(values);
       console.log(err);
-      // setErrors(err.graphQLErrors[0].extensions.exception.errors);
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
     client: adminClient,
@@ -106,7 +106,7 @@ function EditChallenge({
                   onChange={onChange}
                 />
                 {errors.newAdminId && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newAdminId}
                   </p>
                 )}
@@ -122,7 +122,7 @@ function EditChallenge({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newName ? "border-red-500" : ""
+                    errors.newName ? "border-red-800" : ""
                   }`}
                   name="newName"
                   placeholder=""
@@ -132,7 +132,7 @@ function EditChallenge({
                   type="text"
                 />
                 {errors.newName && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newName}
                   </p>
                 )}
@@ -152,7 +152,7 @@ function EditChallenge({
                   categoryType="newCategoryId"
                 />
                 {errors.newCategoryId && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newCategoryId}
                   </p>
                 )}
@@ -167,7 +167,7 @@ function EditChallenge({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newChallengeDescription ? "border-red-500" : ""
+                    errors.newChallengeDescription ? "border-red-800" : ""
                   }`}
                   name="newChallengeDescription"
                   placeholder=""
@@ -177,7 +177,7 @@ function EditChallenge({
                   type="text"
                 />
                 {errors.newChallengeDescription && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newChallengeDescription}
                   </p>
                 )}
@@ -193,7 +193,7 @@ function EditChallenge({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newDueDate ? "border-red-500" : ""
+                    errors.newDueDate ? "border-red-800" : ""
                   }`}
                   name="newDueDate"
                   placeholder=""
@@ -203,7 +203,7 @@ function EditChallenge({
                   type="text"
                 />
                 {errors.newDueDate && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newDueDate}
                   </p>
                 )}
@@ -218,7 +218,7 @@ function EditChallenge({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newExtraLink ? "border-red-500" : ""
+                    errors.newExtraLink ? "border-red-800" : ""
                   }`}
                   name="newExtraLink"
                   placeholder=""
@@ -228,7 +228,7 @@ function EditChallenge({
                   type="text"
                 />
                 {errors.newExtraLink && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newExtraLink}
                   </p>
                 )}
@@ -252,7 +252,7 @@ function EditChallenge({
 
                 {/* <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.image ? "border-red-500" : ""
+                    errors.image ? "border-red-800" : ""
                   }`}
                   name="image"
                   placeholder=""
@@ -263,7 +263,7 @@ function EditChallenge({
                 />
                  */}
                 {errors.newImageFile && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newImageFile}
                   </p>
                 )}

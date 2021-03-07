@@ -46,7 +46,7 @@ export default function QuestionInputDropdown({
       <button
         onClick={toggleIsOpen}
         className={`shadow text-left appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-          questionErrors ? "border-red-500" : ""
+          questionErrors ? "border-red-800" : ""
         }`}
       >
         {currentQuestion ? (

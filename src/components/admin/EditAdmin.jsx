@@ -84,7 +84,7 @@ function EditAdmin({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newEmail ? "border-red-500" : ""
+                    errors.newEmail ? "border-red-800" : ""
                   }`}
                   name="newEmail"
                   placeholder=""
@@ -94,7 +94,7 @@ function EditAdmin({
                   type="text"
                 />
                 {errors.newEmail && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newEmail}
                   </p>
                 )}
@@ -110,7 +110,7 @@ function EditAdmin({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newPassword ? "border-red-500" : ""
+                    errors.newPassword ? "border-red-800" : ""
                   }`}
                   name="newPassword"
                   placeholder=""
@@ -120,7 +120,7 @@ function EditAdmin({
                   type="text"
                 />
                 {errors.newPassword && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newPassword}
                   </p>
                 )}
@@ -136,7 +136,7 @@ function EditAdmin({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.confirmNewPassword ? "border-red-500" : ""
+                    errors.confirmNewPassword ? "border-red-800" : ""
                   }`}
                   name="confirmNewPassword"
                   placeholder=""
@@ -146,7 +146,7 @@ function EditAdmin({
                   type="text"
                 />
                 {errors.confirmNewPassword && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.confirmNewPassword}
                   </p>
                 )}

@@ -80,7 +80,7 @@ function EditQuestion({
     onError(err) {
       console.log(values);
       console.log(err);
-      // setErrors(err.graphQLErrors[0].extensions.exception.errors);
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
     client: adminClient,
@@ -143,7 +143,7 @@ function EditQuestion({
                   onChange={onChange}
                 />
                 {errors.newAdminId && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newAdminId}
                   </p>
                 )}
@@ -163,7 +163,7 @@ function EditQuestion({
                   moduleType="newModuleId"
                 />
                 {errors.newModuleId && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newModuleId}
                   </p>
                 )}
@@ -178,7 +178,7 @@ function EditQuestion({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newName ? "border-red-500" : ""
+                    errors.newName ? "border-red-800" : ""
                   }`}
                   name="newName"
                   placeholder=""
@@ -188,7 +188,7 @@ function EditQuestion({
                   type="text"
                 />
                 {errors.newName && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newName}
                   </p>
                 )}
@@ -203,7 +203,7 @@ function EditQuestion({
               <td className="text-sm py-2 border-b border-gray-200">
                 <textarea
                   className={`shadow appearance-none border rounded w-full h-16 py-1 px-2 font-light focus:outline-none   ${
-                    errors.newDescription ? "border-red-500" : ""
+                    errors.newDescription ? "border-red-800" : ""
                   }`}
                   name="newDescription"
                   placeholder=""
@@ -214,7 +214,7 @@ function EditQuestion({
                   rows="20"
                 />
                 {errors.newDescription && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newDescription}
                   </p>
                 )}
@@ -229,7 +229,7 @@ function EditQuestion({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newPoints ? "border-red-500" : ""
+                    errors.newPoints ? "border-red-800" : ""
                   }`}
                   name="newPoints"
                   placeholder=""
@@ -239,7 +239,7 @@ function EditQuestion({
                   type="number"
                 />
                 {errors.newPoints && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newPoints}
                   </p>
                 )}
@@ -254,7 +254,7 @@ function EditQuestion({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newVideoLink ? "border-red-500" : ""
+                    errors.newVideoLink ? "border-red-800" : ""
                   }`}
                   name="newVideoLink"
                   placeholder=""
@@ -264,7 +264,7 @@ function EditQuestion({
                   type="text"
                 />
                 {errors.newVideoLink && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newVideoLink}
                   </p>
                 )}
@@ -279,7 +279,7 @@ function EditQuestion({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newArticleLink ? "border-red-500" : ""
+                    errors.newArticleLink ? "border-red-800" : ""
                   }`}
                   name="newArticleLink"
                   placeholder=""
@@ -289,7 +289,7 @@ function EditQuestion({
                   type="text"
                 />
                 {errors.newArticleLink && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newArticleLink}
                   </p>
                 )}
@@ -304,7 +304,7 @@ function EditQuestion({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newHint ? "border-red-500" : ""
+                    errors.newHint ? "border-red-800" : ""
                   }`}
                   name="newHint"
                   placeholder=""
@@ -314,14 +314,90 @@ function EditQuestion({
                   type="text"
                 />
                 {errors.newHint && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newHint}
                   </p>
                 )}
               </td>
             </tr>
             {/* if type is ques, may have specific answer; must if MC, handled in backend */}
-            {type === "Question" && (
+            {questionFormat === "Multiple Choice" && (
+              <tr>
+                <td className="text-sm py-2 border-b border-gray-200">
+                  <label className=" font-semibold uppercase tracking-wide ">
+                    Expected Answer
+                  </label>
+                </td>
+                <td className="font-light text-sm px-2 py-2 border-b border-gray-200">
+                  <div>
+                    <input
+                      className="mr-2"
+                      name="newExpectedAnswer"
+                      value="A"
+                      onChange={onChange}
+                      error={errors.newExpectedAnswer ? "true" : "false"}
+                      type="radio"
+                      id="A"
+                      checked={
+                        values.newExpectedAnswer === "A" ? "checked" : ""
+                      }
+                    />
+                    <label htmlFor="A">A</label>
+                  </div>
+                  <div>
+                    <input
+                      className="mr-2"
+                      name="newExpectedAnswer"
+                      value="B"
+                      onChange={onChange}
+                      error={errors.newExpectedAnswer ? "true" : "false"}
+                      type="radio"
+                      id="B"
+                      checked={
+                        values.newExpectedAnswer === "B" ? "checked" : ""
+                      }
+                    />
+                    <label htmlFor="B">B</label>
+                  </div>
+                  <div>
+                    <input
+                      className="mr-2"
+                      name="newExpectedAnswer"
+                      value="C"
+                      onChange={onChange}
+                      error={errors.newExpectedAnswer ? "true" : "false"}
+                      type="radio"
+                      id="C"
+                      checked={
+                        values.newExpectedAnswer === "C" ? "checked" : ""
+                      }
+                    />
+                    <label htmlFor="C">C</label>
+                  </div>
+                  <div>
+                    <input
+                      className="mr-2"
+                      name="newExpectedAnswer"
+                      value="D"
+                      onChange={onChange}
+                      error={errors.newExpectedAnswer ? "true" : "false"}
+                      type="radio"
+                      id="D"
+                      checked={
+                        values.newExpectedAnswer === "D" ? "checked" : ""
+                      }
+                    />
+                    <label htmlFor="D">D</label>
+                  </div>
+                  {errors.newExpectedAnswer && (
+                    <p className="text-red-800 font-light">
+                      <b>&#33;</b> {errors.newExpectedAnswer}
+                    </p>
+                  )}
+                </td>
+              </tr>
+            )}
+            {type === "Question" && questionFormat !== "Multiple Choice" && (
               <tr>
                 <td className="text-sm py-2 border-b border-gray-200">
                   <label className=" font-semibold uppercase tracking-wide ">
@@ -331,7 +407,7 @@ function EditQuestion({
                 <td className="text-sm py-2 border-b border-gray-200">
                   <input
                     className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                      errors.newExpectedAnswer ? "border-red-500" : ""
+                      errors.newExpectedAnswer ? "border-red-800" : ""
                     }`}
                     name="newExpectedAnswer"
                     placeholder=""
@@ -341,13 +417,13 @@ function EditQuestion({
                     type="text"
                   />
                   {errors.newExpectedAnswer && (
-                    <p className="text-red-500">
+                    <p className="text-red-800 font-light">
                       <b>&#33;</b> {errors.newExpectedAnswer}
                     </p>
                   )}
                 </td>
               </tr>
-            )}{" "}
+            )}
             {type === "Question" && questionFormat === "Multiple Choice" && (
               <>
                 <tr>
@@ -359,7 +435,7 @@ function EditQuestion({
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
                       className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                        errors.newOptionA ? "border-red-500" : ""
+                        errors.newOptionA ? "border-red-800" : ""
                       }`}
                       name="newOptionA"
                       placeholder=""
@@ -369,7 +445,7 @@ function EditQuestion({
                       type="text"
                     />
                     {errors.newOptionA && (
-                      <p className="text-red-500">
+                      <p className="text-red-800 font-light">
                         <b>&#33;</b> {errors.newOptionA}
                       </p>
                     )}
@@ -384,7 +460,7 @@ function EditQuestion({
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
                       className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                        errors.newOptionB ? "border-red-500" : ""
+                        errors.newOptionB ? "border-red-800" : ""
                       }`}
                       name="newOptionB"
                       placeholder=""
@@ -394,7 +470,7 @@ function EditQuestion({
                       type="text"
                     />
                     {errors.newOptionB && (
-                      <p className="text-red-500">
+                      <p className="text-red-800 font-light">
                         <b>&#33;</b> {errors.newOptionB}
                       </p>
                     )}
@@ -409,7 +485,7 @@ function EditQuestion({
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
                       className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                        errors.newOptionC ? "border-red-500" : ""
+                        errors.newOptionC ? "border-red-800" : ""
                       }`}
                       name="newOptionC"
                       placeholder=""
@@ -419,7 +495,7 @@ function EditQuestion({
                       type="text"
                     />
                     {errors.newOptionC && (
-                      <p className="text-red-500">
+                      <p className="text-red-800 font-light">
                         <b>&#33;</b> {errors.newOptionC}
                       </p>
                     )}
@@ -434,7 +510,7 @@ function EditQuestion({
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
                       className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                        errors.newOptionD ? "border-red-500" : ""
+                        errors.newOptionD ? "border-red-800" : ""
                       }`}
                       name="newOptionD"
                       placeholder=""
@@ -444,7 +520,7 @@ function EditQuestion({
                       type="text"
                     />
                     {errors.newOptionD && (
-                      <p className="text-red-500">
+                      <p className="text-red-800 font-light">
                         <b>&#33;</b> {errors.newOptionD}
                       </p>
                     )}
@@ -465,7 +541,7 @@ function EditQuestion({
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
                       className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                        errors.newExtraLink ? "border-red-500" : ""
+                        errors.newExtraLink ? "border-red-800" : ""
                       }`}
                       name="newExtraLink"
                       placeholder=""
@@ -475,7 +551,7 @@ function EditQuestion({
                       type="text"
                     />
                     {errors.newExtraLink && (
-                      <p className="text-red-500">
+                      <p className="text-red-800 font-light">
                         <b>&#33;</b> {errors.newExtraLink}
                       </p>
                     )}
@@ -499,7 +575,7 @@ function EditQuestion({
 
                 {/* <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.image ? "border-red-500" : ""
+                    errors.image ? "border-red-800" : ""
                   }`}
                   name="image"
                   placeholder=""
@@ -510,7 +586,7 @@ function EditQuestion({
                 />
                  */}
                 {errors.newImageFile && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newImageFile}
                   </p>
                 )}

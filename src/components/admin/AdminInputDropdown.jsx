@@ -36,7 +36,7 @@ export default function AdminInputDropdown({
       <button
         onClick={toggleIsOpen}
         className={`shadow text-left appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-          errors.newAdminId ? "border-red-500" : ""
+          errors.newAdminId ? "border-red-800" : ""
         }`}
       >
         {currentAdmin ? (

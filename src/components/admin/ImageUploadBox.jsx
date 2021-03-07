@@ -100,7 +100,7 @@ export default function ImageUploadBox({
       {/* {isDragActive ? ( */}
       {isDragActive ? (
         <p
-          className={`break-words font-normal w-full text-center border-dashed p-2 border-2 rounded bg-red-100 border-red-800`}
+          className={`break-words font-normal w-full text-center border-dashed p-2 border-2 rounded bg-red-300 border-red-800`}
         >
           Drop the file here...
         </p>
@@ -108,13 +108,13 @@ export default function ImageUploadBox({
 
       previewImages && previewImages[imageName] ? (
         <p
-          className={`focus:outline-none break-words text-sm font-light w-full text-center hover:text-red-800 cursor-pointer border-dashed p-2 border-2 rounded bg-red-100 border-red-800`}
+          className={`focus:outline-none break-words text-sm font-light  w-full text-center hover:text-red-800 text-black cursor-pointer border-dashed p-2 border-2 rounded bg-red-100 border-red-800`}
         >
-          Drop file or click to change the file
+          Drop or click to change file
         </p>
       ) : (
         <p
-          className={`focus:outline-none break-words text-sm font-light w-full text-center hover:text-red-800 cursor-pointer border-dashed p-2 border-2 rounded bg-gray-100 border-gray-500`}
+          className={`focus:outline-none break-words text-sm font-light w-full text-center hover:text-red-800 cursor-pointer border-dashed p-2 border-2 rounded bg-gray-100 border-red-800`}
         >
           Drop or click to select file
         </p>

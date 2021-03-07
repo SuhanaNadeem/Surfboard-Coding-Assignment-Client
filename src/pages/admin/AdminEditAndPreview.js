@@ -105,17 +105,17 @@ export default function AdminEditAndPreview(props) {
         )} */}
 
         {givenId && category && (
-          <div className="h-full justify-start items-center flex  lg:mx-48 mx-12 my-10">
+          <div className="h-full justify-start items-start flex flex-1 lg:mx-48 mx-12 my-10">
             <EditCategory category={category} props={props} />
           </div>
         )}
         {givenId && badge && (
-          <div className="h-full justify-start items-center flex  lg:mx-48 mx-12 my-10">
+          <div className="h-full justify-start items-start flex flex-1 lg:mx-48 mx-12 my-10">
             <EditBadge badge={badge} props={props} />
           </div>
         )}
         {givenId && challenge && (
-          <div className="h-full justify-start items-center flex  lg:mx-48 mx-12 my-10">
+          <div className="h-full justify-start items-start flex flex-1 lg:mx-48 mx-12 my-10">
             <EditChallenge challenge={challenge} props={props} />
           </div>
         )}

@@ -46,7 +46,7 @@ export default function ModuleCard({ props, module, created }) {
     onError(err) {
       console.log(values);
       console.log(err);
-      // setErrors(err.graphQLErrors[0].extensions.exception.errors);
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
     client: adminClient,

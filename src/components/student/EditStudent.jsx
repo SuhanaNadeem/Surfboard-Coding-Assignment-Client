@@ -48,7 +48,7 @@ function EditStudent({
       console.log(values);
 
       console.log(err);
-      // setErrors(err.graphQLErrors[0].extensions.exception.errors);
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
       // console.log(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
@@ -123,7 +123,7 @@ function EditStudent({
               <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newEmail ? "border-red-500" : ""
+                    errors.newEmail ? "border-red-800" : ""
                   }`}
                   name="newEmail"
                   placeholder=""
@@ -133,7 +133,7 @@ function EditStudent({
                   type="text"
                 />
                 {errors.newEmail && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newEmail}
                   </p>
                 )}
@@ -149,7 +149,7 @@ function EditStudent({
               <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newPassword ? "border-red-500" : ""
+                    errors.newPassword ? "border-red-800" : ""
                   }`}
                   name="newPassword"
                   placeholder=""
@@ -159,7 +159,7 @@ function EditStudent({
                   type="password"
                 />
                 {errors.newPassword && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newPassword}
                   </p>
                 )}
@@ -175,7 +175,7 @@ function EditStudent({
               <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.confirmNewPassword ? "border-red-500" : ""
+                    errors.confirmNewPassword ? "border-red-800" : ""
                   }`}
                   name="confirmNewPassword"
                   placeholder=""
@@ -185,7 +185,7 @@ function EditStudent({
                   type="password"
                 />
                 {errors.confirmNewPassword && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.confirmNewPassword}
                   </p>
                 )}

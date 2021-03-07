@@ -25,7 +25,7 @@ function EditCategory({
     onError(err) {
       console.log(values);
       console.log(err);
-      // setErrors(err.graphQLErrors[0].extensions.exception.errors);
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
     client: adminClient,
@@ -66,7 +66,7 @@ function EditCategory({
                   onChange={onChange}
                 />
                 {errors.newAdminId && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newAdminId}
                   </p>
                 )}
@@ -82,7 +82,7 @@ function EditCategory({
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                    errors.newName ? "border-red-500" : ""
+                    errors.newName ? "border-red-800" : ""
                   }`}
                   name="newName"
                   placeholder=""
@@ -92,7 +92,7 @@ function EditCategory({
                   type="text"
                 />
                 {errors.newName && (
-                  <p className="text-red-500">
+                  <p className="text-red-800 font-light">
                     <b>&#33;</b> {errors.newName}
                   </p>
                 )}

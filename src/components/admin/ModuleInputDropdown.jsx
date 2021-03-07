@@ -44,7 +44,7 @@ export default function ModuleInputDropdown({
       <button
         onClick={toggleIsOpen}
         className={`shadow text-left appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-          moduleErrors ? "border-red-500" : ""
+          moduleErrors ? "border-red-800" : ""
         }`}
       >
         {currentModule ? (
