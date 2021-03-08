@@ -55,8 +55,10 @@ export default function StudentAccountDropdown({ logout, props }) {
             <button
               className="block focus:outline-none text-left font-light w-full md:hidden px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               onClick={(e) => {
-                // e.preventDefault();
+                e.preventDefault();
+                e.stopPropagation();
                 setIsOpen(false);
+
                 props.history.push("/dashboard");
               }}
             >
@@ -76,7 +78,9 @@ export default function StudentAccountDropdown({ logout, props }) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                props.history.push("/studentAccount#EditAccount");
+                setIsOpen(false);
+
+                props.history.push("/studentAccount");
               }}
               className="focus:outline-none text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
             >

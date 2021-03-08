@@ -74,6 +74,7 @@ export default function ModuleCard({ props, module, created }) {
         <p className=" text-gray-700 font-thin text-sm mr-2">
           {module.questions.length} Questions
         </p>
+        {/* TODO round this! */}
         <img
           src={
             module.image && module.image !== ""

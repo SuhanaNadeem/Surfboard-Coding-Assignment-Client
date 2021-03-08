@@ -72,7 +72,7 @@ function CreateQuestion({ admin, props }) {
       values.videoLink = "";
       values.articleLink = "";
       values.name = "";
-      // values.type = "";
+      values.type = "";
       values.extraLink = "";
       values.optionA = "";
       values.optionB = "";
@@ -82,6 +82,7 @@ function CreateQuestion({ admin, props }) {
       setPreviewImages({
         image: "",
       });
+      console.log(values);
     },
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
@@ -152,6 +153,7 @@ function CreateQuestion({ admin, props }) {
                     error={errors.type ? "true" : "false"}
                     type="radio"
                     id="Question"
+                    checked={values.type === "Question" ? "checked" : ""}
                   />
                   <label htmlFor="Question">Question</label>
                 </div>
@@ -164,6 +166,7 @@ function CreateQuestion({ admin, props }) {
                     error={errors.type ? "true" : "false"}
                     type="radio"
                     id="Skill"
+                    checked={values.type === "Skill" ? "checked" : ""}
                   />
                   <label htmlFor="Skill">Skill</label>
                 </div>
@@ -370,6 +373,11 @@ function CreateQuestion({ admin, props }) {
                         error={errors.questionFormat ? "true" : "false"}
                         type="radio"
                         id="Multiple Choice"
+                        checked={
+                          values.questionFormat === "Multiple Choice"
+                            ? "checked"
+                            : ""
+                        }
                       />
                       <label htmlFor="Multiple Choice">Multiple Choice</label>
                     </div>
@@ -382,6 +390,11 @@ function CreateQuestion({ admin, props }) {
                         error={errors.questionFormat ? "true" : "false"}
                         type="radio"
                         id="Written Response"
+                        checked={
+                          values.questionFormat === "Written Response"
+                            ? "checked"
+                            : ""
+                        }
                       />
                       <label htmlFor="Written Response">Written Response</label>
                     </div>
@@ -394,6 +407,9 @@ function CreateQuestion({ admin, props }) {
                         error={errors.questionFormat ? "true" : "false"}
                         type="radio"
                         id="Link"
+                        checked={
+                          values.questionFormat === "Link" ? "checked" : ""
+                        }
                       />
                       <label htmlFor="Link">Link</label>
                     </div>

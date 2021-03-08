@@ -56,7 +56,8 @@ export default function AdminAccountDropdown({ logout, props }) {
             <button
               className="block focus:outline-none text-left font-light w-full md:hidden px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               onClick={(e) => {
-                // e.preventDefault();
+                e.preventDefault();
+                e.preventDefault();
                 setIsOpen(false);
                 props.history.push("/adminDashboard");
               }}
@@ -66,7 +67,8 @@ export default function AdminAccountDropdown({ logout, props }) {
             <button
               className="block focus:outline-none text-left font-light w-full md:hidden px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               onClick={(e) => {
-                // e.preventDefault();
+                e.preventDefault();
+                e.preventDefault();
                 setIsOpen(false);
                 props.history.push("/adminUsers");
               }}
@@ -87,6 +89,7 @@ export default function AdminAccountDropdown({ logout, props }) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                setIsOpen(false);
                 // console.log("pushing");
                 props.history.push("/adminEditAccount");
               }}
