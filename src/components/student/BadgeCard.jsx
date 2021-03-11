@@ -15,10 +15,26 @@ export default function BadgeCard({ props, badge }) {
         <p className="font-semibold text-xs leading-tight w-20 truncate">
           {badge.name}
         </p>
-        <p className="font-thin text-xs w-20 truncate">
-          {badge.requiredAmount}{" "}
-          {`${badge.type === "Module" ? `Modules` : `Questions`}`}
-        </p>
+        {badge.type === "Module" && badge.requiredAmount > 1 && (
+          <p className="font-thin text-xs w-20 truncate">
+            {badge.requiredAmount} Modules
+          </p>
+        )}
+        {badge.type === "Question" && badge.requiredAmount > 1 && (
+          <p className="font-thin text-xs w-20 truncate">
+            {badge.requiredAmount} Questions
+          </p>
+        )}
+        {badge.type === "Module" && badge.requiredAmount === 1 && (
+          <p className="font-thin text-xs w-20 truncate">
+            {badge.requiredAmount} Module
+          </p>
+        )}
+        {badge.type === "Question" && badge.requiredAmount === 1 && (
+          <p className="font-thin text-xs w-20 truncate">
+            {badge.requiredAmount} Question
+          </p>
+        )}
         <img
           src={
             badge.image && badge.image !== ""

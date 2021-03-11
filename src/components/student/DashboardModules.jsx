@@ -7,11 +7,15 @@ export default function DashboardModules({ props, modules, type }) {
     <div className="pt-8">
       <h4 className="text-3xl">{type}</h4>
 
-      <div className="pt-4 grid grid-flow-col gap-2 items-stretch justify-start py-1 mr-2 overflow-x-auto relative">
-        {modules.map((module, index) => (
-          <ModuleCard key={index} props={props} module={module} />
-        ))}
-      </div>
+      {modules.length > 0 ? (
+        <div className="pt-4 grid grid-flow-col gap-2 items-stretch justify-start py-1 mr-2 overflow-x-auto relative">
+          {modules.map((module, index) => (
+            <ModuleCard key={index} props={props} module={module} />
+          ))}
+        </div>
+      ) : (
+        <p className="font-light text-sm mt-3">{type} will appear here.</p>
+      )}
     </div>
   ) : (
     <div></div>

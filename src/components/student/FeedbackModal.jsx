@@ -3,14 +3,7 @@ import { StudentAuthContext } from "../../context/studentAuth";
 import { GiFallingStar } from "react-icons/gi";
 import { IoIosRepeat } from "react-icons/io";
 
-export default function FeedbackModal({
-  props,
-  isOpen,
-  setIsOpen,
-  isCorrect,
-  moduleId,
-  question,
-}) {
+export default function FeedbackModal({ isOpen, questionFormat, isCorrect }) {
   const { student } = useContext(StudentAuthContext);
   // console.log(activeQuestionId);
 
@@ -24,10 +17,10 @@ export default function FeedbackModal({
     isOpen && (
       <div className="mt-2 mx-auto">
         <div className="flex justify-center items-center">
-          <h3 className="mr-2">
-            {isCorrect ? `Correct!` : `Not quite. Try the hint.`}
-          </h3>
-          {isCorrect ? <GiFallingStar size={32} /> : <IoIosRepeat size={32} />}
+          <h3 className="mr-2">{isCorrect && questionFormat ==="Multiple Choice" ? `Correct!` : `Not quite.`}</h3>
+          {questionFormat!=="Multiple Choice" && (<h3 className="mr-2">Onward!</h3>)}
+
+          {isCorrect || questionFormat!=="Multiple Choice" ? <GiFallingStar size={32} /> : <IoIosRepeat size={32} />}
         </div>
       </div>
     )

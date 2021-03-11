@@ -78,6 +78,10 @@ function SignupStudent(props) {
                 type="orgName"
               />
             </div>
+            <p className="text-gray-700 md:text-xs">
+              Use what was indicated by your mentors. Usually the form "FRC
+              1234" is suggested.
+            </p>
           </div>
           <div className="w-64 mb-6">
             <h4 className="font-thin  uppercase tracking-wider">Email</h4>

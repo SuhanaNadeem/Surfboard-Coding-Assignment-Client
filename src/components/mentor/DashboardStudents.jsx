@@ -41,26 +41,33 @@ export default function DashboardStudents({
   return allStudents && addedStudents ? (
     <div className="mt-3 flex items-start justify-start flex-col w-full">
       <h6 className="text-3xl mb-1">Students</h6>
-      <p className="font-light text-lg">
-        Add or remove students who have signed up with your organization,{" "}
-        {mentor.orgName}.
-      </p>
-
-      <div className="w-full pt-4  grid grid-flow-col gap-2 items-stretch justify-start py-1 overflow-x-auto relative">
-        {allStudents.map((student, index) => (
-          <DashboardStudentCard
-            key={index}
-            props={props}
-            student={student}
-            mentor={mentor}
-            added={addedStudents.some(
-              (addedStudent) => addedStudent.id === student.id
-            )}
-            setIsOpen={setIsOpen}
-            handleStudentClick={handleStudentClick}
-          />
-        ))}
-      </div>
+      {allStudents.length > 0 ? (
+        <>
+          <p className="font-light text-lg">
+            Add or remove students who have signed up with your organization,{" "}
+            {mentor.orgName}.
+          </p>
+          <div className="w-full pt-4  grid grid-flow-col gap-2 items-stretch justify-start py-1 overflow-x-auto relative">
+            {allStudents.map((student, index) => (
+              <DashboardStudentCard
+                key={index}
+                props={props}
+                student={student}
+                mentor={mentor}
+                added={addedStudents.some(
+                  (addedStudent) => addedStudent.id === student.id
+                )}
+                setIsOpen={setIsOpen}
+                handleStudentClick={handleStudentClick}
+              />
+            ))}
+          </div>{" "}
+        </>
+      ) : (
+        <p className="font-light text-left w-full text-lg">
+          Students in {mentor.orgName} will appear here.
+        </p>
+      )}
       <StudentModal
         props={props}
         isOpen={isOpen}

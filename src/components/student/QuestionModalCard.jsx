@@ -19,6 +19,8 @@ import { GET_QUESTION_BY_ID } from "./QuestionCard";
 import FeedbackModal from "./FeedbackModal";
 import StarQuestionCard from "./StarQuestionCard";
 import ModuleEndCard from "./ModuleEndCard";
+import AnswerCorrect from "./AnswerCorrect";
+import AnswerIncorrect from "./AnswerIncorrect";
 
 function QuestionModalCard({
   props,
@@ -116,7 +118,10 @@ function QuestionModalCard({
     }
   }, [completedQuestions]);
 
-  const [handleAnswerPoints, { loading }] = useMutation(HANDLE_ANSWER_POINTS, {
+  const [
+    handleAnswerPoints,
+    { loading: loadingHandleAnswerPoints },
+  ] = useMutation(HANDLE_ANSWER_POINTS, {
     client: studentClient,
     refetchQueries: [
       {
@@ -143,6 +148,9 @@ function QuestionModalCard({
         var nextQuesId =
           module && module.questions[module.questions.indexOf(question.id) + 1];
         handleQuestionClick(nextQuesId);
+        if (!completedQuestions.includes(nextQuesId)) {
+          setIsOpen(false);
+        }
       }
     },
     onError(err) {
@@ -172,8 +180,9 @@ function QuestionModalCard({
     console.log(module.questions.indexOf(question.id) + 1);
     console.log(module.questions.length);
   }
+  console.log(loadingHandleAnswerPoints);
 
-  return question && completedQuestions && studentObject && module ? (
+  return question && completedQuestions && studentObject && module && errors ? (
     <div className="justify-between flex flex-col h-full">
       <div className="flex flex-col items-center justify-start text-center overflow-y-auto ">
         <h3 className="text-3xl text-red-800 mx-auto mb-2">{question.name}</h3>
@@ -263,8 +272,9 @@ function QuestionModalCard({
                       id="A"
                       className="mr-2"
                       checked={
-                        completedQuestions.includes(question.id) &&
-                        savedAnswer === "A"
+                        (completedQuestions.includes(question.id) &&
+                          savedAnswer === "A") ||
+                        values.answer === "A"
                           ? true
                           : false
                       }
@@ -281,8 +291,9 @@ function QuestionModalCard({
                       id="B"
                       className="mr-2"
                       checked={
-                        completedQuestions.includes(question.id) &&
-                        savedAnswer === "B"
+                        (completedQuestions.includes(question.id) &&
+                          savedAnswer === "B") ||
+                        values.answer === "B"
                           ? true
                           : false
                       }
@@ -299,8 +310,9 @@ function QuestionModalCard({
                       type="radio"
                       id="C"
                       checked={
-                        completedQuestions.includes(question.id) &&
-                        savedAnswer === "C"
+                        (completedQuestions.includes(question.id) &&
+                          savedAnswer === "C") ||
+                        values.answer === "C"
                           ? true
                           : false
                       }
@@ -317,8 +329,9 @@ function QuestionModalCard({
                       type="radio"
                       id="D"
                       checked={
-                        completedQuestions.includes(question.id) &&
-                        savedAnswer === "D"
+                        (completedQuestions.includes(question.id) &&
+                          savedAnswer === "D") ||
+                        values.answer === "D"
                           ? true
                           : false
                       }
@@ -366,14 +379,24 @@ function QuestionModalCard({
                 {hintVisible && <h3 className="ml-2">{hint}</h3>}
               </button>
             )}
-            <FeedbackModal
-              props={props}
+            {!loadingHandleAnswerPoints && (
+              <FeedbackModal
+                isOpen={isOpen}
+                questionFormat={question.questionFormat}
+                isCorrect={completedQuestions.includes(questionId)}
+              />
+            )}
+            {/* <FeedbackModal
               isOpen={isOpen}
-              setIsOpen={setIsOpen}
               isCorrect={completedQuestions.includes(questionId)}
-              moduleId={moduleId}
-              question={question}
-            />
+              loading={loadingHandleAnswerPoints}
+            /> */}
+            {/* {completedQuestions.includes(questionId) && isOpen && (
+              <AnswerCorrect />
+            )}
+            {!completedQuestions.includes(questionId) && isOpen && (
+              <AnswerIncorrect />
+            )} */}
           </div>
         )}
       </div>

@@ -19,18 +19,27 @@ export default function CategoryCard({ category, props }) {
     client: studentClient,
   });
   return modules ? (
-    <div className="w-full">
-      {modules.map((moduleInfo, index) => (
-        <NewModuleCard
-          props={props}
-          key={index}
-          categoryName={category.name}
-          moduleInfo={moduleInfo}
-        />
-      ))}
-    </div>
+    <>
+      <></>
+      {modules.length > 0 ? (
+        <div className="w-full">
+          {modules.map((moduleInfo, index) => (
+            <NewModuleCard
+              props={props}
+              key={index}
+              categoryName={category.name}
+              moduleInfo={moduleInfo}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="font-light text-left w-full text-sm mt-3">
+          New {category.name} modules will appear here.
+        </p>
+      )}
+    </>
   ) : (
-    <div></div>
+    <></>
   );
 }
 export const GET_INCOMPLETE_MODULES_BY_CATEGORY = gql`

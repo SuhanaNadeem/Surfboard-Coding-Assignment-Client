@@ -41,12 +41,14 @@ export default function MentorDashboard(props) {
         <p className="text-4xl truncate text-white">Mentor Dashboard</p>
       </div>
       <div className="h-full flex-1 flex mx-12 md:mx-32 lg:mx-48 mt-4 my-8">
-        <DashboardStudents
-          props={props}
-          addedStudents={addedStudents}
-          mentor={mentorObject}
-          selectedStudentId={selectedStudentId}
-        />
+        {addedStudents && (
+          <DashboardStudents
+            props={props}
+            addedStudents={addedStudents}
+            mentor={mentorObject}
+            selectedStudentId={selectedStudentId}
+          />
+        )}
       </div>
       <Footer />
     </div>
