@@ -6,7 +6,7 @@ import { mentorClient } from "../../GraphqlApolloClients";
 import Footer from "../../components/mentor/Footer";
 import { GET_MENTOR_BY_ID } from "../admin/AdminUsers";
 import EditMentor from "../../components/mentor/EditMentor";
-import LoadingIcon from "../../images/tempModuleCardImg.PNG";
+import LoadingScreen from "../../components/student/LoadingScreen";
 
 export default function MentorAccount(props) {
   const { mentor } = useContext(MentorAuthContext);
@@ -36,15 +36,7 @@ export default function MentorAccount(props) {
       <Footer />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
-      <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
-        {/* <p>loading...</p> */}
-        <img
-          src={LoadingIcon}
-          className="rounded-lg object-contain w-full h-32 p-2"
-        />
-      </div>
-    </div>
+    <LoadingScreen />
   );
   return mentorAccount;
 }

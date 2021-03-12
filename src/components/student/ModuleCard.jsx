@@ -54,7 +54,7 @@ export default function ModuleCard({ props, module }) {
               ? module.image
               : "https://li-images.s3.amazonaws.com/3206906234/tempSvg.png"
           }
-          className="rounded-lg object-contain w-full h-32 p-2"
+          className="object-cover w-full h-32 rounded-lg overflow-hidden m-2"
         />
       </div>
     </button>

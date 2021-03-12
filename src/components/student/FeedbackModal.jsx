@@ -1,26 +1,77 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { StudentAuthContext } from "../../context/studentAuth";
 import { GiFallingStar } from "react-icons/gi";
 import { IoIosRepeat } from "react-icons/io";
+import { GET_STUDENT_BY_ID } from "./ModuleSummaryBar";
+import { studentClient } from "../../GraphqlApolloClients";
+import { useQuery } from "@apollo/client";
+import { GET_QUESTION_BY_ID } from "./CompletedQuestion";
 
-export default function FeedbackModal({ isOpen, questionFormat, isCorrect }) {
+export default function FeedbackModal({
+  lazyCompletedQuestions,
+  questionId,
+  markedCorrect,
+}) {
   const { student } = useContext(StudentAuthContext);
-  // console.log(activeQuestionId);
+  const { data: { getStudentById: studentObject } = {} } = useQuery(
+    GET_STUDENT_BY_ID,
+    {
+      variables: { studentId: student.id },
+      client: studentClient,
+    }
+  );
+  const {
+    data: { getQuestionById: question } = {},
+    loading: loadingQuestion,
+    questionError,
+  } = useQuery(GET_QUESTION_BY_ID, {
+    variables: { questionId },
+    client: studentClient,
+  });
 
-  // if (isActiveQuestion) {
-  //   startQuestion();
-  // }
+  return lazyCompletedQuestions && question ? (
+    <div className="mt-2 mx-auto">
+      <div className="flex justify-center items-center">
+        <h3 className="mr-2">
+          {lazyCompletedQuestions.includes(questionId) &&
+          question.questionFormat === "Multiple Choice"
+            ? `Correct!`
+            : !markedCorrect && markedCorrect !== undefined && `Not quite.`}
+        </h3>
+        {question.questionFormat !== "Multiple Choice" &&
+          markedCorrect !== undefined &&
+          markedCorrect && <h3 className="mr-2">Onward!</h3>}
 
-  console.log("inside");
-  console.log(isOpen);
-  return (
-    isOpen && (
+        {lazyCompletedQuestions.includes(questionId) ||
+        question.questionFormat === "Link" ||
+        question.questionFormat === "Written Response" ? (
+          <GiFallingStar size={32} />
+        ) : (
+          !markedCorrect &&
+          markedCorrect !== undefined && <IoIosRepeat size={32} />
+        )}
+      </div>
+    </div>
+  ) : (
+    !lazyCompletedQuestions && question && studentObject && (
       <div className="mt-2 mx-auto">
         <div className="flex justify-center items-center">
-          <h3 className="mr-2">{isCorrect && questionFormat ==="Multiple Choice" ? `Correct!` : `Not quite.`}</h3>
-          {questionFormat!=="Multiple Choice" && (<h3 className="mr-2">Onward!</h3>)}
+          <h3 className="mr-2">
+            {studentObject.completedQuestions.includes(questionId) &&
+            question.questionFormat === "Multiple Choice"
+              ? `Correct!`
+              : question.questionFormat === "Multiple Choice" && `Not quite.`}
+          </h3>
+          {question.questionFormat !== "Multiple Choice" && (
+            <h3 className="mr-2">Onward!</h3>
+          )}
 
-          {isCorrect || questionFormat!=="Multiple Choice" ? <GiFallingStar size={32} /> : <IoIosRepeat size={32} />}
+          {studentObject.completedQuestions.includes(questionId) ||
+          question.questionFormat !== "Multiple Choice" ? (
+            <GiFallingStar size={32} />
+          ) : (
+            <IoIosRepeat size={32} />
+          )}
         </div>
       </div>
     )

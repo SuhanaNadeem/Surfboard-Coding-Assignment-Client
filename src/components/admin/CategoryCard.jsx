@@ -66,7 +66,7 @@ export default function CategoryCard({ props, category, created }) {
       <p className=" text-gray-700 font-thin text-sm">{category.createdAt} </p> */}
         <img
           src={tempSvg}
-          className="rounded-lg object-contain w-full h-32 p-2"
+          className="object-cover w-full h-32 rounded-lg overflow-hidden m-2"
         />
         <form
           onSubmit={onSubmit}

@@ -9,7 +9,7 @@ import Footer from "../../components/admin/Footer";
 import StudentModal from "../../components/admin/StudentModal";
 import { GET_STUDENT_BY_ID } from "../../components/student/ModuleSummaryBar";
 import MentorModal from "../../components/admin/MentorModal";
-import LoadingIcon from "../../images/tempModuleCardImg.PNG";
+import LoadingScreen from "../../components/student/LoadingScreen";
 
 export default function AdminUsers(props) {
   const { admin } = useContext(AdminAuthContext);
@@ -146,15 +146,7 @@ export default function AdminUsers(props) {
       />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
-      <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
-        {/* <p>loading...</p> */}
-        <img
-          src={LoadingIcon}
-          className="rounded-lg object-contain w-full h-32 p-2"
-        />
-      </div>
-    </div>
+    <LoadingScreen />
   );
 }
 export const GET_STUDENTS = gql`

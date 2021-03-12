@@ -62,9 +62,7 @@ function QuestionCard({
         <p className=" font-semibold text-sm uppercase tracking-wide ">
           {question.type}
         </p>
-        <p className="text-red-800 w-32 md:w-52 lg:w-full truncate">
-          {question.name}
-        </p>
+        <p className="text-red-800 w-32 md:w-52 truncate">{question.name}</p>
         <p className="tracking-wider text-sm uppercase font-light ">
           {question.points} lynx tokens
         </p>

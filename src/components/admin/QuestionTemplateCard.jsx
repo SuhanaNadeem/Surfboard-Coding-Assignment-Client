@@ -42,7 +42,7 @@ export default function QuestionTemplateCard({
         </p>
         {/* <img
           src={tempModuleCardImg}
-          className="rounded-lg object-contain w-full h-32 p-2"
+          className="object-cover w-full h-32 rounded-lg overflow-hidden m-2"
         /> */}
       </div>
     </button>

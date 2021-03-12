@@ -78,7 +78,7 @@ function SignupStudent(props) {
                 type="orgName"
               />
             </div>
-            <p className="text-gray-700 md:text-xs">
+            <p className="mt-2 text-gray-700 md:text-xs font-light">
               Use what was indicated by your mentors. Usually the form "FRC
               1234" is suggested.
             </p>

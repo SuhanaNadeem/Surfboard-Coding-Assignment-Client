@@ -14,6 +14,7 @@ import QuestionCard, {
 import QuestionModal from "../../components/student/QuestionModal";
 import LoadingIcon from "../../images/tempModuleCardImg.PNG";
 import ModuleEndCard from "../../components/student/ModuleEndCard";
+import LoadingScreen from "../../components/student/LoadingScreen";
 
 export default function StudentModule(props) {
   const { student } = useContext(StudentAuthContext);
@@ -172,15 +173,7 @@ export default function StudentModule(props) {
         <Footer />
       </div>
     ) : (
-      <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
-        <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
-          {/* <p>loading...</p> */}
-          <img
-            src={LoadingIcon}
-            className="rounded-lg object-contain w-full h-32 p-2"
-          />
-        </div>
-      </div>
+      <LoadingScreen />
     );
   return studentModule;
 }

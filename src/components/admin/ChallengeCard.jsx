@@ -77,7 +77,7 @@ export default function ChallengeCard({ props, challenge, created }) {
               ? challenge.image
               : tempSvg
           }
-          className="rounded-lg object-contain w-full h-32 p-2"
+          className="object-cover w-full h-32 rounded-lg overflow-hidden m-2"
         />
         <form
           onSubmit={onSubmit}

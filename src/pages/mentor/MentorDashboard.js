@@ -1,13 +1,13 @@
 import { MentorAuthContext } from "../../context/mentorAuth";
 import React, { useContext } from "react";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import NavBar from "../../components/mentor/NavBar";
 import { mentorClient } from "../../GraphqlApolloClients";
 import Footer from "../../components/mentor/Footer";
 import { GET_STUDENTS_BY_MENTOR } from "../../components/admin/Students";
 import { GET_MENTOR_BY_ID } from "../../pages/admin/AdminUsers";
 import DashboardStudents from "../../components/mentor/DashboardStudents";
-import LoadingIcon from "../../images/tempModuleCardImg.PNG";
+import LoadingScreen from "../../components/student/LoadingScreen";
 
 export default function MentorDashboard(props) {
   const { mentor } = useContext(MentorAuthContext);
@@ -53,15 +53,7 @@ export default function MentorDashboard(props) {
       <Footer />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
-      <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
-        {/* <p>loading...</p> */}
-        <img
-          src={LoadingIcon}
-          className="rounded-lg object-contain w-full h-32 p-2"
-        />
-      </div>
-    </div>
+    <LoadingScreen />
   );
   return mentorDashboard;
 }

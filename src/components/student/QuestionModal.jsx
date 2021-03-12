@@ -49,7 +49,6 @@ export default function QuestionModal({
             handleQuestionClick={handleQuestionClick}
           />
         </div>
-        )
       </>
     )
   );

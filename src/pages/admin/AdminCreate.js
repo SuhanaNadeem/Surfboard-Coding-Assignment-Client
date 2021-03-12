@@ -7,7 +7,7 @@ import CreateQuestion from "../../components/admin/CreateQuestion";
 import CreateCategory from "../../components/admin/CreateCategory";
 import CreateBadge from "../../components/admin/CreateBadge";
 import CreateChallenge from "../../components/admin/CreateChallenge";
-import LoadingIcon from "../../images/tempModuleCardImg.PNG";
+import LoadingScreen from "../../components/student/LoadingScreen";
 
 export default function AdminCreate(props) {
   const { admin } = useContext(AdminAuthContext);
@@ -50,14 +50,6 @@ export default function AdminCreate(props) {
       <Footer />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
-      <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
-        {/* <p>loading...</p> */}
-        <img
-          src={LoadingIcon}
-          className="rounded-lg object-contain w-full h-32 p-2"
-        />
-      </div>
-    </div>
+    <LoadingScreen />
   );
 }

@@ -8,6 +8,7 @@ import {
   GET_COMPLETED_QUESTIONS_BY_MODULE,
   GET_MODULE_BY_ID,
   GET_MODULE_POINTS_BY_STUDENT,
+  GET_TOTAL_POSSIBLE_MODULE_POINTS,
 } from "../../pages/student/StudentModule";
 import {
   GET_COMPLETED_MODULES_BY_STUDENT,
@@ -18,9 +19,7 @@ import ReactPlayer from "react-player";
 import { GET_QUESTION_BY_ID } from "./QuestionCard";
 import FeedbackModal from "./FeedbackModal";
 import StarQuestionCard from "./StarQuestionCard";
-import ModuleEndCard from "./ModuleEndCard";
-import AnswerCorrect from "./AnswerCorrect";
-import AnswerIncorrect from "./AnswerIncorrect";
+import { useLazyQuery } from "@apollo/client";
 
 function QuestionModalCard({
   props,
@@ -40,7 +39,6 @@ function QuestionModalCard({
     data: { getQuestionById: question } = {},
     loading: loadingQuestion,
     questionError,
-    refetch: refetchQuestion,
   } = useQuery(GET_QUESTION_BY_ID, {
     variables: { questionId },
     client: studentClient,
@@ -79,6 +77,13 @@ function QuestionModalCard({
     variables: { moduleId: moduleId },
     client: studentClient,
   });
+  const [
+    getLazyCompletedQuestionsByModule,
+    {
+      loading,
+      data: { getCompletedQuestionsByModule: lazyCompletedQuestions } = {},
+    },
+  ] = useLazyQuery(GET_COMPLETED_QUESTIONS_BY_MODULE);
 
   const { values, onChange, onSubmit, setValues } = useForm(
     handleAnswerPointsCallback,
@@ -94,7 +99,7 @@ function QuestionModalCard({
     loading: loadingCompletedQuestionsByModule,
     completedQuestionsByModuleError,
   } = useQuery(GET_COMPLETED_QUESTIONS_BY_MODULE, {
-    variables: { moduleId: moduleId, studentId: studentId },
+    variables: { moduleId, studentId },
     client: studentClient,
   });
 
@@ -107,20 +112,42 @@ function QuestionModalCard({
   useEffect(() => {
     if (questionId) {
       setValues({ ...values, questionId, answer: savedAnswer });
+      // console.log("changng");
       setIsOpen(completedQuestions.includes(questionId));
+      // console.log(isOpen);
       setHintVisible(false);
     }
   }, [questionId, savedAnswer, hint]);
 
+  // useEffect(() => {
+  //   if (question && question.type === "Question") {
+  //     setIsOpen(true);
+  //   }
+  // }, [completedQuestions]);
+
   useEffect(() => {
-    if (question && question.type === "Question") {
-      setIsOpen(true);
+    if (
+      !loadingHandleAnswerPoints &&
+      !loadingCompletedQuestionsByModule &&
+      !loadingGetModuleById &&
+      !loadingHint &&
+      !loadingQuestion &&
+      !loadingSavedAnswer
+    ) {
+      if (!completedQuestions.includes(questionId)) {
+        setIsOpen(false);
+      } else {
+        setIsOpen(true);
+      }
     }
-  }, [completedQuestions]);
+  }, [questionId]);
 
   const [
     handleAnswerPoints,
-    { loading: loadingHandleAnswerPoints },
+    {
+      loading: loadingHandleAnswerPoints,
+      data: { handleAnswerPoints: markedCorrect } = {},
+    },
   ] = useMutation(HANDLE_ANSWER_POINTS, {
     client: studentClient,
     refetchQueries: [
@@ -137,13 +164,17 @@ function QuestionModalCard({
       { query: GET_COMPLETED_MODULES_BY_STUDENT, variables: { studentId } },
       { query: GET_IN_PROGRESS_MODULES_BY_STUDENT, variables: { studentId } },
     ],
-
-    update(proxy, { data }) {
-      console.log(values);
-      setIsOpen(true);
+    onCompleted({ handleAnswerPoints }) {
+      if (handleAnswerPoints) {
+        getLazyCompletedQuestionsByModule({
+          variables: { moduleId, studentId },
+          client: studentClient,
+        });
+      }
+    },
+    update() {
       setErrors({});
-      console.log("is a skill");
-
+      console.log("done mutation");
       if (question.type === "Skill") {
         var nextQuesId =
           module && module.questions[module.questions.indexOf(question.id) + 1];
@@ -151,6 +182,8 @@ function QuestionModalCard({
         if (!completedQuestions.includes(nextQuesId)) {
           setIsOpen(false);
         }
+      } else {
+        setIsOpen(true);
       }
     },
     onError(err) {
@@ -161,9 +194,27 @@ function QuestionModalCard({
   });
 
   function handleAnswerPointsCallback() {
+    setIsOpen(false);
     handleAnswerPoints();
   }
-
+  const {
+    data: { getTotalPossibleModulePoints: totalPossiblePoints } = {},
+  } = useQuery(GET_TOTAL_POSSIBLE_MODULE_POINTS, {
+    variables: { moduleId },
+    client: studentClient,
+  });
+  const { data: { getModulePointsByStudent: studentPoints } = {} } = useQuery(
+    GET_MODULE_POINTS_BY_STUDENT,
+    {
+      variables: { moduleId, studentId },
+      client: studentClient,
+    }
+  );
+  function goToEndCard() {
+    if (studentPoints === totalPossiblePoints) {
+      props.history.push(`/module/${module.id}/end`);
+    }
+  }
   function togglePrevOpen() {
     var prevQuesId =
       module && module.questions[module.questions.indexOf(question.id) - 1];
@@ -176,11 +227,11 @@ function QuestionModalCard({
     // refetchQuestion({ questionId: nextQuesId });
     handleQuestionClick(nextQuesId);
   }
-  if (module && question) {
-    console.log(module.questions.indexOf(question.id) + 1);
-    console.log(module.questions.length);
-  }
-  console.log(loadingHandleAnswerPoints);
+  // if (module && question) {
+  //   console.log(module.questions.indexOf(question.id) + 1);
+  //   console.log(module.questions.length);
+  // }
+  // console.log(loadingHandleAnswerPoints);
 
   return question && completedQuestions && studentObject && module && errors ? (
     <div className="justify-between flex flex-col h-full">
@@ -357,7 +408,7 @@ function QuestionModalCard({
               )}
               {!completedQuestions.includes(questionId) && (
                 <button
-                  onClick={console.log(values)}
+                  // onClick={console.log(values)}
                   type="submit"
                   className={`${
                     question.questionFormat === "Multiple Choice"
@@ -379,24 +430,13 @@ function QuestionModalCard({
                 {hintVisible && <h3 className="ml-2">{hint}</h3>}
               </button>
             )}
-            {!loadingHandleAnswerPoints && (
+            {isOpen && (
               <FeedbackModal
-                isOpen={isOpen}
-                questionFormat={question.questionFormat}
-                isCorrect={completedQuestions.includes(questionId)}
+                lazyCompletedQuestions={lazyCompletedQuestions}
+                questionId={questionId}
+                markedCorrect={markedCorrect}
               />
             )}
-            {/* <FeedbackModal
-              isOpen={isOpen}
-              isCorrect={completedQuestions.includes(questionId)}
-              loading={loadingHandleAnswerPoints}
-            /> */}
-            {/* {completedQuestions.includes(questionId) && isOpen && (
-              <AnswerCorrect />
-            )}
-            {!completedQuestions.includes(questionId) && isOpen && (
-              <AnswerIncorrect />
-            )} */}
           </div>
         )}
       </div>
@@ -414,7 +454,8 @@ function QuestionModalCard({
             module.questions.length ||
           (module.questions.indexOf(question.id) + 1 ===
             module.questions.length &&
-            module.questions.length === 1)) && (
+            module.questions.length === 1) ||
+          question.type === "Skill") && (
           <button
             className="mx-auto"
             type={question.type === "Skill" ? `submit` : `button`}
@@ -425,10 +466,12 @@ function QuestionModalCard({
                   module.questions.length
               ) {
                 // console.log("endCardIsOpen");
-                props.history.push(`/module/${module.id}/end`);
+                goToEndCard();
                 // used to toggle here
               } else if (question.type !== "Skill") {
                 toggleNextOpen(e);
+              } else {
+                goToEndCard();
               }
             }}
           >

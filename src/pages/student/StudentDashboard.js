@@ -11,6 +11,7 @@ import tempIcon from "../../images/icon1.png";
 import DashboardBadges from "../../components/student/DashboardBadges";
 import LoadingIcon from "../../images/tempModuleCardImg.PNG";
 import { GET_STUDENT_BY_ID } from "../../components/student/ModuleSummaryBar";
+import LoadingScreen from "../../components/student/LoadingScreen";
 
 export default function StudentDashboard(props) {
   const { student } = useContext(StudentAuthContext);
@@ -98,15 +99,7 @@ export default function StudentDashboard(props) {
       <Footer />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
-      <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
-        {/* <p>loading...</p> */}
-        <img
-          src={LoadingIcon}
-          className="rounded-lg object-contain w-full h-32 p-2"
-        />
-      </div>
-    </div>
+    <LoadingScreen />
   );
   return studentDashboard;
 }

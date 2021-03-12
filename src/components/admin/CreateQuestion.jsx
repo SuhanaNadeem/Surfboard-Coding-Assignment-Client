@@ -420,89 +420,91 @@ function CreateQuestion({ admin, props }) {
                     )}
                   </td>
                 </tr>
-                <tr>
-                  <td className="text-sm py-2 border-b border-gray-200">
-                    <label className="text-red-800 font-semibold uppercase tracking-wide ">
-                      Expected Answer
-                    </label>
-                  </td>
-                  {values.questionFormat === "Multiple Choice" ? (
-                    <td className="font-light text-sm px-2 py-2 border-b border-gray-200">
-                      <div>
-                        <input
-                          className="mr-2"
-                          name="expectedAnswer"
-                          value="A"
-                          onChange={onChange}
-                          error={errors.expectedAnswer ? "true" : "false"}
-                          type="radio"
-                          id="A"
-                        />
-                        <label htmlFor="A">A</label>
-                      </div>
-                      <div>
-                        <input
-                          className="mr-2"
-                          name="expectedAnswer"
-                          value="B"
-                          onChange={onChange}
-                          error={errors.expectedAnswer ? "true" : "false"}
-                          type="radio"
-                          id="B"
-                        />
-                        <label htmlFor="B">B</label>
-                      </div>
-                      <div>
-                        <input
-                          className="mr-2"
-                          name="expectedAnswer"
-                          value="C"
-                          onChange={onChange}
-                          error={errors.expectedAnswer ? "true" : "false"}
-                          type="radio"
-                          id="C"
-                        />
-                        <label htmlFor="C">C</label>
-                      </div>
-                      <div>
-                        <input
-                          className="mr-2"
-                          name="expectedAnswer"
-                          value="D"
-                          onChange={onChange}
-                          error={errors.expectedAnswer ? "true" : "false"}
-                          type="radio"
-                          id="D"
-                        />
-                        <label htmlFor="D">D</label>
-                      </div>
-                      {errors.expectedAnswer && (
-                        <p className="text-red-800 font-light">
-                          <b>&#33;</b> {errors.expectedAnswer}
-                        </p>
-                      )}
-                    </td>
-                  ) : (
+                {values.questionFormat !== "Link" && (
+                  <tr>
                     <td className="text-sm py-2 border-b border-gray-200">
-                      <input
-                        className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
-                          errors.expectedAnswer ? "border-red-800" : ""
-                        }`}
-                        name="expectedAnswer"
-                        placeholder=""
-                        value={values.expectedAnswer}
-                        onChange={onChange}
-                        error={errors.expectedAnswer ? "true" : "false"}
-                        type="text"
-                      />
-                      {errors.expectedAnswer && (
-                        <p className="text-red-800 font-light">
-                          <b>&#33;</b> {errors.expectedAnswer}
-                        </p>
-                      )}
+                      <label className="text-red-800 font-semibold uppercase tracking-wide ">
+                        Expected Answer
+                      </label>
                     </td>
-                  )}
-                </tr>
+                    {values.questionFormat === "Multiple Choice" ? (
+                      <td className="font-light text-sm px-2 py-2 border-b border-gray-200">
+                        <div>
+                          <input
+                            className="mr-2"
+                            name="expectedAnswer"
+                            value="A"
+                            onChange={onChange}
+                            error={errors.expectedAnswer ? "true" : "false"}
+                            type="radio"
+                            id="A"
+                          />
+                          <label htmlFor="A">A</label>
+                        </div>
+                        <div>
+                          <input
+                            className="mr-2"
+                            name="expectedAnswer"
+                            value="B"
+                            onChange={onChange}
+                            error={errors.expectedAnswer ? "true" : "false"}
+                            type="radio"
+                            id="B"
+                          />
+                          <label htmlFor="B">B</label>
+                        </div>
+                        <div>
+                          <input
+                            className="mr-2"
+                            name="expectedAnswer"
+                            value="C"
+                            onChange={onChange}
+                            error={errors.expectedAnswer ? "true" : "false"}
+                            type="radio"
+                            id="C"
+                          />
+                          <label htmlFor="C">C</label>
+                        </div>
+                        <div>
+                          <input
+                            className="mr-2"
+                            name="expectedAnswer"
+                            value="D"
+                            onChange={onChange}
+                            error={errors.expectedAnswer ? "true" : "false"}
+                            type="radio"
+                            id="D"
+                          />
+                          <label htmlFor="D">D</label>
+                        </div>
+                        {errors.expectedAnswer && (
+                          <p className="text-red-800 font-light">
+                            <b>&#33;</b> {errors.expectedAnswer}
+                          </p>
+                        )}
+                      </td>
+                    ) : (
+                      <td className="text-sm py-2 border-b border-gray-200">
+                        <input
+                          className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                            errors.expectedAnswer ? "border-red-800" : ""
+                          }`}
+                          name="expectedAnswer"
+                          placeholder=""
+                          value={values.expectedAnswer}
+                          onChange={onChange}
+                          error={errors.expectedAnswer ? "true" : "false"}
+                          type="text"
+                        />
+                        {errors.expectedAnswer && (
+                          <p className="text-red-800 font-light">
+                            <b>&#33;</b> {errors.expectedAnswer}
+                          </p>
+                        )}
+                      </td>
+                    )}
+                  </tr>
+                )}{" "}
                 <tr>
                   <td className="text-sm py-2 border-b border-gray-200">
                     <label className="text-red-800 font-semibold uppercase tracking-wide ">

@@ -13,6 +13,7 @@ import AccountBadges from "../../components/student/AccountBadges";
 import { GET_STUDENT_BY_ID } from "../../components/student/ModuleSummaryBar";
 import { GET_MENTORS_BY_STUDENT } from "../../components/admin/Mentors";
 import LoadingIcon from "../../images/tempModuleCardImg.PNG";
+import LoadingScreen from "../../components/student/LoadingScreen";
 
 export default function StudentAccount(props) {
   const { student } = useContext(StudentAuthContext);
@@ -83,15 +84,7 @@ export default function StudentAccount(props) {
         <Footer />
       </div>
     ) : (
-      <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
-        <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
-          {/* <p>loading...</p> */}
-          <img
-            src={LoadingIcon}
-            className="rounded-lg object-contain w-full h-32 p-2"
-          />
-        </div>
-      </div>
+      <LoadingScreen />
     );
   return studentAccount;
 }

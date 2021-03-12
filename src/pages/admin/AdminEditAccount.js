@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { gql, useQuery } from "@apollo/client";
-import LoadingIcon from "../../images/tempModuleCardImg.PNG";
+import LoadingScreen from "../../components/student/LoadingScreen";
 
 import NavBar from "../../components/admin/NavBar";
 import Footer from "../../components/admin/Footer";
@@ -34,14 +34,6 @@ export default function AdminEditAccount(props) {
       <Footer />
     </div>
   ) : (
-    <div className="h-full flex flex-col min-h-screen w-full items-center justify-center">
-      <div className="uppercase font-light text-lg flex flex-col w-full justify-center items-center">
-        {/* <p>loading...</p> */}
-        <img
-          src={LoadingIcon}
-          className="rounded-lg object-contain w-full h-32 p-2"
-        />
-      </div>
-    </div>
+    <LoadingScreen />
   );
 }
