@@ -65,13 +65,11 @@ export default function StudentAccount(props) {
             <Mentors student={studentObject} />
           </div>
           <div className="w-full">
-            {allBadges && allBadges.length !== 0 && (
-              <AccountBadges
-                props={props}
-                allBadges={allBadges}
-                studentBadges={studentBadges}
-              />
-            )}
+            <AccountBadges
+              props={props}
+              allBadges={allBadges}
+              studentBadges={studentBadges}
+            />
           </div>
 
           <div

@@ -69,7 +69,7 @@ export default function BadgeCard({ props, badge, created }) {
               ? badge.image
               : "https://li-images.s3.amazonaws.com/3206906234/tempSvg.png"
           }
-          className="object-cover w-full h-32 rounded-lg overflow-hidden m-2"
+          className="object-contain w-full h-32 rounded-lg overflow-hidden m-2"
         />
         <form
           onSubmit={onSubmit}

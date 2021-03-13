@@ -12,13 +12,16 @@ function Mentors({ student }) {
     }
   );
 
-  return mentors && mentors.length !== 0 ? (
+  return mentors ? (
     <div className="flex flex-col w-full md:w-1/2">
       <h2 className="text-3xl mb-2 font-normal">Mentors</h2>
-
-      {mentors.map((mentor, index) => (
-        <Mentor key={index} mentor={mentor} />
-      ))}
+      {mentors.length > 0 ? (
+        mentors.map((mentor, index) => <Mentor key={index} mentor={mentor} />)
+      ) : (
+        <p className="font-light text-left w-full text-sm">
+          Once you're added by them, your mentor(s) will appear here.
+        </p>
+      )}
     </div>
   ) : (
     <></>

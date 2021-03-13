@@ -7,7 +7,6 @@ import { IoMdTrash } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
 
 import { AdminAuthContext } from "../../context/adminAuth";
-import tempSvg from "../../images/tempSvg.png";
 import {
   GET_CHALLENGES,
   GET_CHALLENGES_BY_ADMIN,
@@ -75,9 +74,13 @@ export default function ChallengeCard({ props, challenge, created }) {
           src={
             challenge.image && challenge.image !== ""
               ? challenge.image
-              : tempSvg
+              : "https://li-images.s3.amazonaws.com/3206906234/tempSvg.png"
           }
-          className="object-cover w-full h-32 rounded-lg overflow-hidden m-2"
+          className={`${
+            challenge.image && challenge.image !== ""
+              ? `object-cover`
+              : `object-contain`
+          } w-full h-32 rounded-lg overflow-hidden m-2`}
         />
         <form
           onSubmit={onSubmit}

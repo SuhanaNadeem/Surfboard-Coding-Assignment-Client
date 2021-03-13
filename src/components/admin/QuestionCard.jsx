@@ -76,7 +76,11 @@ export default function QuestionCard({ props, question, created }) {
               ? question.image
               : "https://li-images.s3.amazonaws.com/3206906234/tempSvg.png"
           }
-          className="object-cover w-full h-32 rounded-lg overflow-hidden m-2"
+          className={`${
+            question.image && question.image !== ""
+              ? `object-cover`
+              : `object-contain`
+          } w-full h-32 rounded-lg overflow-hidden m-2`}
         />
         <form
           onSubmit={onSubmit}

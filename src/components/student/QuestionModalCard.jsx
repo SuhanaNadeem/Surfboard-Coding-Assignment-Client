@@ -112,18 +112,10 @@ function QuestionModalCard({
   useEffect(() => {
     if (questionId) {
       setValues({ ...values, questionId, answer: savedAnswer });
-      // console.log("changng");
       setIsOpen(completedQuestions.includes(questionId));
-      // console.log(isOpen);
       setHintVisible(false);
     }
   }, [questionId, savedAnswer, hint]);
-
-  // useEffect(() => {
-  //   if (question && question.type === "Question") {
-  //     setIsOpen(true);
-  //   }
-  // }, [completedQuestions]);
 
   useEffect(() => {
     if (
@@ -165,6 +157,7 @@ function QuestionModalCard({
       { query: GET_IN_PROGRESS_MODULES_BY_STUDENT, variables: { studentId } },
     ],
     onCompleted({ handleAnswerPoints }) {
+      console.log("on completed");
       if (handleAnswerPoints) {
         getLazyCompletedQuestionsByModule({
           variables: { moduleId, studentId },
@@ -224,14 +217,9 @@ function QuestionModalCard({
   function toggleNextOpen() {
     var nextQuesId =
       module && module.questions[module.questions.indexOf(question.id) + 1];
-    // refetchQuestion({ questionId: nextQuesId });
+    console.log(nextQuesId);
     handleQuestionClick(nextQuesId);
   }
-  // if (module && question) {
-  //   console.log(module.questions.indexOf(question.id) + 1);
-  //   console.log(module.questions.length);
-  // }
-  // console.log(loadingHandleAnswerPoints);
 
   return question && completedQuestions && studentObject && module && errors ? (
     <div className="justify-between flex flex-col h-full">
@@ -245,7 +233,7 @@ function QuestionModalCard({
         <div>
           {question.image && question.image !== "" && (
             <div
-              className="bg-cover mb-2 w-64 h-32 bg-center bg-no-repeat rounded-lg  mx-auto"
+              className="bg-cover mt-2 mb-4 w-full md:w-96 h-48 bg-center bg-no-repeat rounded-lg  mx-auto"
               style={{
                 backgroundImage: `url(${question.image})`,
               }}
@@ -408,7 +396,9 @@ function QuestionModalCard({
               )}
               {!completedQuestions.includes(questionId) && (
                 <button
-                  // onClick={console.log(values)}
+                  // onClick={(e) => {
+                  //   e.preventDefault();
+                  // }}
                   type="submit"
                   className={`${
                     question.questionFormat === "Multiple Choice"
@@ -442,8 +432,12 @@ function QuestionModalCard({
       </div>
       <form className="flex mt-6" onSubmit={onSubmit}>
         {module.questions.indexOf(question.id) != 0 && (
-          <button className="mx-auto" onClick={togglePrevOpen} type="button">
-            <BsChevronLeft size={32} />
+          <button
+            className="mx-auto focus:outline-none"
+            onClick={togglePrevOpen}
+            type="button"
+          >
+            <BsChevronLeft size={32} className="focus:outline-none" />
           </button>
         )}
 
@@ -457,25 +451,39 @@ function QuestionModalCard({
             module.questions.length === 1) ||
           question.type === "Skill") && (
           <button
-            className="mx-auto"
+            className="mx-auto focus:outline-none"
             type={question.type === "Skill" ? `submit` : `button`}
             onClick={(e) => {
-              if (
-                module &&
+              console.log("entered onclick");
+              console.log(
                 module.questions.indexOf(question.id) + 1 ===
+                  module.questions.length &&
+                  studentObject.completedModules.includes(moduleId)
+              );
+              console.log(
+                module.questions.indexOf(question.id) + 1 !==
                   module.questions.length
+              );
+              console.log(
+                module.questions.indexOf(question.id) + 1 ===
+                  module.questions.length && module.questions.length === 1
+              );
+              if (
+                module.questions.indexOf(question.id) + 1 ===
+                module.questions.length
               ) {
                 // console.log("endCardIsOpen");
                 goToEndCard();
                 // used to toggle here
               } else if (question.type !== "Skill") {
+                e.preventDefault();
+
                 toggleNextOpen(e);
-              } else {
-                goToEndCard();
               }
             }}
           >
-            <BsChevronRight size={32} />
+            {/* TODO: wokring on endcard when last q is skill + skipping skill when next is clicked on q + fixed wrong -> correct!! */}
+            <BsChevronRight size={32} className="focus:outline-none" />
           </button>
         )}
       </form>

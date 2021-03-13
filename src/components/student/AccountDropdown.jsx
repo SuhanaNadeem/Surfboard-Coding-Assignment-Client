@@ -82,12 +82,12 @@ export default function StudentAccountDropdown({ logout, props }) {
 
                 props.history.push("/studentAccount");
               }}
-              className="focus:outline-none text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
+              className="focus:outline-none text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800 "
             >
               Edit Account
             </button>
             <button
-              className="text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
+              className="text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800 focus:outline-none"
               onClick={(e) => {
                 logout();
                 studentClient.cache.reset();

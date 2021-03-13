@@ -65,9 +65,10 @@ export default function CategoryCard({ props, category, created }) {
       </p>
       <p className=" text-gray-700 font-thin text-sm">{category.createdAt} </p> */}
         <img
-          src={tempSvg}
-          className="object-cover w-full h-32 rounded-lg overflow-hidden m-2"
+          src="https://li-images.s3.amazonaws.com/3206906234/tempSvg.png"
+          className="object-contain w-full h-32 rounded-lg overflow-hidden m-2"
         />
+
         <form
           onSubmit={onSubmit}
           className="flex items-center justify-center mt-2"

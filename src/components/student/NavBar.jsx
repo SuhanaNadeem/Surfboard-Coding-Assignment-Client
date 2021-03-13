@@ -26,15 +26,15 @@ export default function StudentNavBar({ props }) {
               e.preventDefault();
               props.history.push("/login");
             }}
-            className="hover:opacity-75 hidden md:flex font-light items-center justify-center"
+            className="hover:opacity-75 hidden md:flex font-light items-center justify-center focus:outline-none"
           >
             <p className="mr-2">LYNX Institute</p>
             <img
               src="https://li-images.s3.amazonaws.com/8945722254/tempSvgWhite.png"
-              className="w-6 h-full"
-            />{" "}
+              className="w-6 h-full focus:outline-none"
+            />
           </button>
-          <div className="flex-1 flex items-center justify-end">
+          <div className="flex-1 flex items-center justify-end focus:outline-none">
             {pageLinksAndTitles.map((pageInfo) => (
               <button
                 key={pageInfo.title}
