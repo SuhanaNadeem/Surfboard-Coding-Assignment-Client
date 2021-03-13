@@ -1,10 +1,9 @@
-import { gql, useQuery } from "@apollo/client";
-import React, { useState } from "react";
+import { useQuery } from "@apollo/client";
+import React from "react";
+import { BiCheckboxChecked } from "react-icons/bi";
 import { adminClient } from "../../GraphqlApolloClients";
 import { GET_MODULE_POINTS_BY_STUDENT } from "../../pages/student/StudentModule";
-import { GET_MODULE_BY_ID } from "./QuestionCard";
 
-import { BiCheckboxChecked } from "react-icons/bi";
 function CompletedModule({ student, module }) {
   const {
     data: { getModulePointsByStudent: points } = {},

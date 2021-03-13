@@ -1,5 +1,4 @@
 import React from "react";
-import { MdPersonOutline } from "react-icons/md";
 import tempWhiteLogo from "../../images/tempSvgWhite.png";
 
 export default function MentorTitleBar() {

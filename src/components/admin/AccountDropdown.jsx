@@ -1,10 +1,7 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
-import { adminClient } from "../../GraphqlApolloClients";
-import { MdPersonOutline } from "react-icons/md";
-import tempWhiteLogo from "../../images/tempSvgWhite.png";
-import { MdMenu } from "react-icons/md";
-
 import { gql, useQuery } from "@apollo/client";
+import React, { useState } from "react";
+import { MdMenu, MdPersonOutline } from "react-icons/md";
+import { adminClient } from "../../GraphqlApolloClients";
 
 export default function AdminAccountDropdown({ logout, props }) {
   const [isOpen, setIsOpen] = useState(false);

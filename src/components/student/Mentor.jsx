@@ -1,6 +1,6 @@
 import React from "react";
-
 import { MdPerson } from "react-icons/md";
+
 function Mentor({ mentor }) {
   return mentor ? (
     <div className="flex items-center justify-start mb-2">

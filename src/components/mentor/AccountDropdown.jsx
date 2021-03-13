@@ -1,9 +1,7 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
-import { mentorClient } from "../../GraphqlApolloClients";
-import { MdPersonOutline } from "react-icons/md";
-import tempWhiteLogo from "../../images/tempSvgWhite.png";
 import { gql, useQuery } from "@apollo/client";
-import { MdMenu } from "react-icons/md";
+import React, { useState } from "react";
+import { MdMenu, MdPersonOutline } from "react-icons/md";
+import { mentorClient } from "../../GraphqlApolloClients";
 
 export default function MentorAccountDropdown({ logout, props }) {
   const [isOpen, setIsOpen] = useState(false);

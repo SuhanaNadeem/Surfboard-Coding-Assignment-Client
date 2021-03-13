@@ -1,11 +1,10 @@
 import { gql, useMutation } from "@apollo/client";
-import React, { useState, useContext } from "react";
-import { useForm } from "../../util/hooks";
-
-import { adminClient } from "../../GraphqlApolloClients";
-import { IoMdTrash } from "react-icons/io";
+import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
+import { IoMdTrash } from "react-icons/io";
+import { adminClient } from "../../GraphqlApolloClients";
 import { GET_STUDENTS } from "../../pages/admin/AdminUsers";
+import { useForm } from "../../util/hooks";
 
 export default function StudentCard({
   props,

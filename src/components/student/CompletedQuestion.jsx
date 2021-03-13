@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
-import { StudentAuthContext } from "../../context/studentAuth";
-
 import { gql, useQuery } from "@apollo/client";
+import React, { useContext } from "react";
+import { CgCheckO, CgCloseO } from "react-icons/cg";
+import { StudentAuthContext } from "../../context/studentAuth";
 import { studentClient } from "../../GraphqlApolloClients";
-import { CgCloseO, CgCheckO } from "react-icons/cg";
 
 export default function CompletedQuestion({
   props,

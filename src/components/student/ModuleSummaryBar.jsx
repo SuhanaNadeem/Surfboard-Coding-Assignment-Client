@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
-import { StudentAuthContext } from "../../context/studentAuth";
-
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { studentClient } from "../../GraphqlApolloClients";
-import CompletedQuestion from "./CompletedQuestion";
+import React, { useContext } from "react";
 import { BsStar, BsStarFill } from "react-icons/bs";
+import { StudentAuthContext } from "../../context/studentAuth";
+import { studentClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
+import CompletedQuestion from "./CompletedQuestion";
 
 export default function ModuleSummaryBar({
   props,

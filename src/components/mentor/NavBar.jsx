@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-
 import { useHistory } from "react-router-dom";
 import { MentorAuthContext } from "../../context/mentorAuth";
-import MentorAccountDropdown from "./AccountDropdown";
 import tempWhiteLogo from "../../images/tempSvgWhite.png";
+import MentorAccountDropdown from "./AccountDropdown";
 
 export default function MentorNavBar({ props }) {
   const history = useHistory();

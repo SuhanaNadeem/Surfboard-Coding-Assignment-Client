@@ -1,10 +1,7 @@
 import React, { useContext } from "react";
-
 import { useHistory } from "react-router-dom";
-
 import { AdminAuthContext } from "../../context/adminAuth";
 import tempWhiteLogo from "../../images/tempSvgWhite.png";
-
 import AdminAccountDropdown from "./AccountDropdown";
 
 export default function NavBar({ props }) {

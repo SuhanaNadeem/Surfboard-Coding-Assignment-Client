@@ -6,14 +6,12 @@ import { gql, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
 
 export default function DashboardCategories({ props }) {
-  const history = useHistory();
-
-  const {
-    data: { getCategories: categories } = {},
-    loading: loadingCategories,
-  } = useQuery(GET_CATEGORIES, {
-    client: studentClient,
-  });
+  const { data: { getCategories: categories } = {} } = useQuery(
+    GET_CATEGORIES,
+    {
+      client: studentClient,
+    }
+  );
 
   return categories ? (
     <div>

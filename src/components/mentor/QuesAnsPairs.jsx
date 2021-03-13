@@ -1,7 +1,7 @@
+import { gql, useQuery } from "@apollo/client";
 import React from "react";
 import { mentorClient } from "../../GraphqlApolloClients";
 import QuesAnsPair from "./QuesAnsPair";
-import { gql, useQuery } from "@apollo/client";
 
 function QuesAnsPairs({ student }) {
   const {

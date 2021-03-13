@@ -1,12 +1,12 @@
-import React, { useContext, useRef, useState } from "react";
-
-import { useForm } from "../../util/hooks";
 import { gql, useMutation } from "@apollo/client";
+import React, { useContext, useState } from "react";
+import StudentTitleBar from "../../components/student/TitleBar";
 // import { MdPersonOutline } from "react-icons/md";
 // import { VscKey } from "react-icons/vsc";
 import { StudentAuthContext } from "../../context/studentAuth";
-import StudentTitleBar from "../../components/student/TitleBar";
 import robotics from "../../images/robotics.jpg";
+import { useForm } from "../../util/hooks";
+
 function SignupStudent(props) {
   const context = useContext(StudentAuthContext);
   const [errors, setErrors] = useState({});

@@ -1,11 +1,10 @@
+import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import tempSvg from "../../images/tempSvg.png";
-import { AiOutlineFundView, AiOutlineUserAdd } from "react-icons/ai";
+import { AiOutlineUserAdd } from "react-icons/ai";
+import { mentorClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
 import { GET_STUDENTS_BY_MENTOR } from "../admin/Students";
 import { GET_STUDENTS_BY_ORG_NAME } from "./DashboardStudents";
-import { mentorClient } from "../../GraphqlApolloClients";
-import { gql, useMutation } from "@apollo/client";
 export default function AddStudent({ mentor, student }) {
   const [errors, setErrors] = useState({});
 

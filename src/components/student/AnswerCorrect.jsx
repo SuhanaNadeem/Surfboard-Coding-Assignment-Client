@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
-import { StudentAuthContext } from "../../context/studentAuth";
+import React, { useContext } from "react";
 import { GiFallingStar } from "react-icons/gi";
-import { IoIosRepeat } from "react-icons/io";
+import { StudentAuthContext } from "../../context/studentAuth";
 
 export default function AnswerCorrect({ props }) {
   const { student } = useContext(StudentAuthContext);

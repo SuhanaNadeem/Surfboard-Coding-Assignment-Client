@@ -1,11 +1,10 @@
-import CategoryCard from "./CategoryCard";
+import React from "react";
 import BadgeCard from "./BadgeCard";
+import CategoryCard from "./CategoryCard";
 import ChallengeCard from "./ChallengeCard";
 import ModuleCard from "./ModuleCard";
 import QuestionCard from "./QuestionCard";
-import QuestionTemplateCard from "./QuestionTemplateCard";
 
-import React from "react";
 export default function DashboardCards({ props, objects, adminObjects, type }) {
   var createPage;
   if (type === "Categories") {

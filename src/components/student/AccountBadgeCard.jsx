@@ -1,5 +1,4 @@
 import React from "react";
-import tempSvg from "../../images/tempSvg.png";
 
 export default function AccountBadgeCard({ props, badge, earned }) {
   return badge ? (

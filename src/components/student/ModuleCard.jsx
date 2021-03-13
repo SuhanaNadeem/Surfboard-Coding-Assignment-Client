@@ -1,12 +1,7 @@
+import { gql, useQuery } from "@apollo/client";
 import React from "react";
 import { BsStarFill } from "react-icons/bs";
-
-import { gql, useQuery } from "@apollo/client";
 import { studentClient } from "../../GraphqlApolloClients";
-import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
-import tempSvg from "../../images/tempSvg.png";
-import { StudentAuthContext } from "../../context/studentAuth";
-import { useContext } from "react";
 
 export default function ModuleCard({ props, module }) {
   // const {context} = useContext(StudentAuthContext);

@@ -1,6 +1,6 @@
+import { gql, useQuery } from "@apollo/client";
 import React from "react";
 import { mentorClient } from "../../GraphqlApolloClients";
-import { gql, useQuery } from "@apollo/client";
 
 function Progress({ student }) {
   const { data: { getTotalPointsByStudent: totalPoints } = {} } = useQuery(

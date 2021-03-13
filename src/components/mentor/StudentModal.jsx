@@ -1,12 +1,12 @@
+import { useQuery } from "@apollo/client";
 import React from "react";
 import { mentorClient } from "../../GraphqlApolloClients";
-import { useQuery } from "@apollo/client";
 import { GET_STUDENT_BY_ID } from "../student/QuestionModalCard";
+import Badges from "./Badges";
 import CompletedModules from "./CompletedModules";
 import InProgressModules from "./InProgressModules";
-import Badges from "./Badges";
-import QuesAnsPairs from "./QuesAnsPairs";
 import Progress from "./Progress";
+import QuesAnsPairs from "./QuesAnsPairs";
 
 export default function StudentModal({
   props,

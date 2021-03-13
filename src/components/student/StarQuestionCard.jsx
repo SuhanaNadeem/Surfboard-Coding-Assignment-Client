@@ -1,11 +1,11 @@
+import { gql, useMutation } from "@apollo/client";
+import React, { useContext, useEffect } from "react";
 import { BsStar, BsStarFill } from "react-icons/bs";
-import React, { useContext, useEffect, useState } from "react";
-
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { StudentAuthContext } from "../../context/studentAuth";
 import { studentClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
-import { StudentAuthContext } from "../../context/studentAuth";
 import { GET_STUDENT_BY_ID } from "./ModuleSummaryBar";
+
 export default function StarQuestionCard({ props, questionId, studentObject }) {
   const { student } = useContext(StudentAuthContext);
   if (studentObject) {

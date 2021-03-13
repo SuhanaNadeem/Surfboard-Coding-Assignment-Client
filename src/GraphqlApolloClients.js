@@ -1,10 +1,8 @@
-import { ApolloClient, gql, InMemoryCache } from "@apollo/client/core";
 import { split } from "@apollo/client";
-import { WebSocketLink } from "@apollo/client/link/ws";
-
+import { ApolloClient, InMemoryCache } from "@apollo/client/core";
 import { setContext } from "@apollo/client/link/context";
+import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
-
 import { createUploadLink } from "apollo-upload-client";
 
 const backendURI =

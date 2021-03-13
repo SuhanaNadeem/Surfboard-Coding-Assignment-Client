@@ -1,8 +1,8 @@
+import { useQuery } from "@apollo/client";
 import React from "react";
 import { adminClient } from "../../GraphqlApolloClients";
-import { useQuery, gql } from "@apollo/client";
-import EditMentor from "./EditMentor";
 import { GET_MENTOR_BY_ID } from "../../pages/admin/AdminUsers";
+import EditMentor from "./EditMentor";
 import Students from "./Students";
 
 export default function MentorModal({

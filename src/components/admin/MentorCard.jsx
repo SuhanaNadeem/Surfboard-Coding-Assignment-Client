@@ -1,12 +1,10 @@
 import { gql, useMutation } from "@apollo/client";
-import React, { useState, useContext } from "react";
-import { useForm } from "../../util/hooks";
-
-import { adminClient } from "../../GraphqlApolloClients";
-import { IoMdTrash } from "react-icons/io";
+import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
-import { AdminAuthContext } from "../../context/adminAuth";
+import { IoMdTrash } from "react-icons/io";
+import { adminClient } from "../../GraphqlApolloClients";
 import { GET_MENTORS } from "../../pages/admin/AdminUsers";
+import { useForm } from "../../util/hooks";
 
 export default function MentorCard({
   props,

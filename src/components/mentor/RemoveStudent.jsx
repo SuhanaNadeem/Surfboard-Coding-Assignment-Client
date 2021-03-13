@@ -1,11 +1,10 @@
+import { gql, useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import tempSvg from "../../images/tempSvg.png";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
+import { mentorClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
 import { GET_STUDENTS_BY_MENTOR } from "../admin/Students";
 import { GET_STUDENTS_BY_ORG_NAME } from "./DashboardStudents";
-import { mentorClient } from "../../GraphqlApolloClients";
-import { gql, useMutation } from "@apollo/client";
 export default function RemoveStudent({ mentor, student }) {
   const [errors, setErrors] = useState({});
 

@@ -1,9 +1,9 @@
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
-import { GET_QUESTION_BY_ID } from "../student/CompletedQuestion";
-import { adminClient } from "../../GraphqlApolloClients";
 import { IoMdTrash } from "react-icons/io";
+import { adminClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
+import { GET_QUESTION_BY_ID } from "../student/CompletedQuestion";
 import { GET_STRING_STRING_DICTS_BY_STUDENT } from "./QuesAnsPairs";
 
 export default function QuesAnsPair({

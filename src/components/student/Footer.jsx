@@ -1,7 +1,5 @@
 import React from "react";
-import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
 import { useHistory } from "react-router-dom";
-import tempSvg from "../../images/tempSvg.png";
 export default function Footer() {
   const history = useHistory();
   return (

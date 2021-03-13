@@ -1,7 +1,6 @@
+import { gql, useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import { adminClient } from "../../GraphqlApolloClients";
-
-import { gql, useQuery } from "@apollo/client";
 import { GET_CATEGORY_BY_ID } from "./ChallengeCard";
 
 export default function CategoryInputDropdown({

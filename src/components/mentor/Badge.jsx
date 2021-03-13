@@ -1,6 +1,6 @@
 import React from "react";
-
 import { BiAward } from "react-icons/bi";
+
 function Badge({ badge }) {
   return badge ? (
     <div className="flex items-start justify-start mb-2">

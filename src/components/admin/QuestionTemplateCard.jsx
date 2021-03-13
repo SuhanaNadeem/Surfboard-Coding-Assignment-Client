@@ -1,8 +1,7 @@
-import React from "react";
-
 import { gql, useQuery } from "@apollo/client";
+import React from "react";
 import { adminClient } from "../../GraphqlApolloClients";
-import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
+
 export default function QuestionTemplateCard({
   props,
   questionTemplate,

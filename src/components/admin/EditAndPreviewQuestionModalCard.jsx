@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-
 import { gql, useQuery } from "@apollo/client";
-import { adminClient } from "../../GraphqlApolloClients";
+import React, { useEffect, useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import ReactPlayer from "react-player";
-import { GET_MODULE_BY_ID } from "./QuestionCard";
+import { adminClient } from "../../GraphqlApolloClients";
 import { GET_QUESTION_BY_ID } from "../student/CompletedQuestion";
+import { GET_MODULE_BY_ID } from "./QuestionCard";
 
 function EditAndPreviewQuestionModalCard({
   props,

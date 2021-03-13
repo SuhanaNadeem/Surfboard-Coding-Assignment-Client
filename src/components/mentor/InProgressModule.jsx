@@ -1,9 +1,9 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import React from "react";
+import { BiCheckbox } from "react-icons/bi";
 import { mentorClient } from "../../GraphqlApolloClients";
 import { GET_TOTAL_POSSIBLE_MODULE_POINTS } from "../../pages/student/StudentModule";
 
-import { BiCheckbox } from "react-icons/bi";
 function InProgressModule({ module }) {
   const {
     data: { getTotalPossibleModulePoints: points } = {},

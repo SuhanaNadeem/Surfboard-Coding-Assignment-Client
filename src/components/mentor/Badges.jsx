@@ -1,7 +1,7 @@
+import { gql, useQuery } from "@apollo/client";
 import React from "react";
 import { mentorClient } from "../../GraphqlApolloClients";
 import Badge from "./Badge";
-import { gql, useQuery } from "@apollo/client";
 
 function Badges({ student }) {
   const { data: { getBadgesByStudent: badges } = {} } = useQuery(

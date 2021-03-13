@@ -1,12 +1,11 @@
-import { gql, useQuery } from "@apollo/client";
-import React, { useState } from "react";
+import { useQuery } from "@apollo/client";
+import React from "react";
+import { BiAward } from "react-icons/bi";
 import { adminClient } from "../../GraphqlApolloClients";
-import { GET_MODULE_POINTS_BY_STUDENT } from "../../pages/student/StudentModule";
+import { GET_QUESTION_BY_ID } from "../student/CompletedQuestion";
+import { GET_CATEGORY_BY_ID } from "../student/ModuleCard";
 import { GET_MODULE_BY_ID } from "./QuestionCard";
 
-import { BiAward } from "react-icons/bi";
-import { GET_CATEGORY_BY_ID } from "../student/ModuleCard";
-import { GET_QUESTION_BY_ID } from "../student/CompletedQuestion";
 function Badge({ badge }) {
   // console.log(badge);
 

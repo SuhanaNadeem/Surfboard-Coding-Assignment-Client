@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react";
-import { StudentAuthContext } from "../../context/studentAuth";
-import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
+import React from "react";
 import { RiArrowGoBackFill } from "react-icons/ri";
+import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
 export default function ModuleEndCard({
   props,
   module,

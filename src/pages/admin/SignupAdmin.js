@@ -1,11 +1,10 @@
-import React, { useContext, useRef, useState } from "react";
-
-import { useForm } from "../../util/hooks";
 import { gql, useMutation } from "@apollo/client";
-
-import { AdminAuthContext } from "../../context/adminAuth";
+import React, { useContext, useState } from "react";
 import AdminTitleBar from "../../components/admin/TitleBar";
+import { AdminAuthContext } from "../../context/adminAuth";
 import robotics from "../../images/robotics.jpg";
+import { useForm } from "../../util/hooks";
+
 function SignupAdmin(props) {
   const context = useContext(AdminAuthContext);
   const [errors, setErrors] = useState({});

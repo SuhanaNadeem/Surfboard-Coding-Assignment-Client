@@ -1,29 +1,28 @@
-import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { StudentAuthProvider } from "./context/studentAuth";
-import { MentorAuthProvider } from "./context/mentorAuth";
+import "./App.css";
 import { AdminAuthProvider } from "./context/adminAuth";
-import StudentAuthRoute from "./util/StudentAuthRoute";
-import MentorAuthRoute from "./util/MentorAuthRoute";
-import AdminAuthRoute from "./util/AdminAuthRoute";
-import LoginStudent from "./pages/student/LoginStudent";
-import SignupStudent from "./pages/student/SignupStudent";
-import SignupMentor from "./pages/mentor/SignupMentor";
-import LoginMentor from "./pages/mentor/LoginMentor";
-import MentorDashboard from "./pages/mentor/MentorDashboard";
-
-import SignupAdmin from "./pages/admin/SignupAdmin";
-import LoginAdmin from "./pages/admin/LoginAdmin";
-import StudentDashboard from "./pages/student/StudentDashboard";
-import StudentModule from "./pages/student/StudentModule";
-import AdminDashboard from "./pages/admin/AdminDashboard";
+import { MentorAuthProvider } from "./context/mentorAuth";
+import { StudentAuthProvider } from "./context/studentAuth";
 import AdminCreate from "./pages/admin/AdminCreate";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminEditAccount from "./pages/admin/AdminEditAccount";
 import AdminEditAndPreview from "./pages/admin/AdminEditAndPreview";
 import AdminUsers from "./pages/admin/AdminUsers";
-import AdminEditAccount from "./pages/admin/AdminEditAccount";
-import StudentAccount from "./pages/student/StudentAccount";
+import LoginAdmin from "./pages/admin/LoginAdmin";
+import SignupAdmin from "./pages/admin/SignupAdmin";
+import LoginMentor from "./pages/mentor/LoginMentor";
 import MentorAccount from "./pages/mentor/MentorAccount";
+import MentorDashboard from "./pages/mentor/MentorDashboard";
+import SignupMentor from "./pages/mentor/SignupMentor";
+import LoginStudent from "./pages/student/LoginStudent";
+import SignupStudent from "./pages/student/SignupStudent";
+import StudentAccount from "./pages/student/StudentAccount";
+import StudentDashboard from "./pages/student/StudentDashboard";
+import StudentModule from "./pages/student/StudentModule";
+import AdminAuthRoute from "./util/AdminAuthRoute";
+import MentorAuthRoute from "./util/MentorAuthRoute";
+import StudentAuthRoute from "./util/StudentAuthRoute";
 
 function App() {
   return (

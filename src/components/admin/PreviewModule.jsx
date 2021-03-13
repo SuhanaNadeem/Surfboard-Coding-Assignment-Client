@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
-
-import EditAndPreviewQuestionModal from "../../components/admin/EditAndPreviewQuestionModal";
+import React, { useEffect, useState } from "react";
 import EditAndPreviewQuestionCard, {
   GET_QUESTION_BY_ID,
 } from "../../components/admin/EditAndPreviewQuestionCard";
+import EditAndPreviewQuestionModal from "../../components/admin/EditAndPreviewQuestionModal";
+
 export default function PreviewModule({ props, selectedQuestionId, module }) {
   const [activeQuestionId, setActiveQuestionId] = useState(selectedQuestionId);
 
