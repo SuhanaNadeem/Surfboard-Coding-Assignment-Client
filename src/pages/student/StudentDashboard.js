@@ -58,7 +58,7 @@ export default function StudentDashboard(props) {
       {/* mx-8 sm:mx-24 md:mx-32 lg:mx-48     ml-8 sm:ml-24 md:ml-32 lg:ml-48*/}
 
       <div className="bg-red-800 w-full h-40 flex items-center justify-start overflow-hidden ">
-        <div className="flex w-full items-center justify-start mx-8 sm:mx-24 md:mx-32 lg:mx-48 ">
+        <div className="flex w-full items-center justify-start mx-8 sm:mx-24 md:mx-32 lg:mx-48 overflow-hidden  ">
           {/* <div className="bg-red-800 w-full h-40 flex items-center justify-start overflow-hidden mx-8 sm:mx-24 md:mx-32 lg:mx-48"> */}
           {/* <div
             className="bg-cover w-28 h-28 bg-center bg-no-repeat mr-4 flex-shrink-0 flex"

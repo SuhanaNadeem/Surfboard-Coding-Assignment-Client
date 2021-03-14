@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { StudentAuthContext } from "../../context/studentAuth";
 import tempWhiteLogo from "../../images/tempSvgWhite.png";
 import StudentAccountDropdown from "./AccountDropdown";
+import LI_logo from "../../images/li_logo.svg";
 
 export default function StudentNavBar({ props }) {
   const history = useHistory();
@@ -15,7 +16,7 @@ export default function StudentNavBar({ props }) {
 
   return (
     <div className="bg-black shadow-lg flex items-center justify-center w-full z-10 text-center md:h-14 h-16">
-      <nav className="py-4 px-8 md:px-0 flex items-center justify-center  w-full md:max-w-2xl xl:max-w-5xl">
+      <nav className="py-4 px-8 md:px-0 flex items-center justify-center  w-full md:max-w-2xl xl:max-w-5xl text-lg">
         <div className="w-full flex items-center justify-center font-light text-md text-white ">
           <div className="items-center flex flex-1 h-full md:h-8 justify-start">
             <StudentAccountDropdown props={props} logout={logoutStudent} />
@@ -32,11 +33,12 @@ export default function StudentNavBar({ props }) {
               src="https://li-images.s3.amazonaws.com/8945722254/tempSvgWhite.png"
               className="w-6 h-full focus:outline-none"
             /> */}
-            <img
+            {/* <img
               src="https://li-images.s3.amazonaws.com/1622532725/dw.png"
               className="object-cover w-36 "
               alt="LI Logo"
-            />
+            /> */}
+            <img src={LI_logo} className="object-cover w-36" alt="LI Logo" />
           </button>
           <div className="flex-1 flex items-center justify-end focus:outline-none">
             {pageLinksAndTitles.map((pageInfo) => (

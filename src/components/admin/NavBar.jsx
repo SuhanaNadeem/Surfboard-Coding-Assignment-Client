@@ -3,6 +3,10 @@ import { useHistory } from "react-router-dom";
 import { AdminAuthContext } from "../../context/adminAuth";
 import tempWhiteLogo from "../../images/tempSvgWhite.png";
 import AdminAccountDropdown from "./AccountDropdown";
+// import Logo from "../../images/LI_Logo.jpeg"
+// import li_logo from "../../images/li-logo.svg";
+
+import LI_logo from "../../images/li_logo.svg";
 
 export default function NavBar({ props }) {
   const history = useHistory();
@@ -16,7 +20,7 @@ export default function NavBar({ props }) {
 
   return (
     <div className="bg-black shadow-lg flex items-center justify-center w-full z-10 text-center">
-      <nav className="py-4 px-8 md:px-0 flex items-center justify-center  w-full md:max-w-2xl xl:max-w-5xl">
+      <nav className="py-4 px-8 md:px-0 flex items-center justify-center  w-full md:max-w-2xl xl:max-w-5xl text-lg">
         <div className="w-full flex items-center justify-center font-light text-md text-white ">
           <div className="items-center flex flex-1 h-full md:h-8 justify-start">
             <AdminAccountDropdown props={props} logout={logoutAdmin} />
@@ -34,11 +38,8 @@ export default function NavBar({ props }) {
               src="https://li-images.s3.amazonaws.com/8945722254/tempSvgWhite.png"
               className="w-6 h-full"
             /> */}
-            <img
-              src="https://li-images.s3.amazonaws.com/1622532725/dw.png"
-              className="object-cover w-36 "
-              alt="LI Logo"
-            />
+            <img src={LI_logo} className="object-cover w-36 " alt="LI Logo" />
+
             {/* <div
               className="bg-cover w-152 h-32 bg-center bg-no-repeat   mx-auto"
               style={{

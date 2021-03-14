@@ -13,7 +13,7 @@ export default function DashboardModules({ props, modules, type }) {
           ))}
         </div>
       ) : (
-        <p className="font-light text-sm mt-3">
+        <p className="font-light text-md mt-3">
           {type === "In-Progress Modules" ? "Start" : "Complete"} a module to
           see {type} here.
         </p>

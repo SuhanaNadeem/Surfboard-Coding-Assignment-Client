@@ -1,4 +1,5 @@
 import React from "react";
+import LI_logo from "../../images/li_logo.svg";
 
 export default function MentorTitleBar() {
   return (
@@ -8,11 +9,12 @@ export default function MentorTitleBar() {
           {/* <p className="mr-3">LYNX Institute Mentor</p>
 
           <img src={tempWhiteLogo} className="w-14 h-full" /> */}
-          <img
+          {/* <img
             src="https://li-images.s3.amazonaws.com/1622532725/dw.png"
             className="object-cover w-48 "
             alt="LI Logo"
-          />
+          /> */}
+          <img src={LI_logo} className="object-cover w-48 " alt="LI Logo" />
         </div>
       </nav>
     </div>
