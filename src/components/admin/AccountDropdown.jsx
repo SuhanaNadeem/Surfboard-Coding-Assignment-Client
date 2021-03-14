@@ -46,12 +46,12 @@ export default function AdminAccountDropdown({ logout, props }) {
             className="fixed inset-0 h-full w-full bg-transparent cursor-default z-20 focus:outline-none"
           ></button>
 
-          <div className="focus:outline-none absolute left-0 w-40 mt-2 py-1 bg-white rounded-lg shadow-xl text-sm z-20">
+          <div className=" absolute left-0 w-40 mt-2 py-1 bg-white rounded-lg shadow-xl text-sm z-20">
             <h1 className="text-gray-800 text-left px-4 py-1 font-semibold text-xs whitespace-no-wrap overflow-hidden w-36 truncate">
               Hi, {admin.name}
             </h1>
             <button
-              className="block focus:outline-none text-left font-light w-full md:hidden px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
+              className="block focus:outline-none focus:ring text-left font-light w-full md:hidden px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               onClick={(e) => {
                 e.preventDefault();
                 e.preventDefault();
@@ -62,7 +62,7 @@ export default function AdminAccountDropdown({ logout, props }) {
               Dashboard
             </button>
             <button
-              className="block focus:outline-none text-left font-light w-full md:hidden px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
+              className="block focus:outline-none focus:ring text-left font-light w-full md:hidden px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               onClick={(e) => {
                 e.preventDefault();
                 e.preventDefault();
@@ -90,12 +90,12 @@ export default function AdminAccountDropdown({ logout, props }) {
                 // console.log("pushing");
                 props.history.push("/adminEditAccount");
               }}
-              className="text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
+              className="text-left focus:outline-none focus:ring font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
             >
               Edit Account
             </button>
             <button
-              className="text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
+              className="text-left focus:outline-none focus:ring font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               onClick={(e) => {
                 logout();
                 adminClient.cache.reset();

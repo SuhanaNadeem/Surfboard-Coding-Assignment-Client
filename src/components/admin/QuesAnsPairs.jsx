@@ -12,7 +12,7 @@ function QuesAnsPairs({ student }) {
   });
   // console.log(quesAnsPairs);
   return quesAnsPairs && quesAnsPairs.length !== 0 ? (
-    <div className="mr-2 flex flex-col w-full">
+    <div className="mr-2 mt-2 flex flex-col w-full">
       <h2 className="text-lg text-red-800 ">Questions and Answers</h2>
       <div className="grid grid-flow-col gap-2 items-stretch justify-start pt-2 pb-1 overflow-x-auto relative">
         {quesAnsPairs.map((quesAnsPair, index) => (

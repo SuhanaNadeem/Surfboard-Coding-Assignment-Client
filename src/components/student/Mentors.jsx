@@ -18,7 +18,7 @@ function Mentors({ student }) {
       {mentors.length > 0 ? (
         mentors.map((mentor, index) => <Mentor key={index} mentor={mentor} />)
       ) : (
-        <p className="font-light text-left w-full text-sm">
+        <p className="font-light text-left w-full text-lg">
           Once you're added by them, your mentor(s) will appear here.
         </p>
       )}

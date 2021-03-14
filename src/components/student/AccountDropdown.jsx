@@ -53,7 +53,7 @@ export default function StudentAccountDropdown({ logout, props }) {
               {/* Welcome */}
             </h1>
             <button
-              className="block focus:outline-none text-left font-light w-full md:hidden px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
+              className="block focus:outline-none  focus:ring text-left font-light w-full md:hidden px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -82,12 +82,12 @@ export default function StudentAccountDropdown({ logout, props }) {
 
                 props.history.push("/studentAccount");
               }}
-              className="focus:outline-none text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800 "
+              className="focus:outline-none focus:ring text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800 "
             >
               Edit Account
             </button>
             <button
-              className="text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800 focus:outline-none"
+              className="text-left font-light w-full block px-4 py-1 text-gray-800 hover:text-white hover:bg-red-800 focus:outline-none focus:ring "
               onClick={(e) => {
                 logout();
                 studentClient.cache.reset();

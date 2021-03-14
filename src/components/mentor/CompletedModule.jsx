@@ -16,8 +16,8 @@ function CompletedModule({ student, module }) {
 
   return points !== undefined && module && student ? (
     <div className="flex items-start justify-start mb-2">
-      <BiCheckboxChecked size={24} />
-      <h3 className="font-semibold mx-1 text-sm uppercase truncate">
+      <BiCheckboxChecked size={24} className="flex-shrink-0" />
+      <h3 className="font-semibold mx-1 text-sm uppercase truncate w-36">
         {module.name}
       </h3>
       <h2 className="font-light truncate text-sm">({points} LYNX Tokens)</h2>

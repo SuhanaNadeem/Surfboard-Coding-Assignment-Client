@@ -65,7 +65,7 @@ function EditAdmin({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light  focus:outline-none focus:ring   ${
                     errors.newName ? "border-red-800" : ""
                   }`}
                   name="newName"
@@ -90,7 +90,7 @@ function EditAdmin({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light  focus:outline-none focus:ring   ${
                     errors.newEmail ? "border-red-800" : ""
                   }`}
                   name="newEmail"
@@ -116,7 +116,7 @@ function EditAdmin({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light  focus:outline-none focus:ring   ${
                     errors.newPassword ? "border-red-800" : ""
                   }`}
                   name="newPassword"
@@ -142,7 +142,7 @@ function EditAdmin({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light  focus:outline-none focus:ring   ${
                     errors.confirmNewPassword ? "border-red-800" : ""
                   }`}
                   name="confirmNewPassword"
@@ -161,10 +161,10 @@ function EditAdmin({
             </tr>
           </tbody>
         </table>
-        <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none w-1/4 md:w-1/6">
+        <div className="text-right md:text-sm mx-auto mt-4 flex w-1/4 md:w-1/6">
           <button
             type="submit"
-            className="flex focus:outline-none border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm items-center justify-center font-semibold w-full"
+            className="flex focus:outline-none focus:ring border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm items-center justify-center font-semibold w-full"
           >
             Save
           </button>

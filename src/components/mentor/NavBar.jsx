@@ -25,7 +25,7 @@ export default function MentorNavBar({ props }) {
               e.preventDefault();
               props.history.push("/loginMentor");
             }}
-            className="hover:opacity-75 hidden md:flex font-light items-center justify-center"
+            className="hover:opacity-75 hidden md:flex font-light items-center justify-center  focus:outline-none focus:ring"
           >
             <p className="mr-2">LYNX Institute</p>
             <img

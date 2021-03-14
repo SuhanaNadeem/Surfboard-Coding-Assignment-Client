@@ -74,7 +74,7 @@ function EditAndPreviewQuestionModalCard({
         <div>
           {question.image && question.image !== "" && (
             <div
-              className="bg-cover mb-2 w-64 h-32 bg-center bg-no-repeat rounded-lg mx-auto"
+              className="bg-cover mt-2 mb-4 w-full md:w-96 h-48 bg-center bg-no-repeat rounded-lg  mx-auto"
               style={{
                 backgroundImage: `url(${question.image})`,
               }}
@@ -119,7 +119,7 @@ function EditAndPreviewQuestionModalCard({
               url={question.videoLink}
               width={557.33}
               height={300}
-              muted={true}
+              controls={true}
             />
           </div>
         )}
@@ -210,7 +210,11 @@ function EditAndPreviewQuestionModalCard({
       </div>
       <div className="flex mt-6">
         {module && module.questions.indexOf(question.id) != 0 && (
-          <button className="mx-auto" onClick={togglePrevOpen} type="button">
+          <button
+            className="mx-auto focus:outline-none focus:ring rounded-sm"
+            onClick={togglePrevOpen}
+            type="button"
+          >
             <BsChevronLeft size={32} />
           </button>
         )}
@@ -219,7 +223,7 @@ function EditAndPreviewQuestionModalCard({
           module.questions.indexOf(question.id) + 1 !==
             module.questions.length && (
             <button
-              className="mx-auto"
+              className="mx-auto focus:outline-none focus:ring rounded-sm"
               onClick={(e) => {
                 onAdminClick();
 

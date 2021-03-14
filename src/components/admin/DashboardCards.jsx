@@ -27,7 +27,7 @@ export default function DashboardCards({ props, objects, adminObjects, type }) {
       </div>
 
       {type === "Modules" && (
-        <div className="h-full xl:h-64 grid xl:grid-flow-row grid-flow-col xl:grid-cols-4 gap-2 justify-start py-1 xl:overflow-y-auto relative mt-3 items-stretch overflow-x-auto ">
+        <div className="h-full grid xl:grid-flow-row grid-flow-col xl:grid-cols-4 gap-2 justify-start py-1 xl:overflow-y-auto relative mt-3 items-stretch overflow-x-auto ">
           {objects.map((module, index) => (
             <ModuleCard
               key={index}
@@ -41,7 +41,7 @@ export default function DashboardCards({ props, objects, adminObjects, type }) {
         </div>
       )}
       {type === "Questions" && (
-        <div className="h-full xl:h-64 grid xl:grid-flow-row grid-flow-col xl:grid-cols-4 gap-2 justify-start py-1 xl:overflow-y-auto relative mt-3 items-stretch overflow-x-auto ">
+        <div className="h-full grid xl:grid-flow-row grid-flow-col xl:grid-cols-4 gap-2 justify-start py-1 xl:overflow-y-auto relative mt-3 items-stretch overflow-x-auto ">
           {objects.map((question, index) => (
             <QuestionCard
               key={index}

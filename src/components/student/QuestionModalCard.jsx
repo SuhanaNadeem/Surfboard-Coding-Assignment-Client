@@ -16,6 +16,8 @@ import {
 } from "../../pages/student/StudentDashboard";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import ReactPlayer from "react-player";
+import { findDOMNode } from "react-dom";
+import screenfull from "screenfull";
 import { GET_QUESTION_BY_ID } from "./QuestionCard";
 import FeedbackModal from "./FeedbackModal";
 import StarQuestionCard from "./StarQuestionCard";
@@ -246,7 +248,7 @@ function QuestionModalCard({
               Article:
             </h5>
             <a
-              className="font-light text-sm truncate"
+              className="font-light text-sm truncate focus:outline-none focus:text-blue-500"
               href={question.articleLink}
               target="_blank"
             >
@@ -275,14 +277,17 @@ function QuestionModalCard({
         )}
 
         {question.videoLink && question.videoLink !== "" && (
-          <div className="mt-4 ">
-            <ReactPlayer
-              url={question.videoLink}
-              width={557.33}
-              height={300}
-              muted={true}
-            />
-          </div>
+          <>
+            <div className="mt-4 ">
+              <ReactPlayer
+                url={question.videoLink}
+                width={557.33}
+                height={300}
+                controls={true}
+              />
+            </div>
+            {/* <button onClick={handleClickFullscreen}>Fullscreen</button> */}
+          </>
         )}
         {question.type === "Question" && (
           <div className="flex flex-col">
@@ -404,7 +409,7 @@ function QuestionModalCard({
                     question.questionFormat === "Multiple Choice"
                       ? `mt-4 w-16`
                       : `ml-4 w-20`
-                  }  border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex`}
+                  }  border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex focus:outline-none focus:ring`}
                 >
                   Submit
                 </button>
@@ -433,7 +438,7 @@ function QuestionModalCard({
       <form className="flex mt-6" onSubmit={onSubmit}>
         {module.questions.indexOf(question.id) != 0 && (
           <button
-            className="mx-auto focus:outline-none"
+            className="mx-auto focus:outline-none focus:ring rounded-sm"
             onClick={togglePrevOpen}
             type="button"
           >
@@ -451,7 +456,7 @@ function QuestionModalCard({
             module.questions.length === 1) ||
           question.type === "Skill") && (
           <button
-            className="mx-auto focus:outline-none"
+            className="mx-auto focus:outline-none focus:ring rounded-sm"
             type={question.type === "Skill" ? `submit` : `button`}
             onClick={(e) => {
               // console.log("entered onclick");
@@ -471,7 +476,7 @@ function QuestionModalCard({
             }}
           >
             {/* TODO: wokring on endcard when last q is skill + skipping skill when next is clicked on q + fixed wrong -> correct!! */}
-            <BsChevronRight size={32} className="focus:outline-none" />
+            <BsChevronRight size={32} />
           </button>
         )}
       </form>

@@ -1,7 +1,9 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
+import { BsStarFill } from "react-icons/bs";
 import { studentClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
+import { GET_STUDENT_BY_ID } from "./ModuleSummaryBar";
 
 function QuestionCard({
   props,
@@ -20,7 +22,13 @@ function QuestionCard({
     variables: { questionId },
     client: studentClient,
   });
-
+  const { data: { getStudentById: studentObject } = {} } = useQuery(
+    GET_STUDENT_BY_ID,
+    {
+      variables: { studentId },
+      client: studentClient,
+    }
+  );
   const [errors, setErrors] = useState({});
 
   const { values, onSubmit } = useForm(startQuestionCallback, {
@@ -59,9 +67,15 @@ function QuestionCard({
       }`}
     >
       <div className="flex flex-col mr-10">
-        <p className=" font-semibold text-sm uppercase tracking-wide ">
-          {question.type}
-        </p>
+        <div className="flex items-center justify-center">
+          <p className=" font-semibold text-sm uppercase tracking-wide ">
+            {question.type}
+          </p>
+          {studentObject &&
+            studentObject.starredQuestions.includes(questionId) && (
+              <BsStarFill size={20} className="pl-2" />
+            )}
+        </div>
         <p className="text-red-800 w-32 md:w-52 truncate">{question.name}</p>
         <p className="tracking-wider text-sm uppercase font-light ">
           {question.points} lynx tokens
@@ -70,7 +84,7 @@ function QuestionCard({
       <form onSubmit={onSubmit}>
         <button
           type="submit"
-          className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
+          className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold focus:outline-none focus:ring"
         >
           {`${complete ? "revisit" : "start"}`}
         </button>

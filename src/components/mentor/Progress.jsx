@@ -16,11 +16,11 @@ function Progress({ student }) {
     "
     >
       <h2 className="text-lg mb-1 text-red-800 font-normal">Progress</h2>
-      <div className="flex items-center justify-start ">
+      <div className="flex items-center justify-start w-full text-sm">
         <p className=" mr-1">{student.completedQuestions.length}</p>
         <p className="font-light">Questions Completed</p>
       </div>
-      <div className="flex items-center justify-start ">
+      <div className="flex items-center justify-start w-full text-sm">
         <p className=" mr-1">{totalPoints}</p>
         <p className="font-light"> Lifetime Points</p>
       </div>
