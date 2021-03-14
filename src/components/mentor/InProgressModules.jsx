@@ -13,7 +13,7 @@ function InProgressModules({ student }) {
     }
   );
 
-  console.log(modules);
+  // console.log(modules);
   // console.log(student);
   return modules && modules.length !== 0 ? (
     <div className="mr-2 flex flex-col w-full md:w-1/2 mt-2">

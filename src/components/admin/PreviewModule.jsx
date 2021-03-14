@@ -13,7 +13,7 @@ export default function PreviewModule({ props, selectedQuestionId, module }) {
   }, [setActiveQuestionId, selectedQuestionId]);
 
   function handleQuestionClick(selectedQuestionId) {
-    console.log(selectedQuestionId);
+    // console.log(selectedQuestionId);
     if (selectedQuestionId) {
       setActiveQuestionId(selectedQuestionId);
       props.history.push(

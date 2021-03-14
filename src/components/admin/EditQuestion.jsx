@@ -77,8 +77,8 @@ function EditQuestion({
       props.history.push("/adminDashboard");
     },
     onError(err) {
-      console.log(values);
-      console.log(err);
+      // console.log(values);
+      // console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
@@ -97,7 +97,7 @@ function EditQuestion({
     // bannerLogoFile;
 
     if (imageFile) {
-      console.log(previewImages);
+      // console.log(previewImages);
       setValues({
         ...values,
         [imageName + "File"]: imageFile,

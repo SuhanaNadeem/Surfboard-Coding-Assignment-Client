@@ -28,8 +28,8 @@ export default function MentorCard({
       setErrors({});
     },
     onError(err) {
-      console.log(values);
-      console.log(err);
+      // console.log(values);
+      // console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
@@ -59,7 +59,7 @@ export default function MentorCard({
             type="button"
             // have to toggle the pop up and only get edit field to show
             onClick={(e) => {
-              console.log("inhere");
+              // console.log("inhere");
               setIsMentorOpen(true);
               handleMentorClick(mentor.id);
               props.history.push(`/adminUsers/${mentor.id}`);

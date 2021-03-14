@@ -35,9 +35,9 @@ export default function QuestionInputDropdown({
     variables: { questionId: currentQuestionId },
     client: adminClient,
   });
-  console.log(currentQuestionId);
-  console.log(currentQuestion);
-  console.log(questionType);
+  // console.log(currentQuestionId);
+  // console.log(currentQuestion);
+  // console.log(questionType);
 
   return (
     <>

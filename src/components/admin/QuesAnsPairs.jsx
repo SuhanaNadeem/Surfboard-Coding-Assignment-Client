@@ -10,7 +10,7 @@ function QuesAnsPairs({ student }) {
     variables: { studentId: student && student.id },
     client: adminClient,
   });
-  console.log(quesAnsPairs);
+  // console.log(quesAnsPairs);
   return quesAnsPairs && quesAnsPairs.length !== 0 ? (
     <div className="mr-2 flex flex-col w-full">
       <h2 className="text-lg text-red-800 ">Questions and Answers</h2>

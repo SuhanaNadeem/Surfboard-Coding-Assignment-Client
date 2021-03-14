@@ -32,7 +32,7 @@ export default function DashboardStudentCard({
           <button
             className="hover:text-red-800 focus:outline-none mr-3"
             onClick={(e) => {
-              console.log("clicked");
+              // console.log("clicked");
               setIsOpen(true);
               handleStudentClick(student.id);
               props.history.push(`/mentorDashboard/${student.id}`);

@@ -50,8 +50,8 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
       props.history.push(`/module/${moduleId}`);
     },
     onError(err) {
-      console.log(valuesStatus);
-      console.log(err);
+      // console.log(valuesStatus);
+      // console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: { moduleId, studentId },
@@ -65,8 +65,8 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
       addInProgressModule();
     },
     onError(err) {
-      console.log(valuesStatus);
-      console.log(err);
+      // console.log(valuesStatus);
+      // console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: valuesStatus,

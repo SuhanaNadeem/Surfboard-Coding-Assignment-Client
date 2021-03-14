@@ -38,8 +38,8 @@ export default function CategoryCard({ props, category, created }) {
       setErrors({});
     },
     onError(err) {
-      console.log(values);
-      console.log(err);
+      // console.log(values);
+      // console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,

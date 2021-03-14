@@ -82,13 +82,13 @@ function CreateQuestion({ admin, props }) {
       setPreviewImages({
         image: "",
       });
-      console.log(values);
+      // console.log(values);
     },
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
-      console.log(values);
-      console.log(errors);
-      console.log(err);
+      // console.log(values);
+      // console.log(errors);
+      // console.log(err);
     },
     variables: values,
     client: adminClient,
@@ -114,7 +114,7 @@ function CreateQuestion({ admin, props }) {
   const [previewImages, setPreviewImages] = useState({
     image: "",
   });
-  console.log(errors);
+  // console.log(errors);
   return errors ? (
     <form
       className="w-full overflow-hidden flex flex-col "

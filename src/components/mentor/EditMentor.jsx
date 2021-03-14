@@ -26,7 +26,7 @@ function EditMentor({
   const [editMentor, { loading }] = useMutation(EDIT_MENTOR, {
     update(_, { data: { editMentor: adminData } }) {
       setErrors({});
-      console.log("done");
+      // console.log("done");
       values.confirmNewPassword = "";
       values.newPassword = "";
     },
@@ -37,11 +37,11 @@ function EditMentor({
       },
     ],
     onError(err) {
-      console.log(values);
+      // console.log(values);
 
-      console.log(err);
+      // console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
-      console.log(err.graphQLErrors[0].extensions.exception.errors);
+      // console.log(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
     client: mentorClient,

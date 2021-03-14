@@ -22,7 +22,7 @@ function EditBadge({
     image,
   },
 }) {
-  console.log(newType);
+  // console.log(newType);
   const [errors, setErrors] = useState({});
   const { admin } = useContext(AdminAuthContext);
   const { values, onChange, onSubmit, setValues } = useForm(editBadgeCallback, {
@@ -50,8 +50,8 @@ function EditBadge({
       props.history.push("/adminDashboard");
     },
     onError(err) {
-      console.log(values);
-      console.log(err);
+      // console.log(values);
+      // console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
@@ -70,7 +70,7 @@ function EditBadge({
     // bannerLogoFile;
 
     if (imageFile) {
-      console.log(previewImages);
+      // console.log(previewImages);
       setValues({
         ...values,
         [imageName + "File"]: imageFile,

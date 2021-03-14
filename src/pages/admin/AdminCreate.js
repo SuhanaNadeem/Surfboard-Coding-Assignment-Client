@@ -15,7 +15,7 @@ export default function AdminCreate(props) {
     props.history.push("/loginAdmin");
   }
   const page = props.match.params.page;
-  console.log(page);
+  // console.log(page);
   return page ? (
     <div className="h-full flex flex-col min-h-screen w-full">
       <NavBar props={props} />

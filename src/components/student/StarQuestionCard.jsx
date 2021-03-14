@@ -9,8 +9,8 @@ import { GET_STUDENT_BY_ID } from "./ModuleSummaryBar";
 export default function StarQuestionCard({ props, questionId, studentObject }) {
   const { student } = useContext(StudentAuthContext);
   if (studentObject) {
-    console.log("completed questions in starq");
-    console.log(studentObject.starredQuestions);
+    // console.log("completed questions in starq");
+    // console.log(studentObject.starredQuestions);
   }
   const { values, onSubmit, setValues } = useForm(handleStarQuestionCallback, {
     questionId,
@@ -18,7 +18,7 @@ export default function StarQuestionCard({ props, questionId, studentObject }) {
 
   useEffect(() => {
     if (questionId) {
-      console.log("changed");
+      // console.log("changed");
       setValues({ questionId });
     }
   }, [questionId]);
@@ -39,8 +39,8 @@ export default function StarQuestionCard({ props, questionId, studentObject }) {
         { data: { handleStarQuestion: handleStarQuestionData } }
       ) {},
       onError(err) {
-        console.log(err);
-        console.log(err.graphQLErrors[0].extensions.exception.errors);
+        // console.log(err);
+        // console.log(err.graphQLErrors[0].extensions.exception.errors);
       },
       variables: values,
     }

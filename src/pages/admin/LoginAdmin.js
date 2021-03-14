@@ -23,7 +23,7 @@ function LoginAdmin(props) {
       props.history.push("/adminDashboard");
     },
     onError(err) {
-      console.log(err);
+      // console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
@@ -36,13 +36,13 @@ function LoginAdmin(props) {
   return (
     <div className="flex flex-col w-full">
       <AdminTitleBar />
-      <div className="flex w-full flex-col mx-auto py-10 px-16 md:flex-row">
+      <div className="flex w-full flex-col mx-auto py-10 px-16 sm:px-24 md:px-16 md:flex-row">
         <form
           onSubmit={onSubmit}
           noValidate
-          className="flex-col justify-center items-center flex md:pr-8 w-96"
+          className="flex-col justify-center items-center flex md:pr-8 w-full md:w-96"
         >
-          <div className="my-4 w-64">
+          <div className="mb-4 w-full md:w-64">
             <h4 className="font-thin mt-4 uppercase tracking-wider">Email</h4>
             <div className="border-b-2 py-2 border-gray-300 flex items-center justify-start w-full">
               {/* <MdPersonOutline size={32} /> */}
@@ -62,7 +62,7 @@ function LoginAdmin(props) {
               </p>
             )}
           </div>
-          <div className="mb-4 w-64">
+          <div className="mb-4 w-full md:w-64">
             <h4 className="font-thin mt-10 uppercase tracking-wider">
               Password
             </h4>
@@ -87,7 +87,7 @@ function LoginAdmin(props) {
           </div>
           <button
             type="submit"
-            className="mt-8 uppercase hover:shadow-lg text-md w-64 flex items-center justify-center  text-white bg-red-800 shadow-md border border-red-800  py-2 px-6 rounded-full"
+            className="mt-8 uppercase hover:shadow-lg text-md w-64 sm:w-72 md:w-64 flex items-center justify-center  text-white bg-red-800 shadow-md border border-red-800  py-2 px-6 rounded-full focus:outline-none focus:ring"
           >
             Log In
           </button>
@@ -95,7 +95,7 @@ function LoginAdmin(props) {
             onClick={(e) => {
               props.history.push("/signupAdmin");
             }}
-            className="mt-4 hover:opacity-80  uppercase text-md bg-white text-red-800 text-bold tracking-wide px-6 rounded-full"
+            className="mt-4 hover:opacity-80  uppercase text-md bg-white text-red-800 text-bold tracking-wide px-6 rounded-full focus:text-blue-500 focus:outline-none"
           >
             or Sign Up
           </button>

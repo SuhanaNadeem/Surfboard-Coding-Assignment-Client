@@ -8,7 +8,7 @@ function EditMentor({
   props,
   mentor: { id: mentorId, name: newName, email: newEmail, orgName: newOrgName },
 }) {
-  console.log(newOrgName);
+  // console.log(newOrgName);
   var confirmNewPassword = "";
   var newPassword = "";
 
@@ -39,9 +39,9 @@ function EditMentor({
       },
     ],
     onError(err) {
-      console.log(values);
+      // console.log(values);
 
-      console.log(err);
+      // console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
       // console.log(err.graphQLErrors[0].extensions.exception.errors);
     },

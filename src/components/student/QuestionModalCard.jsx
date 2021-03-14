@@ -157,7 +157,7 @@ function QuestionModalCard({
       { query: GET_IN_PROGRESS_MODULES_BY_STUDENT, variables: { studentId } },
     ],
     onCompleted({ handleAnswerPoints }) {
-      console.log("on completed");
+      // console.log("on completed");
       if (handleAnswerPoints) {
         getLazyCompletedQuestionsByModule({
           variables: { moduleId, studentId },
@@ -167,7 +167,7 @@ function QuestionModalCard({
     },
     update() {
       setErrors({});
-      console.log("done mutation");
+      // console.log("done mutation");
       if (question.type === "Skill") {
         var nextQuesId =
           module && module.questions[module.questions.indexOf(question.id) + 1];
@@ -180,7 +180,7 @@ function QuestionModalCard({
       }
     },
     onError(err) {
-      console.log(err);
+      // console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
@@ -217,7 +217,7 @@ function QuestionModalCard({
   function toggleNextOpen() {
     var nextQuesId =
       module && module.questions[module.questions.indexOf(question.id) + 1];
-    console.log(nextQuesId);
+    // console.log(nextQuesId);
     handleQuestionClick(nextQuesId);
   }
 
@@ -454,20 +454,8 @@ function QuestionModalCard({
             className="mx-auto focus:outline-none"
             type={question.type === "Skill" ? `submit` : `button`}
             onClick={(e) => {
-              console.log("entered onclick");
-              console.log(
-                module.questions.indexOf(question.id) + 1 ===
-                  module.questions.length &&
-                  studentObject.completedModules.includes(moduleId)
-              );
-              console.log(
-                module.questions.indexOf(question.id) + 1 !==
-                  module.questions.length
-              );
-              console.log(
-                module.questions.indexOf(question.id) + 1 ===
-                  module.questions.length && module.questions.length === 1
-              );
+              // console.log("entered onclick");
+
               if (
                 module.questions.indexOf(question.id) + 1 ===
                 module.questions.length

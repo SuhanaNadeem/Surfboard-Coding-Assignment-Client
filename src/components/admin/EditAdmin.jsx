@@ -25,11 +25,11 @@ function EditAdmin({
       values.newPassword = "";
     },
     onError(err) {
-      console.log(values);
+      // console.log(values);
 
-      console.log(err);
+      // console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
-      console.log(err.graphQLErrors[0].extensions.exception.errors);
+      // console.log(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
     client: adminClient,

@@ -40,8 +40,8 @@ export default function ModuleSummaryBar({
 
     update(proxy, { data: { handleStarModule: handleStarModuleData } }) {},
     onError(err) {
-      console.log(err);
-      console.log(err.graphQLErrors[0].extensions.exception.errors);
+      // console.log(err);
+      // console.log(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
   });

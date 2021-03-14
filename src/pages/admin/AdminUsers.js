@@ -46,7 +46,7 @@ export default function AdminUsers(props) {
   }, [setActiveStudentId, selectedStudentId]);
 
   useEffect(() => {
-    console.log("in mentor's useEffect");
+    // console.log("in mentor's useEffect");
     setActiveMentorId(selectedMentorId);
   }, [setActiveMentorId, selectedMentorId]);
   const [isOpen, setIsOpen] = useState(true);
@@ -66,7 +66,7 @@ export default function AdminUsers(props) {
   });
 
   function handleStudentClick(selectedStudentId) {
-    console.log("wb here?");
+    // console.log("wb here?");
     setActiveMentorId("");
     if (selectedStudentId) {
       setActiveStudentId(selectedStudentId);
@@ -79,7 +79,7 @@ export default function AdminUsers(props) {
   }
 
   function handleMentorClick(selectedMentorId) {
-    console.log("comes in here?");
+    // console.log("comes in here?");
     setActiveStudentId("");
 
     if (selectedMentorId) {
