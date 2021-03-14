@@ -50,9 +50,12 @@ export default function DashboardStudents({
             props={props}
             student={student}
             mentor={mentor}
-            added={addedStudents.some(
-              (addedStudent) => addedStudent.id === student.id
-            )}
+            added={
+              addedStudents &&
+              addedStudents.some(
+                (addedStudent) => addedStudent.id === student.id
+              )
+            }
             setIsOpen={setIsOpen}
             handleStudentClick={handleStudentClick}
           />

@@ -35,7 +35,7 @@ function QuestionModalCard({
 
   const {
     data: { getQuestionById: question } = {},
-    loading: loadingQuestion,
+    //loading: loadingQuestion,
   } = useQuery(GET_QUESTION_BY_ID, {
     variables: { questionId },
     client: studentClient,
@@ -51,7 +51,7 @@ function QuestionModalCard({
 
   const {
     data: { getSavedAnswerByQuestion: savedAnswer } = {},
-    loading: loadingSavedAnswer,
+    //loading: loadingSavedAnswer,
   } = useQuery(GET_SAVED_ANSWER_BY_QUESTION, {
     variables: { questionId: questionId, studentId: studentId },
     client: studentClient,
@@ -59,7 +59,7 @@ function QuestionModalCard({
 
   const {
     data: { getHintByQuestion: hint } = {},
-    loading: loadingHint,
+    //loading: loadingHint,
   } = useQuery(GET_HINT_BY_QUESTION, {
     variables: { questionId: questionId },
     client: studentClient,
@@ -67,7 +67,7 @@ function QuestionModalCard({
 
   const {
     data: { getModuleById: module } = {},
-    loading: loadingGetModuleById,
+    //loading: loadingGetModuleById,
   } = useQuery(GET_MODULE_BY_ID, {
     variables: { moduleId: moduleId },
     client: studentClient,
@@ -88,7 +88,7 @@ function QuestionModalCard({
 
   const {
     data: { getCompletedQuestionsByModule: completedQuestions } = {},
-    loading: loadingCompletedQuestionsByModule,
+    //loading: loadingCompletedQuestionsByModule,
   } = useQuery(GET_COMPLETED_QUESTIONS_BY_MODULE, {
     variables: { moduleId, studentId },
     client: studentClient,
@@ -102,11 +102,12 @@ function QuestionModalCard({
   }
   useEffect(() => {
     if (questionId) {
-      setValues({ ...values, questionId, answer: savedAnswer });
+      setValues({ studentId, questionId, answer: savedAnswer });
       setIsOpen(completedQuestions.includes(questionId));
       setHintVisible(false);
     }
-  }, [questionId, savedAnswer, hint, completedQuestions, setValues, values]);
+  }, [questionId, setValues, studentId, savedAnswer, completedQuestions]);
+  // [questionId, savedAnswer, hint, completedQuestions, setValues, values]
   // CHANGED SUMN HERE: completedQuestions, setValues, values
   // CHANGED SUMN HERE completedQuestions, loadingCompletedQuestionsByModule,loadingGetModuleById,loadingHandleAnswerPoints,loadingHint,loadingQuestion,loadingSavedAnswer
   const [
@@ -161,30 +162,12 @@ function QuestionModalCard({
     variables: values,
   });
   useEffect(() => {
-    if (
-      !loadingHandleAnswerPoints &&
-      !loadingCompletedQuestionsByModule &&
-      !loadingGetModuleById &&
-      !loadingHint &&
-      !loadingQuestion &&
-      !loadingSavedAnswer
-    ) {
-      if (!completedQuestions.includes(questionId)) {
-        setIsOpen(false);
-      } else {
-        setIsOpen(true);
-      }
+    if (!completedQuestions.includes(questionId)) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
     }
-  }, [
-    questionId,
-    completedQuestions,
-    loadingCompletedQuestionsByModule,
-    loadingGetModuleById,
-    loadingHandleAnswerPoints,
-    loadingHint,
-    loadingQuestion,
-    loadingSavedAnswer,
-  ]);
+  }, [questionId, completedQuestions]);
 
   function handleAnswerPointsCallback() {
     setIsOpen(false);
@@ -230,16 +213,15 @@ function QuestionModalCard({
           questionId={questionId}
           studentObject={studentObject}
         />
-        <div>
-          {question.image && question.image !== "" && (
-            <div
-              className="bg-cover mt-2 mb-4 w-full md:w-96 h-48 bg-center bg-no-repeat rounded-lg  mx-auto"
-              style={{
-                backgroundImage: `url(${question.image})`,
-              }}
-            ></div>
-          )}
-        </div>
+        {question.image && question.image !== "" && (
+          <div className="mt-2 mb-4 mx-auto">
+            <img
+              className="w-full h-72 object-cover object-center rounded-lg  "
+              alt="Question"
+              src={question.image}
+            />
+          </div>
+        )}
         {question.articleLink && question.articleLink !== "" && (
           <div className="flex justify-center items-center mb-2 w-full">
             <h5 className="font-semibold uppercase tracking-wide text-xs mr-2">
@@ -257,7 +239,7 @@ function QuestionModalCard({
         )}
 
         {/* admin will upload images, but question type will store aws link. admin will upload + we'll store yt vid links */}
-        <h6 className="text-md font-light leading-snug">
+        <h6 className="text-md text-left font-normal lg:font-light leading-snug ">
           {question.description}
         </h6>
         {question.extraLink && question.extraLink !== "" && (
@@ -302,7 +284,7 @@ function QuestionModalCard({
               {question.questionFormat === "Multiple Choice" ? (
                 // && !completedQuestions.includes(question.id)
                 <div
-                  className={`flex flex-col text-md font-light justify-center items-start ${
+                  className={`flex flex-col text-md font-normal lg:font-light justify-center items-start ${
                     errors.answer ? "text-red-800" : ""
                   }`}
                 >

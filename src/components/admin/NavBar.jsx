@@ -35,14 +35,14 @@ export default function NavBar({ props }) {
               className="w-6 h-full"
             /> */}
             <img
-              src="https://li-images.s3.amazonaws.com/0037927447/dw.png"
+              src="https://li-images.s3.amazonaws.com/1622532725/dw.png"
               className="object-cover w-36 "
               alt="LI Logo"
             />
             {/* <div
               className="bg-cover w-152 h-32 bg-center bg-no-repeat   mx-auto"
               style={{
-                backgroundImage: `url(https://li-images.s3.amazonaws.com/0037927447/dw.png)`,
+                backgroundImage: `url(https://li-images.s3.amazonaws.com/1622532725/dw.png)`,
               }}
             ></div> */}
           </button>

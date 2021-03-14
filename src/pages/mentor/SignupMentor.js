@@ -43,18 +43,20 @@ function SignupMentor(props) {
   return (
     <div className="flex flex-col w-full">
       <MentorTitleBar />
-      <div className="flex w-full flex-col mx-auto py-10 px-16 sm:px-24 md:px-16 md:flex-row">
+      <div className="flex w-full flex-col mx-auto pt-10 px-16 sm:px-24 md:px-16 md:flex-row">
         <form
           onSubmit={onSubmit}
           noValidate
           className="flex-col justify-center items-center flex md:pr-8 w-full md:w-96"
         >
           <div className="w-full md:w-64 mb-6">
-            <h4 className="font-thin  uppercase tracking-wider">Name</h4>
+            <h4 className="font-normal text-lg  uppercase tracking-wider">
+              Name
+            </h4>
             <div className="border-b-2 py-2 border-gray-300 flex items-center justify-start w-full">
               {/* <MdPersonOutline size={32} /> */}
               <input
-                className="w-full focus:outline-none text-sm font-thin"
+                className="w-full focus:outline-none text-lg font-normal"
                 name="name"
                 placeholder="Your Name"
                 value={values.name}
@@ -64,13 +66,13 @@ function SignupMentor(props) {
             </div>
           </div>
           <div className="w-full md:w-64 mb-6">
-            <h4 className="font-thin  uppercase tracking-wider">
+            <h4 className="font-normal text-lg  uppercase tracking-wider">
               Organization
             </h4>
             <div className="border-b-2 py-2 border-gray-300 flex items-center justify-start w-full">
               {/* <MdPersonOutline size={32} /> */}
               <input
-                className="w-full focus:outline-none text-sm font-thin"
+                className="w-full focus:outline-none text-lg font-normal"
                 name="orgName"
                 placeholder="Your Organization"
                 value={values.orgName}
@@ -83,11 +85,13 @@ function SignupMentor(props) {
             </p>
           </div>
           <div className="w-full md:w-64 mb-6">
-            <h4 className="font-thin  uppercase tracking-wider">Email</h4>
+            <h4 className="font-normal text-lg  uppercase tracking-wider">
+              Email
+            </h4>
             <div className="border-b-2 py-2 border-gray-300 flex items-center justify-start w-full">
               {/* <MdPersonOutline size={32} /> */}
               <input
-                className="w-full focus:outline-none text-sm font-thin"
+                className="w-full focus:outline-none text-lg font-normal"
                 name="email"
                 placeholder="Your Email"
                 value={values.email}
@@ -103,12 +107,14 @@ function SignupMentor(props) {
             )}
           </div>
           <div className=" w-full md:w-64 mb-6">
-            <h4 className="font-thin  uppercase tracking-wider">Password</h4>
+            <h4 className="font-normal text-lg  uppercase tracking-wider">
+              Password
+            </h4>
 
             <div className="border-b-2 py-2 border-gray-300 flex items-center justify-start w-full">
               {/* <VscKey size={32} /> */}
               <input
-                className="w-full focus:outline-none text-sm font-thin"
+                className="w-full focus:outline-none text-lg font-normal"
                 name="password"
                 placeholder="Your Password"
                 value={values.password}
@@ -124,14 +130,14 @@ function SignupMentor(props) {
             )}
           </div>
           <div className=" w-full md:w-64">
-            <h4 className="font-thin  uppercase tracking-wider">
+            <h4 className="font-normal text-lg  uppercase tracking-wider">
               Confirm Password
             </h4>
 
             <div className="border-b-2 py-2 border-gray-300 flex items-center justify-start w-full">
               {/* <VscKey size={32} /> */}
               <input
-                className="w-full focus:outline-none text-sm font-thin"
+                className="w-full focus:outline-none text-lg font-normal"
                 name="confirmPassword"
                 placeholder="Your Password"
                 value={values.confirmPassword}

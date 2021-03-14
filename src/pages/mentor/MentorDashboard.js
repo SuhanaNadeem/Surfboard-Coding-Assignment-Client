@@ -11,8 +11,10 @@ import { GET_MENTOR_BY_ID } from "../../pages/admin/AdminUsers";
 
 export default function MentorDashboard(props) {
   const { mentor } = useContext(MentorAuthContext);
-
-  if (!mentor) {
+  var mentorId;
+  if (mentor) {
+    mentorId = mentor.id;
+  } else {
     props.history.push("/loginMentor");
   }
   var selectedStudentId = props.match.params.studentId;
@@ -20,14 +22,14 @@ export default function MentorDashboard(props) {
   const { data: { getMentorById: mentorObject } = {} } = useQuery(
     GET_MENTOR_BY_ID,
     {
-      variables: { mentorId: mentor && mentor.id },
+      variables: { mentorId },
       client: mentorClient,
     }
   );
   const { data: { getStudentsByMentor: addedStudents } = {} } = useQuery(
     GET_STUDENTS_BY_MENTOR,
     {
-      variables: { mentorId: mentor && mentor.id },
+      variables: { mentorId },
       client: mentorClient,
     }
   );

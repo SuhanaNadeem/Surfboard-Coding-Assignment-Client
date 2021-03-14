@@ -64,16 +64,15 @@ function EditAndPreviewQuestionModalCard({
     <div className="justify-between flex flex-col h-full">
       <div className="flex flex-col items-center justify-start text-center overflow-y-auto ">
         <h3 className="text-3xl text-red-800 mx-auto mb-2">{question.name}</h3>
-        <div>
-          {question.image && question.image !== "" && (
-            <div
-              className="bg-cover mt-2 mb-4 w-full md:w-96 h-48 bg-center bg-no-repeat rounded-lg  mx-auto"
-              style={{
-                backgroundImage: `url(${question.image})`,
-              }}
-            ></div>
-          )}
-        </div>
+        {question.image && question.image !== "" && (
+          <div className="mt-2 mb-4 mx-auto px-1">
+            <img
+              className="w-full h-72 object-cover object-center rounded-lg "
+              alt="Question"
+              src={question.image}
+            />
+          </div>
+        )}
 
         {question.articleLink && question.articleLink !== "" && (
           <div className="flex justify-center items-center mb-2 w-full">
@@ -90,7 +89,7 @@ function EditAndPreviewQuestionModalCard({
             </a>
           </div>
         )}
-        <h6 className="text-md font-light leading-snug">
+        <h6 className="text-md text-left font-normal lg:font-light leading-snug ">
           {question.description}
         </h6>
         {question.extraLink && question.extraLink !== "" && (

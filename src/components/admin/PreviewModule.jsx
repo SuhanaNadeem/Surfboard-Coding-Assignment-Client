@@ -1,8 +1,5 @@
-import { useLazyQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
-import EditAndPreviewQuestionCard, {
-  GET_QUESTION_BY_ID,
-} from "../../components/admin/EditAndPreviewQuestionCard";
+import EditAndPreviewQuestionCard from "../../components/admin/EditAndPreviewQuestionCard";
 import EditAndPreviewQuestionModal from "../../components/admin/EditAndPreviewQuestionModal";
 
 export default function PreviewModule({ props, selectedQuestionId, module }) {
@@ -25,15 +22,15 @@ export default function PreviewModule({ props, selectedQuestionId, module }) {
     }
   }
 
-  const [getQuestionById] = useLazyQuery(GET_QUESTION_BY_ID);
+  // const [getQuestionById] = useLazyQuery(GET_QUESTION_BY_ID);
 
   useEffect(() => {
     if (selectedQuestionId) {
       setIsOpen(true);
     }
     setActiveQuestionId(selectedQuestionId);
-    getQuestionById({ variables: { questionId: selectedQuestionId } });
-  }, [selectedQuestionId, getQuestionById]);
+    // getQuestionById({ variables: { questionId: selectedQuestionId } });
+  }, [selectedQuestionId]);
   // CHANGED SUMN HERE getQuesByid
   const [isOpen, setIsOpen] = useState(
     activeQuestionId !== undefined && activeQuestionId !== "" ? true : false

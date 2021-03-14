@@ -33,7 +33,7 @@ export default function MentorNavBar({ props }) {
               className="w-6 h-full"
             /> */}
             <img
-              src="https://li-images.s3.amazonaws.com/0037927447/dw.png"
+              src="https://li-images.s3.amazonaws.com/1622532725/dw.png"
               className="object-cover w-36 "
               alt="LI Logo"
             />

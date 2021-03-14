@@ -8,7 +8,7 @@ export default function StudentTitleBar() {
           {/* <p className="mr-3">LYNX Institute</p>
           <img src={tempWhiteLogo} className="w-14 h-full" /> */}
           <img
-            src="https://li-images.s3.amazonaws.com/0037927447/dw.png"
+            src="https://li-images.s3.amazonaws.com/1622532725/dw.png"
             className="object-cover w-48 "
             alt="LI Logo"
           />
