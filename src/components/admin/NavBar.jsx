@@ -28,12 +28,22 @@ export default function NavBar({ props }) {
             }}
             className="hover:opacity-75 hidden md:flex font-light items-center justify-center  focus:outline-none focus:ring"
           >
-            <p className="mr-2">LYNX Institute</p>
+            {/* <p className="mr-2">LYNX Institute</p> */}
             {/* <MdPersonOutline size={16} /> */}
-            <img
+            {/* <imgs
               src="https://li-images.s3.amazonaws.com/8945722254/tempSvgWhite.png"
               className="w-6 h-full"
+            /> */}
+            <img
+              src="https://li-images.s3.amazonaws.com/0037927447/dw.png"
+              className="object-cover w-36 "
             />
+            {/* <div
+              className="bg-cover w-152 h-32 bg-center bg-no-repeat   mx-auto"
+              style={{
+                backgroundImage: `url(https://li-images.s3.amazonaws.com/0037927447/dw.png)`,
+              }}
+            ></div> */}
           </button>
           <div className="flex-1 flex items-center justify-end">
             {pageLinksAndTitles.map((pageInfo) => (

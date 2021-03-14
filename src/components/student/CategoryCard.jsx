@@ -33,8 +33,8 @@ export default function CategoryCard({ category, props }) {
           ))}
         </div>
       ) : (
-        <p className="font-light text-left w-full text-sm mt-3">
-          New {category.name} modules will appear here.
+        <p className="font-light text-left w-full leading-tight text-md mt-3">
+          New {category.name} Modules will appear here.
         </p>
       )}
     </>

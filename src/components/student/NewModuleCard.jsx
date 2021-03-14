@@ -78,7 +78,10 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
 
   return categoryName && moduleInfo ? (
     <form onSubmit={onSubmitStatus}>
-      <button type="submit" className="w-full">
+      <button
+        type="submit"
+        className="w-full focus:outline-none focus:text-blue-500"
+      >
         <div className="flex flex-row items-center justify-start w-full">
           {categoryName === "Programming" && <BsCodeSlash size={32} />}
           {categoryName === "Electrical" && (

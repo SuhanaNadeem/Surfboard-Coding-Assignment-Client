@@ -16,8 +16,6 @@ import {
 } from "../../pages/student/StudentDashboard";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import ReactPlayer from "react-player";
-import { findDOMNode } from "react-dom";
-import screenfull from "screenfull";
 import { GET_QUESTION_BY_ID } from "./QuestionCard";
 import FeedbackModal from "./FeedbackModal";
 import StarQuestionCard from "./StarQuestionCard";
@@ -99,7 +97,6 @@ function QuestionModalCard({
   const {
     data: { getCompletedQuestionsByModule: completedQuestions } = {},
     loading: loadingCompletedQuestionsByModule,
-    completedQuestionsByModuleError,
   } = useQuery(GET_COMPLETED_QUESTIONS_BY_MODULE, {
     variables: { moduleId, studentId },
     client: studentClient,
@@ -399,7 +396,9 @@ function QuestionModalCard({
                   type="text"
                 />
               )}
-              {!completedQuestions.includes(questionId) && (
+              {!completedQuestions.includes(questionId) &&
+              !loadingHandleAnswerPoints &&
+              !isOpen ? (
                 <button
                   // onClick={(e) => {
                   //   e.preventDefault();
@@ -413,6 +412,30 @@ function QuestionModalCard({
                 >
                   Submit
                 </button>
+              ) : (
+                loadingHandleAnswerPoints &&
+                !isOpen && (
+                  <svg
+                    class="fill-current animate-spin h-4 mt-4 text-red-800"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"
+                    ></circle>
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                )
               )}
             </form>
             {!completedQuestions.includes(questionId) && hint && hint !== "" && (
@@ -422,7 +445,9 @@ function QuestionModalCard({
                 className="focus:outline-none flex mx-auto mt-2 px-4 py-2 uppercase text-black tracking-wide hover:text-red-800 text-xs"
               >
                 <h3 className="font-semibold">Hint</h3>
-                {hintVisible && <h3 className="ml-2">{hint}</h3>}
+                {hintVisible && !loadingHandleAnswerPoints && !isOpen && (
+                  <h3 className="ml-2">{hint}</h3>
+                )}
               </button>
             )}
             {isOpen && (
