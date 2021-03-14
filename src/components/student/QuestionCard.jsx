@@ -1,5 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import React, { useState } from "react";
+import React from "react";
 import { BsStarFill } from "react-icons/bs";
 import { studentClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
@@ -13,15 +13,13 @@ function QuestionCard({
   studentId,
   setIsOpen,
 }) {
-  const {
-    data: { getQuestionById: question } = {},
-    loading: loadingQuestion,
-    questionError,
-    // refetch: refetchQuestion,
-  } = useQuery(GET_QUESTION_BY_ID, {
-    variables: { questionId },
-    client: studentClient,
-  });
+  const { data: { getQuestionById: question } = {} } = useQuery(
+    GET_QUESTION_BY_ID,
+    {
+      variables: { questionId },
+      client: studentClient,
+    }
+  );
   const { data: { getStudentById: studentObject } = {} } = useQuery(
     GET_STUDENT_BY_ID,
     {
@@ -29,27 +27,24 @@ function QuestionCard({
       client: studentClient,
     }
   );
-  const [errors, setErrors] = useState({});
 
   const { values, onSubmit } = useForm(startQuestionCallback, {
     questionId,
     studentId,
   });
 
-  const [startQuestion, { loading }] = useMutation(START_QUESTION, {
+  const [startQuestion] = useMutation(START_QUESTION, {
     client: studentClient,
     refetchQueries: [],
 
-    update(proxy, { data: { startQuestion: startQuestionData } }) {
+    update() {
       setIsOpen(true);
-      setErrors({});
       handleQuestionClick(questionId);
     },
-    onError(err) {
-      // console.log(err);
-      // console.log(err.graphQLErrors[0].extensions.exception.errors);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
+    // onError(err) {
+    //   // console.log(err);
+    //   // console.log(err.graphQLErrors[0].extensions.exception.errors);
+    // },
     variables: values,
   });
 

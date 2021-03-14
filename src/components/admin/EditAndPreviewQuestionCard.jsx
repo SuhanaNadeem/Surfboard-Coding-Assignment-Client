@@ -10,8 +10,7 @@ function EditAndPreviewQuestionCard({
 }) {
   const {
     data: { getQuestionById: question } = {},
-    loading: loadingQuestion,
-    questionError,
+
     // refetch: refetchQuestion,
   } = useQuery(GET_QUESTION_BY_ID, {
     variables: { questionId },

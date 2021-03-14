@@ -21,30 +21,24 @@ export default function StarQuestionCard({ props, questionId, studentObject }) {
       // console.log("changed");
       setValues({ questionId });
     }
-  }, [questionId]);
+  }, [questionId, setValues]);
 
-  const [handleStarQuestion, { loadingStarQuestion }] = useMutation(
-    HANDLE_STAR_QUESTION,
-    {
-      client: studentClient,
-      refetchQueries: [
-        {
-          query: GET_STUDENT_BY_ID,
-          variables: { studentId: student && student.id },
-        },
-      ],
-
-      update(
-        proxy,
-        { data: { handleStarQuestion: handleStarQuestionData } }
-      ) {},
-      onError(err) {
-        // console.log(err);
-        // console.log(err.graphQLErrors[0].extensions.exception.errors);
+  const [handleStarQuestion] = useMutation(HANDLE_STAR_QUESTION, {
+    client: studentClient,
+    refetchQueries: [
+      {
+        query: GET_STUDENT_BY_ID,
+        variables: { studentId: student && student.id },
       },
-      variables: values,
-    }
-  );
+    ],
+
+    update(proxy, { data: { handleStarQuestion: handleStarQuestionData } }) {},
+    onError(err) {
+      // console.log(err);
+      // console.log(err.graphQLErrors[0].extensions.exception.errors);
+    },
+    variables: values,
+  });
 
   function handleStarQuestionCallback() {
     handleStarQuestion();

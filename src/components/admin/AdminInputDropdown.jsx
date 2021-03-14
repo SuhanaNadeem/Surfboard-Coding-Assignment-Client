@@ -13,21 +13,17 @@ export default function AdminInputDropdown({
     setIsOpen(!isOpen);
   }
 
-  const { data: { getAdmins: admins } = {}, loading: loadingAdmins } = useQuery(
-    GET_ADMINS,
+  const { data: { getAdmins: admins } = {} } = useQuery(GET_ADMINS, {
+    client: adminClient,
+  });
+
+  const { data: { getAdminById: currentAdmin } = {} } = useQuery(
+    GET_ADMIN_BY_ID,
     {
+      variables: { adminId: currentAdminId },
       client: adminClient,
     }
   );
-
-  const {
-    data: { getAdminById: currentAdmin } = {},
-    loading: loadingAdmin,
-    error,
-  } = useQuery(GET_ADMIN_BY_ID, {
-    variables: { adminId: currentAdminId },
-    client: adminClient,
-  });
 
   return (
     <>

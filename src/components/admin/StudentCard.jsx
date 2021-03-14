@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import React, { useState } from "react";
+import React from "react";
 import { FaEdit } from "react-icons/fa";
 import { IoMdTrash } from "react-icons/io";
 import { adminClient } from "../../GraphqlApolloClients";
@@ -12,26 +12,24 @@ export default function StudentCard({
   setIsOpen,
   handleStudentClick,
 }) {
-  const [errors, setErrors] = useState({});
-
   const { values, onSubmit } = useForm(deleteStudentCallback, {
     studentId: student && student.id,
   });
 
-  const [deleteStudent, { loading }] = useMutation(DELETE_STUDENT, {
+  const [deleteStudent] = useMutation(DELETE_STUDENT, {
     refetchQueries: [
       {
         query: GET_STUDENTS,
       },
     ],
-    update() {
-      setErrors({});
-    },
-    onError(err) {
-      // console.log(values);
-      // console.log(err);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
+    // update() {
+    //   setErrors({});
+    // },
+    // onError(err) {
+    //   // console.log(values);
+    //   // console.log(err);
+    //   setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    // },
     variables: values,
     client: adminClient,
   });

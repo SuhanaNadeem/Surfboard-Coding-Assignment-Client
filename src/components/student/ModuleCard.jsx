@@ -5,18 +5,14 @@ import { studentClient } from "../../GraphqlApolloClients";
 
 export default function ModuleCard({ props, module }) {
   // const {context} = useContext(StudentAuthContext);
-  const {
-    data: { getCategoryById: category } = {},
-    loading: loadingCategory,
-    error,
-  } = useQuery(GET_CATEGORY_BY_ID, {
-    variables: { categoryId: module.categoryId },
-    client: studentClient,
-  });
-  const {
-    data: { getStudent: student } = {},
-    loading: loadingStudent,
-  } = useQuery(GET_STUDENT, {
+  const { data: { getCategoryById: category } = {} } = useQuery(
+    GET_CATEGORY_BY_ID,
+    {
+      variables: { categoryId: module.categoryId },
+      client: studentClient,
+    }
+  );
+  const { data: { getStudent: student } = {} } = useQuery(GET_STUDENT, {
     client: studentClient,
   });
 
@@ -44,6 +40,7 @@ export default function ModuleCard({ props, module }) {
           )}
         </div>
         <img
+          alt="Module Icon"
           src={
             module.image && module.image !== ""
               ? module.image

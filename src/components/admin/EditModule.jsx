@@ -36,7 +36,7 @@ function EditModule({
     }
   );
 
-  const [editModule, { loading }] = useMutation(EDIT_MODULE, {
+  const [editModule] = useMutation(EDIT_MODULE, {
     refetchQueries: [
       {
         query: GET_MODULES,

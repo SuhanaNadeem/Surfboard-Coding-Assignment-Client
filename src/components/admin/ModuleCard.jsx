@@ -1,36 +1,31 @@
-import { gql, useQuery, useMutation } from "@apollo/client";
-import React, { useState, useContext } from "react";
-import { useForm } from "../../util/hooks";
-
-import { adminClient } from "../../GraphqlApolloClients";
-import { IoMdTrash } from "react-icons/io";
+import { gql, useMutation, useQuery } from "@apollo/client";
+import React, { useContext } from "react";
 import { FaEdit } from "react-icons/fa";
+import { IoMdTrash } from "react-icons/io";
+import { AdminAuthContext } from "../../context/adminAuth";
+import { adminClient } from "../../GraphqlApolloClients";
 import {
   GET_MODULES,
   GET_MODULES_BY_ADMIN,
 } from "../../pages/admin/AdminDashboard";
-import { AdminAuthContext } from "../../context/adminAuth";
-import tempSvg from "../../images/tempSvg.png";
+import { useForm } from "../../util/hooks";
 
 export default function ModuleCard({ props, module, created }) {
   const { admin } = useContext(AdminAuthContext);
 
-  const [errors, setErrors] = useState({});
-
-  const {
-    data: { getCategoryById: category } = {},
-    loading: loadingCategory,
-    error,
-  } = useQuery(GET_CATEGORY_BY_ID, {
-    variables: { categoryId: module.categoryId },
-    client: adminClient,
-  });
+  const { data: { getCategoryById: category } = {} } = useQuery(
+    GET_CATEGORY_BY_ID,
+    {
+      variables: { categoryId: module.categoryId },
+      client: adminClient,
+    }
+  );
 
   const { values, onSubmit } = useForm(deleteModuleCallback, {
     moduleId: module.id,
   });
 
-  const [deleteModule, { loading }] = useMutation(DELETE_MODULE, {
+  const [deleteModule] = useMutation(DELETE_MODULE, {
     refetchQueries: [
       {
         query: GET_MODULES,
@@ -40,14 +35,14 @@ export default function ModuleCard({ props, module, created }) {
         variables: { adminId: admin && admin.id },
       },
     ],
-    update() {
-      setErrors({});
-    },
-    onError(err) {
-      // console.log(values);
-      // console.log(err);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
+    // update() {
+    //   setErrors({});
+    // },
+    // onError(err) {
+    //   // console.log(values);
+    //   // console.log(err);
+    //   setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    // },
     variables: values,
     client: adminClient,
   });
@@ -76,6 +71,7 @@ export default function ModuleCard({ props, module, created }) {
         </p>
         {/* TODO round this! */}
         <img
+          alt="Module Icon"
           src={
             module.image && module.image !== ""
               ? module.image

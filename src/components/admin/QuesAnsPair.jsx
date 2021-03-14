@@ -1,5 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import React, { useState } from "react";
+import React from "react";
 import { IoMdTrash } from "react-icons/io";
 import { adminClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
@@ -12,8 +12,6 @@ export default function QuesAnsPair({
   answerId,
   stringStringDictId,
 }) {
-  const [errors, setErrors] = useState({});
-
   const {
     data: { getQuestionById: question } = {},
     // refetch: refetchQuestion,
@@ -32,29 +30,26 @@ export default function QuesAnsPair({
     stringStringDictId,
   });
 
-  const [deleteStringStringDict, { loading }] = useMutation(
-    DELETE_STRING_STRING_DICT,
-    {
-      refetchQueries: [
-        {
-          query: GET_STRING_STRING_DICTS_BY_STUDENT,
-          variables: { studentId: student && student.id },
-        },
-      ],
-      update() {
-        // console.log(values);
+  const [deleteStringStringDict] = useMutation(DELETE_STRING_STRING_DICT, {
+    refetchQueries: [
+      {
+        query: GET_STRING_STRING_DICTS_BY_STUDENT,
+        variables: { studentId: student && student.id },
+      },
+    ],
+    // update() {
+    //   // console.log(values);
 
-        setErrors({});
-      },
-      onError(err) {
-        // console.log(values);
-        // console.log(err);
-        setErrors(err.graphQLErrors[0].extensions.exception.errors);
-      },
-      variables: values,
-      client: adminClient,
-    }
-  );
+    //   setErrors({});
+    // },
+    // onError(err) {
+    //   // console.log(values);
+    //   // console.log(err);
+    //   setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    // },
+    variables: values,
+    client: adminClient,
+  });
 
   function deleteStringStringDictCallback() {
     deleteStringStringDict();

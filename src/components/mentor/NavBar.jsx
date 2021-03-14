@@ -11,7 +11,7 @@ export default function MentorNavBar({ props }) {
     // { title: "Search", link: "/search" },
   ];
 
-  const { mentor, logoutMentor } = useContext(MentorAuthContext);
+  const { logoutMentor } = useContext(MentorAuthContext);
 
   return (
     <div className="bg-black shadow-lg flex items-center justify-center w-full z-10 text-center md:h-14 h-16">
@@ -35,6 +35,7 @@ export default function MentorNavBar({ props }) {
             <img
               src="https://li-images.s3.amazonaws.com/0037927447/dw.png"
               className="object-cover w-36 "
+              alt="LI Logo"
             />
           </button>
 
@@ -59,6 +60,7 @@ export default function MentorNavBar({ props }) {
               }}
             >
               <img
+                alt="LYNX Logo"
                 src={tempWhiteLogo}
                 className="focus:outline-none w-5 h-full"
               />

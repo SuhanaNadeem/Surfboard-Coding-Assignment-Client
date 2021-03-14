@@ -1,23 +1,20 @@
-import { StudentAuthContext } from "../../context/studentAuth";
-import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
-import { studentClient } from "../../GraphqlApolloClients";
+import React, { useContext } from "react";
 
+import { StudentAuthContext } from "../../context/studentAuth";
+import { studentClient } from "../../GraphqlApolloClients";
 import NewModuleCard from "./NewModuleCard";
 
 export default function CategoryCard({ category, props }) {
-  const history = useHistory();
   const { student } = useContext(StudentAuthContext);
 
-  const {
-    data: { getIncompleteModulesByCategory: modules } = {},
-    loading: loadingModules,
-    error,
-  } = useQuery(GET_INCOMPLETE_MODULES_BY_CATEGORY, {
-    variables: { categoryId: category.id, studentId: student && student.id },
-    client: studentClient,
-  });
+  const { data: { getIncompleteModulesByCategory: modules } = {} } = useQuery(
+    GET_INCOMPLETE_MODULES_BY_CATEGORY,
+    {
+      variables: { categoryId: category.id, studentId: student && student.id },
+      client: studentClient,
+    }
+  );
   return modules ? (
     <>
       <></>

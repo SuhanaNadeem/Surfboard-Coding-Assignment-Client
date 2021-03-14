@@ -21,21 +21,20 @@ export default function CategoryInputDropdown({
     categoryErrors = errors.categoryId;
   }
 
-  const {
-    data: { getCategories: categories } = {},
-    loading: loadingCategories,
-  } = useQuery(GET_CATEGORIES, {
-    client: adminClient,
-  });
+  const { data: { getCategories: categories } = {} } = useQuery(
+    GET_CATEGORIES,
+    {
+      client: adminClient,
+    }
+  );
 
-  const {
-    data: { getCategoryById: currentCategory } = {},
-    loading: loadingCategory,
-    error,
-  } = useQuery(GET_CATEGORY_BY_ID, {
-    variables: { categoryId: currentCategoryId },
-    client: adminClient,
-  });
+  const { data: { getCategoryById: currentCategory } = {} } = useQuery(
+    GET_CATEGORY_BY_ID,
+    {
+      variables: { categoryId: currentCategoryId },
+      client: adminClient,
+    }
+  );
 
   return (
     <>

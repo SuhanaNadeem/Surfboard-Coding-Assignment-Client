@@ -1,20 +1,18 @@
-import React, { useState, useContext } from "react";
 import { gql, useMutation } from "@apollo/client";
-import { StudentAuthContext } from "../../context/studentAuth";
-
-import { GiMorphBall } from "react-icons/gi";
+import React, { useContext } from "react";
 import { BsCodeSlash } from "react-icons/bs";
-import { RiWirelessChargingLine } from "react-icons/ri";
+import { GiMorphBall } from "react-icons/gi";
 import { GrPersonalComputer } from "react-icons/gr";
-import { useForm } from "../../util/hooks";
+import { RiWirelessChargingLine } from "react-icons/ri";
+import { StudentAuthContext } from "../../context/studentAuth";
 import { studentClient } from "../../GraphqlApolloClients";
 import { GET_IN_PROGRESS_MODULES_BY_STUDENT } from "../../pages/student/StudentDashboard";
+import { useForm } from "../../util/hooks";
 import { GET_INCOMPLETE_MODULES_BY_CATEGORY } from "./CategoryCard";
 
 export default function NewModuleCard({ props, categoryName, moduleInfo }) {
   const { student } = useContext(StudentAuthContext);
 
-  const [errors, setErrors] = useState({});
   const moduleId = moduleInfo.id;
   var studentId;
   if (student) {
@@ -46,29 +44,29 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
       },
     ],
     update(proxy, { data: { addInProgressModuleData: addingModuleData } }) {
-      setErrors({});
+      // setErrors({});
       props.history.push(`/module/${moduleId}`);
     },
-    onError(err) {
-      // console.log(valuesStatus);
-      // console.log(err);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
+    // onError(err) {
+    //   // console.log(valuesStatus);
+    //   // console.log(err);
+    //   setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    // },
     variables: { moduleId, studentId },
   });
 
   const [startModule] = useMutation(START_MODULE, {
     client: studentClient,
-    update(proxy, { data: { startModuleData: startingModuleData } }) {
+    update() {
       startModuleCallback();
-      setErrors({});
+      // setErrors({});
       addInProgressModule();
     },
-    onError(err) {
-      // console.log(valuesStatus);
-      // console.log(err);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
+    // onError(err) {
+    //   // console.log(valuesStatus);
+    //   // console.log(err);
+    //   setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    // },
     variables: valuesStatus,
   });
   function startModuleCallback() {

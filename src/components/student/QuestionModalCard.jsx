@@ -1,25 +1,23 @@
+import { gql, useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
-
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { studentClient } from "../../GraphqlApolloClients";
-import { useForm } from "../../util/hooks";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import ReactPlayer from "react-player";
 import { StudentAuthContext } from "../../context/studentAuth";
+import { studentClient } from "../../GraphqlApolloClients";
+import {
+  GET_COMPLETED_MODULES_BY_STUDENT,
+  GET_IN_PROGRESS_MODULES_BY_STUDENT,
+} from "../../pages/student/StudentDashboard";
 import {
   GET_COMPLETED_QUESTIONS_BY_MODULE,
   GET_MODULE_BY_ID,
   GET_MODULE_POINTS_BY_STUDENT,
   GET_TOTAL_POSSIBLE_MODULE_POINTS,
 } from "../../pages/student/StudentModule";
-import {
-  GET_COMPLETED_MODULES_BY_STUDENT,
-  GET_IN_PROGRESS_MODULES_BY_STUDENT,
-} from "../../pages/student/StudentDashboard";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-import ReactPlayer from "react-player";
-import { GET_QUESTION_BY_ID } from "./QuestionCard";
+import { useForm } from "../../util/hooks";
 import FeedbackModal from "./FeedbackModal";
+import { GET_QUESTION_BY_ID } from "./QuestionCard";
 import StarQuestionCard from "./StarQuestionCard";
-import { useLazyQuery } from "@apollo/client";
 
 function QuestionModalCard({
   props,
@@ -38,7 +36,6 @@ function QuestionModalCard({
   const {
     data: { getQuestionById: question } = {},
     loading: loadingQuestion,
-    questionError,
   } = useQuery(GET_QUESTION_BY_ID, {
     variables: { questionId },
     client: studentClient,
@@ -55,7 +52,6 @@ function QuestionModalCard({
   const {
     data: { getSavedAnswerByQuestion: savedAnswer } = {},
     loading: loadingSavedAnswer,
-    refetch: refetchSavedAnswer,
   } = useQuery(GET_SAVED_ANSWER_BY_QUESTION, {
     variables: { questionId: questionId, studentId: studentId },
     client: studentClient,
@@ -64,7 +60,6 @@ function QuestionModalCard({
   const {
     data: { getHintByQuestion: hint } = {},
     loading: loadingHint,
-    hintError,
   } = useQuery(GET_HINT_BY_QUESTION, {
     variables: { questionId: questionId },
     client: studentClient,
@@ -79,10 +74,7 @@ function QuestionModalCard({
   });
   const [
     getLazyCompletedQuestionsByModule,
-    {
-      loading,
-      data: { getCompletedQuestionsByModule: lazyCompletedQuestions } = {},
-    },
+    { data: { getCompletedQuestionsByModule: lazyCompletedQuestions } = {} },
   ] = useLazyQuery(GET_COMPLETED_QUESTIONS_BY_MODULE);
 
   const { values, onChange, onSubmit, setValues } = useForm(
@@ -114,25 +106,9 @@ function QuestionModalCard({
       setIsOpen(completedQuestions.includes(questionId));
       setHintVisible(false);
     }
-  }, [questionId, savedAnswer, hint]);
-
-  useEffect(() => {
-    if (
-      !loadingHandleAnswerPoints &&
-      !loadingCompletedQuestionsByModule &&
-      !loadingGetModuleById &&
-      !loadingHint &&
-      !loadingQuestion &&
-      !loadingSavedAnswer
-    ) {
-      if (!completedQuestions.includes(questionId)) {
-        setIsOpen(false);
-      } else {
-        setIsOpen(true);
-      }
-    }
-  }, [questionId]);
-
+  }, [questionId, savedAnswer, hint, completedQuestions, setValues, values]);
+  // CHANGED SUMN HERE: completedQuestions, setValues, values
+  // CHANGED SUMN HERE completedQuestions, loadingCompletedQuestionsByModule,loadingGetModuleById,loadingHandleAnswerPoints,loadingHint,loadingQuestion,loadingSavedAnswer
   const [
     handleAnswerPoints,
     {
@@ -184,6 +160,31 @@ function QuestionModalCard({
     },
     variables: values,
   });
+  useEffect(() => {
+    if (
+      !loadingHandleAnswerPoints &&
+      !loadingCompletedQuestionsByModule &&
+      !loadingGetModuleById &&
+      !loadingHint &&
+      !loadingQuestion &&
+      !loadingSavedAnswer
+    ) {
+      if (!completedQuestions.includes(questionId)) {
+        setIsOpen(false);
+      } else {
+        setIsOpen(true);
+      }
+    }
+  }, [
+    questionId,
+    completedQuestions,
+    loadingCompletedQuestionsByModule,
+    loadingGetModuleById,
+    loadingHandleAnswerPoints,
+    loadingHint,
+    loadingQuestion,
+    loadingSavedAnswer,
+  ]);
 
   function handleAnswerPointsCallback() {
     setIsOpen(false);
@@ -248,6 +249,7 @@ function QuestionModalCard({
               className="font-light text-sm truncate focus:outline-none focus:text-blue-500"
               href={question.articleLink}
               target="_blank"
+              rel="noopener noreferrer"
             >
               {question.articleLink}
             </a>
@@ -267,6 +269,7 @@ function QuestionModalCard({
               className="font-light text-sm truncate"
               href={question.extraLink}
               target="_blank"
+              rel="noopener noreferrer"
             >
               {question.extraLink}
             </a>
@@ -461,7 +464,7 @@ function QuestionModalCard({
         )}
       </div>
       <form className="flex mt-6" onSubmit={onSubmit}>
-        {module.questions.indexOf(question.id) != 0 && (
+        {module.questions.indexOf(question.id) !== 0 && (
           <button
             className="mx-auto focus:outline-none focus:ring rounded-sm"
             onClick={togglePrevOpen}

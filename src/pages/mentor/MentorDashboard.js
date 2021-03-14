@@ -1,13 +1,13 @@
-import { MentorAuthContext } from "../../context/mentorAuth";
-import React, { useContext } from "react";
 import { useQuery } from "@apollo/client";
-import NavBar from "../../components/mentor/NavBar";
-import { mentorClient } from "../../GraphqlApolloClients";
-import Footer from "../../components/mentor/Footer";
+import React, { useContext } from "react";
 import { GET_STUDENTS_BY_MENTOR } from "../../components/admin/Students";
-import { GET_MENTOR_BY_ID } from "../../pages/admin/AdminUsers";
 import DashboardStudents from "../../components/mentor/DashboardStudents";
+import Footer from "../../components/mentor/Footer";
+import NavBar from "../../components/mentor/NavBar";
 import LoadingScreen from "../../components/student/LoadingScreen";
+import { MentorAuthContext } from "../../context/mentorAuth";
+import { mentorClient } from "../../GraphqlApolloClients";
+import { GET_MENTOR_BY_ID } from "../../pages/admin/AdminUsers";
 
 export default function MentorDashboard(props) {
   const { mentor } = useContext(MentorAuthContext);
@@ -17,22 +17,20 @@ export default function MentorDashboard(props) {
   }
   var selectedStudentId = props.match.params.studentId;
 
-  const {
-    data: { getMentorById: mentorObject } = {},
-    loading: loadingMentor,
-    mentorError,
-    refetch: refetchMentor,
-  } = useQuery(GET_MENTOR_BY_ID, {
-    variables: { mentorId: mentor && mentor.id },
-    client: mentorClient,
-  });
-  const {
-    data: { getStudentsByMentor: addedStudents } = {},
-    loading: loadingAddedStudents,
-  } = useQuery(GET_STUDENTS_BY_MENTOR, {
-    variables: { mentorId: mentor && mentor.id },
-    client: mentorClient,
-  });
+  const { data: { getMentorById: mentorObject } = {} } = useQuery(
+    GET_MENTOR_BY_ID,
+    {
+      variables: { mentorId: mentor && mentor.id },
+      client: mentorClient,
+    }
+  );
+  const { data: { getStudentsByMentor: addedStudents } = {} } = useQuery(
+    GET_STUDENTS_BY_MENTOR,
+    {
+      variables: { mentorId: mentor && mentor.id },
+      client: mentorClient,
+    }
+  );
 
   const mentorDashboard = mentorObject ? (
     <div className="h-full flex flex-col min-h-screen w-full">

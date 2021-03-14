@@ -12,12 +12,7 @@ export default function MentorModal({
   activeMentorId,
   handleMentorClick,
 }) {
-  const {
-    data: { getMentorById: mentor } = {},
-    loading: loadingMentor,
-    mentorError,
-    refetch: refetchMentor,
-  } = useQuery(GET_MENTOR_BY_ID, {
+  const { data: { getMentorById: mentor } = {} } = useQuery(GET_MENTOR_BY_ID, {
     variables: { mentorId: activeMentorId },
     client: adminClient,
   });

@@ -1,9 +1,4 @@
-import { useQuery } from "@apollo/client";
-import React, { useContext, useState } from "react";
-import { StudentAuthContext } from "../../context/studentAuth";
-import { studentClient } from "../../GraphqlApolloClients";
-import { GET_QUESTION_BY_ID } from "./CompletedQuestion";
-
+import React from "react";
 import QuestionModalCard from "./QuestionModalCard";
 
 export default function QuestionModal({
@@ -15,7 +10,6 @@ export default function QuestionModal({
   moduleId,
   initialPoints,
 }) {
-  const { student } = useContext(StudentAuthContext);
   // console.log(activeQuestionId);
   function toggleIsOpen() {
     // console.log("enters");

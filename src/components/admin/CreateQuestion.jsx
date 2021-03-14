@@ -6,7 +6,6 @@ import {
   GET_QUESTIONS_BY_ADMIN,
 } from "../../pages/admin/AdminDashboard";
 import { useForm } from "../../util/hooks";
-import CategoryInputDropdown from "./CategoryInputDropdown";
 import ImageUploadBox from "./ImageUploadBox";
 import ModuleInputDropdown from "./ModuleInputDropdown";
 
@@ -51,7 +50,7 @@ function CreateQuestion({ admin, props }) {
     }
   );
 
-  const [createNewQuestion, { loading }] = useMutation(CREATE_NEW_QUESTION, {
+  const [createNewQuestion] = useMutation(CREATE_NEW_QUESTION, {
     refetchQueries: [
       {
         query: GET_QUESTIONS,

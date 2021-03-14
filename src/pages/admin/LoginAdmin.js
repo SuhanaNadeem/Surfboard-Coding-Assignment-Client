@@ -17,7 +17,7 @@ function LoginAdmin(props) {
     password: "",
   });
 
-  const [loginAdmin, { loading }] = useMutation(LOGIN_ADMIN, {
+  const [loginAdmin] = useMutation(LOGIN_ADMIN, {
     update(_, { data: { loginAdmin: adminData } }) {
       context.loginAdmin(adminData);
       props.history.push("/adminDashboard");
@@ -101,7 +101,7 @@ function LoginAdmin(props) {
           </button>
         </form>
         <div className="flex flex-1 mt-4 md:m-0 items-center  focus:outline-none justify-end flex-shrink-0">
-          <img src={robotics} className="w-full" />
+          <img alt="LYNX Logo Large" src={robotics} className="w-full" />
         </div>
       </div>
     </div>

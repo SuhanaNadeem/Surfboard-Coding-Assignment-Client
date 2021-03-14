@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import React, { useState } from "react";
+import React from "react";
 import { FaEdit } from "react-icons/fa";
 import { IoMdTrash } from "react-icons/io";
 import { adminClient } from "../../GraphqlApolloClients";
@@ -12,26 +12,24 @@ export default function MentorCard({
   setIsMentorOpen,
   handleMentorClick,
 }) {
-  const [errors, setErrors] = useState({});
-
   const { values, onSubmit } = useForm(deleteMentorCallback, {
     mentorId: mentor && mentor.id,
   });
 
-  const [deleteMentor, { loading }] = useMutation(DELETE_MENTOR, {
+  const [deleteMentor] = useMutation(DELETE_MENTOR, {
     refetchQueries: [
       {
         query: GET_MENTORS,
       },
     ],
-    update() {
-      setErrors({});
-    },
-    onError(err) {
-      // console.log(values);
-      // console.log(err);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
+    // update() {
+    //   setErrors({});
+    // },
+    // onError(err) {
+    //   // console.log(values);
+    //   // console.log(err);
+    //   setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    // },
     variables: values,
     client: adminClient,
   });

@@ -1,10 +1,5 @@
 import React from "react";
 
-import { gql, useQuery } from "@apollo/client";
-import { studentClient } from "../../GraphqlApolloClients";
-import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
-import tempSvg from "../../images/tempSvg.png";
-
 export default function BadgeCard({ props, badge }) {
   return badge ? (
     <div>
@@ -36,6 +31,7 @@ export default function BadgeCard({ props, badge }) {
           </p>
         )}
         <img
+          alt="Badge Icon"
           src={
             badge.image && badge.image !== ""
               ? badge.image

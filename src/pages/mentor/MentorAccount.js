@@ -1,12 +1,12 @@
-import { MentorAuthContext } from "../../context/mentorAuth";
+import { useQuery } from "@apollo/client";
 import React, { useContext } from "react";
-import { useQuery, gql } from "@apollo/client";
-import NavBar from "../../components/mentor/NavBar";
-import { mentorClient } from "../../GraphqlApolloClients";
-import Footer from "../../components/mentor/Footer";
-import { GET_MENTOR_BY_ID } from "../admin/AdminUsers";
 import EditMentor from "../../components/mentor/EditMentor";
+import Footer from "../../components/mentor/Footer";
+import NavBar from "../../components/mentor/NavBar";
 import LoadingScreen from "../../components/student/LoadingScreen";
+import { MentorAuthContext } from "../../context/mentorAuth";
+import { mentorClient } from "../../GraphqlApolloClients";
+import { GET_MENTOR_BY_ID } from "../admin/AdminUsers";
 
 export default function MentorAccount(props) {
   const { mentor } = useContext(MentorAuthContext);

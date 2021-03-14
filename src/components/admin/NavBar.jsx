@@ -12,7 +12,7 @@ export default function NavBar({ props }) {
     // { title: "Search", link: "/search" },
   ];
 
-  const { admin, logoutAdmin } = useContext(AdminAuthContext);
+  const { logoutAdmin } = useContext(AdminAuthContext);
 
   return (
     <div className="bg-black shadow-lg flex items-center justify-center w-full z-10 text-center">
@@ -37,6 +37,7 @@ export default function NavBar({ props }) {
             <img
               src="https://li-images.s3.amazonaws.com/0037927447/dw.png"
               className="object-cover w-36 "
+              alt="LI Logo"
             />
             {/* <div
               className="bg-cover w-152 h-32 bg-center bg-no-repeat   mx-auto"
@@ -66,6 +67,7 @@ export default function NavBar({ props }) {
               }}
             >
               <img
+                alt="LYNX Logo"
                 src={tempWhiteLogo}
                 className="focus:outline-none w-5 h-full"
               />

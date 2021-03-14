@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
-import React, { useContext } from "react";
+import React from "react";
 import { CgCheckO, CgCloseO } from "react-icons/cg";
-import { StudentAuthContext } from "../../context/studentAuth";
+
 import { studentClient } from "../../GraphqlApolloClients";
 
 export default function CompletedQuestion({
@@ -9,17 +9,14 @@ export default function CompletedQuestion({
   completedQuestions,
   questionId,
 }) {
-  const { student } = useContext(StudentAuthContext);
+  const { data: { getQuestionById: question } = {} } = useQuery(
+    GET_QUESTION_BY_ID,
+    {
+      variables: { questionId: questionId },
 
-  const {
-    data: { getQuestionById: question } = {},
-    loading: loadingQuestion,
-    getQuestionByIdError,
-  } = useQuery(GET_QUESTION_BY_ID, {
-    variables: { questionId: questionId },
-
-    client: studentClient,
-  });
+      client: studentClient,
+    }
+  );
 
   return question && completedQuestions ? (
     <div className="flex items-center justify-start w-full overflow-hidden pb-2 ">

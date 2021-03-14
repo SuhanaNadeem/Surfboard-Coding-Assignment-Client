@@ -10,6 +10,7 @@ export default function StudentTitleBar() {
           <img
             src="https://li-images.s3.amazonaws.com/0037927447/dw.png"
             className="object-cover w-48 "
+            alt="LI Logo"
           />
         </div>
       </nav>

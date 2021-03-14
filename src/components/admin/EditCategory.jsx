@@ -16,7 +16,7 @@ function EditCategory({
     newAdminId: newAdminId || "",
   });
 
-  const [editCategory, { loading }] = useMutation(EDIT_CATEGORY, {
+  const [editCategory] = useMutation(EDIT_CATEGORY, {
     refetchQueries: [],
     update(proxy, { data: { editCategory: categoryData } }) {
       setErrors({});

@@ -1,19 +1,19 @@
 import { gql, useMutation } from "@apollo/client";
-import React, { useState } from "react";
+import React from "react";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { mentorClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
 import { GET_STUDENTS_BY_MENTOR } from "../admin/Students";
 import { GET_STUDENTS_BY_ORG_NAME } from "./DashboardStudents";
 export default function AddStudent({ mentor, student }) {
-  const [errors, setErrors] = useState({});
+  // const [errors, setErrors] = useState({});
 
   const { values, onSubmit } = useForm(addMentorCallback, {
     studentId: student && student.id,
     mentorId: mentor && mentor.id,
   });
 
-  const [addMentor, { loading }] = useMutation(ADD_MENTOR, {
+  const [addMentor] = useMutation(ADD_MENTOR, {
     refetchQueries: [
       {
         query: GET_STUDENTS_BY_ORG_NAME,
@@ -24,14 +24,14 @@ export default function AddStudent({ mentor, student }) {
         variables: { mentorId: mentor && mentor.id },
       },
     ],
-    update() {
-      setErrors({});
-    },
-    onError(err) {
-      // console.log(values);
-      // console.log(err);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
+    // update() {
+    //   setErrors({});
+    // },
+    // onError(err) {
+    //   // console.log(values);
+    //   // console.log(err);
+    //   setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    // },
     variables: values,
     client: mentorClient,
   });

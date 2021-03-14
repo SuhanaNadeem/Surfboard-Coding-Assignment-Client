@@ -25,7 +25,7 @@ export default function PreviewModule({ props, selectedQuestionId, module }) {
     }
   }
 
-  const [getQuestionById, { loading, data }] = useLazyQuery(GET_QUESTION_BY_ID);
+  const [getQuestionById] = useLazyQuery(GET_QUESTION_BY_ID);
 
   useEffect(() => {
     if (selectedQuestionId) {
@@ -33,8 +33,8 @@ export default function PreviewModule({ props, selectedQuestionId, module }) {
     }
     setActiveQuestionId(selectedQuestionId);
     getQuestionById({ variables: { questionId: selectedQuestionId } });
-  }, [selectedQuestionId]);
-
+  }, [selectedQuestionId, getQuestionById]);
+  // CHANGED SUMN HERE getQuesByid
   const [isOpen, setIsOpen] = useState(
     activeQuestionId !== undefined && activeQuestionId !== "" ? true : false
   );

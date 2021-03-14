@@ -24,22 +24,19 @@ function EditQuestionTemplate({
     newAdminId: newAdminId || "",
   });
 
-  const [editQuestionTemplate, { loading }] = useMutation(
-    EDIT_QUESTION_TEMPLATE,
-    {
-      refetchQueries: [],
-      update(proxy, { data: { editQuestionTemplate: questionTemplateData } }) {
-        setErrors({});
-      },
-      onError(err) {
-        // console.log(values);
-        // console.log(err);
-        setErrors(err.graphQLErrors[0].extensions.exception.errors);
-      },
-      variables: values,
-      client: adminClient,
-    }
-  );
+  const [editQuestionTemplate] = useMutation(EDIT_QUESTION_TEMPLATE, {
+    refetchQueries: [],
+    update(proxy, { data: { editQuestionTemplate: questionTemplateData } }) {
+      setErrors({});
+    },
+    onError(err) {
+      // console.log(values);
+      // console.log(err);
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    },
+    variables: values,
+    client: adminClient,
+  });
 
   function editQuestionTemplateCallback() {
     editQuestionTemplate();

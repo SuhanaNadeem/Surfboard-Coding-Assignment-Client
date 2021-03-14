@@ -22,7 +22,7 @@ function CreateModule({ admin, props }) {
     }
   );
 
-  const [createNewModule, { loading }] = useMutation(CREATE_NEW_MODULE, {
+  const [createNewModule] = useMutation(CREATE_NEW_MODULE, {
     refetchQueries: [
       {
         query: GET_MODULES,

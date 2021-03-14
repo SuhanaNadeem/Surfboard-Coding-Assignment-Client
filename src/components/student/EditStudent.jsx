@@ -28,7 +28,7 @@ function EditStudent({
     confirmNewPassword: confirmNewPassword || "",
   });
 
-  const [editStudent, { loading }] = useMutation(EDIT_STUDENT, {
+  const [editStudent] = useMutation(EDIT_STUDENT, {
     update(_, { data: { editStudent: adminData } }) {
       setErrors({});
       // console.log("done");

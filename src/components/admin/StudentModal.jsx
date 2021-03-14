@@ -16,15 +16,13 @@ export default function StudentModal({
   activeStudentId,
   handleStudentClick,
 }) {
-  const {
-    data: { getStudentById: student } = {},
-    loading: loadingStudent,
-    studentError,
-    refetch: refetchStudent,
-  } = useQuery(GET_STUDENT_BY_ID, {
-    variables: { studentId: activeStudentId },
-    client: adminClient,
-  });
+  const { data: { getStudentById: student } = {} } = useQuery(
+    GET_STUDENT_BY_ID,
+    {
+      variables: { studentId: activeStudentId },
+      client: adminClient,
+    }
+  );
 
   return isOpen && student ? (
     <>

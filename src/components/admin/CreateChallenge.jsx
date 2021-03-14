@@ -29,7 +29,7 @@ function CreateChallenge({ admin, props }) {
     }
   );
 
-  const [createNewChallenge, { loading }] = useMutation(CREATE_NEW_CHALLENGE, {
+  const [createNewChallenge] = useMutation(CREATE_NEW_CHALLENGE, {
     refetchQueries: [
       {
         query: GET_CHALLENGES,

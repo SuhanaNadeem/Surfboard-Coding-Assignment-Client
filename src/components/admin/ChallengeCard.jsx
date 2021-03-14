@@ -1,35 +1,31 @@
-import { gql, useQuery, useMutation } from "@apollo/client";
-import React, { useState, useContext } from "react";
-import { useForm } from "../../util/hooks";
-
-import { adminClient } from "../../GraphqlApolloClients";
-import { IoMdTrash } from "react-icons/io";
+import { gql, useMutation, useQuery } from "@apollo/client";
+import React, { useContext } from "react";
 import { FaEdit } from "react-icons/fa";
-
+import { IoMdTrash } from "react-icons/io";
 import { AdminAuthContext } from "../../context/adminAuth";
+import { adminClient } from "../../GraphqlApolloClients";
 import {
   GET_CHALLENGES,
   GET_CHALLENGES_BY_ADMIN,
 } from "../../pages/admin/AdminDashboard";
+import { useForm } from "../../util/hooks";
+
 export default function ChallengeCard({ props, challenge, created }) {
   const { admin } = useContext(AdminAuthContext);
 
-  const [errors, setErrors] = useState({});
-
-  const {
-    data: { getCategoryById: category } = {},
-    loading: loadingCategory,
-    error,
-  } = useQuery(GET_CATEGORY_BY_ID, {
-    variables: { categoryId: challenge.categoryId },
-    client: adminClient,
-  });
+  const { data: { getCategoryById: category } = {} } = useQuery(
+    GET_CATEGORY_BY_ID,
+    {
+      variables: { categoryId: challenge.categoryId },
+      client: adminClient,
+    }
+  );
 
   const { values, onSubmit } = useForm(deleteChallengeCallback, {
     challengeId: challenge.id,
   });
 
-  const [deleteChallenge, { loading }] = useMutation(DELETE_CHALLENGE, {
+  const [deleteChallenge] = useMutation(DELETE_CHALLENGE, {
     refetchQueries: [
       {
         query: GET_CHALLENGES,
@@ -39,14 +35,14 @@ export default function ChallengeCard({ props, challenge, created }) {
         variables: { adminId: admin && admin.id },
       },
     ],
-    update() {
-      setErrors({});
-    },
-    onError(err) {
-      // console.log(values);
-      // console.log(err);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
+    // update() {
+    //   setErrors({});
+    // },
+    // onError(err) {
+    //   // console.log(values);
+    //   // console.log(err);
+    //   setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    // },
     variables: values,
     client: adminClient,
   });
@@ -71,6 +67,7 @@ export default function ChallengeCard({ props, challenge, created }) {
           {category.name}
         </p>
         <img
+          alt="Challenge icon"
           src={
             challenge.image && challenge.image !== ""
               ? challenge.image

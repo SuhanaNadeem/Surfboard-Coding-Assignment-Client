@@ -1,13 +1,12 @@
-import { AdminAuthContext } from "../../context/adminAuth";
-import React, { useContext } from "react";
 import { gql, useQuery } from "@apollo/client";
-import NavBar from "../../components/admin/NavBar";
-import DashboardSideBar from "../../components/admin/DashboardSideBar";
-import { adminClient } from "../../GraphqlApolloClients";
+import React, { useContext } from "react";
 import DashboardCards from "../../components/admin/DashboardCards";
+import DashboardSideBar from "../../components/admin/DashboardSideBar";
 import Footer from "../../components/admin/Footer";
-import LoadingIcon from "../../images/tempModuleCardImg.PNG";
+import NavBar from "../../components/admin/NavBar";
 import LoadingScreen from "../../components/student/LoadingScreen";
+import { AdminAuthContext } from "../../context/adminAuth";
+import { adminClient } from "../../GraphqlApolloClients";
 
 export default function AdminDashboard(props) {
   const { admin } = useContext(AdminAuthContext);
@@ -18,82 +17,73 @@ export default function AdminDashboard(props) {
     adminId = admin.id;
   }
 
-  const {
-    data: { getModulesByAdmin: adminModules } = {},
-    loading: loadingAdminModules,
-  } = useQuery(GET_MODULES_BY_ADMIN, {
-    variables: { adminId },
-    client: adminClient,
-  });
-  const {
-    data: { getBadgesByAdmin: adminBadges } = {},
-    loading: loadingAdminBadges,
-  } = useQuery(GET_BADGES_BY_ADMIN, {
-    variables: { adminId },
-    client: adminClient,
-  });
-  const {
-    data: { getQuestionsByAdmin: adminQuestions } = {},
-    loading: loadingAdminQuestions,
-  } = useQuery(GET_QUESTIONS_BY_ADMIN, {
-    variables: { adminId },
-    client: adminClient,
-  });
-  const {
-    data: { getChallengesByAdmin: adminChallenges } = {},
-    loading: loadingAdminChallenges,
-  } = useQuery(GET_CHALLENGES_BY_ADMIN, {
-    variables: { adminId },
-    client: adminClient,
-  });
-  const {
-    data: { getCategoriesByAdmin: adminCategories } = {},
-    loading: loadingAdminCategories,
-  } = useQuery(GET_CATEGORIES_BY_ADMIN, {
-    variables: { adminId },
-    client: adminClient,
-  });
+  const { data: { getModulesByAdmin: adminModules } = {} } = useQuery(
+    GET_MODULES_BY_ADMIN,
+    {
+      variables: { adminId },
+      client: adminClient,
+    }
+  );
+  const { data: { getBadgesByAdmin: adminBadges } = {} } = useQuery(
+    GET_BADGES_BY_ADMIN,
+    {
+      variables: { adminId },
+      client: adminClient,
+    }
+  );
+  const { data: { getQuestionsByAdmin: adminQuestions } = {} } = useQuery(
+    GET_QUESTIONS_BY_ADMIN,
+    {
+      variables: { adminId },
+      client: adminClient,
+    }
+  );
+  const { data: { getChallengesByAdmin: adminChallenges } = {} } = useQuery(
+    GET_CHALLENGES_BY_ADMIN,
+    {
+      variables: { adminId },
+      client: adminClient,
+    }
+  );
+  const { data: { getCategoriesByAdmin: adminCategories } = {} } = useQuery(
+    GET_CATEGORIES_BY_ADMIN,
+    {
+      variables: { adminId },
+      client: adminClient,
+    }
+  );
   //   const {
   //     data: { getQuestionTemplatesByAdmin: adminQuestionTemplates } = {},
-  //     loading: loadingAdminQuestionTemplates,
+  //
   //   } = useQuery(GET_QUESTION_TEMPLATES_BY_ADMIN, {
   //     variables: { adminId },
   //     client: adminClient,
   //   });
 
-  const {
-    data: { getModules: modules } = {},
-    loading: loadingModules,
-  } = useQuery(GET_MODULES, {
+  const { data: { getModules: modules } = {} } = useQuery(GET_MODULES, {
     client: adminClient,
   });
-  const { data: { getBadges: badges } = {}, loading: loadingBadges } = useQuery(
-    GET_BADGES,
+  const { data: { getBadges: badges } = {} } = useQuery(GET_BADGES, {
+    client: adminClient,
+  });
+  const { data: { getQuestions: questions } = {} } = useQuery(GET_QUESTIONS, {
+    client: adminClient,
+  });
+  const { data: { getChallenges: challenges } = {} } = useQuery(
+    GET_CHALLENGES,
     {
       client: adminClient,
     }
   );
-  const {
-    data: { getQuestions: questions } = {},
-    loading: loadingQuestions,
-  } = useQuery(GET_QUESTIONS, {
-    client: adminClient,
-  });
-  const {
-    data: { getChallenges: challenges } = {},
-    loading: loadingChallenges,
-  } = useQuery(GET_CHALLENGES, {
-    client: adminClient,
-  });
-  const {
-    data: { getCategories: categories } = {},
-    loading: loadingCategories,
-  } = useQuery(GET_CATEGORIES, {
-    client: adminClient,
-  });
+  const { data: { getCategories: categories } = {} } = useQuery(
+    GET_CATEGORIES,
+    {
+      client: adminClient,
+    }
+  );
   //   const {
   //     data: { getQuestionTemplates: questionTemplates } = {},
-  //     loading: loadingQuestionTemplates,
+  //
   //   } = useQuery(GET_QUESTION_TEMPLATES, {
   //     client: adminClient,
   //   });

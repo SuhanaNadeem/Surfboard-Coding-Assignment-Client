@@ -5,14 +5,13 @@ import { mentorClient } from "../../GraphqlApolloClients";
 import { GET_TOTAL_POSSIBLE_MODULE_POINTS } from "../../pages/student/StudentModule";
 
 function InProgressModule({ module }) {
-  const {
-    data: { getTotalPossibleModulePoints: points } = {},
-    loading: loadingPoints,
-    pointsError,
-  } = useQuery(GET_TOTAL_POSSIBLE_MODULE_POINTS, {
-    variables: { moduleId: module.id },
-    client: mentorClient,
-  });
+  const { data: { getTotalPossibleModulePoints: points } = {} } = useQuery(
+    GET_TOTAL_POSSIBLE_MODULE_POINTS,
+    {
+      variables: { moduleId: module.id },
+      client: mentorClient,
+    }
+  );
 
   return points !== undefined && module ? (
     <div className="flex items-start justify-start mb-2">

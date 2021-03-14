@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import ReactPlayer from "react-player";
 import { adminClient } from "../../GraphqlApolloClients";
@@ -7,47 +7,40 @@ import { GET_QUESTION_BY_ID } from "../student/CompletedQuestion";
 import { GET_MODULE_BY_ID } from "./QuestionCard";
 
 function EditAndPreviewQuestionModalCard({
-  props,
   questionId,
   handleQuestionClick,
   moduleId,
 }) {
-  const {
-    data: { getQuestionById: question } = {},
-    loading: loadingQuestion,
-    questionError,
-    refetch: refetchQuestion,
-  } = useQuery(GET_QUESTION_BY_ID, {
-    variables: { questionId },
-    client: adminClient,
-  });
+  const { data: { getQuestionById: question } = {} } = useQuery(
+    GET_QUESTION_BY_ID,
+    {
+      variables: { questionId },
+      client: adminClient,
+    }
+  );
 
-  const {
-    data: { getHintByQuestion: hint } = {},
-    loading: loadingHint,
-    hintError,
-  } = useQuery(GET_HINT_BY_QUESTION, {
-    variables: { questionId: questionId },
-    client: adminClient,
-  });
+  const { data: { getHintByQuestion: hint } = {} } = useQuery(
+    GET_HINT_BY_QUESTION,
+    {
+      variables: { questionId: questionId },
+      client: adminClient,
+    }
+  );
 
-  const {
-    data: { getModuleById: module } = {},
-    loading: loadingGetModuleById,
-  } = useQuery(GET_MODULE_BY_ID, {
+  const { data: { getModuleById: module } = {} } = useQuery(GET_MODULE_BY_ID, {
     variables: { moduleId: moduleId },
     client: adminClient,
   });
 
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    if (question && question.type === "Question") {
-      setIsOpen(true);
-    }
-  }, [questionId]);
+  // useEffect(() => {
+  //   if (question && question.type === "Question") {
+  //     setIsOpen(true);
+  //   }
+  // }, [questionId]);
   function onAdminClick() {
-    setIsOpen(true);
+    // setIsOpen(true);
     if (question.type === "Skill") {
       var nextQuesId =
         module && module.questions[module.questions.indexOf(question.id) + 1];
@@ -91,6 +84,7 @@ function EditAndPreviewQuestionModalCard({
               className="font-light text-sm truncate"
               href={question.articleLink}
               target="_blank"
+              rel="noopener noreferrer"
             >
               {question.articleLink}
             </a>
@@ -108,6 +102,7 @@ function EditAndPreviewQuestionModalCard({
               className="font-light text-sm truncate"
               href={question.extraLink}
               target="_blank"
+              rel="noopener noreferrer"
             >
               {question.extraLink}
             </a>
@@ -209,7 +204,7 @@ function EditAndPreviewQuestionModalCard({
         )}
       </div>
       <div className="flex mt-6">
-        {module && module.questions.indexOf(question.id) != 0 && (
+        {module && module.questions.indexOf(question.id) !== 0 && (
           <button
             className="mx-auto focus:outline-none focus:ring rounded-sm"
             onClick={togglePrevOpen}

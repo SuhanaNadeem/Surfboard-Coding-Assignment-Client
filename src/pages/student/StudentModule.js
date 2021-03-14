@@ -1,20 +1,18 @@
-import React, { useContext, useState, useEffect } from "react";
-import { StudentAuthContext } from "../../context/studentAuth";
-
 import { gql, useLazyQuery, useQuery } from "@apollo/client";
-import NavBar from "../../components/student/NavBar";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../components/student/Footer";
-import { studentClient } from "../../GraphqlApolloClients";
+import LoadingScreen from "../../components/student/LoadingScreen";
+import ModuleEndCard from "../../components/student/ModuleEndCard";
 import ModuleSummaryBar, {
   GET_STUDENT_BY_ID,
 } from "../../components/student/ModuleSummaryBar";
+import NavBar from "../../components/student/NavBar";
 import QuestionCard, {
   GET_QUESTION_BY_ID,
 } from "../../components/student/QuestionCard";
 import QuestionModal from "../../components/student/QuestionModal";
-import LoadingIcon from "../../images/tempModuleCardImg.PNG";
-import ModuleEndCard from "../../components/student/ModuleEndCard";
-import LoadingScreen from "../../components/student/LoadingScreen";
+import { StudentAuthContext } from "../../context/studentAuth";
+import { studentClient } from "../../GraphqlApolloClients";
 
 export default function StudentModule(props) {
   const { student } = useContext(StudentAuthContext);
@@ -46,11 +44,7 @@ export default function StudentModule(props) {
     setActiveQuestionId(selectedQuestionId);
   }, [setActiveQuestionId, selectedQuestionId]);
 
-  const {
-    data: { getModuleById: module } = {},
-    loading: loadingModule,
-    moduleError,
-  } = useQuery(GET_MODULE_BY_ID, {
+  const { data: { getModuleById: module } = {} } = useQuery(GET_MODULE_BY_ID, {
     variables: { moduleId: moduleId },
     client: studentClient,
   });
@@ -62,29 +56,25 @@ export default function StudentModule(props) {
     }
   );
 
-  const {
-    data: { getTotalPossibleModulePoints: totalPoints } = {},
-    loading: loadingTotalPoints,
-    totalPointsError,
-  } = useQuery(GET_TOTAL_POSSIBLE_MODULE_POINTS, {
-    variables: { moduleId: moduleId },
-    client: studentClient,
-  });
+  const { data: { getTotalPossibleModulePoints: totalPoints } = {} } = useQuery(
+    GET_TOTAL_POSSIBLE_MODULE_POINTS,
+    {
+      variables: { moduleId: moduleId },
+      client: studentClient,
+    }
+  );
   // query to get module points
 
-  const {
-    data: { getModulePointsByStudent: studentPoints } = {},
-    loading: loadingStudentPoints,
-    studentPointsError,
-  } = useQuery(GET_MODULE_POINTS_BY_STUDENT, {
-    variables: { moduleId: moduleId, studentId: student && student.id },
-    client: studentClient,
-  });
+  const { data: { getModulePointsByStudent: studentPoints } = {} } = useQuery(
+    GET_MODULE_POINTS_BY_STUDENT,
+    {
+      variables: { moduleId: moduleId, studentId: student && student.id },
+      client: studentClient,
+    }
+  );
 
   const {
     data: { getCompletedQuestionsByModule: completedQuestions } = {},
-    loading: loadingCompletedQuestionsByModule,
-    completedQuestionsByModuleError,
   } = useQuery(GET_COMPLETED_QUESTIONS_BY_MODULE, {
     variables: { moduleId: moduleId, studentId: student && student.id },
     client: studentClient,
@@ -102,13 +92,13 @@ export default function StudentModule(props) {
     }
   }
 
-  const [getQuestionById, { loading, data }] = useLazyQuery(GET_QUESTION_BY_ID);
+  const [getQuestionById] = useLazyQuery(GET_QUESTION_BY_ID);
 
   useEffect(() => {
     setActiveQuestionId(selectedQuestionId);
     getQuestionById({ variables: { questionId: selectedQuestionId } });
-  }, [selectedQuestionId]);
-
+  }, [selectedQuestionId, getQuestionById]);
+  // CHANGED SUMN HERE
   const [isOpen, setIsOpen] = useState(
     activeQuestionId !== undefined && activeQuestionId !== "" ? true : false
   );
@@ -130,6 +120,7 @@ export default function StudentModule(props) {
           />
           <div className="w-3/4 lg:w-5/6 mt-6 md:ml-10">
             <img
+              alt="LYNX Logo"
               src="https://li-images.s3.amazonaws.com/3206906234/tempSvg.png"
               className="hidden lg:block absolute right-22 xl:right-40 my-auto h-full fill-current opacity-25 "
             />

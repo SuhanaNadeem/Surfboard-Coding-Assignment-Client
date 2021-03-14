@@ -23,7 +23,7 @@ function EditMentor({
     confirmNewPassword: confirmNewPassword || "",
   });
 
-  const [editMentor, { loading }] = useMutation(EDIT_MENTOR, {
+  const [editMentor] = useMutation(EDIT_MENTOR, {
     update(_, { data: { editMentor: adminData } }) {
       setErrors({});
       values.confirmNewPassword = "";

@@ -62,7 +62,7 @@ function EditQuestion({
     }
   );
 
-  const [editQuestion, { loading }] = useMutation(EDIT_QUESTION, {
+  const [editQuestion] = useMutation(EDIT_QUESTION, {
     refetchQueries: [
       {
         query: GET_QUESTIONS,

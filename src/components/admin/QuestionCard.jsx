@@ -1,26 +1,21 @@
-import { gql, useQuery, useMutation } from "@apollo/client";
-import React, { useState, useContext } from "react";
-import { useForm } from "../../util/hooks";
-import { adminClient } from "../../GraphqlApolloClients";
+import { gql, useMutation, useQuery } from "@apollo/client";
+import React, { useContext } from "react";
+import { FaEdit } from "react-icons/fa";
+import { IoMdTrash } from "react-icons/io";
 import { AdminAuthContext } from "../../context/adminAuth";
+import { adminClient } from "../../GraphqlApolloClients";
 import {
   GET_QUESTIONS,
   GET_QUESTIONS_BY_ADMIN,
 } from "../../pages/admin/AdminDashboard";
-import { IoMdTrash } from "react-icons/io";
-import { FaEdit } from "react-icons/fa";
-import tempSvg from "../../images/tempSvg.png";
+import { useForm } from "../../util/hooks";
 
 export default function QuestionCard({ props, question, created }) {
   const { admin } = useContext(AdminAuthContext);
 
-  const [errors, setErrors] = useState({});
+  // const [errors, setErrors] = useState({});
 
-  const {
-    data: { getModuleById: module } = {},
-    loading: loadingModule,
-    error,
-  } = useQuery(GET_MODULE_BY_ID, {
+  const { data: { getModuleById: module } = {} } = useQuery(GET_MODULE_BY_ID, {
     variables: { moduleId: question.moduleId },
     client: adminClient,
   });
@@ -29,7 +24,7 @@ export default function QuestionCard({ props, question, created }) {
     questionId: question.id,
   });
 
-  const [deleteQuestion, { loading }] = useMutation(DELETE_QUESTION, {
+  const [deleteQuestion] = useMutation(DELETE_QUESTION, {
     refetchQueries: [
       {
         query: GET_QUESTIONS,
@@ -39,14 +34,14 @@ export default function QuestionCard({ props, question, created }) {
         variables: { adminId: admin && admin.id },
       },
     ],
-    update() {
-      setErrors({});
-    },
-    onError(err) {
-      // console.log(values);
-      // console.log(err);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
+    // update() {
+    //   setErrors({});
+    // },
+    // onError(err) {
+    //   // console.log(values);
+    //   // console.log(err);
+    //   setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    // },
     variables: values,
     client: adminClient,
   });
@@ -71,6 +66,7 @@ export default function QuestionCard({ props, question, created }) {
           {module.name}
         </p>
         <img
+          alt="Question Icon"
           src={
             question.image && question.image !== ""
               ? question.image

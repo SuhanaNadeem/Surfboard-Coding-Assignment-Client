@@ -18,7 +18,7 @@ function EditAdmin({
     confirmNewPassword: confirmNewPassword || "",
   });
 
-  const [editAdmin, { loading }] = useMutation(EDIT_ADMIN, {
+  const [editAdmin] = useMutation(EDIT_ADMIN, {
     update(_, { data: { editAdmin: adminData } }) {
       setErrors({});
       values.confirmNewPassword = "";

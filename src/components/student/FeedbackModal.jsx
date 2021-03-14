@@ -1,11 +1,11 @@
+import { useQuery } from "@apollo/client";
 import React, { useContext } from "react";
-import { StudentAuthContext } from "../../context/studentAuth";
 import { GiFallingStar } from "react-icons/gi";
 import { IoIosRepeat } from "react-icons/io";
-import { GET_STUDENT_BY_ID } from "./ModuleSummaryBar";
+import { StudentAuthContext } from "../../context/studentAuth";
 import { studentClient } from "../../GraphqlApolloClients";
-import { useQuery } from "@apollo/client";
 import { GET_QUESTION_BY_ID } from "./CompletedQuestion";
+import { GET_STUDENT_BY_ID } from "./ModuleSummaryBar";
 
 export default function FeedbackModal({
   lazyCompletedQuestions,
@@ -20,14 +20,13 @@ export default function FeedbackModal({
       client: studentClient,
     }
   );
-  const {
-    data: { getQuestionById: question } = {},
-    loading: loadingQuestion,
-    questionError,
-  } = useQuery(GET_QUESTION_BY_ID, {
-    variables: { questionId },
-    client: studentClient,
-  });
+  const { data: { getQuestionById: question } = {} } = useQuery(
+    GET_QUESTION_BY_ID,
+    {
+      variables: { questionId },
+      client: studentClient,
+    }
+  );
 
   return lazyCompletedQuestions && question ? (
     <div className="mt-2 mx-auto">

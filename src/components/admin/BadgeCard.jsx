@@ -1,27 +1,25 @@
-import { gql, useQuery, useMutation } from "@apollo/client";
-import React, { useState, useContext } from "react";
-import { useForm } from "../../util/hooks";
-
-import { adminClient } from "../../GraphqlApolloClients";
-import { IoMdTrash } from "react-icons/io";
+import { gql, useMutation } from "@apollo/client";
+import React, { useContext } from "react";
 import { FaEdit } from "react-icons/fa";
+import { IoMdTrash } from "react-icons/io";
 import { AdminAuthContext } from "../../context/adminAuth";
-import tempSvg from "../../images/tempSvg.png";
+import { adminClient } from "../../GraphqlApolloClients";
 import {
   GET_BADGES,
   GET_BADGES_BY_ADMIN,
 } from "../../pages/admin/AdminDashboard";
+import { useForm } from "../../util/hooks";
 
 export default function BadgeCard({ props, badge, created }) {
   const { admin } = useContext(AdminAuthContext);
 
-  const [errors, setErrors] = useState({});
+  // const [errors, setErrors] = useState({});
 
   const { values, onSubmit } = useForm(deleteBadgeCallback, {
     badgeId: badge.id,
   });
 
-  const [deleteBadge, { loading }] = useMutation(DELETE_BADGE, {
+  const [deleteBadge] = useMutation(DELETE_BADGE, {
     refetchQueries: [
       {
         query: GET_BADGES,
@@ -31,14 +29,14 @@ export default function BadgeCard({ props, badge, created }) {
         variables: { adminId: admin && admin.id },
       },
     ],
-    update() {
-      setErrors({});
-    },
-    onError(err) {
-      // console.log(values);
-      // console.log(err);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
+    // update() {
+    //   setErrors({});
+    // },
+    // onError(err) {
+    //   // console.log(values);
+    //   // console.log(err);
+    //   setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    // },
     variables: values,
     client: adminClient,
   });
@@ -64,6 +62,7 @@ export default function BadgeCard({ props, badge, created }) {
       </p> */}
         {/* <p className=" text-gray-700 font-thin text-sm">{badge.createdAt} </p> */}
         <img
+          alt="Badge Icon"
           src={
             badge.image && badge.image !== ""
               ? badge.image

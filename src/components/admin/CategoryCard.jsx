@@ -1,30 +1,23 @@
 import { gql, useMutation } from "@apollo/client";
-import React, { useState, useContext } from "react";
-import { useForm } from "../../util/hooks";
-
-import { adminClient } from "../../GraphqlApolloClients";
-import { IoMdTrash } from "react-icons/io";
+import React, { useContext } from "react";
 import { FaEdit } from "react-icons/fa";
+import { IoMdTrash } from "react-icons/io";
 import { AdminAuthContext } from "../../context/adminAuth";
-
-import tempModuleCardImg from "../../images/tempModuleCardImg.PNG";
-import tempSvg from "../../images/tempSvg.png";
-
+import { adminClient } from "../../GraphqlApolloClients";
 import {
   GET_CATEGORIES,
   GET_CATEGORIES_BY_ADMIN,
 } from "../../pages/admin/AdminDashboard";
+import { useForm } from "../../util/hooks";
 
 export default function CategoryCard({ props, category, created }) {
   const { admin } = useContext(AdminAuthContext);
-
-  const [errors, setErrors] = useState({});
 
   const { values, onSubmit } = useForm(deleteCategoryCallback, {
     categoryId: category.id,
   });
 
-  const [deleteCategory, { loading }] = useMutation(DELETE_CATEGORY, {
+  const [deleteCategory] = useMutation(DELETE_CATEGORY, {
     refetchQueries: [
       {
         query: GET_CATEGORIES,
@@ -34,14 +27,14 @@ export default function CategoryCard({ props, category, created }) {
         variables: { adminId: admin && admin.id },
       },
     ],
-    update() {
-      setErrors({});
-    },
-    onError(err) {
-      // console.log(values);
-      // console.log(err);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
+    // update() {
+    //   setErrors({});
+    // },
+    // onError(err) {
+    //   // console.log(values);
+    //   // console.log(err);
+    //   setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    // },
     variables: values,
     client: adminClient,
   });
@@ -66,6 +59,7 @@ export default function CategoryCard({ props, category, created }) {
       <p className=" text-gray-700 font-thin text-sm">{category.createdAt} </p> */}
         <img
           src="https://li-images.s3.amazonaws.com/3206906234/tempSvg.png"
+          alt="LYNX Logo"
           className="object-contain w-full h-32 rounded-lg overflow-hidden m-2"
         />
 

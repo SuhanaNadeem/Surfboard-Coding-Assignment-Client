@@ -1,5 +1,4 @@
 import React from "react";
-import tempWhiteLogo from "../../images/tempSvgWhite.png";
 
 export default function AdminTitleBar() {
   return (
@@ -11,6 +10,7 @@ export default function AdminTitleBar() {
           <img
             src="https://li-images.s3.amazonaws.com/0037927447/dw.png"
             className="object-cover w-48 "
+            alt="LI Logo"
           />
         </div>
       </nav>

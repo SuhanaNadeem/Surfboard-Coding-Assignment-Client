@@ -35,7 +35,7 @@ function EditChallenge({
     }
   );
 
-  const [editChallenge, { loading }] = useMutation(EDIT_CHALLENGE, {
+  const [editChallenge] = useMutation(EDIT_CHALLENGE, {
     refetchQueries: [],
     update(proxy, { data: { editChallenge: categoryData } }) {
       setErrors({});

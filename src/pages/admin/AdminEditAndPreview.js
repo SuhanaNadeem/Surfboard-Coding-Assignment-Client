@@ -1,21 +1,19 @@
-import { AdminAuthContext } from "../../context/adminAuth";
+import { gql, useQuery } from "@apollo/client";
 import React, { useContext } from "react";
-import { useQuery, gql } from "@apollo/client";
-import NavBar from "../../components/admin/NavBar";
-import { adminClient } from "../../GraphqlApolloClients";
-import Footer from "../../components/admin/Footer";
-import { GET_MODULE_BY_ID } from "../../components/admin/QuestionCard";
-import EditModule from "../../components/admin/EditModule";
-import PreviewModule from "../../components/admin/PreviewModule";
-import { GET_QUESTION_BY_ID } from "../../components/admin/EditAndPreviewQuestionCard";
-import EditQuestion from "../../components/admin/EditQuestion";
-import EditQuestionTemplate from "../../components/admin/EditQuestionTemplate";
 import { GET_CATEGORY_BY_ID } from "../../components/admin/ChallengeCard";
-import EditCategory from "../../components/admin/EditCategory";
+import { GET_QUESTION_BY_ID } from "../../components/admin/EditAndPreviewQuestionCard";
 import EditBadge from "../../components/admin/EditBadge";
+import EditCategory from "../../components/admin/EditCategory";
 import EditChallenge from "../../components/admin/EditChallenge";
-import LoadingIcon from "../../images/tempModuleCardImg.PNG";
+import EditModule from "../../components/admin/EditModule";
+import EditQuestion from "../../components/admin/EditQuestion";
+import Footer from "../../components/admin/Footer";
+import NavBar from "../../components/admin/NavBar";
+import PreviewModule from "../../components/admin/PreviewModule";
+import { GET_MODULE_BY_ID } from "../../components/admin/QuestionCard";
 import LoadingScreen from "../../components/student/LoadingScreen";
+import { AdminAuthContext } from "../../context/adminAuth";
+import { adminClient } from "../../GraphqlApolloClients";
 
 export default function AdminEditAndPreview(props) {
   const { admin } = useContext(AdminAuthContext);
@@ -25,53 +23,47 @@ export default function AdminEditAndPreview(props) {
   const givenId = props.match.params.givenId;
   var selectedQuestionId = props.match.params.questionId;
   // console.log(givenId);
-  const {
-    data: { getModuleById: module } = {},
-    loading: loadingModules,
-  } = useQuery(GET_MODULE_BY_ID, {
+  const { data: { getModuleById: module } = {} } = useQuery(GET_MODULE_BY_ID, {
     variables: { moduleId: givenId },
     client: adminClient,
   });
 
-  const {
-    data: { getQuestionById: question } = {},
-    loading: loadingQuestion,
-  } = useQuery(GET_QUESTION_BY_ID, {
-    variables: { questionId: givenId },
-    client: adminClient,
-  });
+  const { data: { getQuestionById: question } = {} } = useQuery(
+    GET_QUESTION_BY_ID,
+    {
+      variables: { questionId: givenId },
+      client: adminClient,
+    }
+  );
 
-  const {
-    data: { getCategoryById: category } = {},
-    loading: loadingCategory,
-  } = useQuery(GET_CATEGORY_BY_ID, {
-    variables: { categoryId: givenId },
-    client: adminClient,
-  });
+  const { data: { getCategoryById: category } = {} } = useQuery(
+    GET_CATEGORY_BY_ID,
+    {
+      variables: { categoryId: givenId },
+      client: adminClient,
+    }
+  );
 
   // const {
   //   data: { getQuestionTemplateById: questionTemplate } = {},
-  //   loading: loadingQuestionTemplate,
+  //
   // } = useQuery(GET_QUESTION_TEMPLATE_BY_ID, {
   //   variables: { questionTemplateId: givenId },
   //   client: adminClient,
   // });
 
-  const {
-    data: { getBadgeById: badge } = {},
-    loading: loadingBadge,
-  } = useQuery(GET_BADGE_BY_ID, {
+  const { data: { getBadgeById: badge } = {} } = useQuery(GET_BADGE_BY_ID, {
     variables: { badgeId: givenId },
     client: adminClient,
   });
 
-  const {
-    data: { getChallengeById: challenge } = {},
-    loading: loadingChallenge,
-  } = useQuery(GET_CHALLENGE_BY_ID, {
-    variables: { challengeId: givenId },
-    client: adminClient,
-  });
+  const { data: { getChallengeById: challenge } = {} } = useQuery(
+    GET_CHALLENGE_BY_ID,
+    {
+      variables: { challengeId: givenId },
+      client: adminClient,
+    }
+  );
 
   const adminEditAndPreview =
     module || question || category || badge || challenge ? (

@@ -1,36 +1,11 @@
-import { useQuery } from "@apollo/client";
 import React from "react";
 import { BiAward } from "react-icons/bi";
-import { adminClient } from "../../GraphqlApolloClients";
-import { GET_QUESTION_BY_ID } from "../student/CompletedQuestion";
-import { GET_CATEGORY_BY_ID } from "../student/ModuleCard";
-import { GET_MODULE_BY_ID } from "./QuestionCard";
 
 function Badge({ badge }) {
-  // console.log(badge);
-
-  const {
-    data: { getQuestionById: question } = {},
-    // refetch: refetchQuestion,
-  } = useQuery(GET_QUESTION_BY_ID, {
-    variables: { questionId: badge.questionId },
-    client: adminClient,
-  });
-  const { data: { getCategoryById: category } = {} } = useQuery(
-    GET_CATEGORY_BY_ID,
-    {
-      variables: { categoryId: badge.categoryId },
-      client: adminClient,
-    }
-  );
-  const { data: { getModuleById: module } = {} } = useQuery(GET_MODULE_BY_ID, {
-    variables: { moduleId: badge.moduleId },
-    client: adminClient,
-  });
-
   return badge ? (
     <div className="flex items-start justify-start mb-2">
       <BiAward size={24} />
+
       <div className="flex flex-col items-start justify-start ml-1">
         <h3 className="font-semibold text-sm uppercase">{badge.name}</h3>
       </div>

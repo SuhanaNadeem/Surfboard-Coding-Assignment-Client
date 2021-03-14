@@ -35,7 +35,7 @@ function EditBadge({
     newImageFile: null,
   });
 
-  const [editBadge, { loading }] = useMutation(EDIT_BADGE, {
+  const [editBadge] = useMutation(EDIT_BADGE, {
     refetchQueries: [
       {
         query: GET_BADGES,

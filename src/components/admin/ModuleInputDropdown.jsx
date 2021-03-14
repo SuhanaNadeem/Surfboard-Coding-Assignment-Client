@@ -21,21 +21,17 @@ export default function ModuleInputDropdown({
     moduleErrors = errors.moduleId;
   }
   // console.log(currentModuleId);
-  const {
-    data: { getModules: modules } = {},
-    loading: loadingModules,
-  } = useQuery(GET_MODULES, {
+  const { data: { getModules: modules } = {} } = useQuery(GET_MODULES, {
     client: adminClient,
   });
 
-  const {
-    data: { getModuleById: currentModule } = {},
-    loading: loadingModule,
-    error,
-  } = useQuery(GET_MODULE_BY_ID, {
-    variables: { moduleId: currentModuleId },
-    client: adminClient,
-  });
+  const { data: { getModuleById: currentModule } = {} } = useQuery(
+    GET_MODULE_BY_ID,
+    {
+      variables: { moduleId: currentModuleId },
+      client: adminClient,
+    }
+  );
 
   return (
     <>

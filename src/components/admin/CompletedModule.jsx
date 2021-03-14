@@ -5,14 +5,13 @@ import { adminClient } from "../../GraphqlApolloClients";
 import { GET_MODULE_POINTS_BY_STUDENT } from "../../pages/student/StudentModule";
 
 function CompletedModule({ student, module }) {
-  const {
-    data: { getModulePointsByStudent: points } = {},
-    loading: loadingPoints,
-    pointsError,
-  } = useQuery(GET_MODULE_POINTS_BY_STUDENT, {
-    variables: { moduleId: module.id, studentId: student && student.id },
-    client: adminClient,
-  });
+  const { data: { getModulePointsByStudent: points } = {} } = useQuery(
+    GET_MODULE_POINTS_BY_STUDENT,
+    {
+      variables: { moduleId: module.id, studentId: student && student.id },
+      client: adminClient,
+    }
+  );
 
   return points !== undefined && module && student ? (
     <div className="flex items-start justify-start mb-2">

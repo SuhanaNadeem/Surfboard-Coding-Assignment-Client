@@ -13,7 +13,7 @@ function CreateCategory({ admin, props }) {
     name: name || "",
   });
 
-  const [createNewCategory, { loading }] = useMutation(CREATE_NEW_CATEGORY, {
+  const [createNewCategory] = useMutation(CREATE_NEW_CATEGORY, {
     refetchQueries: [
       {
         query: GET_CATEGORIES,

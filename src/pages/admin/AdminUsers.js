@@ -1,15 +1,15 @@
-import { AdminAuthContext } from "../../context/adminAuth";
-import React, { useContext, useState, useEffect } from "react";
-import { useQuery, gql } from "@apollo/client";
-import NavBar from "../../components/admin/NavBar";
-import { adminClient } from "../../GraphqlApolloClients";
-import StudentCard from "../../components/admin/StudentCard";
-import MentorCard from "../../components/admin/MentorCard";
+import { gql, useQuery } from "@apollo/client";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../components/admin/Footer";
-import StudentModal from "../../components/admin/StudentModal";
-import { GET_STUDENT_BY_ID } from "../../components/student/ModuleSummaryBar";
+import MentorCard from "../../components/admin/MentorCard";
 import MentorModal from "../../components/admin/MentorModal";
+import NavBar from "../../components/admin/NavBar";
+import StudentCard from "../../components/admin/StudentCard";
+import StudentModal from "../../components/admin/StudentModal";
 import LoadingScreen from "../../components/student/LoadingScreen";
+import { GET_STUDENT_BY_ID } from "../../components/student/ModuleSummaryBar";
+import { AdminAuthContext } from "../../context/adminAuth";
+import { adminClient } from "../../GraphqlApolloClients";
 
 export default function AdminUsers(props) {
   const { admin } = useContext(AdminAuthContext);
@@ -19,17 +19,14 @@ export default function AdminUsers(props) {
   var selectedStudentId;
   var selectedMentorId;
   var selectedId = props.match.params.userId;
-  const {
-    data: { getStudentById: student } = {},
-    loading: loadingStudent,
-  } = useQuery(GET_STUDENT_BY_ID, {
-    client: adminClient,
-    variables: { studentId: selectedId },
-  });
-  const {
-    data: { getMentorById: mentor } = {},
-    loading: loadingMentor,
-  } = useQuery(GET_MENTOR_BY_ID, {
+  const { data: { getStudentById: student } = {} } = useQuery(
+    GET_STUDENT_BY_ID,
+    {
+      client: adminClient,
+      variables: { studentId: selectedId },
+    }
+  );
+  const { data: { getMentorById: mentor } = {} } = useQuery(GET_MENTOR_BY_ID, {
     client: adminClient,
     variables: { mentorId: selectedId },
   });
@@ -52,16 +49,10 @@ export default function AdminUsers(props) {
   const [isOpen, setIsOpen] = useState(true);
 
   const [isMentorOpen, setIsMentorOpen] = useState(true);
-  const {
-    data: { getStudents: students } = {},
-    loading: loadingStudents,
-  } = useQuery(GET_STUDENTS, {
+  const { data: { getStudents: students } = {} } = useQuery(GET_STUDENTS, {
     client: adminClient,
   });
-  const {
-    data: { getMentors: mentors } = {},
-    loading: loadingMentors,
-  } = useQuery(GET_MENTORS, {
+  const { data: { getMentors: mentors } = {} } = useQuery(GET_MENTORS, {
     client: adminClient,
   });
 

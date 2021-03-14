@@ -1,17 +1,16 @@
-import { StudentAuthContext } from "../../context/studentAuth";
-import React, { useContext } from "react";
 import { gql, useQuery } from "@apollo/client";
-import NavBar from "../../components/student/NavBar";
-import DashboardSideBar from "../../components/student/DashboardSideBar";
-import DashboardCategories from "../../components/student/DashboardCategories";
-import { studentClient } from "../../GraphqlApolloClients";
-import DashboardModules from "../../components/student/DashboardModules";
-import Footer from "../../components/student/Footer";
-import tempIcon from "../../images/icon1.png";
+import React, { useContext } from "react";
 import DashboardBadges from "../../components/student/DashboardBadges";
-import LoadingIcon from "../../images/tempModuleCardImg.PNG";
-import { GET_STUDENT_BY_ID } from "../../components/student/ModuleSummaryBar";
+import DashboardCategories from "../../components/student/DashboardCategories";
+import DashboardModules from "../../components/student/DashboardModules";
+import DashboardSideBar from "../../components/student/DashboardSideBar";
+import Footer from "../../components/student/Footer";
 import LoadingScreen from "../../components/student/LoadingScreen";
+import { GET_STUDENT_BY_ID } from "../../components/student/ModuleSummaryBar";
+import NavBar from "../../components/student/NavBar";
+import { StudentAuthContext } from "../../context/studentAuth";
+import { studentClient } from "../../GraphqlApolloClients";
+import tempIcon from "../../images/icon1.png";
 
 export default function StudentDashboard(props) {
   const { student } = useContext(StudentAuthContext);
@@ -31,7 +30,6 @@ export default function StudentDashboard(props) {
   );
   const {
     data: { getInProgressModulesByStudent: inProgressModules } = {},
-    loading: loadingInProgressModules,
   } = useQuery(GET_IN_PROGRESS_MODULES_BY_STUDENT, {
     client: studentClient,
     variables: { studentId: student && student.id },
@@ -39,18 +37,17 @@ export default function StudentDashboard(props) {
 
   const {
     data: { getCompletedModulesByStudent: completedModules } = {},
-    loading: loadingCompletedModules,
   } = useQuery(GET_COMPLETED_MODULES_BY_STUDENT, {
     client: studentClient,
     variables: { studentId: student && student.id },
   });
-  const {
-    data: { getBadgesByStudent: badges } = {},
-    loading: loadingBadges,
-  } = useQuery(GET_BADGES_BY_STUDENT, {
-    client: studentClient,
-    variables: { studentId: student && student.id },
-  });
+  const { data: { getBadgesByStudent: badges } = {} } = useQuery(
+    GET_BADGES_BY_STUDENT,
+    {
+      client: studentClient,
+      variables: { studentId: student && student.id },
+    }
+  );
 
   // console.log(inProgressModules);
   // console.log(student.id);
@@ -71,6 +68,7 @@ export default function StudentDashboard(props) {
           ></div> */}
           <img
             className="mr-4 w-24 flex-shrink-0 flex h-full object-contain"
+            alt="Student Icon"
             src={
               studentObject.icon && studentObject.icon !== ""
                 ? `${studentObject.icon}`

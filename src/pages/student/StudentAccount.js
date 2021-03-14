@@ -1,19 +1,18 @@
-import { StudentAuthContext } from "../../context/studentAuth";
+import { useQuery } from "@apollo/client";
 import React, { useContext } from "react";
-import { useQuery, gql } from "@apollo/client";
-import NavBar from "../../components/student/NavBar";
-import { studentClient } from "../../GraphqlApolloClients";
-import Footer from "../../components/student/Footer";
-import { GET_BADGES_BY_STUDENT } from "./StudentDashboard";
-import EditStudent from "../../components/student/EditStudent";
-import { GET_BADGES } from "../admin/AdminDashboard";
-import Progress from "../../components/student/Progress";
-import Mentors from "../../components/student/Mentors";
-import AccountBadges from "../../components/student/AccountBadges";
-import { GET_STUDENT_BY_ID } from "../../components/student/ModuleSummaryBar";
 import { GET_MENTORS_BY_STUDENT } from "../../components/admin/Mentors";
-import LoadingIcon from "../../images/tempModuleCardImg.PNG";
+import AccountBadges from "../../components/student/AccountBadges";
+import EditStudent from "../../components/student/EditStudent";
+import Footer from "../../components/student/Footer";
 import LoadingScreen from "../../components/student/LoadingScreen";
+import Mentors from "../../components/student/Mentors";
+import { GET_STUDENT_BY_ID } from "../../components/student/ModuleSummaryBar";
+import NavBar from "../../components/student/NavBar";
+import Progress from "../../components/student/Progress";
+import { StudentAuthContext } from "../../context/studentAuth";
+import { studentClient } from "../../GraphqlApolloClients";
+import { GET_BADGES } from "../admin/AdminDashboard";
+import { GET_BADGES_BY_STUDENT } from "./StudentDashboard";
 
 export default function StudentAccount(props) {
   const { student } = useContext(StudentAuthContext);
@@ -42,10 +41,7 @@ export default function StudentAccount(props) {
       client: studentClient,
     }
   );
-  const {
-    data: { getBadges: allBadges } = {},
-    loading: loadingBadges,
-  } = useQuery(GET_BADGES, {
+  const { data: { getBadges: allBadges } = {} } = useQuery(GET_BADGES, {
     client: studentClient,
   });
 

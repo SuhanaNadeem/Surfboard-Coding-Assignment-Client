@@ -1,27 +1,25 @@
+import { useQuery } from "@apollo/client";
 import React, { useContext } from "react";
-import { gql, useQuery } from "@apollo/client";
-import LoadingScreen from "../../components/student/LoadingScreen";
-
-import NavBar from "../../components/admin/NavBar";
+import { GET_ADMIN_BY_ID } from "../../components/admin/AdminInputDropdown";
+import EditAdmin from "../../components/admin/EditAdmin";
 import Footer from "../../components/admin/Footer";
+import NavBar from "../../components/admin/NavBar";
+import LoadingScreen from "../../components/student/LoadingScreen";
 import { AdminAuthContext } from "../../context/adminAuth";
 import { adminClient } from "../../GraphqlApolloClients";
-import EditAdmin from "../../components/admin/EditAdmin";
-import { GET_ADMIN_BY_ID } from "../../components/admin/AdminInputDropdown";
 
 export default function AdminEditAccount(props) {
   const { admin } = useContext(AdminAuthContext);
   if (!admin) {
     props.history.push("/loginAdmin");
   }
-  const {
-    data: { getAdminById: adminObject } = {},
-    loading: loadingAdmin,
-    error,
-  } = useQuery(GET_ADMIN_BY_ID, {
-    variables: { adminId: admin && admin.id },
-    client: adminClient,
-  });
+  const { data: { getAdminById: adminObject } = {} } = useQuery(
+    GET_ADMIN_BY_ID,
+    {
+      variables: { adminId: admin && admin.id },
+      client: adminClient,
+    }
+  );
   return adminObject ? (
     <div className="h-full flex flex-col min-h-screen w-full">
       <NavBar props={props} />

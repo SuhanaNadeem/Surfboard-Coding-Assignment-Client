@@ -10,10 +10,9 @@ export default function DashboardStudentCard({
   setIsOpen,
   handleStudentClick,
 }) {
-  {
-    /* Should be able to (1) view the stats from student, inProg + completedMods + answers from admin, 
+  /* Should be able to (1) view the stats from student, inProg + completedMods + answers from admin, 
       (2) add the student, (3) remove the student, (4) see that the student is already "added." */
-  }
+
   return student ? (
     <div>
       <div

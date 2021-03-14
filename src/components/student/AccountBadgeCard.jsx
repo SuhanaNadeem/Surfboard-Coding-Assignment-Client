@@ -20,6 +20,7 @@ export default function AccountBadgeCard({ props, badge, earned }) {
           {`${badge.type === "Module" ? `Modules` : `Questions`}`}
         </p>
         <img
+          alt="Badge Icon"
           src={
             badge.image && badge.image !== ""
               ? badge.image

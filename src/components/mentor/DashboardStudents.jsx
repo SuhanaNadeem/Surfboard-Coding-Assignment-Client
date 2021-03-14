@@ -1,11 +1,8 @@
-import { MentorAuthContext } from "../../context/mentorAuth";
-import React, { useContext } from "react";
 import { gql, useQuery } from "@apollo/client";
-import DashboardStudentCard from "./DashboardStudentCard";
+import React, { useEffect, useState } from "react";
 import { mentorClient } from "../../GraphqlApolloClients";
+import DashboardStudentCard from "./DashboardStudentCard";
 import StudentModal from "./StudentModal";
-import { useEffect } from "react";
-import { useState } from "react";
 
 export default function DashboardStudents({
   props,
@@ -13,13 +10,13 @@ export default function DashboardStudents({
   mentor,
   selectedStudentId,
 }) {
-  const {
-    data: { getStudentsByOrgName: allStudents } = {},
-    loading: loadingAllStudents,
-  } = useQuery(GET_STUDENTS_BY_ORG_NAME, {
-    variables: { orgName: mentor.orgName },
-    client: mentorClient,
-  });
+  const { data: { getStudentsByOrgName: allStudents } = {} } = useQuery(
+    GET_STUDENTS_BY_ORG_NAME,
+    {
+      variables: { orgName: mentor.orgName },
+      client: mentorClient,
+    }
+  );
 
   const [activeStudentId, setActiveStudentId] = useState(selectedStudentId);
 

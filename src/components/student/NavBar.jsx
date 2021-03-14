@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-
 import { useHistory } from "react-router-dom";
 import { StudentAuthContext } from "../../context/studentAuth";
-import StudentAccountDropdown from "./AccountDropdown";
 import tempWhiteLogo from "../../images/tempSvgWhite.png";
+import StudentAccountDropdown from "./AccountDropdown";
 
 export default function StudentNavBar({ props }) {
   const history = useHistory();
@@ -12,7 +11,7 @@ export default function StudentNavBar({ props }) {
     // { title: "Search", link: "/search" },
   ];
 
-  const { student, logoutStudent } = useContext(StudentAuthContext);
+  const { logoutStudent } = useContext(StudentAuthContext);
 
   return (
     <div className="bg-black shadow-lg flex items-center justify-center w-full z-10 text-center md:h-14 h-16">
@@ -36,6 +35,7 @@ export default function StudentNavBar({ props }) {
             <img
               src="https://li-images.s3.amazonaws.com/0037927447/dw.png"
               className="object-cover w-36 "
+              alt="LI Logo"
             />
           </button>
           <div className="flex-1 flex items-center justify-end focus:outline-none">
@@ -59,6 +59,7 @@ export default function StudentNavBar({ props }) {
               }}
             >
               <img
+                alt="LYNX Logo"
                 src={tempWhiteLogo}
                 className="focus:outline-none w-5 h-full"
               />

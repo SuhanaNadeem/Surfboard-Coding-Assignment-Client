@@ -26,7 +26,7 @@ function CreateBadge({ admin, props }) {
     }
   );
 
-  const [createNewBadge, { loading }] = useMutation(CREATE_NEW_BADGE, {
+  const [createNewBadge] = useMutation(CREATE_NEW_BADGE, {
     refetchQueries: [
       {
         query: GET_BADGES,

@@ -42,7 +42,11 @@ export default function ModuleEndCard({
             You completed {module.name}
           </p>
           <div className="w-64 mx-auto h-96 flex rounded-lg">
-            <img src={tempModuleCardImg} className="object-contain flex" />
+            <img
+              src={tempModuleCardImg}
+              className="object-contain flex"
+              alt="LYNX Logo"
+            />
           </div>
           <button
             onClick={returnToDash}

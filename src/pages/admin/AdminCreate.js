@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import NavBar from "../../components/admin/NavBar";
-import Footer from "../../components/admin/Footer";
-import { AdminAuthContext } from "../../context/adminAuth";
+import CreateBadge from "../../components/admin/CreateBadge";
+import CreateCategory from "../../components/admin/CreateCategory";
+import CreateChallenge from "../../components/admin/CreateChallenge";
 import CreateModule from "../../components/admin/CreateModule";
 import CreateQuestion from "../../components/admin/CreateQuestion";
-import CreateCategory from "../../components/admin/CreateCategory";
-import CreateBadge from "../../components/admin/CreateBadge";
-import CreateChallenge from "../../components/admin/CreateChallenge";
+import Footer from "../../components/admin/Footer";
+import NavBar from "../../components/admin/NavBar";
 import LoadingScreen from "../../components/student/LoadingScreen";
+import { AdminAuthContext } from "../../context/adminAuth";
 
 export default function AdminCreate(props) {
   const { admin } = useContext(AdminAuthContext);

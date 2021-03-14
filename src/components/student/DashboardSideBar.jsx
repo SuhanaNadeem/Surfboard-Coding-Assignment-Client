@@ -1,10 +1,7 @@
 import React from "react";
 import { BiLock } from "react-icons/bi";
-import { useHistory } from "react-router-dom";
 
 export default function DashboardSideBar({ props }) {
-  const history = useHistory();
-
   const pageLinksAndTitles = [
     { title: "Progress", link: "/studentAccount" },
     { title: "Mentors", link: "/studentAccount" },

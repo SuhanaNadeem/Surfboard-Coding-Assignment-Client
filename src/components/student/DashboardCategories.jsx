@@ -1,9 +1,7 @@
-import React from "react";
-
-import { useHistory } from "react-router-dom";
-import CategoryCard from "./CategoryCard";
 import { gql, useQuery } from "@apollo/client";
+import React from "react";
 import { studentClient } from "../../GraphqlApolloClients";
+import CategoryCard from "./CategoryCard";
 
 export default function DashboardCategories({ props }) {
   const { data: { getCategories: categories } = {} } = useQuery(

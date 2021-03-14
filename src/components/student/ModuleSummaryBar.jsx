@@ -29,7 +29,7 @@ export default function ModuleSummaryBar({
     moduleId,
   });
 
-  const [handleStarModule, { loading }] = useMutation(HANDLE_STAR_MODULE, {
+  const [handleStarModule] = useMutation(HANDLE_STAR_MODULE, {
     client: studentClient,
     refetchQueries: [
       {
