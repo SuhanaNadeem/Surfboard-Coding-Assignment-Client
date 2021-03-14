@@ -7,12 +7,12 @@ import { createUploadLink } from "apollo-upload-client";
 
 const backendURI =
   process.env.NODE_ENV === "production"
-    ? "https://sheltered-ridge-57950.herokuapp.com/"
+    ? "https://lynx-institute.herokuapp.com/"
     : "http://localhost:5000/";
 
 const wsURI =
   process.env.NODE_ENV === "production"
-    ? `wss://sheltered-ridge-57950.herokuapp.com/subscriptions`
+    ? `wss://lynx-institute.herokuapp.com/subscriptions`
     : "ws://localhost:5000/subscriptions";
 
 const httpLink = createUploadLink({
