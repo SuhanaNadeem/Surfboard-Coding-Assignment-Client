@@ -32,7 +32,9 @@ export default function MentorModal({
         <div className="flex flex-col items-center justify-center">
           <h3 className="text-3xl text-red-800">{mentor.name}</h3>
           <h3 className="text-xl my-1 font-semibold">{mentor.orgName}</h3>
-          <h3 className="text-lg mb-4 font-light">{mentor.email}</h3>
+          <h3 className="font-normal text-lg mb-4 lg:font-light">
+            {mentor.email}
+          </h3>
         </div>
         <div className="flex items-start justify-start">
           <Students mentor={mentor} />

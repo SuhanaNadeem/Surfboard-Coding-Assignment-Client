@@ -14,7 +14,7 @@ function Students({ mentor }) {
   // console.log(students);
   return students && students.length !== 0 ? (
     <div className="mr-2 flex flex-col w-full mt-4">
-      <h2 className="text-lg mb-2 text-red-800 ">Students</h2>
+      <h2 className="text-xl lg:text-lg mb-2 text-red-800 ">Students</h2>
 
       {students.map((student, index) => (
         <Student key={index} student={student} />

@@ -16,10 +16,12 @@ function InProgressModule({ module }) {
   return points !== undefined && module ? (
     <div className="flex items-start justify-start mb-2">
       <BiCheckbox size={24} class="flex-shrink-0" />
-      <h3 className="font-semibold mx-1 text-sm uppercase truncate w-36">
+      <h3 className="font-semibold mx-1 text-sm uppercase w-1/2 md:w-36">
         {module.name}
       </h3>
-      <h2 className="font-light truncate text-sm">({points} LYNX Tokens)</h2>
+      <h2 className="font-normal lg:font-light text-md lg:text-sm truncate leading-tight w-1/2 md:w-full text-center">
+        ({points} LYNX Tokens)
+      </h2>
     </div>
   ) : (
     <></>

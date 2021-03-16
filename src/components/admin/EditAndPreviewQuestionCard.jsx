@@ -26,11 +26,11 @@ function EditAndPreviewQuestionCard({
   return question ? (
     <div className="bg-white w-96 align-middle flex flex-row items-center text-center p-4 rounded-md shadow-sm overflow-hidden h-32 justify-center hover:shadow-md ">
       <div className="flex flex-col mr-10">
-        <p className=" font-semibold text-sm uppercase tracking-wide ">
+        <p className=" font-semibold text-sm w-32 md:w-52 uppercase tracking-wide ">
           {question.type}
         </p>
         <p className="text-red-800 w-32 md:w-52 truncate">{question.name}</p>
-        <p className="tracking-wider text-sm uppercase font-light ">
+        <p className="tracking-wider text-md lg:text-sm uppercase lg:font-light w-32 md:w-52 font-normal truncate ">
           {question.points} lynx tokens
         </p>
       </div>

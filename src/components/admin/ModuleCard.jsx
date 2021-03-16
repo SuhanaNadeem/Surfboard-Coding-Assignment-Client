@@ -66,7 +66,7 @@ export default function ModuleCard({ props, module, created }) {
         <p className=" text-gray-700 font-semibold text-md leading-tight w-40 truncate">
           {category.name}
         </p>
-        <p className=" text-gray-700 font-thin text-sm mr-2">
+        <p className=" text-gray-700 font-thin text-md lg:text-sm mr-2">
           {module.questions.length} Questions
         </p>
         {/* TODO round this! */}

@@ -142,7 +142,7 @@ function CreateQuestion({ admin, props }) {
                   Type
                 </label>
               </td>
-              <td className="font-light text-sm px-2 py-2 border-b border-gray-200">
+              <td className="font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
                 <div>
                   <input
                     className="mr-2"
@@ -184,7 +184,7 @@ function CreateQuestion({ admin, props }) {
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.name ? "border-red-800" : ""
                   }`}
                   name="name"
@@ -229,7 +229,7 @@ function CreateQuestion({ admin, props }) {
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.videoLink ? "border-red-800" : ""
                   }`}
                   name="videoLink"
@@ -254,7 +254,7 @@ function CreateQuestion({ admin, props }) {
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.articleLink ? "border-red-800" : ""
                   }`}
                   name="articleLink"
@@ -280,7 +280,7 @@ function CreateQuestion({ admin, props }) {
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <textarea
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.description ? "border-red-800" : ""
                   }`}
                   rows="3"
@@ -306,7 +306,7 @@ function CreateQuestion({ admin, props }) {
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.points ? "border-red-800" : ""
                   }`}
                   name="points"
@@ -362,7 +362,7 @@ function CreateQuestion({ admin, props }) {
                       Format
                     </label>
                   </td>
-                  <td className="font-light text-sm px-2 py-2 border-b border-gray-200">
+                  <td className="font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
                     <div>
                       <input
                         className="mr-2"
@@ -427,7 +427,7 @@ function CreateQuestion({ admin, props }) {
                       </label>
                     </td>
                     {values.questionFormat === "Multiple Choice" ? (
-                      <td className="font-light text-sm px-2 py-2 border-b border-gray-200">
+                      <td className="font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
                         <div>
                           <input
                             className="mr-2"
@@ -485,7 +485,7 @@ function CreateQuestion({ admin, props }) {
                     ) : (
                       <td className="text-sm py-2 border-b border-gray-200">
                         <input
-                          className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                          className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                             errors.expectedAnswer ? "border-red-800" : ""
                           }`}
                           name="expectedAnswer"
@@ -512,7 +512,7 @@ function CreateQuestion({ admin, props }) {
                   </td>
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                         errors.hint ? "border-red-800" : ""
                       }`}
                       name="hint"
@@ -541,7 +541,7 @@ function CreateQuestion({ admin, props }) {
                   </td>
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                         errors.optionA ? "border-red-800" : ""
                       }`}
                       name="optionA"
@@ -566,7 +566,7 @@ function CreateQuestion({ admin, props }) {
                   </td>
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                         errors.optionB ? "border-red-800" : ""
                       }`}
                       name="optionB"
@@ -591,7 +591,7 @@ function CreateQuestion({ admin, props }) {
                   </td>
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                         errors.optionC ? "border-red-800" : ""
                       }`}
                       name="optionC"
@@ -616,7 +616,7 @@ function CreateQuestion({ admin, props }) {
                   </td>
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                         errors.optionD ? "border-red-800" : ""
                       }`}
                       name="optionD"
@@ -646,7 +646,7 @@ function CreateQuestion({ admin, props }) {
                   </td>
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                         errors.extraLink ? "border-red-800" : ""
                       }`}
                       name="extraLink"

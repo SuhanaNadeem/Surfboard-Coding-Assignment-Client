@@ -106,7 +106,7 @@ function CreateBadge({ admin, props }) {
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.name ? "border-red-800" : ""
                   }`}
                   name="name"
@@ -129,7 +129,7 @@ function CreateBadge({ admin, props }) {
                   Type
                 </label>
               </td>
-              <td className="font-light text-sm px-2 py-2 border-b border-gray-200">
+              <td className="font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
                 <div>
                   <input
                     className="mr-2"
@@ -170,7 +170,7 @@ function CreateBadge({ admin, props }) {
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.description ? "border-red-800" : ""
                   }`}
                   name="description"
@@ -195,7 +195,7 @@ function CreateBadge({ admin, props }) {
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.image ? "border-red-800" : ""
                   }`}
                   name="image"
@@ -221,7 +221,7 @@ function CreateBadge({ admin, props }) {
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.requiredAmount ? "border-red-800" : ""
                   }`}
                   name="requiredAmount"
@@ -254,7 +254,7 @@ function CreateBadge({ admin, props }) {
                 />
 
                 {/* <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.image ? "border-red-800" : ""
                   }`}
                   name="image"

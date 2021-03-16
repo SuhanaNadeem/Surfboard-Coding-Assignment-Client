@@ -106,7 +106,7 @@ function CreateChallenge({ admin, props }) {
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.name ? "border-red-800" : ""
                   }`}
                   name="name"
@@ -153,7 +153,7 @@ function CreateChallenge({ admin, props }) {
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.challengeDescription ? "border-red-800" : ""
                   }`}
                   name="challengeDescription"
@@ -179,7 +179,7 @@ function CreateChallenge({ admin, props }) {
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.dueDate ? "border-red-800" : ""
                   }`}
                   name="dueDate"
@@ -204,7 +204,7 @@ function CreateChallenge({ admin, props }) {
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.extraLink ? "border-red-800" : ""
                   }`}
                   name="extraLink"
@@ -236,7 +236,7 @@ function CreateChallenge({ admin, props }) {
                   errors={errors}
                 />
                 {/* <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.image ? "border-red-800" : ""
                   }`}
                   name="image"

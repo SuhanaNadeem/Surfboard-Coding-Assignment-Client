@@ -80,7 +80,7 @@ function EditAndPreviewQuestionModalCard({
               Article:
             </h5>
             <a
-              className="font-light text-sm truncate"
+              className="font-normal lg:font-light text-md lg:text-sm truncate leading-tight w-1/2 md:w-full text-center"
               href={question.articleLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -98,7 +98,7 @@ function EditAndPreviewQuestionModalCard({
               Visit:
             </h5>
             <a
-              className="font-light text-sm truncate"
+              className="font-normal lg:font-light text-md lg:text-sm truncate leading-tight w-1/2 md:w-full text-center"
               href={question.extraLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -108,10 +108,10 @@ function EditAndPreviewQuestionModalCard({
           </div>
         )}
         {question.videoLink && question.videoLink !== "" && (
-          <div className="mt-4 ">
+          <div className="mt-4 w-full mb-2">
             <ReactPlayer
               url={question.videoLink}
-              width={557.33}
+              // width={100%}
               height={300}
               controls={true}
             />

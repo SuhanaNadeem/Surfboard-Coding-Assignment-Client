@@ -176,7 +176,7 @@ function EditQuestion({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.newName ? "border-red-800" : ""
                   }`}
                   name="newName"
@@ -227,7 +227,7 @@ function EditQuestion({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.newPoints ? "border-red-800" : ""
                   }`}
                   name="newPoints"
@@ -252,7 +252,7 @@ function EditQuestion({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.newVideoLink ? "border-red-800" : ""
                   }`}
                   name="newVideoLink"
@@ -277,7 +277,7 @@ function EditQuestion({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.newArticleLink ? "border-red-800" : ""
                   }`}
                   name="newArticleLink"
@@ -302,7 +302,7 @@ function EditQuestion({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.newHint ? "border-red-800" : ""
                   }`}
                   name="newHint"
@@ -327,7 +327,7 @@ function EditQuestion({
                     Expected Answer
                   </label>
                 </td>
-                <td className="font-light text-sm px-2 py-2 border-b border-gray-200">
+                <td className="font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
                   <div>
                     <input
                       className="mr-2"
@@ -405,7 +405,7 @@ function EditQuestion({
                 </td>
                 <td className="text-sm py-2 border-b border-gray-200">
                   <input
-                    className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                    className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                       errors.newExpectedAnswer ? "border-red-800" : ""
                     }`}
                     name="newExpectedAnswer"
@@ -433,7 +433,7 @@ function EditQuestion({
                   </td>
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                         errors.newOptionA ? "border-red-800" : ""
                       }`}
                       name="newOptionA"
@@ -458,7 +458,7 @@ function EditQuestion({
                   </td>
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                         errors.newOptionB ? "border-red-800" : ""
                       }`}
                       name="newOptionB"
@@ -483,7 +483,7 @@ function EditQuestion({
                   </td>
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                         errors.newOptionC ? "border-red-800" : ""
                       }`}
                       name="newOptionC"
@@ -508,7 +508,7 @@ function EditQuestion({
                   </td>
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                         errors.newOptionD ? "border-red-800" : ""
                       }`}
                       name="newOptionD"
@@ -539,7 +539,7 @@ function EditQuestion({
                   </td>
                   <td className="text-sm py-2 border-b border-gray-200">
                     <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                         errors.newExtraLink ? "border-red-800" : ""
                       }`}
                       name="newExtraLink"
@@ -573,7 +573,7 @@ function EditQuestion({
                 />
 
                 {/* <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.image ? "border-red-800" : ""
                   }`}
                   name="image"

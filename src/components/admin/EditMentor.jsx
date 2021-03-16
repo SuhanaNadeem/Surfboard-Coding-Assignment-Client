@@ -59,8 +59,8 @@ function EditMentor({
       onSubmit={onSubmit}
       noValidate
     >
-      <h6 className="text-lg text-red-800 ">Edit Mentor</h6>
-      <p className="font-light text-sm">
+      <h6 className="text-xl lg:text-lg text-red-800 ">Edit Mentor</h6>
+      <p className="font-normal lg:font-light text-md lg:text-sm">
         Modify name, email, organization, or password.
       </p>
 
@@ -81,7 +81,7 @@ function EditMentor({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.newName ? "border-red-800" : ""
                   }`}
                   name="newName"
@@ -105,7 +105,7 @@ function EditMentor({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.newOrgName ? "border-red-800" : ""
                   }`}
                   name="newOrgName"
@@ -130,7 +130,7 @@ function EditMentor({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.newEmail ? "border-red-800" : ""
                   }`}
                   name="newEmail"
@@ -156,7 +156,7 @@ function EditMentor({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.newPassword ? "border-red-800" : ""
                   }`}
                   name="newPassword"
@@ -182,7 +182,7 @@ function EditMentor({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.confirmNewPassword ? "border-red-800" : ""
                   }`}
                   name="confirmNewPassword"

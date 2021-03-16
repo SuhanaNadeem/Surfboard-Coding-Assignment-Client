@@ -52,7 +52,7 @@ export default function ModuleEndCard({
             onClick={returnToDash}
             className="flex items-center justify-center"
           >
-            <p className="font-light tracking-wide text-sm uppercase mr-2">
+            <p className="font-light tracking-wide lg:text-sm text-md uppercase mr-2">
               Return to dashboard
             </p>
             <RiArrowGoBackFill size={24} />

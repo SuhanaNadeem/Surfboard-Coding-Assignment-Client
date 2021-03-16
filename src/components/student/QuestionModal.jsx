@@ -41,6 +41,7 @@ export default function QuestionModal({
             answer=""
             moduleId={moduleId}
             handleQuestionClick={handleQuestionClick}
+            toggleIsOpen={toggleIsOpen}
           />
         </div>
       </>

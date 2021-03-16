@@ -106,8 +106,8 @@ export default function StudentModule(props) {
     student && module && completedQuestions ? (
       <div className="h-full flex flex-col min-h-screen w-full">
         <NavBar props={props} />
-        <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-10 lg:pl-32 xl:pl-48 pb-10 ">
-          <p className="text-4xl text-white">{module.name}</p>
+        <div className="bg-red-800 w-full h-32 flex flex-col justify-end px-10 lg:pl-32 xl:pl-48 py-5 pb-10">
+          <p className="text-4xl text-white truncate ">{module.name}</p>
         </div>
         <div className="h-full md:flex-1 md:flex mx-10 lg:mx-32 xl:mx-48 mt-4 mb-8">
           <ModuleSummaryBar

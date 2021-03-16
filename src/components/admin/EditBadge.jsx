@@ -130,7 +130,7 @@ function EditBadge({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.newName ? "border-red-800" : ""
                   }`}
                   name="newName"
@@ -153,7 +153,7 @@ function EditBadge({
                   Type
                 </label>
               </td>
-              <td className="font-light text-sm px-2 py-2 border-b border-gray-200">
+              <td className="font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
                 <div>
                   <input
                     className="mr-2"
@@ -196,7 +196,7 @@ function EditBadge({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.newRequiredAmount ? "border-red-800" : ""
                   }`}
                   name="newRequiredAmount"
@@ -222,7 +222,7 @@ function EditBadge({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.newDescription ? "border-red-800" : ""
                   }`}
                   name="newDescription"
@@ -255,7 +255,7 @@ function EditBadge({
                 />
 
                 {/* <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.image ? "border-red-800" : ""
                   }`}
                   name="image"

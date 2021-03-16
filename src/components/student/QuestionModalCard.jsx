@@ -1,6 +1,7 @@
 import { gql, useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { GrClose } from "react-icons/gr";
 import ReactPlayer from "react-player";
 import { StudentAuthContext } from "../../context/studentAuth";
 import { studentClient } from "../../GraphqlApolloClients";
@@ -25,6 +26,7 @@ function QuestionModalCard({
   answer,
   handleQuestionClick,
   moduleId,
+  toggleIsOpen,
 }) {
   const { student } = useContext(StudentAuthContext);
   var studentId;
@@ -228,7 +230,7 @@ function QuestionModalCard({
               Article:
             </h5>
             <a
-              className="font-light text-sm truncate focus:outline-none focus:text-blue-500"
+              className="font-light text-md lg:text-sm truncate focus:outline-none focus:text-blue-500"
               href={question.articleLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -248,7 +250,7 @@ function QuestionModalCard({
               Visit:
             </h5>
             <a
-              className="font-light text-sm truncate"
+              className="font-normal lg:font-light text-md lg:text-sm truncate leading-tight w-1/2 md:w-full text-center"
               href={question.extraLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -260,10 +262,10 @@ function QuestionModalCard({
 
         {question.videoLink && question.videoLink !== "" && (
           <>
-            <div className="mt-4 ">
+            <div className="mt-4 w-full mb-2">
               <ReactPlayer
                 url={question.videoLink}
-                width={557.33}
+                // width={100%}
                 height={300}
                 controls={true}
               />
@@ -445,17 +447,23 @@ function QuestionModalCard({
           </div>
         )}
       </div>
-      <form className="flex mt-6" onSubmit={onSubmit}>
+      <form className="flex mt-6 justify-between" onSubmit={onSubmit}>
         {module.questions.indexOf(question.id) !== 0 && (
           <button
             className="mx-auto focus:outline-none focus:ring rounded-sm"
             onClick={togglePrevOpen}
             type="button"
           >
-            <BsChevronLeft size={32} className="focus:outline-none" />
+            <BsChevronLeft size={32} />
           </button>
         )}
-
+        <button
+          className="mx-auto focus:outline-none focus:ring rounded-sm"
+          onClick={toggleIsOpen}
+          type="button"
+        >
+          <GrClose size={26} />
+        </button>
         {((module.questions.indexOf(question.id) + 1 ===
           module.questions.length &&
           studentObject.completedModules.includes(moduleId)) ||
@@ -475,7 +483,7 @@ function QuestionModalCard({
                 module.questions.indexOf(question.id) + 1 ===
                 module.questions.length
               ) {
-                // console.log("endCardIsOpen");
+                toggleIsOpen();
                 goToEndCard();
                 // used to toggle here
               } else if (question.type !== "Skill") {

@@ -80,12 +80,12 @@ function EditStudent({
           </thead>
           <tbody>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
+              <td className="text-md lg:text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <label className="text-red-800 font-semibold uppercase tracking-wide ">
                   Name
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
+              <td className="text-md lg:text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none focus-ring   ${
                     errors.newName ? "border-red-800" : ""
@@ -104,12 +104,12 @@ function EditStudent({
               </td>
             </tr>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
+              <td className="text-md lg:text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <label className="text-red-800 font-semibold uppercase tracking-wide ">
                   Organization
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
+              <td className="text-md lg:text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none focus-ring   ${
                     errors.newOrgName ? "border-red-800" : ""
@@ -129,12 +129,12 @@ function EditStudent({
             </tr>
 
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
+              <td className="text-md lg:text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <label className="text-red-800 font-semibold uppercase tracking-wide ">
                   Email
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
+              <td className="text-md lg:text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none focus-ring   ${
                     errors.newEmail ? "border-red-800" : ""
@@ -155,12 +155,12 @@ function EditStudent({
             </tr>
 
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
+              <td className="text-md lg:text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <label className="text-red-800 font-semibold uppercase tracking-wide ">
                   Password
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
+              <td className="text-md lg:text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none focus-ring   ${
                     errors.newPassword ? "border-red-800" : ""
@@ -181,12 +181,12 @@ function EditStudent({
             </tr>
 
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
+              <td className="text-md lg:text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <label className="text-red-800 font-semibold uppercase tracking-wide ">
                   Confirm Password
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
+              <td className="text-md lg:text-sm py-2 border-b border-gray-200 w-full pr-2 truncate">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none focus-ring   ${
                     errors.confirmNewPassword ? "border-red-800" : ""

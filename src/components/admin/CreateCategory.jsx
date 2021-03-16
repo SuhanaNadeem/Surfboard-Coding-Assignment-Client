@@ -71,7 +71,7 @@ function CreateCategory({ admin, props }) {
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <input
-                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
                     errors.name ? "border-red-800" : ""
                   }`}
                   name="name"
