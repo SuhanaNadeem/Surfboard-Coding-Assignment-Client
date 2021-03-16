@@ -111,7 +111,7 @@ function EditAndPreviewQuestionModalCard({
           <div className="mt-4 w-full mb-2">
             <ReactPlayer
               url={question.videoLink}
-              // width={100%}
+              width="100%"
               height={300}
               controls={true}
             />
