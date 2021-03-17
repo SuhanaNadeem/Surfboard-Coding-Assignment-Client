@@ -112,7 +112,7 @@ function QuestionModalCard({
   }
   useEffect(() => {
     if (questionId) {
-      // console.log("enters this use");
+      console.log("enters this use");
       // console.log(questionId);
       setValues({ studentId, questionId, answer: savedAnswer });
       // setIsOpen(completedQuestions.includes(questionId));
@@ -158,7 +158,7 @@ function QuestionModalCard({
       },
     ],
     onCompleted({ handleAnswerPoints }) {
-      // console.log("on completed");
+      console.log("on completed");
       if (handleAnswerPoints) {
         getLazyCompletedQuestionsByModule({
           variables: { moduleId, studentId },
@@ -168,31 +168,43 @@ function QuestionModalCard({
     },
     update() {
       setErrors({});
-      // console.log("done mutation");
+      console.log("done mutation");
       if (question.type === "Skill") {
         var nextQuesId =
           module && module.questions[module.questions.indexOf(question.id) + 1];
         handleQuestionClick(nextQuesId);
-        if (!completedQuestions.includes(nextQuesId)) {
-          // console.log("enters this 1");
-
-          setIsOpen(false);
-          setSubmitIsOpen(true);
-        }
-      } else {
-        // console.log("enters this 2");
+      }
+      if (!completedQuestions.includes(questionId)) {
+        console.log("enters this 1");
 
         setIsOpen(true);
-        if (
-          markedCorrect ||
-          question.questionFormat === "Expected Answer" ||
-          question.questionFormat === "Link"
-        ) {
-          // console.log("in here 3");
-
-          setSubmitIsOpen(false);
-        }
+        setSubmitIsOpen(true);
       }
+      // else {
+      //   console.log("coming innn");
+      //   setIsOpen(true);
+      //   setSubmitIsOpen(false);
+      // }
+      // } else {
+      //   console.log("enters this 2");
+
+      //   // setIsOpen(true);
+      //   // console.log(markedCorrect);
+      //   // if (
+      //   //   markedCorrect ||
+      //   //   question.questionFormat === "Written Response" ||
+      //   //   question.questionFormat === "Link"
+      //   // ) {
+      //   //   // console.log("in here 3");
+
+      //   //   setSubmitIsOpen(false);
+      //   // }
+      //   if (completedQuestions.includes(questionId)) {
+      //     // console.log("in here 1");
+      //     setIsOpen(true);
+      //     setSubmitIsOpen(false);
+      //   }
+      // }
     },
     onError(err) {
       // console.log(err);
@@ -210,7 +222,7 @@ function QuestionModalCard({
     //   setSubmitIsOpen(false);
     // }
     if (completedQuestions.includes(questionId)) {
-      // console.log("problem still?");
+      console.log("problem still?");
       setIsOpen(true);
       setSubmitIsOpen(false);
     }
@@ -559,7 +571,12 @@ function QuestionModalCard({
         {module.questions.indexOf(question.id) !== 0 && (
           <button
             className="mx-auto focus:outline-none focus:ring rounded-sm"
-            onClick={togglePrevOpen}
+            // onClick={togglePrevOpen}
+            onClick={(e) => {
+              togglePrevOpen();
+              setIsOpen(false);
+              setSubmitIsOpen(true);
+            }}
             type="button"
           >
             <BsChevronLeft size={32} />
@@ -588,7 +605,7 @@ function QuestionModalCard({
             onClick={(e) => {
               setIsOpen(false);
               setSubmitIsOpen(true);
-
+              console.log("settt");
               if (
                 module.questions.indexOf(question.id) + 1 ===
                 module.questions.length
