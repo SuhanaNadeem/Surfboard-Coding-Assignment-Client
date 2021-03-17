@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { StudentAuthContext } from "../../context/studentAuth";
+import LI_logo from "../../images/li_logo.svg";
 import tempWhiteLogo from "../../images/tempSvgWhite.png";
 import StudentAccountDropdown from "./AccountDropdown";
-import LI_logo from "../../images/li_logo.svg";
 
 export default function StudentNavBar({ props }) {
   const history = useHistory();

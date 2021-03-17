@@ -108,13 +108,13 @@ export default function ImageUploadBox({
 
       previewImages && previewImages[imageName] ? (
         <p
-          className={`focus:outline-none break-words text-sm font-light  w-full text-center hover:text-red-800 text-black cursor-pointer border-dashed p-2 border-2 rounded bg-red-100 border-red-800`}
+          className={`focus:outline-none break-words text-md lg:text-sm font-normal lg:font-light  w-full text-center hover:text-red-800 text-black cursor-pointer border-dashed p-2 border-2 rounded bg-red-100 border-red-800`}
         >
           Drop or click to change file
         </p>
       ) : (
         <p
-          className={`focus:outline-none break-words text-sm font-light w-full text-center hover:text-red-800 cursor-pointer border-dashed p-2 border-2 rounded bg-gray-100 border-red-800`}
+          className={`focus:outline-none break-words font-md lg:text-sm font-normal lg:font-light w-full text-center hover:text-red-800 cursor-pointer border-dashed p-2 border-2 rounded bg-gray-100 border-red-800`}
         >
           Drop or click to select file
         </p>

@@ -11,22 +11,22 @@ export default function BadgeCard({ props, badge }) {
           {badge.name}
         </p>
         {badge.type === "Module" && badge.requiredAmount > 1 && (
-          <p className="font-thin text-xs w-20 truncate">
+          <p className="font-normal lg:font-light text-xs w-20 truncate">
             {badge.requiredAmount} Modules
           </p>
         )}
         {badge.type === "Question" && badge.requiredAmount > 1 && (
-          <p className="font-thin text-xs w-20 truncate">
+          <p className="font-normal lg:font-light text-xs w-20 truncate">
             {badge.requiredAmount} Questions
           </p>
         )}
         {badge.type === "Module" && badge.requiredAmount === 1 && (
-          <p className="font-thin text-xs w-20 truncate">
+          <p className="font-normal lg:font-light text-xs w-20 truncate">
             {badge.requiredAmount} Module
           </p>
         )}
         {badge.type === "Question" && badge.requiredAmount === 1 && (
-          <p className="font-thin text-xs w-20 truncate">
+          <p className="font-normal lg:font-light text-xs w-20 truncate">
             {badge.requiredAmount} Question
           </p>
         )}

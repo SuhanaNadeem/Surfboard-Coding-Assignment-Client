@@ -1,6 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
 import React, { useContext } from "react";
-
 import { StudentAuthContext } from "../../context/studentAuth";
 import { studentClient } from "../../GraphqlApolloClients";
 import NewModuleCard from "./NewModuleCard";
@@ -17,7 +16,6 @@ export default function CategoryCard({ category, props }) {
   );
   return modules ? (
     <>
-      <></>
       {modules.length > 0 ? (
         <div className="w-full">
           {modules.map((moduleInfo, index) => (
@@ -30,7 +28,7 @@ export default function CategoryCard({ category, props }) {
           ))}
         </div>
       ) : (
-        <p className="font-light text-left w-full leading-tight text-md mt-3">
+        <p className="font-normal lg:font-light text-left w-full leading-tight text-md mt-3">
           New {category.name} Modules will appear here.
         </p>
       )}

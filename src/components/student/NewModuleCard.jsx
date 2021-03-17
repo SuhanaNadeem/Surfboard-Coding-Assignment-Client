@@ -20,9 +20,6 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
   }
   const categoryId = moduleInfo.categoryId;
 
-  // console.log(moduleId);
-  // console.log(studentId);
-
   const { values: valuesStatus, onSubmit: onSubmitStatus } = useForm(
     startModuleCallback,
     {
@@ -43,30 +40,19 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
         variables: { categoryId, studentId },
       },
     ],
-    update(proxy, { data: { addInProgressModuleData: addingModuleData } }) {
-      // setErrors({});
+    update() {
       props.history.push(`/module/${moduleId}`);
     },
-    // onError(err) {
-    //   // console.log(valuesStatus);
-    //   // console.log(err);
-    //   setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    // },
+
     variables: { moduleId, studentId },
   });
 
   const [startModule] = useMutation(START_MODULE, {
     client: studentClient,
     update() {
-      startModuleCallback();
-      // setErrors({});
+      // startModuleCallback();
       addInProgressModule();
     },
-    // onError(err) {
-    //   // console.log(valuesStatus);
-    //   // console.log(err);
-    //   setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    // },
     variables: valuesStatus,
   });
   function startModuleCallback() {
@@ -93,7 +79,7 @@ export default function NewModuleCard({ props, categoryName, moduleInfo }) {
             categoryName !== "Computer-Aided Design" && (
               <GiMorphBall size={32} className="w-1/6" />
             )}
-          <p className="hover:text-red-800 ml-3 truncate w-5/6 tracking-wide font-thin my-2 md:my-4 text-md text-left">
+          <p className="hover:text-red-800 ml-3 truncate w-5/6 tracking-wide font-normal lg:font-light my-2 md:my-4 text-md text-left">
             {moduleInfo.name}
           </p>
         </div>

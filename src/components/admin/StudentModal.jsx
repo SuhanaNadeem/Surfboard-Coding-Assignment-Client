@@ -54,7 +54,9 @@ export default function StudentModal({
               <Badges student={student} />
               <Mentors student={student} />
             </div>
-            <QuesAnsPairs student={student} />
+            <div className="w-full">
+              <QuesAnsPairs student={student} />
+            </div>
             <div className="flex justify-start items-center mt-3 md:mt-6">
               <EditStudent student={student} props={props} />
             </div>

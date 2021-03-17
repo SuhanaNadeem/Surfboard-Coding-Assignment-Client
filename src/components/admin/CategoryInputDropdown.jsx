@@ -40,7 +40,7 @@ export default function CategoryInputDropdown({
     <>
       <button
         onClick={toggleIsOpen}
-        className={`shadow text-left appearance-none border rounded w-full py-1 px-2 font-light focus:outline-none   ${
+        className={`shadow text-left appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none   ${
           categoryErrors ? "border-red-800" : ""
         }`}
       >
@@ -58,7 +58,7 @@ export default function CategoryInputDropdown({
             className="fixed inset-0 h-full w-full bg-transparent cursor-default z-20 focus:outline-none"
           ></button>
 
-          <div className="absolute focus:outline-none left-50 w-1/4 mt-1 py-1 bg-white rounded-lg shadow-xl text-xs font-light z-20 max-h-32 overflow-y-auto">
+          <div className="absolute focus:outline-none left-50 w-1/4 mt-1 py-1 bg-white rounded-lg shadow-xl text-sm lg:text-xs font-normal lg:font-light z-20 max-h-32 overflow-y-auto">
             {categories.map((category, index) => (
               <button
                 onClick={(e) => {
@@ -70,7 +70,7 @@ export default function CategoryInputDropdown({
                 value={category.id}
                 error={categoryErrors ? "true" : "false"}
                 name={categoryType}
-                className="focus:outline-none text-left font-light w-full block px-2 py-1 text-gray-800 hover:text-white hover:bg-red-800"
+                className="focus:outline-none text-left w-full block px-2 py-1 text-gray-800 hover:text-white hover:bg-red-800"
               >
                 {category.name}
               </button>

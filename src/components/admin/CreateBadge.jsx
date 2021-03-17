@@ -84,7 +84,7 @@ function CreateBadge({ admin, props }) {
       noValidate
     >
       <h6 className="text-xl text-red-800">Create a Badge</h6>
-      <p className="text-sm font-light ">
+      <p className="text-sm font-normal lg:font-light ">
         Create a new badge by entering a name, description, points allocation,
         category, question, module, and image.
       </p>
@@ -129,7 +129,7 @@ function CreateBadge({ admin, props }) {
                   Type
                 </label>
               </td>
-              <td className="font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
+              <td className="font-normal lg:font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
                 <div>
                   <input
                     className="mr-2"

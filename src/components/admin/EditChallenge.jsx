@@ -79,7 +79,7 @@ function EditChallenge({
       noValidate
     >
       <h6 className="text-xl text-red-800">Edit Challenge</h6>
-      <p className="text-sm font-light ">
+      <p className="text-sm font-normal lg:font-light ">
         Modify {newName}'s name, admin, description, image, category, due date,
         or link.
       </p>
@@ -106,7 +106,7 @@ function EditChallenge({
                   onChange={onChange}
                 />
                 {errors.newAdminId && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newAdminId}
                   </p>
                 )}
@@ -132,7 +132,7 @@ function EditChallenge({
                   type="text"
                 />
                 {errors.newName && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newName}
                   </p>
                 )}
@@ -152,7 +152,7 @@ function EditChallenge({
                   categoryType="newCategoryId"
                 />
                 {errors.newCategoryId && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newCategoryId}
                   </p>
                 )}
@@ -177,7 +177,7 @@ function EditChallenge({
                   type="text"
                 />
                 {errors.newChallengeDescription && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newChallengeDescription}
                   </p>
                 )}
@@ -203,7 +203,7 @@ function EditChallenge({
                   type="text"
                 />
                 {errors.newDueDate && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newDueDate}
                   </p>
                 )}
@@ -228,7 +228,7 @@ function EditChallenge({
                   type="text"
                 />
                 {errors.newExtraLink && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newExtraLink}
                   </p>
                 )}
@@ -263,7 +263,7 @@ function EditChallenge({
                 />
                  */}
                 {errors.newImageFile && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newImageFile}
                   </p>
                 )}

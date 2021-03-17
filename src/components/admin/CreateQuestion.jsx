@@ -55,6 +55,13 @@ function CreateQuestion({ admin, props }) {
       {
         query: GET_QUESTIONS,
       },
+      // {
+      //   query: GET_MODULES,
+      // },
+      // {
+      //   query: GET_MODULE_BY_ID,
+      //   variables: { moduleId },
+      // },
       {
         query: GET_QUESTIONS_BY_ADMIN,
         variables: { adminId: admin && admin.id },
@@ -121,7 +128,7 @@ function CreateQuestion({ admin, props }) {
       noValidate
     >
       <h6 className="text-xl text-red-800">Create a Question</h6>
-      <p className="text-sm font-light ">
+      <p className="text-sm font-normal lg:font-light ">
         Create a new question by entering a name, descriptions, points
         allocation, multiple choice options, expected answer, hint, required
         links, module, and image.
@@ -142,7 +149,7 @@ function CreateQuestion({ admin, props }) {
                   Type
                 </label>
               </td>
-              <td className="font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
+              <td className="font-normal lg:font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
                 <div>
                   <input
                     className="mr-2"
@@ -170,7 +177,7 @@ function CreateQuestion({ admin, props }) {
                   <label htmlFor="Skill">Skill</label>
                 </div>
                 {errors.type && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.type}
                   </p>
                 )}
@@ -195,7 +202,7 @@ function CreateQuestion({ admin, props }) {
                   type="text"
                 />
                 {errors.name && (
-                  <p className="text-red-800  font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.name}
                   </p>
                 )}
@@ -215,7 +222,7 @@ function CreateQuestion({ admin, props }) {
                   moduleType="moduleId"
                 />
                 {errors.moduleId && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.moduleId}
                   </p>
                 )}
@@ -240,7 +247,7 @@ function CreateQuestion({ admin, props }) {
                   type="text"
                 />
                 {errors.videoLink && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.videoLink}
                   </p>
                 )}
@@ -265,7 +272,7 @@ function CreateQuestion({ admin, props }) {
                   type="text"
                 />
                 {errors.articleLink && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.articleLink}
                   </p>
                 )}
@@ -292,7 +299,7 @@ function CreateQuestion({ admin, props }) {
                   type="text"
                 />
                 {errors.description && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.description}
                   </p>
                 )}
@@ -317,8 +324,34 @@ function CreateQuestion({ admin, props }) {
                   type="number"
                 />
                 {errors.points && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.points}
+                  </p>
+                )}
+              </td>
+            </tr>
+
+            <tr>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
+                  Extra Link
+                </label>
+              </td>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <input
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
+                    errors.extraLink ? "border-red-800" : ""
+                  }`}
+                  name="extraLink"
+                  placeholder=""
+                  value={values.extraLink}
+                  onChange={onChange}
+                  error={errors.extraLink ? "true" : "false"}
+                  type="text"
+                />
+                {errors.extraLink && (
+                  <p className="text-red-800 font-normal lg:font-light">
+                    <b>&#33;</b> {errors.extraLink}
                   </p>
                 )}
               </td>
@@ -338,7 +371,7 @@ function CreateQuestion({ admin, props }) {
                   errors={errors}
                 />
                 {errors.imageFile && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.imageFile}
                   </p>
                 )}
@@ -362,7 +395,7 @@ function CreateQuestion({ admin, props }) {
                       Format
                     </label>
                   </td>
-                  <td className="font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
+                  <td className="font-normal lg:font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
                     <div>
                       <input
                         className="mr-2"
@@ -413,97 +446,99 @@ function CreateQuestion({ admin, props }) {
                       <label htmlFor="Link">Link</label>
                     </div>
                     {errors.questionFormat && (
-                      <p className="text-red-800 font-light">
+                      <p className="text-red-800 font-normal lg:font-light">
                         <b>&#33;</b> {errors.questionFormat}
                       </p>
                     )}
                   </td>
                 </tr>
-                {values.questionFormat !== "Link" && (
-                  <tr>
-                    <td className="text-sm py-2 border-b border-gray-200">
-                      <label className="text-red-800 font-semibold uppercase tracking-wide ">
-                        Expected Answer
-                      </label>
-                    </td>
-                    {values.questionFormat === "Multiple Choice" ? (
-                      <td className="font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
-                        <div>
-                          <input
-                            className="mr-2"
-                            name="expectedAnswer"
-                            value="A"
-                            onChange={onChange}
-                            error={errors.expectedAnswer ? "true" : "false"}
-                            type="radio"
-                            id="A"
-                          />
-                          <label htmlFor="A">A</label>
-                        </div>
-                        <div>
-                          <input
-                            className="mr-2"
-                            name="expectedAnswer"
-                            value="B"
-                            onChange={onChange}
-                            error={errors.expectedAnswer ? "true" : "false"}
-                            type="radio"
-                            id="B"
-                          />
-                          <label htmlFor="B">B</label>
-                        </div>
-                        <div>
-                          <input
-                            className="mr-2"
-                            name="expectedAnswer"
-                            value="C"
-                            onChange={onChange}
-                            error={errors.expectedAnswer ? "true" : "false"}
-                            type="radio"
-                            id="C"
-                          />
-                          <label htmlFor="C">C</label>
-                        </div>
-                        <div>
-                          <input
-                            className="mr-2"
-                            name="expectedAnswer"
-                            value="D"
-                            onChange={onChange}
-                            error={errors.expectedAnswer ? "true" : "false"}
-                            type="radio"
-                            id="D"
-                          />
-                          <label htmlFor="D">D</label>
-                        </div>
-                        {errors.expectedAnswer && (
-                          <p className="text-red-800 font-light">
-                            <b>&#33;</b> {errors.expectedAnswer}
-                          </p>
-                        )}
-                      </td>
-                    ) : (
+                {values.questionFormat !== "Link" &&
+                  values.questionFormat &&
+                  values.questionFormat !== "" && (
+                    <tr>
                       <td className="text-sm py-2 border-b border-gray-200">
-                        <input
-                          className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
-                            errors.expectedAnswer ? "border-red-800" : ""
-                          }`}
-                          name="expectedAnswer"
-                          placeholder=""
-                          value={values.expectedAnswer}
-                          onChange={onChange}
-                          error={errors.expectedAnswer ? "true" : "false"}
-                          type="text"
-                        />
-                        {errors.expectedAnswer && (
-                          <p className="text-red-800 font-light">
-                            <b>&#33;</b> {errors.expectedAnswer}
-                          </p>
-                        )}
+                        <label className="text-red-800 font-semibold uppercase tracking-wide ">
+                          Expected Answer
+                        </label>
                       </td>
-                    )}
-                  </tr>
-                )}{" "}
+                      {values.questionFormat === "Multiple Choice" ? (
+                        <td className="font-normal lg:font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
+                          <div>
+                            <input
+                              className="mr-2"
+                              name="expectedAnswer"
+                              value="A"
+                              onChange={onChange}
+                              error={errors.expectedAnswer ? "true" : "false"}
+                              type="radio"
+                              id="A"
+                            />
+                            <label htmlFor="A">A</label>
+                          </div>
+                          <div>
+                            <input
+                              className="mr-2"
+                              name="expectedAnswer"
+                              value="B"
+                              onChange={onChange}
+                              error={errors.expectedAnswer ? "true" : "false"}
+                              type="radio"
+                              id="B"
+                            />
+                            <label htmlFor="B">B</label>
+                          </div>
+                          <div>
+                            <input
+                              className="mr-2"
+                              name="expectedAnswer"
+                              value="C"
+                              onChange={onChange}
+                              error={errors.expectedAnswer ? "true" : "false"}
+                              type="radio"
+                              id="C"
+                            />
+                            <label htmlFor="C">C</label>
+                          </div>
+                          <div>
+                            <input
+                              className="mr-2"
+                              name="expectedAnswer"
+                              value="D"
+                              onChange={onChange}
+                              error={errors.expectedAnswer ? "true" : "false"}
+                              type="radio"
+                              id="D"
+                            />
+                            <label htmlFor="D">D</label>
+                          </div>
+                          {errors.expectedAnswer && (
+                            <p className="text-red-800 font-normal lg:font-light">
+                              <b>&#33;</b> {errors.expectedAnswer}
+                            </p>
+                          )}
+                        </td>
+                      ) : (
+                        <td className="text-sm py-2 border-b border-gray-200">
+                          <input
+                            className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
+                              errors.expectedAnswer ? "border-red-800" : ""
+                            }`}
+                            name="expectedAnswer"
+                            placeholder=""
+                            value={values.expectedAnswer}
+                            onChange={onChange}
+                            error={errors.expectedAnswer ? "true" : "false"}
+                            type="text"
+                          />
+                          {errors.expectedAnswer && (
+                            <p className="text-red-800 font-normal lg:font-light">
+                              <b>&#33;</b> {errors.expectedAnswer}
+                            </p>
+                          )}
+                        </td>
+                      )}
+                    </tr>
+                  )}{" "}
                 <tr>
                   <td className="text-sm py-2 border-b border-gray-200">
                     <label className="text-red-800 font-semibold uppercase tracking-wide ">
@@ -523,7 +558,7 @@ function CreateQuestion({ admin, props }) {
                       type="text"
                     />
                     {errors.hint && (
-                      <p className="text-red-800 font-light">
+                      <p className="text-red-800 font-normal lg:font-light">
                         <b>&#33;</b> {errors.hint}
                       </p>
                     )}
@@ -552,7 +587,7 @@ function CreateQuestion({ admin, props }) {
                       type="text"
                     />
                     {errors.optionA && (
-                      <p className="text-red-800 font-light">
+                      <p className="text-red-800 font-normal lg:font-light">
                         <b>&#33;</b> {errors.optionA}
                       </p>
                     )}
@@ -577,7 +612,7 @@ function CreateQuestion({ admin, props }) {
                       type="text"
                     />
                     {errors.optionB && (
-                      <p className="text-red-800 font-light">
+                      <p className="text-red-800 font-normal lg:font-light">
                         <b>&#33;</b> {errors.optionB}
                       </p>
                     )}
@@ -602,7 +637,7 @@ function CreateQuestion({ admin, props }) {
                       type="text"
                     />
                     {errors.optionC && (
-                      <p className="text-red-800 font-light">
+                      <p className="text-red-800 font-normal lg:font-light">
                         <b>&#33;</b> {errors.optionC}
                       </p>
                     )}
@@ -627,7 +662,7 @@ function CreateQuestion({ admin, props }) {
                       type="text"
                     />
                     {errors.optionD && (
-                      <p className="text-red-800 font-light">
+                      <p className="text-red-800 font-normal lg:font-light">
                         <b>&#33;</b> {errors.optionD}
                       </p>
                     )}
@@ -635,35 +670,6 @@ function CreateQuestion({ admin, props }) {
                 </tr>
               </>
             )}
-            {values.questionFormat !== "Multiple Choice" &&
-              values.questionFormat !== "" &&
-              values.questionFormat && (
-                <tr>
-                  <td className="text-sm py-2 border-b border-gray-200">
-                    <label className="text-red-800 font-semibold uppercase tracking-wide ">
-                      Resource Link
-                    </label>
-                  </td>
-                  <td className="text-sm py-2 border-b border-gray-200">
-                    <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
-                        errors.extraLink ? "border-red-800" : ""
-                      }`}
-                      name="extraLink"
-                      placeholder=""
-                      value={values.extraLink}
-                      onChange={onChange}
-                      error={errors.extraLink ? "true" : "false"}
-                      type="text"
-                    />
-                    {errors.extraLink && (
-                      <p className="text-red-800 font-light">
-                        <b>&#33;</b> {errors.extraLink}
-                      </p>
-                    )}
-                  </td>
-                </tr>
-              )}
           </tbody>
         </table>
         <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none">

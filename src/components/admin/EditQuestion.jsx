@@ -67,6 +67,13 @@ function EditQuestion({
       {
         query: GET_QUESTIONS,
       },
+      // {
+      //   query: GET_MODULES,
+      // },
+      // {
+      //   query: GET_MODULE_BY_ID,
+      //   variables: { moduleId },
+      // },
       {
         query: GET_QUESTIONS_BY_ADMIN,
         variables: { adminId: admin && admin.id },
@@ -115,7 +122,7 @@ function EditQuestion({
       noValidate
     >
       <h6 className="text-xl text-red-800">Edit Question</h6>
-      <p className="text-sm font-light ">
+      <p className="text-sm font-normal lg:font-light ">
         Modify {newName}'s name, description, image, points, module, video,
         admin, article, expected answer, or hint.
       </p>
@@ -142,7 +149,7 @@ function EditQuestion({
                   onChange={onChange}
                 />
                 {errors.newAdminId && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newAdminId}
                   </p>
                 )}
@@ -162,7 +169,7 @@ function EditQuestion({
                   moduleType="newModuleId"
                 />
                 {errors.newModuleId && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newModuleId}
                   </p>
                 )}
@@ -187,7 +194,7 @@ function EditQuestion({
                   type="text"
                 />
                 {errors.newName && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newName}
                   </p>
                 )}
@@ -201,7 +208,7 @@ function EditQuestion({
               </td>
               <td className="text-sm py-2 border-b border-gray-200">
                 <textarea
-                  className={`shadow appearance-none border rounded w-full h-16 py-1 px-2 font-light focus:outline-none   ${
+                  className={`shadow appearance-none border rounded w-full h-16 py-1 px-2 font-normal lg:font-light focus:outline-none   ${
                     errors.newDescription ? "border-red-800" : ""
                   }`}
                   name="newDescription"
@@ -213,7 +220,7 @@ function EditQuestion({
                   rows="20"
                 />
                 {errors.newDescription && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newDescription}
                   </p>
                 )}
@@ -238,7 +245,7 @@ function EditQuestion({
                   type="number"
                 />
                 {errors.newPoints && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newPoints}
                   </p>
                 )}
@@ -263,7 +270,7 @@ function EditQuestion({
                   type="text"
                 />
                 {errors.newVideoLink && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newVideoLink}
                   </p>
                 )}
@@ -288,7 +295,7 @@ function EditQuestion({
                   type="text"
                 />
                 {errors.newArticleLink && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newArticleLink}
                   </p>
                 )}
@@ -313,7 +320,7 @@ function EditQuestion({
                   type="text"
                 />
                 {errors.newHint && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newHint}
                   </p>
                 )}
@@ -327,7 +334,7 @@ function EditQuestion({
                     Expected Answer
                   </label>
                 </td>
-                <td className="font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
+                <td className="font-normal lg:font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
                   <div>
                     <input
                       className="mr-2"
@@ -389,14 +396,14 @@ function EditQuestion({
                     <label htmlFor="D">D</label>
                   </div>
                   {errors.newExpectedAnswer && (
-                    <p className="text-red-800 font-light">
+                    <p className="text-red-800 font-normal lg:font-light">
                       <b>&#33;</b> {errors.newExpectedAnswer}
                     </p>
                   )}
                 </td>
               </tr>
             )}
-            {type === "Question" && questionFormat !== "Multiple Choice" && (
+            {questionFormat === "Written Answer" && (
               <tr>
                 <td className="text-sm py-2 border-b border-gray-200">
                   <label className=" font-semibold uppercase tracking-wide ">
@@ -416,7 +423,7 @@ function EditQuestion({
                     type="text"
                   />
                   {errors.newExpectedAnswer && (
-                    <p className="text-red-800 font-light">
+                    <p className="text-red-800 font-normal lg:font-light">
                       <b>&#33;</b> {errors.newExpectedAnswer}
                     </p>
                   )}
@@ -444,7 +451,7 @@ function EditQuestion({
                       type="text"
                     />
                     {errors.newOptionA && (
-                      <p className="text-red-800 font-light">
+                      <p className="text-red-800 font-normal lg:font-light">
                         <b>&#33;</b> {errors.newOptionA}
                       </p>
                     )}
@@ -469,7 +476,7 @@ function EditQuestion({
                       type="text"
                     />
                     {errors.newOptionB && (
-                      <p className="text-red-800 font-light">
+                      <p className="text-red-800 font-normal lg:font-light">
                         <b>&#33;</b> {errors.newOptionB}
                       </p>
                     )}
@@ -494,7 +501,7 @@ function EditQuestion({
                       type="text"
                     />
                     {errors.newOptionC && (
-                      <p className="text-red-800 font-light">
+                      <p className="text-red-800 font-normal lg:font-light">
                         <b>&#33;</b> {errors.newOptionC}
                       </p>
                     )}
@@ -519,7 +526,7 @@ function EditQuestion({
                       type="text"
                     />
                     {errors.newOptionD && (
-                      <p className="text-red-800 font-light">
+                      <p className="text-red-800 font-normal lg:font-light">
                         <b>&#33;</b> {errors.newOptionD}
                       </p>
                     )}
@@ -527,36 +534,32 @@ function EditQuestion({
                 </tr>
               </>
             )}
-            {questionFormat !== "Multiple Choice" &&
-              questionFormat !== "" &&
-              questionFormat &&
-              type === "Question" && (
-                <tr>
-                  <td className="text-sm py-2 border-b border-gray-200">
-                    <label className=" font-semibold uppercase tracking-wide ">
-                      Resource Link
-                    </label>
-                  </td>
-                  <td className="text-sm py-2 border-b border-gray-200">
-                    <input
-                      className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
-                        errors.newExtraLink ? "border-red-800" : ""
-                      }`}
-                      name="newExtraLink"
-                      placeholder=""
-                      value={values.newExtraLink}
-                      onChange={onChange}
-                      error={errors.newExtraLink ? "true" : "false"}
-                      type="text"
-                    />
-                    {errors.newExtraLink && (
-                      <p className="text-red-800 font-light">
-                        <b>&#33;</b> {errors.newExtraLink}
-                      </p>
-                    )}
-                  </td>
-                </tr>
-              )}
+
+            <tr>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <label className=" font-semibold uppercase tracking-wide ">
+                  Extra Link
+                </label>
+              </td>
+              <td className="text-sm py-2 border-b border-gray-200">
+                <input
+                  className={`shadow appearance-none border rounded w-full py-1 px-2 font-normal lg:font-light focus:outline-none    ${
+                    errors.newExtraLink ? "border-red-800" : ""
+                  }`}
+                  name="newExtraLink"
+                  placeholder=""
+                  value={values.newExtraLink}
+                  onChange={onChange}
+                  error={errors.newExtraLink ? "true" : "false"}
+                  type="text"
+                />
+                {errors.newExtraLink && (
+                  <p className="text-red-800 font-normal lg:font-light">
+                    <b>&#33;</b> {errors.newExtraLink}
+                  </p>
+                )}
+              </td>
+            </tr>
             <tr>
               <td className="text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
@@ -585,7 +588,7 @@ function EditQuestion({
                 />
                  */}
                 {errors.newImageFile && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newImageFile}
                   </p>
                 )}

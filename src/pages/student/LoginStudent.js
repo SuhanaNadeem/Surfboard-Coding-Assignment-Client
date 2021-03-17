@@ -62,7 +62,7 @@ function LoginStudent(props) {
               />
             </div>
             {errors.email && (
-              <p className="text-red-800 font-light md:text-xs">
+              <p className="text-red-800 font-normal lg:font-light md:text-xs">
                 <b>&#33;</b> {errors.email}
               </p>
             )}
@@ -85,7 +85,7 @@ function LoginStudent(props) {
               />
             </div>
             {errors.password && (
-              <p className="text-red-800 font-light md:text-xs">
+              <p className="text-red-800 font-normal lg:font-light md:text-xs">
                 <b>&#33;</b> {errors.password}
               </p>
             )}

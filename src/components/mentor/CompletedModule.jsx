@@ -19,7 +19,7 @@ function CompletedModule({ student, module }) {
       <h3 className="font-semibold mx-1 text-sm uppercase w-1/2 md:w-36">
         {module.name}
       </h3>
-      <h2 className="font-normal lg:font-light text-md lg:text-sm truncate leading-tight w-1/2 md:w-full text-center">
+      <h2 className="font-light text-md lg:text-sm truncate leading-tight w-1/2 md:w-full text-left ">
         ({points} LYNX Tokens)
       </h2>
     </div>

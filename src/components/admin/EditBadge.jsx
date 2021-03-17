@@ -88,7 +88,7 @@ function EditBadge({
       noValidate
     >
       <h6 className="text-xl text-red-800">Edit Badge</h6>
-      <p className="text-sm font-light ">
+      <p className="text-sm font-normal lg:font-light ">
         Modify {newName}'s name, admin, module, question, category,
         requiredAmount, description, or image.
       </p>
@@ -115,7 +115,7 @@ function EditBadge({
                   onChange={onChange}
                 />
                 {errors.newAdminId && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newAdminId}
                   </p>
                 )}
@@ -141,7 +141,7 @@ function EditBadge({
                   type="text"
                 />
                 {errors.newName && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newName}
                   </p>
                 )}
@@ -153,7 +153,7 @@ function EditBadge({
                   Type
                 </label>
               </td>
-              <td className="font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
+              <td className="font-normal lg:font-light text-md lg:text-sm px-2 py-2 border-b border-gray-200">
                 <div>
                   <input
                     className="mr-2"
@@ -181,7 +181,7 @@ function EditBadge({
                   <label htmlFor="Module">Module</label>
                 </div>
                 {errors.newType && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newType}
                   </p>
                 )}
@@ -207,7 +207,7 @@ function EditBadge({
                   type="number"
                 />
                 {errors.newRequiredAmount && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newRequiredAmount}
                   </p>
                 )}
@@ -233,7 +233,7 @@ function EditBadge({
                   type="text"
                 />
                 {errors.newDescription && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newDescription}
                   </p>
                 )}
@@ -267,7 +267,7 @@ function EditBadge({
                 />
                  */}
                 {errors.newImageFile && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newImageFile}
                   </p>
                 )}

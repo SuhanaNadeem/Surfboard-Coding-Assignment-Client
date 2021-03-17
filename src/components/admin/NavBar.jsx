@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { AdminAuthContext } from "../../context/adminAuth";
-import tempWhiteLogo from "../../images/tempSvgWhite.png";
-import AdminAccountDropdown from "./AccountDropdown";
 // import Logo from "../../images/LI_Logo.jpeg"
 // import li_logo from "../../images/li-logo.svg";
-
 import LI_logo from "../../images/li_logo.svg";
+import tempWhiteLogo from "../../images/tempSvgWhite.png";
+import AdminAccountDropdown from "./AccountDropdown";
 
 export default function NavBar({ props }) {
   const history = useHistory();

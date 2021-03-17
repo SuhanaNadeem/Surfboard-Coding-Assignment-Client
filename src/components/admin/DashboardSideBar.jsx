@@ -13,25 +13,25 @@ export default function DashboardSideBar({
       <p className="mb-3 md:mb-6 font-semibold md:text-sm text-md truncate md:w-full uppercase tracking-wide pr-0 sm:pr-2">
         Contributions
       </p>
-      <h3 className="hover:text-red-800 font-light mb-3 md:mb-6 w-full sm:w-1/6 md:w-full truncate focus:outline-none lg:text-md text-lg">
+      <h3 className="hover:text-red-800 font-normal lg:font-light mb-3 md:mb-6 w-full sm:w-1/6 md:w-full truncate focus:outline-none text-md">
         {numOfQuestions} {numOfQuestions === 1 ? `Question` : `Questions`}
       </h3>
-      <h3 className="hover:text-red-800 font-light mb-3 md:mb-6 w-full sm:w-1/6 md:w-full truncate focus:outline-none lg:text-md text-lg">
+      <h3 className="hover:text-red-800 font-normal lg:font-light mb-3 md:mb-6 w-full sm:w-1/6 md:w-full truncate focus:outline-none text-md">
         {numOfModules} {numOfModules === 1 ? `Module` : `Modules`}
       </h3>
-      {/* <h3 className="hover:text-red-800 font-light mb-3 md:mb-6 w-full sm:w-1/6 md:w-full truncate focus:outline-none lg:text-md text-lg">
+      {/* <h3 className="hover:text-red-800 font-normal lg:font-light mb-3 md:mb-6 w-full sm:w-1/6 md:w-full truncate focus:outline-none text-md">
         {numOfQuestionTemplates}{" "}
         {numOfQuestionTemplates === 1
           ? `Question Template`
           : `Question Templates`}
       </h3> */}
-      <h3 className="hover:text-red-800 font-light mb-3 md:mb-6 w-full sm:w-1/6 md:w-full truncate focus:outline-none lg:text-md text-lg">
+      <h3 className="hover:text-red-800 font-normal lg:font-light mb-3 md:mb-6 w-full sm:w-1/6 md:w-full truncate focus:outline-none text-md">
         {numOfBadges} {numOfBadges === 1 ? `Badge` : `Badges`}
       </h3>
-      <h3 className="hover:text-red-800 font-light mb-3 md:mb-6 w-full sm:w-1/6 md:w-full truncate focus:outline-none lg:text-md text-lg">
+      <h3 className="hover:text-red-800 font-normal lg:font-light mb-3 md:mb-6 w-full sm:w-1/6 md:w-full truncate focus:outline-none text-md">
         {numOfCategories} {numOfCategories === 1 ? `Category` : `Categories`}
       </h3>
-      <h3 className="hover:text-red-800 font-light mb-3 md:mb-6 w-full sm:w-1/6 md:w-full truncate focus:outline-none lg:text-md text-lg">
+      <h3 className="hover:text-red-800 font-normal lg:font-light mb-3 md:mb-6 w-full sm:w-1/6 md:w-full truncate focus:outline-none text-md">
         {numOfChallenges} {numOfChallenges === 1 ? `Challenge` : `Challenges`}
       </h3>
     </nav>

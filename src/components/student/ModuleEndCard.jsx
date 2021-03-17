@@ -50,7 +50,7 @@ export default function ModuleEndCard({
           </div>
           <button
             onClick={returnToDash}
-            className="flex items-center justify-center"
+            className="flex items-center justify-center focus:outline-none focus:text-blue-500"
           >
             <p className="font-light tracking-wide lg:text-sm text-md uppercase mr-2">
               Return to dashboard

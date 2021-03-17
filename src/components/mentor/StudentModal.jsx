@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React from "react";
+import { GrClose } from "react-icons/gr";
 import { mentorClient } from "../../GraphqlApolloClients";
 import { GET_STUDENT_BY_ID } from "../student/QuestionModalCard";
 import Badges from "./Badges";
@@ -7,7 +8,6 @@ import CompletedModules from "./CompletedModules";
 import InProgressModules from "./InProgressModules";
 import Progress from "./Progress";
 import QuesAnsPairs from "./QuesAnsPairs";
-import { GrClose } from "react-icons/gr";
 export default function StudentModal({
   props,
   isOpen,

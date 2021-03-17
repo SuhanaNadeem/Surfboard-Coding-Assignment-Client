@@ -42,7 +42,9 @@ function EditCategory({
       noValidate
     >
       <h6 className="text-xl text-red-800">Edit Category</h6>
-      <p className="text-sm font-light ">Modify {newName}'s name or admin.</p>
+      <p className="text-sm font-normal lg:font-light ">
+        Modify {newName}'s name or admin.
+      </p>
 
       <div className="flex flex-col mt-2">
         <table className="table-fixed w-full">
@@ -66,7 +68,7 @@ function EditCategory({
                   onChange={onChange}
                 />
                 {errors.newAdminId && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newAdminId}
                   </p>
                 )}
@@ -92,7 +94,7 @@ function EditCategory({
                   type="text"
                 />
                 {errors.newName && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newName}
                   </p>
                 )}

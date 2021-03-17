@@ -92,7 +92,7 @@ function EditModule({
       noValidate
     >
       <h6 className="text-xl text-red-800">Edit Module</h6>
-      <p className="text-sm font-light ">
+      <p className="text-sm font-normal lg:font-light ">
         Modify {newName}'s name, category, and admin.
       </p>
 
@@ -118,7 +118,7 @@ function EditModule({
                   onChange={onChange}
                 />
                 {errors.newAdminId && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newAdminId}
                   </p>
                 )}
@@ -138,7 +138,7 @@ function EditModule({
                   categoryType="newCategoryId"
                 />
                 {errors.newCategoryId && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newCategoryId}
                   </p>
                 )}
@@ -163,7 +163,7 @@ function EditModule({
                   type="text"
                 />
                 {errors.newName && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newName}
                   </p>
                 )}
@@ -197,7 +197,7 @@ function EditModule({
                 />
                  */}
                 {errors.newImageFile && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newImageFile}
                   </p>
                 )}

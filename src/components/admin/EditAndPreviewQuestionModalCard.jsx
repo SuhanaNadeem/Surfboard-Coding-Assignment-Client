@@ -76,11 +76,11 @@ function EditAndPreviewQuestionModalCard({
 
         {question.articleLink && question.articleLink !== "" && (
           <div className="flex justify-center items-center mb-2 w-full">
-            <h5 className="font-semibold uppercase tracking-wide text-xs mr-2">
+            <h5 className="font-semibold uppercase tracking-wide text-sm mr-2">
               Article:
             </h5>
             <a
-              className="font-normal lg:font-light text-md lg:text-sm truncate leading-tight w-1/2 md:w-full text-center"
+              className="font-light text-md lg:text-sm truncate leading-tight w-1/2 md:w-full text-left "
               href={question.articleLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -93,12 +93,12 @@ function EditAndPreviewQuestionModalCard({
           {question.description}
         </h6>
         {question.extraLink && question.extraLink !== "" && (
-          <div className="flex justify-center items-center mb-2 w-full">
-            <h5 className="font-semibold uppercase tracking-wide text-xs mr-2">
+          <div className="flex justify-center items-center mt-3 mb-2 w-full">
+            <h5 className="font-semibold uppercase tracking-wide text-sm mr-2">
               Visit:
             </h5>
             <a
-              className="font-normal lg:font-light text-md lg:text-sm truncate leading-tight w-1/2 md:w-full text-center"
+              className="font-light text-md lg:text-sm truncate focus:outline-none focus:text-blue-500 "
               href={question.extraLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -175,7 +175,7 @@ function EditAndPreviewQuestionModalCard({
                 </div>
               ) : (
                 <input
-                  className="md:w-3/4 shadow appearance-none border rounded w-full font-light  py-1 px-2 text-gray-700 leading-tight focus:outline-none"
+                  className="md:w-3/4 shadow appearance-none border rounded w-full font-normal lg:font-light  py-1 px-2 text-gray-700 leading-tight focus:outline-none"
                   name="answer"
                   placeholder="Enter an answer"
                   disabled

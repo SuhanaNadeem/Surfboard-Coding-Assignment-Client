@@ -22,13 +22,13 @@ export default function DashboardSideBar({ props }) {
             e.preventDefault();
             props.history.push(pageInfo.link);
           }}
-          className="hover:text-red-800 mr-2 md:mr-0 font-light md:mb-6 last:mb-0 focus:outline-none "
+          className="hover:text-red-800 mr-2 md:mr-0 font-normal lg:font-light md:mb-6 last:mb-0 focus:outline-none "
         >
           {pageInfo.title}
         </button>
       ))}
       <button
-        className=" cursor-auto hover:text-red-800 font-light md:mb-6 focus:outline-none flex items-center justify-center"
+        className=" cursor-auto hover:text-red-800 font-normal lg:font-light md:mb-6 focus:outline-none flex items-center justify-center"
         disabled
       >
         <p className="mr-2">Challenges</p>

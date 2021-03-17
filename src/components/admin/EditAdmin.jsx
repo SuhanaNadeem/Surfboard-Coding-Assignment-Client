@@ -46,7 +46,9 @@ function EditAdmin({
       noValidate
     >
       <h6 className="text-xl text-red-800">Edit Admin</h6>
-      <p className="text-sm font-light ">Modify name, email, or password.</p>
+      <p className="text-sm font-normal lg:font-light ">
+        Modify name, email, or password.
+      </p>
 
       <div className="flex flex-col mt-2">
         <table className="table-fixed w-full">
@@ -101,7 +103,7 @@ function EditAdmin({
                   type="text"
                 />
                 {errors.newEmail && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newEmail}
                   </p>
                 )}
@@ -127,7 +129,7 @@ function EditAdmin({
                   type="password"
                 />
                 {errors.newPassword && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newPassword}
                   </p>
                 )}
@@ -153,7 +155,7 @@ function EditAdmin({
                   type="password"
                 />
                 {errors.confirmNewPassword && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.confirmNewPassword}
                   </p>
                 )}

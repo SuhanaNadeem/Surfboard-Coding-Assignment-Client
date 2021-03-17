@@ -49,7 +49,7 @@ function EditQuestionTemplate({
       noValidate
     >
       <h6 className="text-xl text-red-800">Edit Question</h6>
-      <p className="text-sm font-light ">
+      <p className="text-sm font-normal lg:font-light ">
         Modify {newName}'s name, description, image, points, module, type,
         video, admin, article, expected answer, or hint.
       </p>
@@ -76,7 +76,7 @@ function EditQuestionTemplate({
                   onChange={onChange}
                 />
                 {errors.newAdminId && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newAdminId}
                   </p>
                 )}
@@ -96,7 +96,7 @@ function EditQuestionTemplate({
                   categoryType="newCategoryId"
                 />
                 {errors.newCategoryId && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newCategoryId}
                   </p>
                 )}
@@ -121,7 +121,7 @@ function EditQuestionTemplate({
                   type="text"
                 />
                 {errors.newName && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newName}
                   </p>
                 )}
@@ -147,7 +147,7 @@ function EditQuestionTemplate({
                   type="text"
                 />
                 {errors.newInputFields && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newInputFields}
                   </p>
                 )}

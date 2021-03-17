@@ -55,9 +55,15 @@ function QuestionModalCard({
     data: { getSavedAnswerByQuestion: savedAnswer } = {},
     //loading: loadingSavedAnswer,
   } = useQuery(GET_SAVED_ANSWER_BY_QUESTION, {
-    variables: { questionId: questionId, studentId: studentId },
+    variables: { questionId, studentId },
     client: studentClient,
   });
+  // console.log(savedAnswer);
+  // if (savedAnswer === "") {
+  //   console.log("object");
+  //   console.log(savedAnswer);
+  //   savedAnswer = undefined;
+  // }
 
   const {
     data: { getHintByQuestion: hint } = {},
@@ -97,6 +103,8 @@ function QuestionModalCard({
   });
 
   const [isOpen, setIsOpen] = useState(false);
+  const [submitIsOpen, setSubmitIsOpen] = useState(true);
+
   const [hintVisible, setHintVisible] = useState(false);
 
   function toggleIsVisible() {
@@ -104,8 +112,19 @@ function QuestionModalCard({
   }
   useEffect(() => {
     if (questionId) {
+      // console.log("enters this use");
+      // console.log(questionId);
       setValues({ studentId, questionId, answer: savedAnswer });
-      setIsOpen(completedQuestions.includes(questionId));
+      // setIsOpen(completedQuestions.includes(questionId));
+      // if (completedQuestions.includes(questionId)) {
+      //   setSubmitIsOpen(false);
+      // }
+      if (completedQuestions.includes(questionId)) {
+        // console.log("in here 1");
+        setIsOpen(true);
+        setSubmitIsOpen(false);
+      }
+      // setSubmitIsOpen(!completedQuestions.includes(questionId));
       setHintVisible(false);
     }
   }, [questionId, setValues, studentId, savedAnswer, completedQuestions]);
@@ -133,6 +152,10 @@ function QuestionModalCard({
       { query: GET_STUDENT_BY_ID, variables: { studentId } },
       { query: GET_COMPLETED_MODULES_BY_STUDENT, variables: { studentId } },
       { query: GET_IN_PROGRESS_MODULES_BY_STUDENT, variables: { studentId } },
+      {
+        query: GET_SAVED_ANSWER_BY_QUESTION,
+        variables: { questionId, studentId },
+      },
     ],
     onCompleted({ handleAnswerPoints }) {
       // console.log("on completed");
@@ -151,10 +174,24 @@ function QuestionModalCard({
           module && module.questions[module.questions.indexOf(question.id) + 1];
         handleQuestionClick(nextQuesId);
         if (!completedQuestions.includes(nextQuesId)) {
+          // console.log("enters this 1");
+
           setIsOpen(false);
+          setSubmitIsOpen(true);
         }
       } else {
+        // console.log("enters this 2");
+
         setIsOpen(true);
+        if (
+          markedCorrect ||
+          question.questionFormat === "Expected Answer" ||
+          question.questionFormat === "Link"
+        ) {
+          // console.log("in here 3");
+
+          setSubmitIsOpen(false);
+        }
       }
     },
     onError(err) {
@@ -164,15 +201,26 @@ function QuestionModalCard({
     variables: values,
   });
   useEffect(() => {
-    if (!completedQuestions.includes(questionId)) {
-      setIsOpen(false);
-    } else {
+    // if (!completedQuestions.includes(questionId)) {
+    //   console.log("problem?");
+    //   setIsOpen(false);
+    //   setSubmitIsOpen(true);
+    // } else {
+    //   setIsOpen(true);
+    //   setSubmitIsOpen(false);
+    // }
+    if (completedQuestions.includes(questionId)) {
+      // console.log("problem still?");
       setIsOpen(true);
+      setSubmitIsOpen(false);
     }
   }, [questionId, completedQuestions]);
 
   function handleAnswerPointsCallback() {
     setIsOpen(false);
+    console.log(193);
+    // setSubmitIsOpen(true)
+
     handleAnswerPoints();
   }
   const {
@@ -189,6 +237,7 @@ function QuestionModalCard({
     }
   );
   function goToEndCard() {
+    console.log("gone");
     if (studentPoints === totalPossiblePoints) {
       props.history.push(`/module/${module.id}/end`);
     }
@@ -205,6 +254,12 @@ function QuestionModalCard({
     // console.log(nextQuesId);
     handleQuestionClick(nextQuesId);
   }
+  // if (completedQuestions && savedAnswer && question && values) {
+  ////  console.log(completedQuestions);
+  ////  console.log(question.id);
+  ////  console.log(savedAnswer);
+  ////  console.log(values.answer);
+  // }
 
   return question && completedQuestions && studentObject && module && errors ? (
     <div className="justify-between flex flex-col h-full">
@@ -226,7 +281,7 @@ function QuestionModalCard({
         )}
         {question.articleLink && question.articleLink !== "" && (
           <div className="flex justify-center items-center mb-2 w-full">
-            <h5 className="font-semibold uppercase tracking-wide text-xs mr-2">
+            <h5 className="font-semibold uppercase tracking-wide text-sm mr-2">
               Article:
             </h5>
             <a
@@ -245,12 +300,12 @@ function QuestionModalCard({
           {question.description}
         </h6>
         {question.extraLink && question.extraLink !== "" && (
-          <div className="flex justify-center items-center mb-2 w-full">
-            <h5 className="font-semibold uppercase tracking-wide text-xs mr-2">
+          <div className="flex justify-center items-center mt-3 mb-2 w-full">
+            <h5 className="font-semibold uppercase tracking-wide text-sm mr-2">
               Visit:
             </h5>
             <a
-              className="font-normal lg:font-light text-md lg:text-sm truncate leading-tight w-1/2 md:w-full text-center"
+              className="font-light text-md lg:text-sm truncate focus:outline-none focus:text-blue-500"
               href={question.extraLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -286,7 +341,7 @@ function QuestionModalCard({
               {question.questionFormat === "Multiple Choice" ? (
                 // && !completedQuestions.includes(question.id)
                 <div
-                  className={`flex flex-col text-md font-normal lg:font-light justify-center items-start ${
+                  className={`flex flex-col text-md font-normal lg:font-light items-start justify-start md:items-start md:justify-center text-left ${
                     errors.answer ? "text-red-800" : ""
                   }`}
                 >
@@ -360,8 +415,8 @@ function QuestionModalCard({
                         (completedQuestions.includes(question.id) &&
                           savedAnswer === "D") ||
                         values.answer === "D"
-                          ? true
-                          : false
+                          ? "checked"
+                          : ""
                       }
                       className="mr-2"
                     />
@@ -375,7 +430,7 @@ function QuestionModalCard({
                 </div>
               ) : (
                 <input
-                  className="md:w-3/4 shadow appearance-none border rounded w-full font-light  py-1 px-2 text-gray-700 leading-tight focus:outline-none"
+                  className="md:w-3/4 shadow appearance-none border rounded w-full font-normal lg:font-light  py-1 px-2 text-gray-700 leading-tight focus:outline-none"
                   name="answer"
                   placeholder="Enter an answer"
                   value={values.answer}
@@ -383,49 +438,61 @@ function QuestionModalCard({
                   type="text"
                 />
               )}
-              {!completedQuestions.includes(questionId) &&
-              !loadingHandleAnswerPoints &&
-              !isOpen ? (
-                <button
-                  // onClick={(e) => {
-                  //   e.preventDefault();
-                  // }}
-                  type="submit"
-                  className={`${
-                    question.questionFormat === "Multiple Choice"
-                      ? `mt-4 w-16`
-                      : `ml-4 w-20`
-                  }  border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex focus:outline-none focus:ring`}
-                >
-                  Submit
-                </button>
-              ) : (
-                loadingHandleAnswerPoints &&
-                !isOpen && (
-                  <svg
-                    class="fill-current animate-spin h-4 mt-4 text-red-800"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      class="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      stroke-width="4"
-                    ></circle>
-                    <path
-                      class="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
-                  </svg>
-                )
-              )}
+              <div className="flex flex-col">
+                {
+                  // (!completedQuestions.includes(questionId) ||
+                  //   (lazyCompletedQuestions &&
+                  //     !lazyCompletedQuestions.includes(questionId) &&
+                  //     !isOpen)) &&
+                  //   !loadingHandleAnswerPoints
+                  submitIsOpen && (
+                    <>
+                      <button
+                        type="submit"
+                        className={`${
+                          question.questionFormat === "Multiple Choice"
+                            ? `mt-4 w-16`
+                            : `ml-4 w-20`
+                        }  border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex focus:outline-none focus:ring mx-auto`}
+                      >
+                        Submit
+                      </button>
+                    </>
+                  )
+                  // : (
+                  //   loadingHandleAnswerPoints && (
+                  //     <div>
+                  //       <svg
+                  //         class={`${
+                  //           question.questionFormat === "Multiple Choice"
+                  //             ? `mt-4`
+                  //             : `pl-4`
+                  //         }fill-current animate-spin h-4 text-red-800`}
+                  //         xmlns="http://www.w3.org/2000/svg"
+                  //         fill="none"
+                  //         viewBox="0 0 24 24"
+                  //       >
+                  //         <circle
+                  //           class="opacity-25"
+                  //           cx="12"
+                  //           cy="12"
+                  //           r="10"
+                  //           stroke="currentColor"
+                  //           stroke-width="4"
+                  //         ></circle>
+                  //         <path
+                  //           class="opacity-75"
+                  //           fill="currentColor"
+                  //           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  //         ></path>
+                  //       </svg>
+                  //     </div>
+                  //   )
+                  // )
+                }
+              </div>
             </form>
-            {!completedQuestions.includes(questionId) && hint && hint !== "" && (
+            {/* {!completedQuestions.includes(questionId) && hint && hint !== "" && (
               <button
                 onClick={toggleIsVisible}
                 type="button"
@@ -436,6 +503,23 @@ function QuestionModalCard({
                   <h3 className="ml-2">{hint}</h3>
                 )}
               </button>
+            )} */}
+            {submitIsOpen && hint && hint !== "" && (
+              <button
+                onClick={toggleIsVisible}
+                type="button"
+                className="focus:outline-none flex mt-2 px-4 py-2 items-center justify-center text-black tracking-wide hover:text-red-800 text-sm"
+              >
+                <h3 className="font-semibold uppercase tracking-wide text-sm ">
+                  Hint
+                </h3>
+                {hintVisible && !loadingHandleAnswerPoints && (
+                  // && !isOpen
+                  <h3 className="font-light text-md lg:text-sm ml-2 focus:outline-none focus:text-blue-500 truncate">
+                    {hint}
+                  </h3>
+                )}
+              </button>
             )}
             {isOpen && (
               <FeedbackModal
@@ -444,6 +528,30 @@ function QuestionModalCard({
                 markedCorrect={markedCorrect}
               />
             )}
+            {loadingHandleAnswerPoints && (
+              <div className="mt-3 flex h-10 mx-auto">
+                <svg
+                  className={`fill-current animate-spin h-4 text-red-800`}
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"
+                  ></circle>
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              </div>
+            )}{" "}
           </div>
         )}
       </div>
@@ -472,43 +580,35 @@ function QuestionModalCard({
           (module.questions.indexOf(question.id) + 1 ===
             module.questions.length &&
             module.questions.length === 1) ||
-          question.type === "Skill") && (
+          (question.type === "Skill" &&
+            completedQuestions.length + 1 === module.questions.length)) && (
           <button
             className="mx-auto focus:outline-none focus:ring rounded-sm"
             type={question.type === "Skill" ? `submit` : `button`}
             onClick={(e) => {
-              // console.log("entered onclick");
+              setIsOpen(false);
+              setSubmitIsOpen(true);
 
               if (
                 module.questions.indexOf(question.id) + 1 ===
                 module.questions.length
               ) {
-                toggleIsOpen();
+                // toggleIsOpen();
                 goToEndCard();
                 // used to toggle here
               } else if (question.type !== "Skill") {
                 e.preventDefault();
-
                 toggleNextOpen(e);
               }
             }}
           >
-            {/* TODO: wokring on endcard when last q is skill + skipping skill when next is clicked on q + fixed wrong -> correct!! */}
             <BsChevronRight size={32} />
           </button>
         )}
       </form>
-      {/* <ModuleEndCard
-        props={props}
-        module={module}
-        isOpen={endCardIsOpen}
-        setIsOpen={setEndCardIsOpen}
-        toggleQuesCard={toggleQuesCard}
-        student={studentObject}
-      /> */}
     </div>
   ) : (
-    <div></div>
+    <></>
   );
 }
 

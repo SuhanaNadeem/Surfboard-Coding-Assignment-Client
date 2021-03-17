@@ -1,7 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import React from "react";
 import { CgCheckO, CgCloseO } from "react-icons/cg";
-
 import { studentClient } from "../../GraphqlApolloClients";
 
 export default function CompletedQuestion({

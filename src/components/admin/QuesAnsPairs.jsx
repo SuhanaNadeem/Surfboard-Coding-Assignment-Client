@@ -11,8 +11,10 @@ function QuesAnsPairs({ student }) {
     client: adminClient,
   });
   // console.log(quesAnsPairs);
-  return quesAnsPairs && quesAnsPairs.length !== 0 ? (
-    <div className="mr-2 mt-2 flex flex-col overflow-hidden w-full">
+  // console.log(quesAnsPairs.length);
+  // console.log(quesAnsPairs && quesAnsPairs.length > 0);
+  return quesAnsPairs && quesAnsPairs.length > 0 ? (
+    <div className="mr-2 mt-2 flex flex-col w-full">
       <h2 className="text-xl lg:text-lg text-red-800 ">
         Questions and Answers
       </h2>

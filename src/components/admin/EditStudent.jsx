@@ -146,7 +146,7 @@ function EditStudent({
                   type="text"
                 />
                 {errors.newEmail && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newEmail}
                   </p>
                 )}
@@ -172,7 +172,7 @@ function EditStudent({
                   type="password"
                 />
                 {errors.newPassword && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.newPassword}
                   </p>
                 )}
@@ -198,7 +198,7 @@ function EditStudent({
                   type="password"
                 />
                 {errors.confirmNewPassword && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.confirmNewPassword}
                   </p>
                 )}

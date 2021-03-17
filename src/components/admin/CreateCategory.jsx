@@ -50,7 +50,7 @@ function CreateCategory({ admin, props }) {
       noValidate
     >
       <h6 className="text-xl text-red-800">Create a Category</h6>
-      <p className="text-sm font-light ">
+      <p className="text-sm font-normal lg:font-light ">
         Create a new question by entering a name.
       </p>
 
@@ -82,7 +82,7 @@ function CreateCategory({ admin, props }) {
                   type="text"
                 />
                 {errors.name && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.name}
                   </p>
                 )}

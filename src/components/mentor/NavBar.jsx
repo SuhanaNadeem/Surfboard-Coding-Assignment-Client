@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { MentorAuthContext } from "../../context/mentorAuth";
+import LI_logo from "../../images/li_logo.svg";
 import tempWhiteLogo from "../../images/tempSvgWhite.png";
 import MentorAccountDropdown from "./AccountDropdown";
-import LI_logo from "../../images/li_logo.svg";
 
 export default function MentorNavBar({ props }) {
   const history = useHistory();

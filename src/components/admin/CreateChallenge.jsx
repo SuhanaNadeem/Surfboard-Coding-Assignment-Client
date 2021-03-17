@@ -84,7 +84,7 @@ function CreateChallenge({ admin, props }) {
       noValidate
     >
       <h6 className="text-xl text-red-800">Create a Challenge</h6>
-      <p className="text-sm font-light ">
+      <p className="text-sm font-normal lg:font-light ">
         Create a new challenge by entering a name, description, link, category,
         due date, and image.
       </p>
@@ -117,7 +117,7 @@ function CreateChallenge({ admin, props }) {
                   type="text"
                 />
                 {errors.name && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.name}
                   </p>
                 )}
@@ -138,7 +138,7 @@ function CreateChallenge({ admin, props }) {
                   categoryType="categoryId"
                 />
                 {errors.categoryId && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.categoryId}
                   </p>
                 )}
@@ -164,7 +164,7 @@ function CreateChallenge({ admin, props }) {
                   type="text"
                 />
                 {errors.challengeDescription && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.challengeDescription}
                   </p>
                 )}
@@ -190,7 +190,7 @@ function CreateChallenge({ admin, props }) {
                   type="text"
                 />
                 {errors.dueDate && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.dueDate}
                   </p>
                 )}
@@ -215,7 +215,7 @@ function CreateChallenge({ admin, props }) {
                   type="text"
                 />
                 {errors.extraLink && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.extraLink}
                   </p>
                 )}
@@ -247,7 +247,7 @@ function CreateChallenge({ admin, props }) {
                   type="text"
                 /> */}
                 {errors.image && (
-                  <p className="text-red-800 font-light">
+                  <p className="text-red-800 font-normal lg:font-light">
                     <b>&#33;</b> {errors.image}
                   </p>
                 )}

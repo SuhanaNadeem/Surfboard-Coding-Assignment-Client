@@ -13,8 +13,6 @@ import { useForm } from "../../util/hooks";
 export default function QuestionCard({ props, question, created }) {
   const { admin } = useContext(AdminAuthContext);
 
-  // const [errors, setErrors] = useState({});
-
   const { data: { getModuleById: module } = {} } = useQuery(GET_MODULE_BY_ID, {
     variables: { moduleId: question.moduleId },
     client: adminClient,
