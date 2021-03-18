@@ -2,7 +2,6 @@ import { gql, useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { GrClose } from "react-icons/gr";
-import ReactPlayer from "react-player";
 import { StudentAuthContext } from "../../context/studentAuth";
 import { studentClient } from "../../GraphqlApolloClients";
 import {
@@ -16,8 +15,9 @@ import {
   GET_TOTAL_POSSIBLE_MODULE_POINTS,
 } from "../../pages/student/StudentModule";
 import { useForm } from "../../util/hooks";
-import FeedbackModal from "./FeedbackModal";
+import AnswerAndSubmitDisplay from "./AnswerAndSubmitDisplay";
 import { GET_QUESTION_BY_ID } from "./QuestionCard";
+import QuestionDisplay from "./QuestionDisplay";
 import StarQuestionCard from "./StarQuestionCard";
 
 function QuestionModalCard({
@@ -51,19 +51,13 @@ function QuestionModalCard({
     }
   );
 
-  const {
-    data: { getSavedAnswerByQuestion: savedAnswer } = {},
-    //loading: loadingSavedAnswer,
-  } = useQuery(GET_SAVED_ANSWER_BY_QUESTION, {
-    variables: { questionId, studentId },
-    client: studentClient,
-  });
-  // console.log(savedAnswer);
-  // if (savedAnswer === "") {
-  //   console.log("object");
-  //   console.log(savedAnswer);
-  //   savedAnswer = undefined;
-  // }
+  const { data: { getSavedAnswerByQuestion: savedAnswer } = {} } = useQuery(
+    GET_SAVED_ANSWER_BY_QUESTION,
+    {
+      variables: { questionId, studentId },
+      client: studentClient,
+    }
+  );
 
   const {
     data: { getHintByQuestion: hint } = {},
@@ -73,10 +67,7 @@ function QuestionModalCard({
     client: studentClient,
   });
 
-  const {
-    data: { getModuleById: module } = {},
-    //loading: loadingGetModuleById,
-  } = useQuery(GET_MODULE_BY_ID, {
+  const { data: { getModuleById: module } = {} } = useQuery(GET_MODULE_BY_ID, {
     variables: { moduleId: moduleId },
     client: studentClient,
   });
@@ -96,7 +87,6 @@ function QuestionModalCard({
 
   const {
     data: { getCompletedQuestionsByModule: completedQuestions } = {},
-    //loading: loadingCompletedQuestionsByModule,
   } = useQuery(GET_COMPLETED_QUESTIONS_BY_MODULE, {
     variables: { moduleId, studentId },
     client: studentClient,
@@ -112,7 +102,7 @@ function QuestionModalCard({
   }
   useEffect(() => {
     if (questionId) {
-      console.log("enters this use");
+      // console.log("enters this use");
       // console.log(questionId);
       setValues({ studentId, questionId, answer: savedAnswer });
       // setIsOpen(completedQuestions.includes(questionId));
@@ -158,7 +148,7 @@ function QuestionModalCard({
       },
     ],
     onCompleted({ handleAnswerPoints }) {
-      console.log("on completed");
+      // console.log("on completed");
       if (handleAnswerPoints) {
         getLazyCompletedQuestionsByModule({
           variables: { moduleId, studentId },
@@ -168,61 +158,27 @@ function QuestionModalCard({
     },
     update() {
       setErrors({});
-      console.log("done mutation");
+      // console.log("done mutation");
       if (question.type === "Skill") {
         var nextQuesId =
           module && module.questions[module.questions.indexOf(question.id) + 1];
         handleQuestionClick(nextQuesId);
       }
       if (!completedQuestions.includes(questionId)) {
-        console.log("enters this 1");
+        // console.log("enters this 1");
 
         setIsOpen(true);
         setSubmitIsOpen(true);
       }
-      // else {
-      //   console.log("coming innn");
-      //   setIsOpen(true);
-      //   setSubmitIsOpen(false);
-      // }
-      // } else {
-      //   console.log("enters this 2");
-
-      //   // setIsOpen(true);
-      //   // console.log(markedCorrect);
-      //   // if (
-      //   //   markedCorrect ||
-      //   //   question.questionFormat === "Written Response" ||
-      //   //   question.questionFormat === "Link"
-      //   // ) {
-      //   //   // console.log("in here 3");
-
-      //   //   setSubmitIsOpen(false);
-      //   // }
-      //   if (completedQuestions.includes(questionId)) {
-      //     // console.log("in here 1");
-      //     setIsOpen(true);
-      //     setSubmitIsOpen(false);
-      //   }
-      // }
     },
     onError(err) {
-      // console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
   });
   useEffect(() => {
-    // if (!completedQuestions.includes(questionId)) {
-    //   console.log("problem?");
-    //   setIsOpen(false);
-    //   setSubmitIsOpen(true);
-    // } else {
-    //   setIsOpen(true);
-    //   setSubmitIsOpen(false);
-    // }
     if (completedQuestions.includes(questionId)) {
-      console.log("problem still?");
+      // console.log("problem still?");
       setIsOpen(true);
       setSubmitIsOpen(false);
     }
@@ -230,7 +186,7 @@ function QuestionModalCard({
 
   function handleAnswerPointsCallback() {
     setIsOpen(false);
-    console.log(193);
+    // console.log(193);
     // setSubmitIsOpen(true)
 
     handleAnswerPoints();
@@ -249,7 +205,7 @@ function QuestionModalCard({
     }
   );
   function goToEndCard() {
-    console.log("gone");
+    // console.log("gone");
     if (studentPoints === totalPossiblePoints) {
       props.history.push(`/module/${module.id}/end`);
     }
@@ -266,12 +222,6 @@ function QuestionModalCard({
     // console.log(nextQuesId);
     handleQuestionClick(nextQuesId);
   }
-  // if (completedQuestions && savedAnswer && question && values) {
-  ////  console.log(completedQuestions);
-  ////  console.log(question.id);
-  ////  console.log(savedAnswer);
-  ////  console.log(values.answer);
-  // }
 
   return question && completedQuestions && studentObject && module && errors ? (
     <div className="justify-between flex flex-col h-full">
@@ -282,290 +232,26 @@ function QuestionModalCard({
           questionId={questionId}
           studentObject={studentObject}
         />
-        {question.image && question.image !== "" && (
-          <div className="mt-2 mb-4 mx-auto">
-            <img
-              className="w-full h-72 object-cover object-center rounded-lg  "
-              alt="Question"
-              src={question.image}
-            />
-          </div>
-        )}
-        {question.articleLink && question.articleLink !== "" && (
-          <div className="flex justify-center items-center mb-2 w-full">
-            <h5 className="font-semibold uppercase tracking-wide text-sm mr-2">
-              Article:
-            </h5>
-            <a
-              className="font-light text-md lg:text-sm truncate focus:outline-none focus:text-blue-500"
-              href={question.articleLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {question.articleLink}
-            </a>
-          </div>
-        )}
-
-        {/* admin will upload images, but question type will store aws link. admin will upload + we'll store yt vid links */}
-        <h6 className="text-md text-left font-normal lg:font-light leading-snug ">
-          {question.description}
-        </h6>
-        {question.extraLink && question.extraLink !== "" && (
-          <div className="flex justify-center items-center mt-3 mb-2 w-full">
-            <h5 className="font-semibold uppercase tracking-wide text-sm mr-2">
-              Visit:
-            </h5>
-            <a
-              className="font-light text-md lg:text-sm truncate focus:outline-none focus:text-blue-500"
-              href={question.extraLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {question.extraLink}
-            </a>
-          </div>
-        )}
-
-        {question.videoLink && question.videoLink !== "" && (
-          <>
-            <div className="mt-4 w-full mb-2">
-              <ReactPlayer
-                url={question.videoLink}
-                width="100%"
-                height={300}
-                controls={true}
-              />
-            </div>
-            {/* <button onClick={handleClickFullscreen}>Fullscreen</button> */}
-          </>
-        )}
-        {question.type === "Question" && (
-          <div className="flex flex-col">
-            <form
-              onSubmit={onSubmit}
-              className={`${
-                !completedQuestions.includes(questionId) ? `items-center ` : ``
-              }  flex mt-4 justify-center ${
-                question.questionFormat === "Multiple Choice" ? `flex-col` : ``
-              }`}
-            >
-              {question.questionFormat === "Multiple Choice" ? (
-                // && !completedQuestions.includes(question.id)
-                <div
-                  className={`flex flex-col text-md font-normal lg:font-light items-start justify-start md:items-start md:justify-center text-left ${
-                    errors.answer ? "text-red-800" : ""
-                  }`}
-                >
-                  <div>
-                    <input
-                      name="answer"
-                      value="A"
-                      onChange={onChange}
-                      error={errors.type ? "true" : "false"}
-                      type="radio"
-                      id="A"
-                      className="mr-2"
-                      checked={
-                        (completedQuestions.includes(question.id) &&
-                          savedAnswer === "A") ||
-                        values.answer === "A"
-                          ? true
-                          : false
-                      }
-                    />
-                    <label htmlFor="A">{question.optionA}</label>
-                  </div>
-                  <div>
-                    <input
-                      name="answer"
-                      value="B"
-                      onChange={onChange}
-                      error={errors.type ? "true" : "false"}
-                      type="radio"
-                      id="B"
-                      className="mr-2"
-                      checked={
-                        (completedQuestions.includes(question.id) &&
-                          savedAnswer === "B") ||
-                        values.answer === "B"
-                          ? true
-                          : false
-                      }
-                      // checked={true}
-                    />
-                    <label htmlFor="B">{question.optionB}</label>
-                  </div>
-                  <div>
-                    <input
-                      name="answer"
-                      value="C"
-                      onChange={onChange}
-                      error={errors.type ? "true" : "false"}
-                      type="radio"
-                      id="C"
-                      checked={
-                        (completedQuestions.includes(question.id) &&
-                          savedAnswer === "C") ||
-                        values.answer === "C"
-                          ? true
-                          : false
-                      }
-                      className="mr-2"
-                    />
-                    <label htmlFor="C">{question.optionC}</label>
-                  </div>
-                  <div>
-                    <input
-                      name="answer"
-                      value="D"
-                      onChange={onChange}
-                      error={errors.type ? "true" : "false"}
-                      type="radio"
-                      id="D"
-                      checked={
-                        (completedQuestions.includes(question.id) &&
-                          savedAnswer === "D") ||
-                        values.answer === "D"
-                          ? "checked"
-                          : ""
-                      }
-                      className="mr-2"
-                    />
-                    <label htmlFor="D">{question.optionD}</label>
-                  </div>
-                  {errors.answer && (
-                    <p className="font-light text-red-800">
-                      <b>&#33;</b> {errors.answer}
-                    </p>
-                  )}
-                </div>
-              ) : (
-                <input
-                  className="md:w-3/4 shadow appearance-none border rounded w-full font-normal lg:font-light  py-1 px-2 text-gray-700 leading-tight focus:outline-none"
-                  name="answer"
-                  placeholder="Enter an answer"
-                  value={values.answer}
-                  onChange={onChange}
-                  type="text"
-                />
-              )}
-              <div className="flex flex-col">
-                {
-                  // (!completedQuestions.includes(questionId) ||
-                  //   (lazyCompletedQuestions &&
-                  //     !lazyCompletedQuestions.includes(questionId) &&
-                  //     !isOpen)) &&
-                  //   !loadingHandleAnswerPoints
-                  submitIsOpen && (
-                    <>
-                      <button
-                        type="submit"
-                        className={`${
-                          question.questionFormat === "Multiple Choice"
-                            ? `mt-4 w-16`
-                            : `ml-4 w-20`
-                        }  border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex focus:outline-none focus:ring mx-auto`}
-                      >
-                        Submit
-                      </button>
-                    </>
-                  )
-                  // : (
-                  //   loadingHandleAnswerPoints && (
-                  //     <div>
-                  //       <svg
-                  //         class={`${
-                  //           question.questionFormat === "Multiple Choice"
-                  //             ? `mt-4`
-                  //             : `pl-4`
-                  //         }fill-current animate-spin h-4 text-red-800`}
-                  //         xmlns="http://www.w3.org/2000/svg"
-                  //         fill="none"
-                  //         viewBox="0 0 24 24"
-                  //       >
-                  //         <circle
-                  //           class="opacity-25"
-                  //           cx="12"
-                  //           cy="12"
-                  //           r="10"
-                  //           stroke="currentColor"
-                  //           stroke-width="4"
-                  //         ></circle>
-                  //         <path
-                  //           class="opacity-75"
-                  //           fill="currentColor"
-                  //           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  //         ></path>
-                  //       </svg>
-                  //     </div>
-                  //   )
-                  // )
-                }
-              </div>
-            </form>
-            {/* {!completedQuestions.includes(questionId) && hint && hint !== "" && (
-              <button
-                onClick={toggleIsVisible}
-                type="button"
-                className="focus:outline-none flex mx-auto mt-2 px-4 py-2 uppercase text-black tracking-wide hover:text-red-800 text-xs"
-              >
-                <h3 className="font-semibold">Hint</h3>
-                {hintVisible && !loadingHandleAnswerPoints && !isOpen && (
-                  <h3 className="ml-2">{hint}</h3>
-                )}
-              </button>
-            )} */}
-            {submitIsOpen && hint && hint !== "" && (
-              <button
-                onClick={toggleIsVisible}
-                type="button"
-                className="focus:outline-none flex mt-2 px-4 py-2 items-center justify-center text-black tracking-wide hover:text-red-800 text-sm"
-              >
-                <h3 className="font-semibold uppercase tracking-wide text-sm ">
-                  Hint
-                </h3>
-                {hintVisible && !loadingHandleAnswerPoints && (
-                  // && !isOpen
-                  <h3 className="font-light text-md lg:text-sm ml-2 focus:outline-none focus:text-blue-500 truncate">
-                    {hint}
-                  </h3>
-                )}
-              </button>
-            )}
-            {isOpen && (
-              <FeedbackModal
-                lazyCompletedQuestions={lazyCompletedQuestions}
-                questionId={questionId}
-                markedCorrect={markedCorrect}
-              />
-            )}
-            {loadingHandleAnswerPoints && (
-              <div className="mt-3 flex h-10 mx-auto">
-                <svg
-                  className={`fill-current animate-spin h-4 text-red-800`}
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    class="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    stroke-width="4"
-                  ></circle>
-                  <path
-                    class="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-              </div>
-            )}{" "}
-          </div>
-        )}
+        <QuestionDisplay question={question} />
+        <AnswerAndSubmitDisplay
+          questionId={questionId}
+          lazyCompletedQuestions={lazyCompletedQuestions}
+          markedCorrect={markedCorrect}
+          hint={hint}
+          isOpen={isOpen}
+          savedAnswer={savedAnswer}
+          toggleIsVisible={toggleIsVisible}
+          hintVisible={hintVisible}
+          submitIsOpen={submitIsOpen}
+          question={question}
+          values={values}
+          onSubmit={onSubmit}
+          errors={errors}
+          values={values}
+          loadingHandleAnswerPoints={loadingHandleAnswerPoints}
+          completedQuestions={completedQuestions}
+          onChange={onChange}
+        />
       </div>
       <form className="flex mt-6 justify-between" onSubmit={onSubmit}>
         {module.questions.indexOf(question.id) !== 0 && (
