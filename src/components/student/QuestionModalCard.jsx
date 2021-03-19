@@ -19,6 +19,7 @@ import AnswerAndSubmitDisplay from "./AnswerAndSubmitDisplay";
 import { GET_QUESTION_BY_ID } from "./QuestionCard";
 import QuestionDisplay from "./QuestionDisplay";
 import StarQuestionCard from "./StarQuestionCard";
+import ToggleAndClose from "./ToggleAndClose";
 
 function QuestionModalCard({
   props,
@@ -234,7 +235,7 @@ function QuestionModalCard({
         />
         <QuestionDisplay question={question} />
         <AnswerAndSubmitDisplay
-          questionId={questionId}
+          // questionId={questionId}
           lazyCompletedQuestions={lazyCompletedQuestions}
           markedCorrect={markedCorrect}
           hint={hint}
@@ -247,68 +248,25 @@ function QuestionModalCard({
           values={values}
           onSubmit={onSubmit}
           errors={errors}
-          values={values}
           loadingHandleAnswerPoints={loadingHandleAnswerPoints}
           completedQuestions={completedQuestions}
           onChange={onChange}
         />
       </div>
-      <form className="flex mt-6 justify-between" onSubmit={onSubmit}>
-        {module.questions.indexOf(question.id) !== 0 && (
-          <button
-            className="mx-auto focus:outline-none focus:ring rounded-sm"
-            // onClick={togglePrevOpen}
-            onClick={(e) => {
-              togglePrevOpen();
-              setIsOpen(false);
-              setSubmitIsOpen(true);
-            }}
-            type="button"
-          >
-            <BsChevronLeft size={32} />
-          </button>
-        )}
-        <button
-          className="mx-auto focus:outline-none focus:ring rounded-sm"
-          onClick={toggleIsOpen}
-          type="button"
-        >
-          <GrClose size={26} />
-        </button>
-        {((module.questions.indexOf(question.id) + 1 ===
-          module.questions.length &&
-          studentObject.completedModules.includes(moduleId)) ||
-          module.questions.indexOf(question.id) + 1 !==
-            module.questions.length ||
-          (module.questions.indexOf(question.id) + 1 ===
-            module.questions.length &&
-            module.questions.length === 1) ||
-          (question.type === "Skill" &&
-            completedQuestions.length + 1 === module.questions.length)) && (
-          <button
-            className="mx-auto focus:outline-none focus:ring rounded-sm"
-            type={question.type === "Skill" ? `submit` : `button`}
-            onClick={(e) => {
-              setIsOpen(false);
-              setSubmitIsOpen(true);
-              console.log("settt");
-              if (
-                module.questions.indexOf(question.id) + 1 ===
-                module.questions.length
-              ) {
-                // toggleIsOpen();
-                goToEndCard();
-                // used to toggle here
-              } else if (question.type !== "Skill") {
-                e.preventDefault();
-                toggleNextOpen(e);
-              }
-            }}
-          >
-            <BsChevronRight size={32} />
-          </button>
-        )}
-      </form>
+      <ToggleAndClose
+        question={question}
+        module={module}
+        onSubmit={onSubmit}
+        togglePrevOpen={togglePrevOpen}
+        setIsOpen={setIsOpen}
+        setSubmitIsOpen={setSubmitIsOpen}
+        toggleIsOpen={toggleIsOpen}
+        studentObject={studentObject}
+        completedQuestions={completedQuestions}
+        goToEndCard={goToEndCard}
+        toggleNextOpen={toggleNextOpen}
+        // moduleId={moduleId}
+      />
     </div>
   ) : (
     <></>

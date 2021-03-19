@@ -5,7 +5,7 @@ import Hint from "./Hint";
 import SubmitAnswer from "./SubmitAnswer";
 
 export default function AnswerAndSubmitDisplay({
-  questionId,
+  //   questionId,
   lazyCompletedQuestions,
   markedCorrect,
   hint,
@@ -28,7 +28,7 @@ export default function AnswerAndSubmitDisplay({
         <form
           onSubmit={onSubmit}
           className={`${
-            !completedQuestions.includes(questionId) ? `items-center ` : ``
+            !completedQuestions.includes(question.id) ? `items-center ` : ``
           }  flex mt-4 justify-center ${
             question.questionFormat === "Multiple Choice" ? `flex-col` : ``
           }`}
@@ -55,7 +55,7 @@ export default function AnswerAndSubmitDisplay({
         {isOpen && (
           <FeedbackModal
             lazyCompletedQuestions={lazyCompletedQuestions}
-            questionId={questionId}
+            questionId={question.id}
             markedCorrect={markedCorrect}
           />
         )}
