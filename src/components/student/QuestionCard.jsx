@@ -62,21 +62,29 @@ function QuestionCard({
       }`}
     >
       <div className="flex flex-col mr-10">
-        <div className="flex items-center justify-center">
-          <p className=" font-semibold text-sm w-32 md:w-52 uppercase tracking-wide ">
-            {question.type}
-          </p>
+        {/* <div className="flex items-center justify-center">
+         
           {studentObject &&
             studentObject.starredQuestions.includes(questionId) && (
               <BsStarFill size={20} className="pl-2" />
             )}
-        </div>
+        </div> */}
+        <p className=" font-semibold text-sm w-32 md:w-52 uppercase tracking-wide ">
+          {question.type}
+        </p>
         <p className="text-red-800 w-32 md:w-52 truncate">{question.name}</p>
         <p className="tracking-wider text-md lg:text-sm uppercase lg:font-light w-32 md:w-52 font-normal truncate ">
           {question.points} lynx tokens
         </p>
       </div>
-      <form onSubmit={onSubmit}>
+      <form
+        onSubmit={onSubmit}
+        className="flex flex-col justify-center items-center"
+      >
+        {studentObject &&
+          studentObject.starredQuestions.includes(questionId) && (
+            <BsStarFill size={20} className="pb-2" />
+          )}
         <button
           type="submit"
           className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold focus:outline-none focus:ring"

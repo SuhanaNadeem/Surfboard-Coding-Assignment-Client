@@ -45,10 +45,8 @@ function EditAdmin({
       onSubmit={onSubmit}
       noValidate
     >
-      <h6 className="text-xl text-red-800">Edit Admin</h6>
-      <p className="text-sm font-normal lg:font-light ">
-        Modify name, email, or password.
-      </p>
+      <h6 className="text-3xl mb-1">Edit Admin</h6>
+      <p className="font-light text-lg ">Modify name, email, or password.</p>
 
       <div className="flex flex-col mt-2">
         <table className="table-fixed w-full">
@@ -60,12 +58,12 @@ function EditAdmin({
           </thead>
           <tbody>
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-red-800 text-md lg:text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Name
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-md lg:text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light  focus:outline-none focus:ring   ${
                     errors.newName ? "border-red-800" : ""
@@ -85,12 +83,12 @@ function EditAdmin({
             </tr>
 
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-red-800 text-md lg:text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Email
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-md lg:text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light  focus:outline-none focus:ring   ${
                     errors.newEmail ? "border-red-800" : ""
@@ -111,12 +109,12 @@ function EditAdmin({
             </tr>
 
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-red-800 text-md lg:text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Password
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-md lg:text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light  focus:outline-none focus:ring   ${
                     errors.newPassword ? "border-red-800" : ""
@@ -137,12 +135,12 @@ function EditAdmin({
             </tr>
 
             <tr>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-red-800 text-md lg:text-sm py-2 border-b border-gray-200">
                 <label className=" font-semibold uppercase tracking-wide ">
                   Confirm Password
                 </label>
               </td>
-              <td className="text-sm py-2 border-b border-gray-200">
+              <td className="text-md lg:text-sm py-2 border-b border-gray-200">
                 <input
                   className={`shadow appearance-none border rounded w-full py-1 px-2 font-light  focus:outline-none focus:ring   ${
                     errors.confirmNewPassword ? "border-red-800" : ""

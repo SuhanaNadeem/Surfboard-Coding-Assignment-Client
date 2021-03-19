@@ -9,7 +9,7 @@ export default function DashboardSideBar({
   numOfBadges,
 }) {
   return (
-    <nav className="flex flex-shrink-0 items-start sm:items-center md:items-start justify-start md:max-w-2xl xl:max-w-5xl border-gray-300 pb-1 md:pb-0 border-b-2 md:border-r-2 md:border-b-0 text-left flex-col sm:flex-row md:flex-col md:static md:mt-6 md:w-1/6 my-4 sm:my-3 md:my-2 w-full cursor-default z-20 sm:space-x-4 md:space-x-0 overflow-x-auto">
+    <nav className="flex flex-shrink-0 items-start sm:items-center md:items-start justify-start md:max-w-2xl xl:max-w-5xl border-gray-300 pb-2 md:pb-0 border-b-2 md:border-r-2 md:border-b-0 text-left flex-col sm:flex-row md:flex-col md:static md:mt-6 md:w-1/6 my-4 sm:my-3 md:my-2 w-full cursor-default z-20 sm:space-x-4 md:space-x-0 overflow-x-auto">
       <p className="mb-3 md:mb-6 font-semibold md:text-sm text-md truncate md:w-full uppercase tracking-wide pr-0 sm:pr-2">
         Contributions
       </p>

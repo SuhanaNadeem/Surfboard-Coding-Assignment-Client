@@ -51,12 +51,14 @@ export default function StudentAccount(props) {
         <NavBar props={props} />
         <div
           className="
-        bg-red-800 w-full h-32 flex flex-col justify-end pl-16 lg:pl-48 pb-10"
+        
+ 
+          bg-red-800 w-full h-32 flex flex-col justify-end  pl-8 sm:pl-24 md:pl-32 lg:pl-48 pb-10"
         >
           <p className="text-4xl text-white">Your Account</p>
         </div>
-        <div className="flex flex-col mx-16 lg:mx-48 mt-4 mb-8 justify-center items-center">
-          <div className="flex flex-col md:flex-row items-start w-full mt-4 mb-6 justify-start">
+        <div className="flex flex-col  mx-8 sm:mx-24 md:mx-32 lg:mx-48 mt-3 mb-8 justify-center items-center">
+          <div className="flex flex-col md:flex-row items-start w-full mt-2 mb-6 justify-start">
             <Progress student={studentObject} />
             <Mentors student={studentObject} />
           </div>
