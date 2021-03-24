@@ -80,7 +80,7 @@ export default function ModuleSummaryBar({
         Lynx Tokens
       </p>
       <p className="mb-4 text-md md:text-sm tracking-wide uppercase font-normal lg:font-light leading-snug w-full truncate">
-        {questions.length} Questions/Skills
+        {questions.length} Questions
       </p>
       {questions.map((questionId, index) => (
         <CompletedQuestion

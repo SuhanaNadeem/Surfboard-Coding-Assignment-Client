@@ -24,10 +24,10 @@ function EditAndPreviewQuestionCard({
 
   // console.log(question);
   return question ? (
-    <div className="bg-white w-96 align-middle flex flex-row items-center text-center p-4 rounded-md shadow-sm overflow-hidden h-32 justify-center hover:shadow-md ">
+    <div className="bg-gray-100 w-96 align-middle flex flex-row items-center text-center p-4 rounded-md shadow-sm overflow-hidden h-32 justify-center hover:shadow-md ">
       <div className="flex flex-col mr-10">
         <p className=" font-semibold text-sm w-32 md:w-52 uppercase tracking-wide ">
-          {question.type}
+          {`${question.type === "Skill" ? `Skill` : `Assessment`}`}
         </p>
         <p className="text-red-800 w-32 md:w-52 truncate">{question.name}</p>
         <p className="tracking-wider text-md lg:text-sm uppercase lg:font-light w-32 md:w-52 font-normal truncate ">
@@ -36,7 +36,7 @@ function EditAndPreviewQuestionCard({
       </div>
       <button
         onClick={onAdminClick}
-        className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
+        className="focus:outline-none focus:ring flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold"
       >
         VIEW
       </button>

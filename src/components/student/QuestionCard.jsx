@@ -70,7 +70,7 @@ function QuestionCard({
             )}
         </div> */}
         <p className=" font-semibold text-sm w-32 md:w-52 uppercase tracking-wide ">
-          {question.type}
+          {`${question.type === "Skill" ? `Skill` : `Assessment`}`}
         </p>
         <p className="text-red-800 w-32 md:w-52 truncate">{question.name}</p>
         <p className="tracking-wider text-md lg:text-sm uppercase lg:font-light w-32 md:w-52 font-normal truncate ">

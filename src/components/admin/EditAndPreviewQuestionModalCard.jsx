@@ -5,11 +5,13 @@ import ReactPlayer from "react-player";
 import { adminClient } from "../../GraphqlApolloClients";
 import { GET_QUESTION_BY_ID } from "../student/CompletedQuestion";
 import { GET_MODULE_BY_ID } from "./QuestionCard";
+import { GrClose } from "react-icons/gr";
 
 function EditAndPreviewQuestionModalCard({
   questionId,
   handleQuestionClick,
   moduleId,
+  toggleQuesCard,
 }) {
   const { data: { getQuestionById: question } = {} } = useQuery(
     GET_QUESTION_BY_ID,
@@ -60,12 +62,12 @@ function EditAndPreviewQuestionModalCard({
     handleQuestionClick(nextQuesId);
   }
 
-  return question ? (
+  return question && module ? (
     <div className="justify-between flex flex-col h-full">
       <div className="flex flex-col items-center justify-start text-center overflow-y-auto ">
         <h3 className="text-3xl text-red-800 mx-auto mb-2">{question.name}</h3>
         {question.image && question.image !== "" && (
-          <div className="mt-2 mb-4 mx-auto px-1">
+          <div className="mt-2 mb-4 mx-auto">
             <img
               className="w-full h-72 object-cover object-center rounded-lg "
               alt="Question"
@@ -127,7 +129,7 @@ function EditAndPreviewQuestionModalCard({
               } flex mt-4 items-center justify-center`}
             >
               {question.questionFormat === "Multiple Choice" ? (
-                <div className="flex flex-col text-md font-light justify-center items-start">
+                <div className="flex flex-col text-md font-normal lg:font-light items-start justify-start md:items-start md:justify-center text-left ">
                   <div>
                     <input
                       name="answer"
@@ -188,22 +190,26 @@ function EditAndPreviewQuestionModalCard({
                   question.questionFormat === "Multiple Choice"
                     ? `mt-4 w-16`
                     : `ml-4 w-20`
-                }  border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex`}
+                }  focus:outline-none focus:ring border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold text-center items-center justify-center flex`}
               >
                 Submit
               </button>
             </div>
             {hint && hint !== "" && (
-              <div className="focus:outline-none flex mx-auto mt-2 px-4 py-2 uppercase text-black tracking-wide hover:text-red-800 text-xs">
-                <h3 className="font-semibold">Hint</h3>
-                <h3 className="ml-2">{hint}</h3>
+              <div class="flex mt-2 px-4 py-2 items-center justify-center text-black tracking-wide hover:text-red-800 text-sm">
+                <h3 class="font-semibold uppercase tracking-wide text-sm ">
+                  Hint
+                </h3>
+                <h3 class="font-light text-md lg:text-sm ml-2 focus:outline-none focus:text-blue-500 truncate">
+                  The name has part of "online" in it.
+                </h3>
               </div>
             )}
           </div>
         )}
       </div>
-      <div className="flex mt-6">
-        {module && module.questions.indexOf(question.id) !== 0 && (
+      <div className="flex mt-6 justify-between">
+        {module.questions.indexOf(question.id) !== 0 && (
           <button
             className="mx-auto focus:outline-none focus:ring rounded-sm"
             onClick={togglePrevOpen}
@@ -212,23 +218,28 @@ function EditAndPreviewQuestionModalCard({
             <BsChevronLeft size={32} />
           </button>
         )}
+        <button
+          className="mx-auto focus:outline-none focus:ring rounded-sm"
+          onClick={toggleQuesCard}
+          type="button"
+        >
+          <GrClose size={26} />
+        </button>
+        {module.questions.indexOf(question.id) + 1 !==
+          module.questions.length && (
+          <button
+            className="mx-auto focus:outline-none focus:ring rounded-sm"
+            onClick={(e) => {
+              onAdminClick();
 
-        {module &&
-          module.questions.indexOf(question.id) + 1 !==
-            module.questions.length && (
-            <button
-              className="mx-auto focus:outline-none focus:ring rounded-sm"
-              onClick={(e) => {
-                onAdminClick();
-
-                if (question.type !== "Skill") {
-                  toggleNextOpen(e);
-                }
-              }}
-            >
-              <BsChevronRight size={32} />
-            </button>
-          )}
+              if (question.type !== "Skill") {
+                toggleNextOpen(e);
+              }
+            }}
+          >
+            <BsChevronRight size={32} />
+          </button>
+        )}
       </div>
     </div>
   ) : (

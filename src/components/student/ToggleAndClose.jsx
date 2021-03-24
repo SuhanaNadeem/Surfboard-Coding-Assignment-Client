@@ -53,7 +53,7 @@ export default function ToggleAndClose({
           onClick={(e) => {
             setIsOpen(false);
             setSubmitIsOpen(true);
-            console.log("settt");
+            // console.log("settt");
             if (
               module.questions.indexOf(question.id) + 1 ===
               module.questions.length
