@@ -20,6 +20,10 @@ function Progress({ student }) {
         <p className="w-full md:truncate">Questions Completed</p>
       </div>
       <div className="flex items-center justify-start w-full text-lg">
+        <p className="font-semibold mr-1">{student.completedSkills.length}</p>
+        <p className="w-full md:truncate">Skills Completed</p>
+      </div>
+      <div className="flex items-center justify-start w-full text-lg">
         <p className="font-semibold mr-1">{totalPoints}</p>
         <p> Lifetime Points</p>
       </div>

@@ -103,6 +103,7 @@ export const GET_STUDENT_BY_ID = gql`
       starredQuestions
       starredModules
       completedQuestions
+      completedSkills
       id
       icon
       orgName
