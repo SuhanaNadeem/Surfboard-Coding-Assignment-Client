@@ -19,13 +19,15 @@ function Progress({ student }) {
         Progress
       </h2>
       <div className="flex items-center justify-start w-full">
-        <p className=" mr-1">{student.completedQuestions.length}</p>
+        <p className=" mr-1">
+          {student.completedQuestions.length + student.completedSkills.length}
+        </p>
         <p className="font-normal lg:font-light">Questions Completed</p>
       </div>
-      <div className="flex items-center justify-start w-full">
+      {/* <div className="flex items-center justify-start w-full">
         <p className=" mr-1">{student.completedSkills.length}</p>
         <p className="font-normal lg:font-light">Skills Completed</p>
-      </div>
+      </div> */}
       <div className="flex items-center justify-start w-full">
         <p className=" mr-1">{totalPoints}</p>
         <p className="font-normal lg:font-light"> Lifetime Points</p>
