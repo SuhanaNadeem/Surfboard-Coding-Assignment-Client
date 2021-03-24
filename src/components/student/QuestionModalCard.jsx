@@ -1,10 +1,9 @@
 import { gql, useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-import { GrClose } from "react-icons/gr";
 import { StudentAuthContext } from "../../context/studentAuth";
 import { studentClient } from "../../GraphqlApolloClients";
 import {
+  GET_BADGES_BY_STUDENT,
   GET_COMPLETED_MODULES_BY_STUDENT,
   GET_IN_PROGRESS_MODULES_BY_STUDENT,
 } from "../../pages/student/StudentDashboard";
@@ -146,6 +145,10 @@ function QuestionModalCard({
       {
         query: GET_SAVED_ANSWER_BY_QUESTION,
         variables: { questionId, studentId },
+      },
+      {
+        query: GET_BADGES_BY_STUDENT,
+        variables: { studentId },
       },
     ],
     onCompleted({ handleAnswerPoints }) {

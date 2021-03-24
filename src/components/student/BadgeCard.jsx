@@ -10,26 +10,19 @@ export default function BadgeCard({ props, badge }) {
         <p className="font-semibold text-xs leading-tight w-20 truncate">
           {badge.name}
         </p>
-        {badge.type === "Module" && badge.requiredAmount > 1 && (
-          <p className="font-normal lg:font-light text-xs w-20 truncate">
-            {badge.requiredAmount} Modules
-          </p>
-        )}
-        {badge.type === "Question" && badge.requiredAmount > 1 && (
-          <p className="font-normal lg:font-light text-xs w-20 truncate">
-            {badge.requiredAmount} Questions
-          </p>
-        )}
-        {badge.type === "Module" && badge.requiredAmount === 1 && (
-          <p className="font-normal lg:font-light text-xs w-20 truncate">
-            {badge.requiredAmount} Module
-          </p>
-        )}
-        {badge.type === "Question" && badge.requiredAmount === 1 && (
-          <p className="font-normal lg:font-light text-xs w-20 truncate">
-            {badge.requiredAmount} Question
-          </p>
-        )}
+
+        <p className="font-normal lg:font-light text-xs w-20 truncate">
+          {badge.requiredAmount}{" "}
+          {`${
+            badge.type === "Question"
+              ? badge.requiredAmount === 1
+                ? `Question`
+                : badge.type === "Question" && `Questions`
+              : badge.type === "Module" && badge.requiredAmount === 1
+              ? `Module`
+              : badge.type === "Module" && `Modules`
+          }`}
+        </p>
         <img
           alt="Badge Icon"
           src={
