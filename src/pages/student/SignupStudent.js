@@ -1,6 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useContext, useState } from "react";
-import LoadingScreen from "../../components/student/LoadingScreen";
+// import LoadingScreen from "../../components/student/LoadingScreen";
 import StudentTitleBar from "../../components/student/TitleBar";
 // import { MdPersonOutline } from "react-icons/md";
 // import { VscKey } from "react-icons/vsc";
@@ -25,7 +25,7 @@ function SignupStudent(props) {
     update(_, { data: { signupStudent: studentData } }) {
       context.loginStudent(studentData);
       props.history.push("/dashboard");
-      <LoadingScreen />;
+      // <LoadingScreen />;
     },
     onError(err) {
       // console.log(values);
