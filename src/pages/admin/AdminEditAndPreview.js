@@ -70,7 +70,9 @@ export default function AdminEditAndPreview(props) {
       <div className="h-full flex flex-col min-h-screen w-full">
         <NavBar props={props} />
         <div className="bg-red-800 w-full h-32 flex flex-col justify-end px-12 lg:px-48  pb-10">
-          <p className="text-4xl text-white truncate">Admin Edit and Preview</p>
+          <p className="text-4xl text-white truncate pb-1">
+            Admin Edit and Preview
+          </p>
         </div>
         {givenId && module && (
           <div
