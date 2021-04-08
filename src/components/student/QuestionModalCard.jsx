@@ -225,6 +225,7 @@ function QuestionModalCard({
       module && module.questions[module.questions.indexOf(question.id) + 1];
     // console.log(nextQuesId);
     handleQuestionClick(nextQuesId);
+    setValues({ answer: "" });
   }
 
   return question && completedQuestions && studentObject && module && errors ? (
