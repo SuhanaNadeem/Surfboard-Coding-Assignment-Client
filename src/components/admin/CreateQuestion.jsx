@@ -161,7 +161,7 @@ function CreateQuestion({ admin, props }) {
                     id="Question"
                     checked={values.type === "Question" ? "checked" : ""}
                   />
-                  <label htmlFor="Question">Question</label>
+                  <label htmlFor="Question">Assessment</label>
                 </div>
                 <div>
                   <input

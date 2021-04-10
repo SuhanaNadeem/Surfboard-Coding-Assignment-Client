@@ -165,7 +165,7 @@ function EditBadge({
                     id="Question"
                     checked={values.newType === "Question" ? "checked" : ""}
                   />
-                  <label htmlFor="Question">Question</label>
+                  <label htmlFor="Question">Assessment</label>
                 </div>
                 <div>
                   <input

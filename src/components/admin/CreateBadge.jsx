@@ -140,7 +140,7 @@ function CreateBadge({ admin, props }) {
                     type="radio"
                     id="Question"
                   />
-                  <label htmlFor="Question">Question</label>
+                  <label htmlFor="Question">Assessment</label>
                 </div>
                 <div>
                   <input
