@@ -2,7 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import React, { useContext, useState } from "react";
 import MentorTitleBar from "../../components/mentor/TitleBar";
 import { MentorAuthContext } from "../../context/mentorAuth";
-import robotics from "../../images/robotics.jpg";
+import loginSignup from "../../images/login.png";
 import { useForm } from "../../util/hooks";
 
 function LoginMentor(props) {
@@ -43,6 +43,9 @@ function LoginMentor(props) {
           noValidate
           className="flex-col justify-center items-center flex md:pr-8 w-full md:w-96"
         >
+          <h3 className="text-3xl mb-6 font-normal uppercase lg:font-semibold">
+            Mentor Login
+          </h3>
           <div className="mb-4 w-full md:w-64">
             <h4 className="font-normal text-lg mt-4 uppercase tracking-wider">
               Email
@@ -104,8 +107,8 @@ function LoginMentor(props) {
             or Sign Up
           </button>
         </form>
-        <div className="flex flex-1 mt-4 md:m-0 items-center  focus:outline-none justify-end flex-shrink-0">
-          <img alt="LYNX Logo Large" src={robotics} className="w-full" />
+        <div className="flex flex-1 mt-10 md:m-0 items-center  focus:outline-none justify-end flex-shrink-0">
+          <img alt="LYNX Logo Large" src={loginSignup} className="w-full" />
         </div>
       </div>
     </div>

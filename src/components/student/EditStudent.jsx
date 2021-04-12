@@ -210,7 +210,7 @@ function EditStudent({
         <div className="text-right md:text-sm mx-auto mt-4 flex w-1/4 md:w-1/6">
           <button
             type="submit"
-            className="flex w-16 focus:outline-none focus-ring border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm items-center justify-center font-semibold md:w-full"
+            className="flex w-16 focus:outline-none focus-ring border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg  hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm items-center justify-center font-semibold md:w-full"
           >
             Save
           </button>

@@ -20,7 +20,7 @@ export default function DashboardCards({ props, objects, adminObjects, type }) {
           onClick={(e) => {
             props.history.push(`/adminCreate/${createPage}`);
           }}
-          className="xl:w-1/12 w-1/4 md:w-1/6 flex focus:outline-none border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm items-center justify-center font-semibold"
+          className="xl:w-1/12 w-1/4 md:w-1/6 flex focus:outline-none border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg  hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm items-center justify-center font-semibold"
         >
           Create
         </button>

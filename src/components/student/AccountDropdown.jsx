@@ -27,12 +27,8 @@ export default function StudentAccountDropdown({ logout, props }) {
         onClick={toggleIsOpen}
         className="hover:opacity-75 focus:outline-none flex items-center justify-center"
       >
-        <MdPersonOutline className="mr-2 hidden md:flex" size={16} />
-        {/* <img
-          src={tempWhiteLogo}
-          className="flex w-5 md:w-0 md:hidden h-full mr-2"
-        /> */}
-        <MdMenu size={16} className="block md:hidden mr-2" />
+        <MdPersonOutline className="mr-2 hidden md:flex" size={20} />
+        <MdMenu size={20} className="block md:hidden mr-2" />
 
         <p className="w-44 text-left truncate font-light">{student.name}</p>
       </button>

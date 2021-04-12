@@ -11,6 +11,8 @@ import AdminEditAndPreview from "./pages/admin/AdminEditAndPreview";
 import AdminUsers from "./pages/admin/AdminUsers";
 import LoginAdmin from "./pages/admin/LoginAdmin";
 import SignupAdmin from "./pages/admin/SignupAdmin";
+import LoginAll from "./pages/landing/LoginAll";
+import Welcome from "./pages/landing/Welcome";
 import LoginMentor from "./pages/mentor/LoginMentor";
 import MentorAccount from "./pages/mentor/MentorAccount";
 import MentorDashboard from "./pages/mentor/MentorDashboard";
@@ -29,7 +31,7 @@ function App() {
     <>
       <StudentAuthProvider>
         <Router>
-          <Route exact path="/" component={LoginStudent} />
+          {/* <Route exact path="/" component={LoginStudent} /> */}
           <StudentAuthRoute exact path="/login" component={LoginStudent} />
           <StudentAuthRoute exact path="/signup" component={SignupStudent} />
           <Route exact path="/dashboard" component={StudentDashboard} />
@@ -39,9 +41,14 @@ function App() {
             path="/module/:moduleId/:questionId?"
             component={StudentModule}
           />
+          {/* <Route exact path="/" component={Welcome} />
+          <Route exact path="/loginAll" component={LoginAll} /> */}
         </Router>
       </StudentAuthProvider>
-
+      <Router>
+        <Route exact path="/" component={Welcome} />
+        <Route exact path="/loginAll" component={LoginAll} />
+      </Router>
       <MentorAuthProvider>
         <Router>
           <MentorAuthRoute exact path="/loginMentor" component={LoginMentor} />

@@ -7,7 +7,7 @@ export default function Footer() {
       <nav className="py-8 px-8 md:px-0 flex items-center w-full justify-center md:max-w-2xl xl:max-w-5xl">
         <button
           className="focus:outline-none flex items-center justify-center"
-          onClick={(e) => history.push("/")}
+          onClick={(e) => history.push("/login")}
         >
           <img
             alt="LI Logo"
@@ -20,7 +20,7 @@ export default function Footer() {
             className="w-6 h-6 "
           ></object> */}
         </button>
-        <p className="ml-4 leading-none text-sm">
+        <p className="ml-4 leading-none lg:text-md text-lg">
           Developed by Suhana Nadeem &#169; 2021
         </p>
       </nav>

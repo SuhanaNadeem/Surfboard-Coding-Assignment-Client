@@ -87,7 +87,7 @@ function QuestionCard({
           )}
         <button
           type="submit"
-          className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg transition-all duration-150 hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold focus:outline-none focus:ring"
+          className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg  hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold focus:outline-none focus:ring"
         >
           {`${complete ? "revisit" : "start"}`}
         </button>

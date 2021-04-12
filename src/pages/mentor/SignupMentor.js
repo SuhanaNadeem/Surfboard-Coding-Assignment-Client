@@ -4,7 +4,7 @@ import MentorTitleBar from "../../components/mentor/TitleBar";
 // import { MdPersonOutline } from "react-icons/md";
 // import { VscKey } from "react-icons/vsc";
 import { MentorAuthContext } from "../../context/mentorAuth";
-import robotics from "../../images/robotics.jpg";
+import loginSignup from "../../images/login.png";
 import { useForm } from "../../util/hooks";
 
 function SignupMentor(props) {
@@ -43,12 +43,15 @@ function SignupMentor(props) {
   return (
     <div className="flex flex-col w-full">
       <MentorTitleBar />
-      <div className="flex w-full flex-col mx-auto pt-10 px-16 sm:px-24 md:px-16 md:flex-row">
+      <div className="flex w-full flex-col mx-auto py-10 px-16 sm:px-24 md:px-16 md:flex-row">
         <form
           onSubmit={onSubmit}
           noValidate
           className="flex-col justify-center items-center flex md:pr-8 w-full md:w-96"
         >
+          <h3 className="text-3xl mb-6 font-normal uppercase lg:font-semibold">
+            Mentor Signup
+          </h3>
           <div className="w-full md:w-64 mb-6">
             <h4 className="font-normal text-lg  uppercase tracking-wider">
               Name
@@ -169,8 +172,8 @@ function SignupMentor(props) {
             or Log in
           </button>
         </form>
-        <div className="flex flex-1 mt-4 md:m-0 items-center justify-end flex-shrink-0">
-          <img alt="LYNX Logo Large" src={robotics} className="w-full" />
+        <div className="flex flex-1 mt-10 md:m-0 items-center justify-end flex-shrink-0">
+          <img alt="LYNX Logo Large" src={loginSignup} className="w-full" />
         </div>
       </div>
     </div>

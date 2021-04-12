@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { StudentAuthContext } from "../../context/studentAuth";
 import LI_logo from "../../images/li_logo.svg";
-import tempWhiteLogo from "../../images/tempSvgWhite.png";
+import smallLynxLogo from "../../images/512.png";
 import StudentAccountDropdown from "./AccountDropdown";
 
 export default function StudentNavBar({ props }) {
@@ -16,7 +16,7 @@ export default function StudentNavBar({ props }) {
 
   return (
     <div className="bg-black shadow-lg flex items-center justify-center w-full z-10 text-center md:h-14 h-16">
-      <nav className="py-4 px-8 md:px-0 flex items-center justify-center  w-full md:max-w-2xl xl:max-w-5xl text-lg">
+      <nav className="py-4 mx-8 sm:mx-24 md:mx-32 lg:mx-48 flex items-center justify-center  w-full text-lg">
         <div className="w-full flex items-center justify-center font-light text-md text-white ">
           <div className="items-center flex flex-1 h-full md:h-8 justify-start">
             <StudentAccountDropdown props={props} logout={logoutStudent} />
@@ -57,12 +57,12 @@ export default function StudentNavBar({ props }) {
               className="md:hidden flex focus:outline-none"
               onClick={(e) => {
                 e.preventDefault();
-                props.history.push("/");
+                props.history.push("/login");
               }}
             >
               <img
                 alt="LYNX Logo"
-                src={tempWhiteLogo}
+                src={smallLynxLogo}
                 className="focus:outline-none w-5 h-full"
               />
             </button>
