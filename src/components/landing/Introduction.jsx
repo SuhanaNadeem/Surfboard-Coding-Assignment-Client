@@ -1,5 +1,5 @@
 import React from "react";
-import welcomeImg from "../../images/WGradient.png";
+import welcomeImg from "../../images/512.png";
 
 export default function Introduction() {
   return (
