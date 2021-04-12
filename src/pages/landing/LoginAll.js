@@ -20,8 +20,8 @@ function LoginAll(props) {
             <a
               href={`${
                 process.env.NODE_ENV === "production"
-                  ? `https://lynxinstitute.com/signupAdmin`
-                  : `/signupAdmin`
+                  ? `https://lynxinstitute.com/loginAdmin`
+                  : `/loginAdmin`
               }`}
               className="focus:outline-none rounded-lg focus:text-blue-500 w-full justify-start items-center flex "
             >
@@ -36,8 +36,8 @@ function LoginAll(props) {
             <a
               href={`${
                 process.env.NODE_ENV === "production"
-                  ? `https://lynxinstitute.com/signupMentor`
-                  : `/signupMentor`
+                  ? `https://lynxinstitute.com/loginMentor`
+                  : `/loginMentor`
               }`}
               className="focus:outline-none rounded-lg focus:text-blue-500  py-8 w-full justify-start items-center flex "
             >
@@ -52,8 +52,8 @@ function LoginAll(props) {
             <a
               href={`${
                 process.env.NODE_ENV === "production"
-                  ? `https://lynxinstitute.com/signup`
-                  : `/signup`
+                  ? `https://lynxinstitute.com/login`
+                  : `/login`
               }`}
               className="focus:outline-none rounded-lg focus:text-blue-500  w-full justify-start items-center flex "
             >

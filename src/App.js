@@ -10,7 +10,7 @@ import AdminEditAccount from "./pages/admin/AdminEditAccount";
 import AdminEditAndPreview from "./pages/admin/AdminEditAndPreview";
 import AdminUsers from "./pages/admin/AdminUsers";
 import LoginAdmin from "./pages/admin/LoginAdmin";
-import SignupAdmin from "./pages/admin/SignupAdmin";
+// import SignupAdmin from "./pages/admin/SignupAdmin";
 import LoginAll from "./pages/landing/LoginAll";
 import Welcome from "./pages/landing/Welcome";
 import LoginMentor from "./pages/mentor/LoginMentor";
@@ -69,7 +69,7 @@ function App() {
       <AdminAuthProvider>
         <Router>
           <AdminAuthRoute exact path="/loginAdmin" component={LoginAdmin} />
-          <AdminAuthRoute exact path="/signupAdmin" component={SignupAdmin} />
+          {/* <AdminAuthRoute exact path="/signupAdmin" component={SignupAdmin} /> */}
           <AdminAuthRoute
             exact
             path="/adminDashboard"

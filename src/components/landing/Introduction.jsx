@@ -17,7 +17,7 @@ export default function Introduction() {
           sign up below:
         </h6>
         <div className="flex w-full md:flex-row flex-col items-center justify-center md:items-start md:justify-start">
-          <a
+          {/* <a
             href={`${
               process.env.NODE_ENV === "production"
                 ? `https://lynxinstitute.com/signupAdmin`
@@ -27,14 +27,14 @@ export default function Introduction() {
             className=" w-full md:w-1/3 border-2 border-red-800 px-2 md:px-4 py-2 uppercase text-red-800 rounded-lg  hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-lg md:text-md font-semibold text-center items-center justify-center flex focus:outline-none focus:ring "
           >
             Admin
-          </a>
+          </a> */}
           <a
             href={`${
               process.env.NODE_ENV === "production"
                 ? `https://lynxinstitute.com/signupMentor`
                 : `/signupMentor`
             }`}
-            className="md:mx-4 my-4 md:my-0 w-full md:w-1/3 border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg  hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-lg md:text-md font-semibold text-center items-center justify-center flex focus:outline-none focus:ring "
+            className="md:mr-4 mb-4 md:my-0 w-full md:w-1/3 border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg  hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-lg md:text-md font-semibold text-center items-center justify-center flex focus:outline-none focus:ring "
           >
             Mentors
           </a>

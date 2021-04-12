@@ -96,14 +96,14 @@ function LoginAdmin(props) {
           >
             Log In
           </button>
-          <button
+          {/* <button
             onClick={(e) => {
               props.history.push("/signupAdmin");
             }}
             className="mt-4 hover:opacity-80  uppercase text-md bg-white text-red-800 text-bold tracking-wide px-6 rounded-full focus:text-blue-500 focus:outline-none"
           >
             or Sign Up
-          </button>
+          </button> */}
         </form>
         <div className="flex flex-1 mt-10 md:m-0 items-center  focus:outline-none justify-end flex-shrink-0">
           <img alt="LYNX Logo Large" src={loginSignup} className="w-full" />
