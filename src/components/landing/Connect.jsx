@@ -6,11 +6,11 @@ export default function Connect() {
     <div className="flex flex-col items-center w-full justify-center ">
       <h2 className="text-5xl">Contact Us</h2>
       <div className="my-20 flex flex-col xl:flex-row w-full items-center justify-center">
-        <div className="flex items-center justify-center pb-10 xl:pb-0 xl:pr-10 w-full">
+        <div className="flex items-center justify-center pb-10 xl:pb-0 xl:pr-10 h-full">
           <img
             alt="LI Connect Graphic"
             src={tempConnectImg}
-            className="h-full rounded-lg  object-cover shadow-lg"
+            className="w-full rounded-lg object-contain shadow-lg"
           />
         </div>
         <div className="flex flex-col font-normal lg:font-light text-2xl w-full h-full items-center justify-center xl:items-start">

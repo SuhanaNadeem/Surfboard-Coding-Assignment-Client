@@ -7,7 +7,7 @@ function LoginAll(props) {
   return (
     <div className="flex flex-col w-full">
       <LandingTitleBar />
-      <div className="flex w-full flex-col mx-auto pt-10 px-16 sm:px-24 md:px-16 md:flex-row">
+      <div className="flex w-full flex-col mx-auto py-10 px-16 sm:px-24 md:px-16 md:flex-row">
         <div className="flex w-full lg:w-1/4 flex-col items-center justify-center ">
           <h3 className="text-3xl mb-6 font-normal uppercase lg:font-semibold">
             Login

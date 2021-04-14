@@ -39,7 +39,7 @@ function LoginStudent(props) {
   return (
     <div className="flex flex-col w-full">
       <StudentTitleBar />
-      <div className="flex w-full flex-col mx-auto pt-10 px-16 sm:px-24 md:px-16 md:flex-row items-center">
+      <div className="flex w-full flex-col mx-auto py-10 px-16 sm:px-24 md:px-16 md:flex-row items-center">
         <form
           onSubmit={onSubmit}
           noValidate

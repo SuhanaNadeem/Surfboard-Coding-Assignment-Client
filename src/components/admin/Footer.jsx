@@ -21,7 +21,7 @@ export default function Footer() {
             className="w-6 h-6 "
           ></object> */}
         </button>
-        <p className="ml-4 leading-none lg:text-md text-lg">
+        <p className="md:ml-4 leading-none text-center lg:text-md text-lg">
           Developed by Suhana Nadeem &#169; 2021
         </p>
       </nav>
