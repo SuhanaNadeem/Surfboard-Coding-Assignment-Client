@@ -86,13 +86,13 @@ function EditModule({
   return module ? (
     <form
       className={`${
-        questions.length === 0 ? `` : `md:mx-auto md:w-1/3`
-      }   w-full  overflow-hidden flex flex-col`}
+        questions.length === 0 ? `` : `md:mx-auto lg:w-1/2  `
+      }   w-full  overflow-hidden flex flex-col items-center justify-center lg:items-start`}
       onSubmit={onSubmit}
       noValidate
     >
       <h6 className="text-xl text-red-800">Edit Module</h6>
-      <p className="text-sm font-normal lg:font-light ">
+      <p className="text-sm font-normal lg:font-light lg:text-left text-center">
         Modify {newName}'s name, category, and admin.
       </p>
 

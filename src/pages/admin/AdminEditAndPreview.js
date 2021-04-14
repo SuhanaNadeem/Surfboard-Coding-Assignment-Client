@@ -69,7 +69,10 @@ export default function AdminEditAndPreview(props) {
     module || question || category || badge || challenge ? (
       <div className="h-full flex flex-col min-h-screen w-full">
         <NavBar props={props} />
-        <div className="bg-red-800 w-full h-32 flex flex-col justify-end px-12 lg:px-48  pb-10">
+        <div
+          className="
+ bg-red-800 w-full h-32 flex flex-col justify-end  pl-8 sm:pl-24 md:pl-32 lg:pl-48 pb-10"
+        >
           <p className="text-4xl text-white truncate pb-1">
             Admin Edit and Preview
           </p>
@@ -78,7 +81,7 @@ export default function AdminEditAndPreview(props) {
           <div
             className={`${
               module.questions.length === 0 ? `justify-start` : `justify-center`
-            }  flex-1 h-full items-start flex md:flex-row flex-col lg:mx-48 mx-12 my-10`}
+            }  flex flex-col lg:flex-row mx-8 sm:mx-24 md:mx-32 lg:mx-48 my-8 items-center lg:items-start`}
           >
             <EditModule props={props} module={module} />
             <PreviewModule
