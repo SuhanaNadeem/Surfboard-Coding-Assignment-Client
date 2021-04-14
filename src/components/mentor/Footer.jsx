@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import smallLogo from "../../images/512.png";
 export default function Footer() {
   const history = useHistory();
   return (
@@ -11,9 +12,9 @@ export default function Footer() {
         >
           <img
             alt="LI Logo"
-            className="w-6 h-full flex-shrink-0"
-            src="https://li-images.s3.amazonaws.com/8945722254/tempSvgWhite.png"
-          />
+            className="w-6 h-full flex-shrink-0 md:block hidden"
+            src={smallLogo}
+          />{" "}
           {/* <object
             type="image/svg+xml"
             data={tempSvg}

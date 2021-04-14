@@ -5,9 +5,9 @@ import learner from "../../images/learner.png";
 
 export default function Features() {
   return (
-    <div className="flex flex-col items-center w-full justify-center mb-24 md:text-left text-center">
+    <div className="flex flex-col items-center w-full justify-center mb-24  text-center">
       <h2 className="text-5xl mt-24 md:mt-0 mb-20 lg:mt-12">How It Works</h2>
-      <div className="grid grid-flow-row md:grid-flow-col w-full items-start justify-start gap-12">
+      <div className="grid grid-flow-row lg:grid-flow-col w-full items-start justify-start gap-12">
         <div className=" flex flex-col items-center justify-center">
           <img src={educator} alt="educator icon" className="w-16 mx-auto" />
           <h2 className="text-2xl font-semibold uppercase mt-6 mb-3 text-red-800">
