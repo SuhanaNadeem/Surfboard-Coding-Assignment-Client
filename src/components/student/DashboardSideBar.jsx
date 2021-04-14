@@ -11,7 +11,7 @@ export default function DashboardSideBar({ props }) {
   ];
 
   return (
-    <nav className="flex md:flex-shrink-0 items-center md:items-start justify-start md:max-w-2xl xl:max-w-5xl border-gray-300 border-b-2 md:border-b-0 md:border-r-2 text-left md:flex-col static md:mt-6 md:w-1/6 my-2 w-full cursor-default z-20 mb-2 md:mb-0  pb-3 md:pb-none md:pr-2 overflow-x-scroll">
+    <nav className="flex md:flex-shrink-0 items-center md:items-start justify-start md:max-w-2xl xl:max-w-5xl border-gray-300 border-b-2 md:border-b-0 md:border-r-2 text-left md:flex-col static md:mt-6 md:w-1/6 my-2 w-full cursor-default z-20 mb-2 md:mb-0  pb-3 md:pb-none md:pr-2 md:overflow-x-auto overflow-x-scroll">
       <p className="md:mb-6 mr-4 md:mr-0 font-semibold text-sm uppercase tracking-wide ">
         Your Account
       </p>
