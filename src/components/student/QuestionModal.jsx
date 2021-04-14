@@ -34,7 +34,7 @@ export default function QuestionModal({
           onClick={toggleIsOpen}
           className="fixed inset-0 h-full w-full bg-gray-800 opacity-50 cursor-default z-20"
         ></button>
-        <div className="fixed mx-2 mx-auto inset-0 overscroll-contain overflow-y-auto max-w-2xl my-4 p-8 bg-white z-40 rounded-lg shadow-xl">
+        <div className="fixed mx-auto inset-0 overscroll-contain overflow-y-auto max-w-2xl my-4 p-8 bg-white z-40 rounded-lg shadow-xl">
           <QuestionModalCard
             props={props}
             questionId={activeQuestionId}

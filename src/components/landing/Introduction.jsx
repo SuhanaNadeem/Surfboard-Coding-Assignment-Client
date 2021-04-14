@@ -8,7 +8,7 @@ export default function Introduction() {
         <img alt="Welcome LI Graphic" src={welcomeImg} className="w-full" />
       </div>
       <div className="flex w-full md:w-1/2 flex-col text-center md:text-left">
-        <h2 className="text-5xl leading-tight md:leading-normal">
+        <h2 className="text-5xl leading-12">
           FRC Team 6378 LYNX Training Platform
         </h2>
         <h6 className="text-2xl font-normal lg:font-light mt-5 mb-10">
