@@ -51,17 +51,14 @@ function QuestionCard({
   function startQuestionCallback() {
     startQuestion();
   }
-
   // console.log(question);
   return question ? (
     <div
       className={`${
-        complete
-          ? "bg-gray-100 w-72 md:w-96 align-middle flex flex-row items-center text-center p-4 rounded-md shadow-sm overflow-hidden h-32 justify-center hover:shadow-md "
-          : "bg-white w-72 md:w-96 align-middle flex flex-row items-center text-center p-4 rounded-md shadow-sm overflow-hidden h-32 justify-center hover:shadow-md "
-      }`}
+        complete ? `bg-gray-100` : `bg-white`
+      } w-full md:w-96 align-middle flex flex-col md:flex-row items-center text-center p-4 rounded-md shadow-sm overflow-hidden h-full md:h-32 justify-center hover:shadow-md  `}
     >
-      <div className="flex flex-col mr-10">
+      <div className="flex flex-col md:mb-0 mb-4 md:mr-10">
         {/* <div className="flex items-center justify-center">
          
           {studentObject &&
@@ -69,11 +66,13 @@ function QuestionCard({
               <BsStarFill size={20} className="pl-2" />
             )}
         </div> */}
-        <p className=" font-semibold text-sm w-32 md:w-52 uppercase tracking-wide ">
+        <p className="  font-semibold text-sm w-full md:w-52 uppercase tracking-wide ">
           {`${question.type === "Skill" ? `Skill` : `Assessment`}`}
         </p>
-        <p className="text-red-800 w-32 md:w-52 truncate">{question.name}</p>
-        <p className="tracking-wider text-md lg:text-sm uppercase lg:font-light w-32 md:w-52 font-normal truncate ">
+        <p className="text-red-800 w-full md:w-52 px-3 md:px-0 md:truncate leading-tight">
+          {question.name}
+        </p>
+        <p className="tracking-wider text-md lg:text-sm uppercase lg:font-light w-full md:w-52 font-normal md:truncate ">
           {question.points} lynx tokens
         </p>
       </div>

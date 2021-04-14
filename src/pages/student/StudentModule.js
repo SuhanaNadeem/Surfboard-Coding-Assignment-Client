@@ -118,13 +118,13 @@ export default function StudentModule(props) {
             completedQuestions={completedQuestions}
             moduleId={moduleId}
           />
-          <div className="w-3/4 lg:w-5/6 mt-6 md:ml-10">
+          <div className="w-full md:w-3/4 lg:w-5/6 mt-6 md:ml-10">
             <img
               alt="LYNX Logo"
               src="https://li-images.s3.amazonaws.com/3206906234/tempSvg.png"
               className="hidden lg:block absolute right-22 xl:right-40 my-auto h-full fill-current opacity-25 "
             />
-            <div className="grid gap-4 items-stretch justify-start h-full md:pl-2 relative">
+            <div className="grid gap-4 items-stretch md:justify-start h-full md:pl-2 relative w-full">
               {module.questions.map((questionId, index) => (
                 <QuestionCard
                   key={index}
