@@ -2,6 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import React, { useContext, useState } from "react";
 import Footer from "../../components/admin/Footer";
 import AdminTitleBar from "../../components/admin/TitleBar";
+import LoadingScreen from "../../components/student/LoadingScreen";
 import { AdminAuthContext } from "../../context/adminAuth";
 import loginSignup from "../../images/login.png";
 import { useForm } from "../../util/hooks";
@@ -18,7 +19,7 @@ function LoginAdmin(props) {
     password: "",
   });
 
-  const [loginAdmin] = useMutation(LOGIN_ADMIN, {
+  const [loginAdmin, { loading: loadingLogin }] = useMutation(LOGIN_ADMIN, {
     update(_, { data: { loginAdmin: adminData } }) {
       context.loginAdmin(adminData);
       props.history.push("/adminDashboard");
@@ -34,7 +35,9 @@ function LoginAdmin(props) {
     loginAdmin();
   }
 
-  return (
+  return loadingLogin ? (
+    <LoadingScreen />
+  ) : (
     <div className="h-full flex flex-col min-h-screen w-full">
       <AdminTitleBar />
       <div className="flex w-full flex-col mx-auto py-10 px-16 sm:px-24 md:px-16 md:flex-row">

@@ -2,6 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import React, { useContext, useState } from "react";
 import Footer from "../../components/mentor/Footer";
 import MentorTitleBar from "../../components/mentor/TitleBar";
+import LoadingScreen from "../../components/student/LoadingScreen";
 // import { MdPersonOutline } from "react-icons/md";
 // import { VscKey } from "react-icons/vsc";
 import { MentorAuthContext } from "../../context/mentorAuth";
@@ -21,27 +22,32 @@ function SignupMentor(props) {
     confirmPassword: "",
   });
 
-  const [signupMentor] = useMutation(SIGNUP_MENTOR, {
-    update(_, { data: { signupMentor: mentorData } }) {
-      context.loginMentor(mentorData);
+  const [signupMentor, { loading: loadingSignup }] = useMutation(
+    SIGNUP_MENTOR,
+    {
+      update(_, { data: { signupMentor: mentorData } }) {
+        context.loginMentor(mentorData);
 
-      props.history.push("/mentorDashboard");
-    },
-    onError(err) {
-      // console.log(values);
+        props.history.push("/mentorDashboard");
+      },
+      onError(err) {
+        // console.log(values);
 
-      // console.log(err);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-      // console.log(err.graphQLErrors[0].extensions.exception.errors);
-    },
-    variables: values,
-  });
+        // console.log(err);
+        setErrors(err.graphQLErrors[0].extensions.exception.errors);
+        // console.log(err.graphQLErrors[0].extensions.exception.errors);
+      },
+      variables: values,
+    }
+  );
 
   function signupMentorCallback() {
     signupMentor();
   }
 
-  return (
+  return loadingSignup ? (
+    <LoadingScreen />
+  ) : (
     <div className="h-full flex flex-col min-h-screen w-full">
       <MentorTitleBar />
       <div className="flex w-full flex-col mx-auto py-10 px-16 sm:px-24 md:px-16 md:flex-row">
@@ -85,7 +91,7 @@ function SignupMentor(props) {
               />
             </div>
             <p className="mt-2 text-gray-700 md:text-xs font-light leading-snug">
-              Please use the form "FRC 1234" for easy reference.
+              For FRC Teams, usually the form "FRC 1234" is used.
             </p>
           </div>
           <div className="w-full md:w-64 mb-6">

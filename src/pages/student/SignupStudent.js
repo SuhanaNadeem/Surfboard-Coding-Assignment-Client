@@ -1,6 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useContext, useState } from "react";
 import Footer from "../../components/student/Footer";
+import LoadingScreen from "../../components/student/LoadingScreen";
 // import LoadingScreen from "../../components/student/LoadingScreen";
 import StudentTitleBar from "../../components/student/TitleBar";
 // import { MdPersonOutline } from "react-icons/md";
@@ -22,26 +23,31 @@ function SignupStudent(props) {
     confirmPassword: "",
   });
 
-  const [signupStudent] = useMutation(SIGNUP_STUDENT, {
-    update(_, { data: { signupStudent: studentData } }) {
-      context.loginStudent(studentData);
-      props.history.push("/dashboard");
-      // <LoadingScreen />;
-    },
-    onError(err) {
-      // console.log(values);
-      // console.log(err);
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-      // console.log(err.graphQLErrors[0].extensions.exception.errors);
-    },
-    variables: values,
-  });
+  const [signupStudent, { loading: loadingSignup }] = useMutation(
+    SIGNUP_STUDENT,
+    {
+      update(_, { data: { signupStudent: studentData } }) {
+        context.loginStudent(studentData);
+        props.history.push("/dashboard");
+        // <LoadingScreen />;
+      },
+      onError(err) {
+        // console.log(values);
+        // console.log(err);
+        setErrors(err.graphQLErrors[0].extensions.exception.errors);
+        // console.log(err.graphQLErrors[0].extensions.exception.errors);
+      },
+      variables: values,
+    }
+  );
 
   function signupStudentCallback() {
     signupStudent();
   }
 
-  return (
+  return loadingSignup ? (
+    <LoadingScreen />
+  ) : (
     <div className="h-full flex flex-col min-h-screen w-full">
       <StudentTitleBar />
       <div className="flex w-full flex-col mx-auto py-10 px-16 sm:px-24 md:px-16 md:flex-row items-center">
@@ -85,8 +91,7 @@ function SignupStudent(props) {
               />
             </div>
             <p className="mt-2 text-gray-700 md:text-xs font-light leading-snug">
-              Use what was indicated by your mentors. Usually the form "FRC
-              1234" is used.
+              For FRC Teams, usually the form "FRC 1234" is used.
             </p>
           </div>
           <div className="w-full md:w-64 mb-6">
@@ -179,7 +184,6 @@ function SignupStudent(props) {
         </div>
       </div>
       <Footer />
-
     </div>
   );
 }

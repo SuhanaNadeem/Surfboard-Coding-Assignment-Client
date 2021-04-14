@@ -1,6 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useContext, useState } from "react";
 import Footer from "../../components/student/Footer";
+import LoadingScreen from "../../components/student/LoadingScreen";
 import StudentTitleBar from "../../components/student/TitleBar";
 import { StudentAuthContext } from "../../context/studentAuth";
 import loginSignup from "../../images/login.png";
@@ -21,7 +22,7 @@ function LoginStudent(props) {
     password: "",
   });
 
-  const [loginStudent] = useMutation(LOGIN_STUDENT, {
+  const [loginStudent, { loading: loadingLogin }] = useMutation(LOGIN_STUDENT, {
     update(_, { data: { loginStudent: studentData } }) {
       context.loginStudent(studentData);
       props.history.push("/dashboard");
@@ -37,7 +38,9 @@ function LoginStudent(props) {
     loginStudent();
   }
 
-  return (
+  return loadingLogin ? (
+    <LoadingScreen />
+  ) : (
     <div className="h-full flex flex-col min-h-screen w-full">
       <StudentTitleBar />
       <div className="flex w-full flex-col mx-auto py-10 px-16 sm:px-24 md:px-16 md:flex-row items-center">

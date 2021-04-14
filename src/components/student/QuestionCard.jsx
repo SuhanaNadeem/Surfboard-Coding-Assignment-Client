@@ -78,11 +78,11 @@ function QuestionCard({
       </div>
       <form
         onSubmit={onSubmit}
-        className="flex flex-col justify-center items-center"
+        className="flex flex-row md:flex-col justify-center items-center"
       >
         {studentObject &&
           studentObject.starredQuestions.includes(questionId) && (
-            <BsStarFill size={20} className="pb-2" />
+            <BsStarFill size={20} className="pr-2 md:pr-0 md:pb-2" />
           )}
         <button
           type="submit"
