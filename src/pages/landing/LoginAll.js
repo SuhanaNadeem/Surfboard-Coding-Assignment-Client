@@ -3,9 +3,10 @@ import LandingTitleBar from "../../components/landing/TitleBar";
 import robotics from "../../images/welcomeLogin.png";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { BsPencilSquare, BsFillPeopleFill } from "react-icons/bs";
+import Footer from "../../components/landing/Footer";
 function LoginAll(props) {
   return (
-    <div className="flex flex-col w-full">
+    <div className="h-full flex flex-col min-h-screen w-full">
       <LandingTitleBar />
       <div className="flex w-full flex-col mx-auto py-10 px-16 sm:px-24 md:px-16 md:flex-row">
         <div className="flex w-full lg:w-1/4 flex-col items-center justify-center ">
@@ -71,6 +72,7 @@ function LoginAll(props) {
           <img alt="LYNX Logo Large" src={robotics} className="w-full" />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

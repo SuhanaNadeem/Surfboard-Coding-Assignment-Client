@@ -15,11 +15,6 @@ export default function Footer() {
             className="w-6 h-full flex-shrink-0 md:block hidden"
             src={smallLogo}
           />{" "}
-          {/* <object
-            type="image/svg+xml"
-            data={tempSvg}
-            className="w-6 h-6 "
-          ></object> */}
         </button>
         <p className="md:ml-4 leading-none text-center lg:text-md text-lg">
           Developed by Suhana Nadeem &#169; 2021

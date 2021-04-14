@@ -1,5 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import React, { useContext, useState } from "react";
+import Footer from "../../components/mentor/Footer";
 import MentorTitleBar from "../../components/mentor/TitleBar";
 import { MentorAuthContext } from "../../context/mentorAuth";
 import loginSignup from "../../images/login.png";
@@ -35,7 +36,7 @@ function LoginMentor(props) {
   }
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="h-full flex flex-col min-h-screen w-full">
       <MentorTitleBar />
       <div className="flex w-full flex-col mx-auto py-10 px-16 sm:px-24 md:px-16 md:flex-row">
         <form
@@ -111,6 +112,7 @@ function LoginMentor(props) {
           <img alt="LYNX Logo Large" src={loginSignup} className="w-full" />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
