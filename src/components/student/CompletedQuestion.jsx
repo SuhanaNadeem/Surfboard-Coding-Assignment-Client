@@ -23,10 +23,10 @@ export default function CompletedQuestion({
         {question.name}
       </p>
       {completedQuestions.includes(questionId) && (
-        <CgCheckO size={16} className="md:w-1/4" />
+        <CgCheckO size={16} className="md:w-1/4 flex-shrink-0" />
       )}
       {!completedQuestions.includes(questionId) && (
-        <CgCloseO size={16} className="md:w-1/4" />
+        <CgCloseO size={16} className="md:w-1/4 flex-shrink-0" />
       )}
     </div>
   ) : (

@@ -69,7 +69,7 @@ function QuestionCard({
         <p className="  font-semibold text-sm w-full md:w-52 uppercase tracking-wide ">
           {`${question.type === "Skill" ? `Skill` : `Assessment`}`}
         </p>
-        <p className="text-red-800 w-full md:w-52 px-3 md:px-0 md:truncate leading-tight">
+        <p className="text-red-800 w-full md:w-52 px-3 md:px-0 leading-tight">
           {question.name}
         </p>
         <p className="tracking-wider text-md lg:text-sm uppercase lg:font-light w-full md:w-52 font-normal md:truncate ">
