@@ -19,14 +19,14 @@ export default function CompletedQuestion({
 
   return question && completedQuestions ? (
     <div className="flex items-center justify-start w-full overflow-hidden pb-2 ">
-      <p className="text-md lg:text-sm font-normal lg:font-light text-red-800 leading-snug mr-2 md:w-3/4 truncate">
+      <p className="text-md lg:text-sm font-normal lg:font-light text-red-800 leading-snug mr-2 md:w-3/4 w-5/6 truncate">
         {question.name}
       </p>
       {completedQuestions.includes(questionId) && (
-        <CgCheckO size={16} className="md:w-1/4 flex-shrink-0" />
+        <CgCheckO size={16} className="md:w-1/4 w-1/6 flex-shrink-0" />
       )}
       {!completedQuestions.includes(questionId) && (
-        <CgCloseO size={16} className="md:w-1/4 flex-shrink-0" />
+        <CgCloseO size={16} className="md:w-1/4 w-1/6 flex-shrink-0" />
       )}
     </div>
   ) : (
