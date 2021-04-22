@@ -19,7 +19,7 @@ export default function CompletedQuestion({
 
   return question && completedQuestions ? (
     <div className="flex items-center justify-start w-full overflow-hidden pb-2 ">
-      <p className="text-md lg:text-sm font-normal lg:font-light text-red-800 leading-snug mr-2 md:w-3/4 w-5/6 truncate">
+      <p className="text-md lg:text-sm font-normal lg:font-light text-red-800 leading-snug mr-2 md:w-3/4 w-5/6">
         {question.name}
       </p>
       {completedQuestions.includes(questionId) && (
