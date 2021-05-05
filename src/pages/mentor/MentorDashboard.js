@@ -1,9 +1,11 @@
 import { useQuery } from "@apollo/client";
 import React, { useContext } from "react";
+import { useState } from "react";
 import { GET_STUDENTS_BY_MENTOR } from "../../components/admin/Students";
 import DashboardStudents from "../../components/mentor/DashboardStudents";
 import Footer from "../../components/mentor/Footer";
 import NavBar from "../../components/mentor/NavBar";
+import WelcomeModal from "../../components/mentor/WelcomeModal";
 import LoadingScreen from "../../components/student/LoadingScreen";
 import { MentorAuthContext } from "../../context/mentorAuth";
 import { mentorClient } from "../../GraphqlApolloClients";
@@ -18,7 +20,14 @@ export default function MentorDashboard(props) {
     props.history.push("/loginMentor");
   }
   var selectedStudentId = props.match.params.studentId;
-
+  const [welcomeIsOpen, setWelcomeIsOpen] = useState(
+    selectedStudentId === "welcome" ? true : false
+  );
+  // console.log(welcomeIsOpen);
+  function toggleWelcomeIsOpen(e) {
+    e.preventDefault();
+    setWelcomeIsOpen(!welcomeIsOpen);
+  }
   const { data: { getMentorById: mentorObject } = {} } = useQuery(
     GET_MENTOR_BY_ID,
     {
@@ -36,6 +45,11 @@ export default function MentorDashboard(props) {
 
   const mentorDashboard = mentorObject ? (
     <div className="h-full flex flex-col min-h-screen w-full">
+      <WelcomeModal
+        welcomeIsOpen={welcomeIsOpen}
+        toggleWelcomeIsOpen={toggleWelcomeIsOpen}
+        mentorObject={mentorObject}
+      />
       <NavBar props={props} />
       <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-8 sm:pl-24 md:pl-32 lg:pl-48 pb-10">
         <p className="text-4xl truncate text-white">Mentor Dashboard</p>

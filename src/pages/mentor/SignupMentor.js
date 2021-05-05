@@ -28,7 +28,7 @@ function SignupMentor(props) {
       update(_, { data: { signupMentor: mentorData } }) {
         context.loginMentor(mentorData);
 
-        props.history.push("/mentorDashboard");
+        props.history.push("/mentorDashboard/welcome");
       },
       onError(err) {
         // console.log(values);

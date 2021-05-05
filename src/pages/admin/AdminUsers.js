@@ -192,6 +192,7 @@ export const GET_MENTOR_BY_ID = gql`
       orgName
       password
       email
+      orgName
       createdAt
       token
     }

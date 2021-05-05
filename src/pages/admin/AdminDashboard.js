@@ -1,9 +1,12 @@
 import { gql, useQuery } from "@apollo/client";
 import React, { useContext } from "react";
+import { useState } from "react";
+import { GET_ADMIN_BY_ID } from "../../components/admin/AdminInputDropdown";
 import DashboardCards from "../../components/admin/DashboardCards";
 import DashboardSideBar from "../../components/admin/DashboardSideBar";
 import Footer from "../../components/admin/Footer";
 import NavBar from "../../components/admin/NavBar";
+import WelcomeModal from "../../components/admin/WelcomeModal";
 import LoadingScreen from "../../components/student/LoadingScreen";
 import { AdminAuthContext } from "../../context/adminAuth";
 import { adminClient } from "../../GraphqlApolloClients";
@@ -16,7 +19,22 @@ export default function AdminDashboard(props) {
   } else {
     adminId = admin.id;
   }
+  var isNewUser = props.match.params.welcome;
+  const [welcomeIsOpen, setWelcomeIsOpen] = useState(
+    isNewUser === "welcome" ? true : false
+  );
+  function toggleWelcomeIsOpen(e) {
+    e.preventDefault();
+    setWelcomeIsOpen(!welcomeIsOpen);
+  }
+  const { data: { getAdminById: adminObject } = {} } = useQuery(
+    GET_ADMIN_BY_ID,
+    {
+      variables: { adminId: admin && admin.id },
 
+      client: adminClient,
+    }
+  );
   const { data: { getModulesByAdmin: adminModules } = {} } = useQuery(
     GET_MODULES_BY_ADMIN,
     {
@@ -88,47 +106,53 @@ export default function AdminDashboard(props) {
   //     client: adminClient,
   //   });
 
-  const adminDashboard = admin ? (
-    <div className="h-full flex flex-col min-h-screen w-full">
-      <NavBar props={props} />
-      <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-8 sm:pl-24 md:pl-32 lg:pl-48 pb-10">
-        <p className="text-4xl text-white">Admin Dashboard</p>
-      </div>
-      <div className="h-full md:flex-1 md:flex-row flex-col flex mx-8 sm:mx-24 md:mx-32 lg:mx-48 mt-4 mb-8">
-        {adminModules &&
-          adminQuestions &&
-          //   adminQuestionTemplates &&
-          adminBadges &&
-          adminCategories &&
-          adminChallenges && (
-            <DashboardSideBar
-              numOfQuestions={adminQuestions.length}
-              //   numOfQuestionTemplates={adminQuestionTemplates.length}
-              numOfModules={adminModules.length}
-              numOfCategories={adminCategories.length}
-              numOfChallenges={adminChallenges.length}
-              numOfBadges={adminBadges.length}
-            />
-          )}
-        <div className="md:w-5/6 w-full mt-4 lg:pl-10 md:pl-8">
-          {modules && modules.length !== 0 && (
-            <DashboardCards
-              props={props}
-              objects={modules}
-              adminObjects={adminModules}
-              type="Modules"
-            />
-          )}
+  const adminDashboard =
+    admin && adminObject ? (
+      <div className="h-full flex flex-col min-h-screen w-full">
+        <WelcomeModal
+          welcomeIsOpen={welcomeIsOpen}
+          toggleWelcomeIsOpen={toggleWelcomeIsOpen}
+          adminObject={adminObject}
+        />
+        <NavBar props={props} />
+        <div className="bg-red-800 w-full h-32 flex flex-col justify-end pl-8 sm:pl-24 md:pl-32 lg:pl-48 pb-10">
+          <p className="text-4xl text-white">Admin Dashboard</p>
+        </div>
+        <div className="h-full md:flex-1 md:flex-row flex-col flex mx-8 sm:mx-24 md:mx-32 lg:mx-48 mt-4 mb-8">
+          {adminModules &&
+            adminQuestions &&
+            //   adminQuestionTemplates &&
+            adminBadges &&
+            adminCategories &&
+            adminChallenges && (
+              <DashboardSideBar
+                numOfQuestions={adminQuestions.length}
+                //   numOfQuestionTemplates={adminQuestionTemplates.length}
+                numOfModules={adminModules.length}
+                numOfCategories={adminCategories.length}
+                numOfChallenges={adminChallenges.length}
+                numOfBadges={adminBadges.length}
+              />
+            )}
+          <div className="md:w-5/6 w-full mt-4 lg:pl-10 md:pl-8">
+            {modules && modules.length !== 0 && (
+              <DashboardCards
+                props={props}
+                objects={modules}
+                adminObjects={adminModules}
+                type="Modules"
+              />
+            )}
 
-          {questions && questions.length !== 0 && (
-            <DashboardCards
-              props={props}
-              objects={questions}
-              adminObjects={adminQuestions}
-              type="Questions"
-            />
-          )}
-          {/* {questionTemplates && questionTemplates.length !== 0 && (
+            {questions && questions.length !== 0 && (
+              <DashboardCards
+                props={props}
+                objects={questions}
+                adminObjects={adminQuestions}
+                type="Questions"
+              />
+            )}
+            {/* {questionTemplates && questionTemplates.length !== 0 && (
             <DashboardCards
               props={props}
               objects={questionTemplates}
@@ -136,37 +160,37 @@ export default function AdminDashboard(props) {
               type="Question Templates"
             />
           )} */}
-          {categories && categories.length !== 0 && (
-            <DashboardCards
-              props={props}
-              objects={categories}
-              adminObjects={adminCategories}
-              type="Categories"
-            />
-          )}
-          {badges && badges.length !== 0 && (
-            <DashboardCards
-              props={props}
-              objects={badges}
-              type="Badges"
-              adminObjects={adminBadges}
-            />
-          )}
-          {challenges && challenges.length !== 0 && (
-            <DashboardCards
-              props={props}
-              objects={challenges}
-              adminObjects={adminChallenges}
-              type="Challenges"
-            />
-          )}
+            {categories && categories.length !== 0 && (
+              <DashboardCards
+                props={props}
+                objects={categories}
+                adminObjects={adminCategories}
+                type="Categories"
+              />
+            )}
+            {badges && badges.length !== 0 && (
+              <DashboardCards
+                props={props}
+                objects={badges}
+                type="Badges"
+                adminObjects={adminBadges}
+              />
+            )}
+            {challenges && challenges.length !== 0 && (
+              <DashboardCards
+                props={props}
+                objects={challenges}
+                adminObjects={adminChallenges}
+                type="Challenges"
+              />
+            )}
+          </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
-  ) : (
-    <LoadingScreen />
-  );
+    ) : (
+      <LoadingScreen />
+    );
   return adminDashboard;
 }
 

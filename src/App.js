@@ -76,7 +76,7 @@ function App() {
           {/* <AdminAuthRoute exact path="/signupAdmin" component={SignupAdmin} /> */}
           <AdminAuthRoute
             exact
-            path="/adminDashboard"
+            path="/adminDashboard/:welcome?"
             component={AdminDashboard}
           />
           <Route exact path="/adminEditAccount" component={AdminEditAccount} />

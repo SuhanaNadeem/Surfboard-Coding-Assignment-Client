@@ -22,7 +22,7 @@ function SignupAdmin(props) {
   const [signupAdmin, { loading: loadingSignup }] = useMutation(SIGNUP_ADMIN, {
     update(_, { data: { signupAdmin: adminData } }) {
       context.loginAdmin(adminData);
-      props.history.push("/adminDashboard");
+      props.history.push("/adminDashboard/welcome");
     },
     onError(err) {
       // console.log(values);
