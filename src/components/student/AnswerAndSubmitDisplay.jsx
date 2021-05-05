@@ -24,14 +24,16 @@ export default function AnswerAndSubmitDisplay({
 }) {
   return (
     question.type === "Question" && (
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <form
           onSubmit={onSubmit}
-          className={`${
-            !completedQuestions.includes(question.id) ? `items-center ` : ``
-          }  flex mt-4 justify-center ${
-            question.questionFormat === "Multiple Choice" ? `flex-col` : ``
-          }`}
+          className="items-center flex flex-col mt-4 justify-center w-full"
+
+          // {`${
+          //   !completedQuestions.includes(question.id) ? `items-center ` : ``
+          // }  flex flex-col mt-4 justify-center w-full ${
+          //   question.questionFormat === "Multiple Choice" ? `flex-col` : ``
+          // }`}
         >
           <EnterAnswer
             loadingHandleAnswerPoints={loadingHandleAnswerPoints}
@@ -87,3 +89,5 @@ export default function AnswerAndSubmitDisplay({
     )
   );
 }
+// flex flex-col mt-4 justify-center w-full flex-col
+// new: items-center flex flex-col mt-4 justify-center w-full

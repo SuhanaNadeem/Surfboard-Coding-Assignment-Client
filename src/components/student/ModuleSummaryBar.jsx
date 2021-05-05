@@ -63,12 +63,12 @@ export default function ModuleSummaryBar({
         <button
           id="starModule"
           type="submit"
-          className="focus:outline-none md:w-1/6 ml-2"
+          className="focus:outline-none flex justify-center items-center md:w-1/4 w-1/6 ml-2"
         >
           {studentObject.starredModules.includes(moduleId) ? (
-            <BsStarFill size={16} />
+            <BsStarFill size={20} />
           ) : (
-            <BsStar size={16} />
+            <BsStar size={20} />
           )}
         </button>
       </form>

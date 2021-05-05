@@ -34,7 +34,11 @@ function App() {
           {/* <Route exact path="/" component={LoginStudent} /> */}
           <StudentAuthRoute exact path="/login" component={LoginStudent} />
           <StudentAuthRoute exact path="/signup" component={SignupStudent} />
-          <Route exact path="/dashboard" component={StudentDashboard} />
+          <Route
+            exact
+            path="/dashboard/:welcome?"
+            component={StudentDashboard}
+          />
           <Route exact path="/studentAccount" component={StudentAccount} />
           <Route
             exact

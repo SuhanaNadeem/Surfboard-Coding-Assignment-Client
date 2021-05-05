@@ -95,13 +95,16 @@ export default function EnterAnswer({
       )}
     </div>
   ) : (
-    <input
-      className="md:w-3/4 shadow appearance-none border rounded w-full font-normal lg:font-light  py-1 px-2 text-gray-700 leading-tight focus:outline-none"
+    // <input
+    <textarea
+      // className="md:w-3/4 shadow appearance-none border rounded w-full font-normal lg:font-light  py-1 px-2 text-gray-700 leading-tight focus:outline-none"
+      className="w-full shadow appearance-none border rounded font-normal lg:font-light  py-1 px-2 text-gray-700 leading-tight focus:outline-none mb-2"
       name="answer"
       placeholder="Enter an answer"
       value={values.answer}
       onChange={onChange}
       type="text"
+      rows="3"
     />
   );
 }

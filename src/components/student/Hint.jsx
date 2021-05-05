@@ -14,7 +14,7 @@ export default function Hint({
       className="focus:outline-none flex mt-2 px-4 py-2 items-center justify-center text-black tracking-wide hover:text-red-800 text-sm"
     >
       <h3 className="font-semibold uppercase tracking-wide text-sm ">Hint</h3>
-      {hintVisible && !loadingHandleAnswerPoints && (
+      {hintVisible && (
         // && !isOpen
         <h3 className="font-light text-md lg:text-sm ml-2 focus:outline-none focus:text-blue-500 truncate">
           {hint}

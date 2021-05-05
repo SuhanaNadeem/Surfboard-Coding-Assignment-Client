@@ -25,6 +25,7 @@
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.14.0",
     "react-dropzone": "^11.0.1",
+    "react-ga": "^3.3.0",
     "react-icons": "^4.1.0",
     "react-intersection-observer": "^8.27.1",
     "react-lazy-load-image-component": "^1.5.0",

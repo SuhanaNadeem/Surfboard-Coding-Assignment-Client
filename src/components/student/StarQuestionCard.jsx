@@ -48,9 +48,9 @@ export default function StarQuestionCard({ props, questionId, studentObject }) {
     <form className="mb-2 flex justify-center items-center" onSubmit={onSubmit}>
       <button id="starQuestion" type="submit" className="focus:outline-none">
         {studentObject.starredQuestions.includes(questionId) ? (
-          <BsStarFill size={16} />
+          <BsStarFill size={20} className="text-red-800" />
         ) : (
-          <BsStar size={16} />
+          <BsStar size={20} className="text-red-800" />
         )}
       </button>
     </form>

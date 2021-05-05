@@ -28,7 +28,7 @@ function SignupStudent(props) {
     {
       update(_, { data: { signupStudent: studentData } }) {
         context.loginStudent(studentData);
-        props.history.push("/dashboard");
+        props.history.push("/dashboard/welcome");
         // <LoadingScreen />;
       },
       onError(err) {

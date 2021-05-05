@@ -63,7 +63,7 @@ function QuestionCard({
          
           {studentObject &&
             studentObject.starredQuestions.includes(questionId) && (
-              <BsStarFill size={20} className="pl-2" />
+              <BsStarFill size={16} className="pl-2" />
             )}
         </div> */}
         <p className="  font-semibold text-sm w-full md:w-52 uppercase tracking-wide ">
@@ -82,7 +82,10 @@ function QuestionCard({
       >
         {studentObject &&
           studentObject.starredQuestions.includes(questionId) && (
-            <BsStarFill size={20} className="pr-2 md:pr-0 md:pb-2" />
+            <BsStarFill
+              size={20}
+              className="pr-2 md:pr-0 md:pb-2 text-red-800"
+            />
           )}
         <button
           type="submit"
