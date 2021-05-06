@@ -11,7 +11,6 @@ import Introduction from "../../components/landing/Introduction";
 import About from "../../components/landing/About";
 import Features from "../../components/landing/Features";
 import Connect from "../../components/landing/Connect";
-
 export default function Welcome(props) {
   return (
     <div className="h-full flex flex-col min-h-screen w-full">

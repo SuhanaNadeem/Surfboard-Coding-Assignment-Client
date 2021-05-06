@@ -25,8 +25,17 @@ import StudentModule from "./pages/student/StudentModule";
 import AdminAuthRoute from "./util/AdminAuthRoute";
 import MentorAuthRoute from "./util/MentorAuthRoute";
 import StudentAuthRoute from "./util/StudentAuthRoute";
+import ReactGA from "react-ga";
+import { useEffect } from "react";
+// import { withRouter } from "react-router-dom";
 
 function App() {
+  ReactGA.initialize(process.env.TRACKING_ID);
+  // ReactGA.pageview(window.location.pathname + window.location.search);
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  });
+
   return (
     <>
       <StudentAuthProvider>

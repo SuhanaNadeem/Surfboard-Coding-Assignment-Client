@@ -9,12 +9,16 @@ import StudentTitleBar from "../../components/student/TitleBar";
 import { StudentAuthContext } from "../../context/studentAuth";
 import loginSignup from "../../images/login.png";
 import { useForm } from "../../util/hooks";
+import ReactGA from "react-ga";
 
 function SignupStudent(props) {
   const context = useContext(StudentAuthContext);
   const [errors, setErrors] = useState({});
   var email = props.match.params.email;
-
+  ReactGA.event({
+    category: "Sign Up",
+    action: "User pressed the big blue sign up button",
+  });
   const { onChange, onSubmit, values } = useForm(signupStudentCallback, {
     email: email || "",
     name: "",
@@ -164,8 +168,6 @@ function SignupStudent(props) {
           </div>
           <button
             type="submit"
-            text-bold
-            tracking-wide
             className="mt-8 uppercase hover:shadow-lg text-md w-64 sm:w-72 md:w-64 flex items-center justify-center focus:ring text-white bg-red-800 shadow-md border border-red-800  py-2 px-6 rounded-full focus:outline-none"
           >
             Sign Up

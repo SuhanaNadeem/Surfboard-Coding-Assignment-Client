@@ -1,4 +1,5 @@
 import React from "react";
+import { GrClose } from "react-icons/gr";
 import robotics from "../../images/welcomeLogin.png";
 
 export default function WelcomeModal({
@@ -14,13 +15,13 @@ export default function WelcomeModal({
         <button
           tabIndex="-1"
           onClick={toggleWelcomeIsOpen}
-          className="fixed inset-0 h-full w-full bg-gray-800 opacity-50 cursor-default z-20"
+          className="fixed inset-0 h-full w-full bg-gray-800 opacity-50 cursor-default z-30"
         ></button>
-        <div className=" overscroll-contain overflow-y-auto fixed mx-2 md:mx-auto inset-0  max-w-2xl my-4 p-8 bg-white z-40 rounded-lg shadow-xl">
+        <div className=" overscroll-contain overflow-y-auto fixed mx-2 md:mx-auto inset-0  max-w-2xl my-16 p-8 bg-white z-40 rounded-lg shadow-xl">
           <div className="justify-between flex flex-col h-full ">
             <div className="flex flex-col items-start justify-start overflow-y-auto ">
               <div className="w-full items-center justify-center flex flex-col">
-                <h3 className="text-3xl text-red-800">
+                <h3 className="text-4xl text-red-800 text-center">
                   Welcome to LYNX Institute, {adminObject.name}!
                 </h3>
                 <div className="flex my-10 items-center  focus:outline-none justify-center w-full">
@@ -44,12 +45,19 @@ export default function WelcomeModal({
                 <button
                   type="button"
                   onClick={toggleWelcomeIsOpen}
-                  className="flex border-2 mt-8 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg  hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm font-semibold focus:outline-none focus:ring"
+                  className="flex border-2 mt-8 mb-1 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg  hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm font-semibold focus:outline-none focus:ring"
                 >
                   Get Started
                 </button>
               </div>
             </div>
+            <button
+              className="mx-auto pt-4 focus:outline-none focus:ring rounded-sm"
+              onClick={toggleWelcomeIsOpen}
+              type="button"
+            >
+              <GrClose size={26} />
+            </button>
           </div>
         </div>
       </>

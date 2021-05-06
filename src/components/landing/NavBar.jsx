@@ -5,6 +5,7 @@ import LI_logo from "../../images/li_logo.svg";
 import smallLynxLogo from "../../images/512.png";
 import LandingNavDropdown from "./NavDropdown";
 // import AdminAccountDropdown from "./AccountDropdown";
+import useGAEventTracker from "../../hooks/useGAEventTracker";
 
 export default function NavBar({ props }) {
   const history = useHistory();
@@ -16,6 +17,7 @@ export default function NavBar({ props }) {
   ];
 
   // const { logoutAdmin } = useContext(AdminAuthContext);
+  const GAEventsTracker = useGAEventTracker("External Links");
 
   return (
     <div className="bg-black shadow-lg flex items-center justify-center w-full z-10 text-center">
@@ -27,7 +29,8 @@ export default function NavBar({ props }) {
           <button
             onClick={(e) => {
               e.preventDefault();
-              history.push("/welcome");
+              history.push("/");
+              GAEventsTracker("Welcome LYNX Logo");
             }}
             className="hover:opacity-75 hidden md:flex font-light items-center justify-center  focus:outline-none focus:ring"
           >
@@ -52,7 +55,7 @@ export default function NavBar({ props }) {
               className=" md:hidden flex focus:outline-none"
               onClick={(e) => {
                 e.preventDefault();
-                props.history.push("/welcome");
+                props.history.push("/");
               }}
             >
               <img

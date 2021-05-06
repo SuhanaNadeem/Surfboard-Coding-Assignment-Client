@@ -6,13 +6,13 @@ export default function AccountBadgeCard({ props, badge, earned }) {
       <div
         className={`${
           earned ? `bg-gray-200` : `bg-white`
-        }  h-full flex-shrink-0 first:ml-2 shadow w-40  ease-in-out lg:text-sm font-semibold md:hover:-translate-y-1 align-middle flex flex-col items-center text-center p-4 rounded-md overflow-hidden `}
+        }  h-full flex-shrink-0 first:ml-2 shadow w-40 lg:w-full ease-in-out lg:text-sm font-semibold md:hover:-translate-y-1 align-middle flex flex-col items-center text-center p-4 rounded-md overflow-hidden `}
       >
-        <p className="text-red-800 uppercase font-sm leading-tight w-32 truncate">
+        <p className="text-red-800 uppercase font-sm leading-tight w-32 lg:w-full truncate">
           {badge.name}
         </p>
-        <p className="font-light my-1 w-32">{badge.description}</p>
-        <p className="w-32 truncate">
+        <p className="font-light my-1 w-32 lg:w-full">{badge.description}</p>
+        <p className="w-32 truncate lg:w-full">
           {badge.requiredAmount}{" "}
           {`${
             badge.type === "Question"
