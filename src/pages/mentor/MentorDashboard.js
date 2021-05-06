@@ -10,6 +10,8 @@ import LoadingScreen from "../../components/student/LoadingScreen";
 import { MentorAuthContext } from "../../context/mentorAuth";
 import { mentorClient } from "../../GraphqlApolloClients";
 import { GET_MENTOR_BY_ID } from "../../pages/admin/AdminUsers";
+import { useEffect } from "react";
+import ReactGA from "react-ga";
 
 export default function MentorDashboard(props) {
   const { mentor } = useContext(MentorAuthContext);
@@ -19,6 +21,9 @@ export default function MentorDashboard(props) {
   } else {
     props.history.push("/loginMentor");
   }
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  });
   var selectedStudentId = props.match.params.studentId;
   const [welcomeIsOpen, setWelcomeIsOpen] = useState(
     selectedStudentId === "welcome" ? true : false

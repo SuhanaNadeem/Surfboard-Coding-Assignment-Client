@@ -12,12 +12,14 @@ import { StudentAuthContext } from "../../context/studentAuth";
 import { studentClient } from "../../GraphqlApolloClients";
 import tempIcon from "../../images/icon1.png";
 import WelcomeModal from "../../components/student/WelcomeModal";
+import ReactGA from "react-ga";
+import { useEffect } from "react";
 
 export default function StudentDashboard(props) {
   const { student } = useContext(StudentAuthContext);
-  // console.log("in dash");
-  // console.log(student);
-  // console.log(props);
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  });
   if (!student) {
     props.history.push("/login");
   }

@@ -23,7 +23,7 @@ function EditMentor({
     confirmNewPassword: confirmNewPassword || "",
   });
 
-  const [editMentor] = useMutation(EDIT_MENTOR, {
+  const [editMentor, { loading: loadingMentor }] = useMutation(EDIT_MENTOR, {
     update(_, { data: { editMentor: adminData } }) {
       setErrors({});
       values.confirmNewPassword = "";
@@ -201,14 +201,39 @@ function EditMentor({
             </tr>
           </tbody>
         </table>
-        <div className="text-right md:text-sm mx-auto mt-4 flex focus:outline-none w-1/4 md:w-1/6">
-          <button
-            type="submit"
-            className="flex focus:outline-none border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg  hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm items-center justify-center font-semibold w-full"
-          >
-            Save
-          </button>
-        </div>
+        {loadingMentor ? (
+          <div className="mt-4 py-2 flex h-10 mx-auto">
+            <svg
+              className={`fill-current animate-spin h-4 text-red-800`}
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+          </div>
+        ) : (
+          <div className="text-right md:text-sm mx-auto mt-4 flex w-1/4 md:w-1/6">
+            <button
+              type="submit"
+              className="flex w-16 focus:outline-none focus-ring border-2 mx-auto border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg  hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-sm items-center justify-center font-semibold md:w-full"
+            >
+              Save
+            </button>
+          </div>
+        )}
       </div>
     </form>
   ) : (

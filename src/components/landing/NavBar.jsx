@@ -32,7 +32,7 @@ export default function NavBar({ props }) {
               history.push("/");
               // GAEventsTracker("WelcomeLYNX");
               ReactGA.event({
-                category: "User",
+                category: "New User",
                 action: "Clicked logo on landing page",
               });
             }}
@@ -48,8 +48,8 @@ export default function NavBar({ props }) {
                   e.preventDefault();
                   history.push(pageInfo.link);
                   ReactGA.event({
-                    category: "User",
-                    action: "Clicked sign up on landing page",
+                    category: "New User",
+                    action: "Clicked log in on landing page",
                   });
                 }}
                 className={`hidden md:block hover:opacity-75 font-light focus:outline-none ${

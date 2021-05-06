@@ -6,6 +6,7 @@ import LoadingScreen from "../../components/student/LoadingScreen";
 import { AdminAuthContext } from "../../context/adminAuth";
 import loginSignup from "../../images/login.png";
 import { useForm } from "../../util/hooks";
+import ReactGA from "react-ga";
 
 function SignupAdmin(props) {
   const context = useContext(AdminAuthContext);
@@ -138,8 +139,12 @@ function SignupAdmin(props) {
           </div>
           <button
             type="submit"
-            text-bold
-            tracking-wide
+            onClick={(e) => {
+              ReactGA.event({
+                category: "Admin",
+                action: "Clicked sign in on signup admin page",
+              });
+            }}
             className="mt-8 uppercase hover:shadow-lg text-md w-64 sm:w-72 md:w-64 flex items-center justify-center  text-white bg-red-800 shadow-md border border-red-800  py-2 px-6 rounded-full  focus:ring focus:outline-none"
           >
             Sign Up

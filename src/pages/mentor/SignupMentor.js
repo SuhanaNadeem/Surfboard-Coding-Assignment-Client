@@ -8,6 +8,7 @@ import LoadingScreen from "../../components/student/LoadingScreen";
 import { MentorAuthContext } from "../../context/mentorAuth";
 import loginSignup from "../../images/login.png";
 import { useForm } from "../../util/hooks";
+import ReactGA from "react-ga";
 
 function SignupMentor(props) {
   const context = useContext(MentorAuthContext);
@@ -164,8 +165,12 @@ function SignupMentor(props) {
           </div>
           <button
             type="submit"
-            text-bold
-            tracking-wide
+            onClick={(e) => {
+              ReactGA.event({
+                category: "Mentor",
+                action: "Clicked sign up on signup mentor page",
+              });
+            }}
             className="mt-8 uppercase hover:shadow-lg text-md w-64 sm:w-72 md:w-64 flex items-center justify-center  text-white bg-red-800 shadow-md border border-red-800  py-2 px-6 rounded-full focus:ring focus:outline-none"
           >
             Sign Up

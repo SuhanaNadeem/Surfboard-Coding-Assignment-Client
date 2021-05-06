@@ -4,6 +4,7 @@ import { BsStarFill } from "react-icons/bs";
 import { studentClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
 import { GET_STUDENT_BY_ID } from "./ModuleSummaryBar";
+import ReactGA from "react-ga";
 
 function QuestionCard({
   props,
@@ -83,12 +84,18 @@ function QuestionCard({
         {studentObject &&
           studentObject.starredQuestions.includes(questionId) && (
             <BsStarFill
-              size={20}
-              className="pr-2 md:pr-0 md:pb-2 text-red-800"
+              size={24}
+              className="pr-2 md:pr-0 md:pb-2 text-red-800 flex-shrink-0"
             />
           )}
         <button
           type="submit"
+          onClick={(e) => {
+            ReactGA.event({
+              category: "Student",
+              action: "Clicked start/revisit on a question",
+            });
+          }}
           className="flex border-2 border-red-800 px-4 py-2 uppercase text-red-800 rounded-lg  hover:shadow-md hover:bg-red-800 hover:text-white tracking-wide text-xs font-semibold focus:outline-none focus:ring"
         >
           {`${complete ? "revisit" : "start"}`}

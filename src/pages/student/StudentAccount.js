@@ -13,12 +13,17 @@ import { StudentAuthContext } from "../../context/studentAuth";
 import { studentClient } from "../../GraphqlApolloClients";
 import { GET_BADGES } from "../admin/AdminDashboard";
 import { GET_BADGES_BY_STUDENT } from "./StudentDashboard";
+import { useEffect } from "react";
+import ReactGA from "react-ga";
 
 export default function StudentAccount(props) {
   const { student } = useContext(StudentAuthContext);
   if (!student) {
     props.history.push("/login");
   }
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  });
   const { data: { getStudentById: studentObject } = {} } = useQuery(
     GET_STUDENT_BY_ID,
     {

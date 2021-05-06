@@ -6,6 +6,7 @@ import StudentTitleBar from "../../components/student/TitleBar";
 import { StudentAuthContext } from "../../context/studentAuth";
 import loginSignup from "../../images/login.png";
 import { useForm } from "../../util/hooks";
+import ReactGA from "react-ga";
 
 // import { MdPersonOutline } from "react-icons/md";
 // import { VscKey } from "react-icons/vsc";
@@ -99,8 +100,12 @@ function LoginStudent(props) {
           </div>
           <button
             type="submit"
-            text-bold
-            tracking-wide
+            onClick={(e) => {
+              ReactGA.event({
+                category: "Student",
+                action: "Clicked log in login student page",
+              });
+            }}
             className="mt-8 uppercase hover:shadow-lg text-md w-52 md:w-64 flex items-center justify-center  text-white bg-red-800 shadow-md border border-red-800  py-2 px-6 rounded-full focus:outline-none focus:ring"
           >
             Log In

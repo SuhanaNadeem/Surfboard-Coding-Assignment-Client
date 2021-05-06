@@ -13,10 +13,13 @@ import QuestionCard, {
 import QuestionModal from "../../components/student/QuestionModal";
 import { StudentAuthContext } from "../../context/studentAuth";
 import { studentClient } from "../../GraphqlApolloClients";
+import ReactGA from "react-ga";
 
 export default function StudentModule(props) {
   const { student } = useContext(StudentAuthContext);
-
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  });
   if (!student) {
     props.history.push("/login");
   }

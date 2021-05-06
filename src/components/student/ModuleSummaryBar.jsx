@@ -53,12 +53,10 @@ export default function ModuleSummaryBar({
   return studentObject ? (
     <nav className="flex flex-shrink-0  items-start justify-start text-gray-800 border-gray-300 border-b-2 md:border-r-2 md:border-b-0 text-left flex-col md:mt-6 md:w-1/4 lg:w-1/6 mt-2 cursor-default z-20 bg-white xl:pr-0 pr-2 w-full pb-3 md:pb-0">
       <form
-        className="mb-2 flex justify-start items-center w-full"
+        className="mb-2 flex justify-center items-center w-full"
         onSubmit={onSubmit}
       >
-        <p className="text-xl md:text-xl lg:text-lg text-red-800 truncate xl:text-xl md:w-5/6">
-          Your Progress
-        </p>
+        <p className="text-xl text-red-800 md:w-5/6">Your Progress</p>
 
         <button
           id="starModule"
