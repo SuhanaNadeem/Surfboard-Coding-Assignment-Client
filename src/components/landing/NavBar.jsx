@@ -30,7 +30,7 @@ export default function NavBar({ props }) {
             onClick={(e) => {
               e.preventDefault();
               history.push("/");
-              GAEventsTracker("Welcome LYNX Logo");
+              GAEventsTracker("WelcomeLYNX");
             }}
             className="hover:opacity-75 hidden md:flex font-light items-center justify-center  focus:outline-none focus:ring"
           >
@@ -43,6 +43,7 @@ export default function NavBar({ props }) {
                 onClick={(e) => {
                   e.preventDefault();
                   history.push(pageInfo.link);
+                  GAEventsTracker(pageInfo.title);
                 }}
                 className={`hidden md:block hover:opacity-75 font-light focus:outline-none ${
                   pageInfo.title !== "Sign Up" && `mr-4`
