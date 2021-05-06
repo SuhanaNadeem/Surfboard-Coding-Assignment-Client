@@ -6,12 +6,16 @@ import React from "react";
 // import Aos from "aos";
 // import "aos/dist/aos.css";
 // import BackgroundSlider from "react-background-slider";
-
+import ReactGA from "react-ga";
+import { useEffect } from "react";
 import Introduction from "../../components/landing/Introduction";
 import About from "../../components/landing/About";
 import Features from "../../components/landing/Features";
 import Connect from "../../components/landing/Connect";
 export default function Welcome(props) {
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  });
   return (
     <div className="h-full flex flex-col min-h-screen w-full">
       <NavBar props={props} />

@@ -5,7 +5,8 @@ import LI_logo from "../../images/li_logo.svg";
 import smallLynxLogo from "../../images/512.png";
 import LandingNavDropdown from "./NavDropdown";
 // import AdminAccountDropdown from "./AccountDropdown";
-import useGAEventTracker from "../../hooks/useGAEventTracker";
+// import useGAEventTracker from "../../hooks/useGAEventTracker";
+import ReactGA from "react-ga";
 
 export default function NavBar({ props }) {
   const history = useHistory();
@@ -17,8 +18,7 @@ export default function NavBar({ props }) {
   ];
 
   // const { logoutAdmin } = useContext(AdminAuthContext);
-  const GAEventsTracker = useGAEventTracker("External Links");
-
+  // const GAEventsTracker = useGAEventTracker("External Links");
   return (
     <div className="bg-black shadow-lg flex items-center justify-center w-full z-10 text-center">
       <nav className="py-4 mx-8 sm:mx-24 md:mx-32 lg:mx-48 flex items-center justify-center  w-full text-lg">
@@ -30,7 +30,11 @@ export default function NavBar({ props }) {
             onClick={(e) => {
               e.preventDefault();
               history.push("/");
-              GAEventsTracker("WelcomeLYNX");
+              // GAEventsTracker("WelcomeLYNX");
+              ReactGA.event({
+                category: "User",
+                action: "Clicked logo on landing page",
+              });
             }}
             className="hover:opacity-75 hidden md:flex font-light items-center justify-center  focus:outline-none focus:ring"
           >
@@ -43,7 +47,10 @@ export default function NavBar({ props }) {
                 onClick={(e) => {
                   e.preventDefault();
                   history.push(pageInfo.link);
-                  GAEventsTracker(pageInfo.title);
+                  ReactGA.event({
+                    category: "User",
+                    action: "Clicked sign up on landing page",
+                  });
                 }}
                 className={`hidden md:block hover:opacity-75 font-light focus:outline-none ${
                   pageInfo.title !== "Sign Up" && `mr-4`

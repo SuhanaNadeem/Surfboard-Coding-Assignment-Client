@@ -4,7 +4,13 @@ import robotics from "../../images/welcomeLogin.png";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { BsPencilSquare, BsFillPeopleFill } from "react-icons/bs";
 import Footer from "../../components/landing/Footer";
+import ReactGA from "react-ga";
+import { useEffect } from "react";
+
 function LoginAll(props) {
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  });
   return (
     <div className="h-full flex flex-col min-h-screen w-full">
       <LandingTitleBar />

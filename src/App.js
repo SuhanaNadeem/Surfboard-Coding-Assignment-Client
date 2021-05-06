@@ -10,7 +10,6 @@ import AdminEditAccount from "./pages/admin/AdminEditAccount";
 import AdminEditAndPreview from "./pages/admin/AdminEditAndPreview";
 import AdminUsers from "./pages/admin/AdminUsers";
 import LoginAdmin from "./pages/admin/LoginAdmin";
-// import SignupAdmin from "./pages/admin/SignupAdmin";
 import LoginAll from "./pages/landing/LoginAll";
 import Welcome from "./pages/landing/Welcome";
 import LoginMentor from "./pages/mentor/LoginMentor";
@@ -25,17 +24,8 @@ import StudentModule from "./pages/student/StudentModule";
 import AdminAuthRoute from "./util/AdminAuthRoute";
 import MentorAuthRoute from "./util/MentorAuthRoute";
 import StudentAuthRoute from "./util/StudentAuthRoute";
-import ReactGA from "react-ga";
-import { useEffect } from "react";
-// import { withRouter } from "react-router-dom";
 
 function App() {
-  ReactGA.initialize(process.env.TRACKING_ID);
-  // ReactGA.pageview(window.location.pathname + window.location.search);
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  });
-
   return (
     <>
       <StudentAuthProvider>
