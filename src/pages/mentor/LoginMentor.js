@@ -57,6 +57,7 @@ function LoginMentor(props) {
             <div className="border-b-2 py-2 border-gray-300 flex items-center justify-start w-full">
               {/* <MdPersonOutline size={32} /> */}
               <input
+                autocomplete="off"
                 className="w-full focus:outline-none text-lg font-normal"
                 name="email"
                 placeholder="Your Email"
@@ -80,6 +81,7 @@ function LoginMentor(props) {
             <div className="border-b-2 py-2 border-gray-300 flex items-center justify-start w-full">
               {/* <VscKey size={32} /> */}
               <input
+                autocomplete="off"
                 className="w-full focus:outline-none text-lg font-normal"
                 name="password"
                 placeholder="Password"
