@@ -19,7 +19,7 @@ function Badges({ student }) {
       {badges && badges.length !== 0 ? (
         badges.map((badge, index) => <Badge key={index} badge={badge} />)
       ) : (
-        <h2 className="font-light text-md lg:text-sm  leading-tight w-1/2 md:w-full text-left ">
+        <h2 className="font-normal lg:font-light text-md lg:text-sm  leading-tight w-full text-left ">
           You will see {student.name}'s badges here when they earn them.
         </h2>
       )}

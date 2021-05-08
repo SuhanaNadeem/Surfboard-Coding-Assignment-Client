@@ -24,7 +24,7 @@ function CompletedModules({ student }) {
           <CompletedModule key={index} module={module} student={student} />
         ))
       ) : (
-        <h2 className="font-light text-md lg:text-sm  leading-tight w-1/2 md:w-full text-left ">
+        <h2 className="font-normal lg:font-light text-md lg:text-sm  leading-tight w-full text-left ">
           You will see {student.name}'s Completed Modules here once they begin
           them.
         </h2>

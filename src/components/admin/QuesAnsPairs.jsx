@@ -30,7 +30,7 @@ function QuesAnsPairs({ student }) {
             />
           ))
         ) : (
-          <h2 className="font-light text-md lg:text-sm  leading-tight w-1/2 md:w-full text-left ">
+          <h2 className="font-normal lg:font-light text-md lg:text-sm  leading-tight w-full text-left ">
             You will see {student.name}'s answers to various questions here once
             they submit them.
           </h2>

@@ -26,7 +26,7 @@ function InProgressModules({ student }) {
           <InProgressModule key={index} module={module} />
         ))
       ) : (
-        <h2 className="font-light text-md lg:text-sm  leading-tight w-1/2 md:w-full text-left ">
+        <h2 className="font-normal lg:font-light text-md lg:text-sm  leading-tight w-full text-left ">
           You will see {student.name}'s In-Progress Modules here once they begin
           them.
         </h2>
