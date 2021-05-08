@@ -36,7 +36,7 @@ export default function StudentModal({
         className="fixed inset-0 h-full w-full bg-gray-800 opacity-50 cursor-default z-20"
       ></button>
 
-      <div className=" overscroll-contain overflow-y-auto fixed mx-2 md:mx-auto inset-0  max-w-2xl my-4 p-8 bg-white z-40 rounded-lg shadow-xl">
+      <div className=" overscroll-contain overflow-y-auto fixed mx-2 md:mx-auto inset-0  max-w-2xl my-16 p-8 bg-white z-40 rounded-lg shadow-xl">
         <div className="justify-between flex flex-col h-full ">
           <div className="flex flex-col items-start justify-start overflow-y-auto ">
             <div className="w-full items-center justify-center flex flex-col">

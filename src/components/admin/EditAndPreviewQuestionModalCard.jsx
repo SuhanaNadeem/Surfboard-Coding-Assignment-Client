@@ -196,11 +196,11 @@ function EditAndPreviewQuestionModalCard({
               </button>
             </div>
             {hint && hint !== "" && (
-              <div class="flex mt-2 px-4 py-2 items-center justify-center text-black tracking-wide hover:text-red-800 text-sm">
-                <h3 class="font-semibold uppercase tracking-wide text-sm ">
+              <div className="flex mt-2 px-4 py-2 items-center justify-center text-black tracking-wide hover:text-red-800 text-sm">
+                <h3 className="font-semibold uppercase tracking-wide text-sm ">
                   Hint
                 </h3>
-                <h3 class="font-light text-md lg:text-sm ml-2 focus:outline-none focus:text-blue-500 truncate">
+                <h3 className="font-light text-md lg:text-sm ml-2 focus:outline-none focus:text-blue-500 truncate">
                   The name has part of "online" in it.
                 </h3>
               </div>

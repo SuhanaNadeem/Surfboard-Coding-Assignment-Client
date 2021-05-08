@@ -70,7 +70,7 @@ export default function DashboardStudents({
       />
     </div>
   ) : (
-    <p className="font-light text-left w-full text-md">
+    <p className="font-light text-left w-full text-lg mt-3">
       Students in {mentor.orgName} will appear here.
     </p>
   );

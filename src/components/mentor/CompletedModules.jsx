@@ -13,15 +13,22 @@ function CompletedModules({ student }) {
     }
   );
 
-  return modules && modules.length !== 0 ? (
+  return student ? (
     <div className="mr-2 flex flex-col w-full md:w-1/2 mt-2">
       <h2 className="text-xl lg:text-lg mb-2 text-red-800 ">
         Completed Modules
       </h2>
 
-      {modules.map((module, index) => (
-        <CompletedModule key={index} module={module} student={student} />
-      ))}
+      {modules && modules.length !== 0 ? (
+        modules.map((module, index) => (
+          <CompletedModule key={index} module={module} student={student} />
+        ))
+      ) : (
+        <h2 className="font-light text-md lg:text-sm  leading-tight w-1/2 md:w-full text-left ">
+          You will see {student.name}'s Completed Modules here once they begin
+          them.
+        </h2>
+      )}
     </div>
   ) : (
     <></>

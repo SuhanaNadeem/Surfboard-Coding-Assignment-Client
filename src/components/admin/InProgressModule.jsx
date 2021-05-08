@@ -15,7 +15,7 @@ function InProgressModule({ module }) {
 
   return points !== undefined && module ? (
     <div className="flex items-start justify-start mb-2">
-      <BiCheckbox size={24} class="flex-shrink-0" />
+      <BiCheckbox size={24} className="flex-shrink-0" />
       <h3 className="font-semibold mx-1 text-sm w-1/2 md:w-36 leading-tight">
         {module.name}
       </h3>

@@ -34,7 +34,7 @@ export default function StudentModal({
         className="fixed inset-0 h-auto w-full bg-gray-800 opacity-50 cursor-default z-20"
       ></button>
 
-      <div className="fixed mx-auto inset-0 overscroll-contain overflow-y-auto max-w-2xl my-20 p-8 bg-white z-40 rounded-lg shadow-xl">
+      <div className="fixed mx-auto inset-0 overscroll-contain overflow-y-auto max-w-2xl my-16 p-8 bg-white z-40 rounded-lg shadow-xl">
         <div className="justify-between flex flex-col h-full">
           <div className="flex flex-col  overflow-y-auto ">
             <div className="w-full items-center justify-center flex flex-col">
@@ -52,7 +52,9 @@ export default function StudentModal({
               <Badges student={student} />
               <Progress student={student} />
             </div>
-            <QuesAnsPairs student={student} />{" "}
+            <div className="w-full">
+              <QuesAnsPairs student={student} />
+            </div>
           </div>
 
           <div className="flex mt-6 ">

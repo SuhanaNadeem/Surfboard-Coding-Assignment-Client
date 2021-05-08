@@ -10,21 +10,31 @@ function QuesAnsPairs({ student }) {
     variables: { studentId: student && student.id },
     client: mentorClient,
   });
-  return quesAnsPairs && quesAnsPairs.length !== 0 ? (
-    <div className="mr-2 mt-2 flex flex-col overflow-hidden w-full">
+  // console.log(quesAnsPairs);
+  // console.log(quesAnsPairs.length);
+  // console.log(quesAnsPairs && quesAnsPairs.length > 0);
+  return student ? (
+    <div className="mr-2 mt-4 flex flex-col w-full">
       <h2 className="text-xl lg:text-lg text-red-800 ">
         Questions and Answers
       </h2>
       <div className="grid grid-flow-col gap-2 items-stretch justify-start pt-2 pb-1 overflow-x-auto relative">
-        {quesAnsPairs.map((quesAnsPair, index) => (
-          <QuesAnsPair
-            key={index}
-            questionId={quesAnsPair.key}
-            answerId={quesAnsPair.value}
-            stringStringDictId={quesAnsPair.id}
-            student={student}
-          />
-        ))}
+        {quesAnsPairs && quesAnsPairs.length !== 0 ? (
+          quesAnsPairs.map((quesAnsPair, index) => (
+            <QuesAnsPair
+              key={index}
+              questionId={quesAnsPair.key}
+              answerId={quesAnsPair.value}
+              stringStringDictId={quesAnsPair.id}
+              student={student}
+            />
+          ))
+        ) : (
+          <h2 className="font-light text-md lg:text-sm  leading-tight w-1/2 md:w-full text-left ">
+            You will see {student.name}'s answers to various questions here once
+            they submit them.
+          </h2>
+        )}
       </div>
     </div>
   ) : (
