@@ -16,7 +16,10 @@ export default function StudentCard({
     studentId: student && student.id,
   });
 
-  const [deleteStudent] = useMutation(DELETE_STUDENT, {
+  const [
+    deleteStudent,
+    // , { loading: loadingDeleteStudent }
+  ] = useMutation(DELETE_STUDENT, {
     refetchQueries: [
       {
         query: GET_STUDENTS,
@@ -68,6 +71,7 @@ export default function StudentCard({
             <IoMdTrash size={16} />
           </button>
         </form>
+        {/* {loadingDeleteStudent && "LOADING"} */}
       </div>
     </div>
   ) : (

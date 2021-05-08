@@ -16,7 +16,10 @@ export default function MentorCard({
     mentorId: mentor && mentor.id,
   });
 
-  const [deleteMentor] = useMutation(DELETE_MENTOR, {
+  const [
+    deleteMentor,
+    // , { loading: loadingDeleteMentor }
+  ] = useMutation(DELETE_MENTOR, {
     refetchQueries: [
       {
         query: GET_MENTORS,
@@ -69,6 +72,7 @@ export default function MentorCard({
             <IoMdTrash size={16} />
           </button>
         </form>
+        {/* {loadingDeleteMentor && "LOADING"} */}
       </div>
     </div>
   ) : (
