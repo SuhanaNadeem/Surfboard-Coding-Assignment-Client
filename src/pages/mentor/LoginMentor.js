@@ -9,9 +9,9 @@ import { useForm } from "../../util/hooks";
 
 function LoginMentor(props) {
   const context = useContext(MentorAuthContext);
-  // if (context.mentor) {
-  //   props.history.push("/mentorDashboard");
-  // }
+  if (context.mentor) {
+    props.history.push("/mentorDashboard");
+  }
   const [errors, setErrors] = useState({});
 
   const { onChange, onSubmit, values } = useForm(loginMentorCallback, {
