@@ -13,9 +13,9 @@ import ReactGA from "react-ga";
 
 function LoginStudent(props) {
   const context = useContext(StudentAuthContext);
-  if (context.student) {
-    props.history.push("/dashboard");
-  }
+  // if (context.student) {
+  //   props.history.push("/dashboard");
+  // }
   const [errors, setErrors] = useState({});
 
   const { onChange, onSubmit, values } = useForm(loginStudentCallback, {
