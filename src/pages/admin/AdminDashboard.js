@@ -288,6 +288,7 @@ export const GET_MODULES_BY_ADMIN = gql`
       image
       categoryId
       createdAt
+      released
     }
   }
 `;

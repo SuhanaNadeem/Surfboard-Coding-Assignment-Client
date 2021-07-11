@@ -7,6 +7,7 @@ import EditCategory from "../../components/admin/EditCategory";
 import EditChallenge from "../../components/admin/EditChallenge";
 import EditModule from "../../components/admin/EditModule";
 import EditQuestion from "../../components/admin/EditQuestion";
+import ToggleModuleReleased from "../../components/admin/ToggleModuleReleased";
 import Footer from "../../components/admin/Footer";
 import NavBar from "../../components/admin/NavBar";
 import PreviewModule from "../../components/admin/PreviewModule";
@@ -44,14 +45,6 @@ export default function AdminEditAndPreview(props) {
     }
   );
 
-  // const {
-  //   data: { getQuestionTemplateById: questionTemplate } = {},
-  //
-  // } = useQuery(GET_QUESTION_TEMPLATE_BY_ID, {
-  //   variables: { questionTemplateId: givenId },
-  //   client: adminClient,
-  // });
-
   const { data: { getBadgeById: badge } = {} } = useQuery(GET_BADGE_BY_ID, {
     variables: { badgeId: givenId },
     client: adminClient,
@@ -78,17 +71,22 @@ export default function AdminEditAndPreview(props) {
           </p>
         </div>
         {givenId && module && (
-          <div
-            className={`${
-              module.questions.length === 0 ? `justify-start` : `justify-center`
-            }  flex flex-col lg:flex-row mx-8 sm:mx-24 md:mx-32 lg:mx-48 my-8 items-center lg:items-start`}
-          >
-            <EditModule props={props} module={module} />
-            <PreviewModule
-              props={props}
-              module={module}
-              selectedQuestionId={selectedQuestionId}
-            />
+          <div className="mx-8 sm:mx-24 md:mx-32 lg:mx-48 my-8">
+            <div
+              className={`${
+                module.questions.length === 0
+                  ? `justify-start`
+                  : `justify-center`
+              }  flex flex-col lg:flex-row  items-center lg:items-start`}
+            >
+              <EditModule props={props} module={module} />
+              <PreviewModule
+                props={props}
+                module={module}
+                selectedQuestionId={selectedQuestionId}
+              />
+            </div>
+            <ToggleModuleReleased module={module} />
           </div>
         )}
         {givenId && question && (

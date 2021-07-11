@@ -75,7 +75,7 @@ export default function BadgeCard({ props, badge, created }) {
           className="flex items-center justify-center mt-2"
         >
           <button
-            className="mr-4 focus:outline-none"
+            className="focus:outline-none"
             type="button"
             onClick={(e) => {
               props.history.push(`/adminEditAndPreview/${badge.id}`);
@@ -83,9 +83,11 @@ export default function BadgeCard({ props, badge, created }) {
           >
             <FaEdit size={16} />
           </button>
-          <button type="submit" className="focus:outline-none">
-            <IoMdTrash size={16} />
-          </button>
+          {admin.id === "TOGCUQ996G" && (
+            <button type="submit" className="ml-4 focus:outline-none">
+              <IoMdTrash size={16} />
+            </button>
+          )}
         </form>
       </div>
     </div>

@@ -85,12 +85,11 @@ function QuestionModalCard({
     }
   );
 
-  const {
-    data: { getCompletedQuestionsByModule: completedQuestions } = {},
-  } = useQuery(GET_COMPLETED_QUESTIONS_BY_MODULE, {
-    variables: { moduleId, studentId },
-    client: studentClient,
-  });
+  const { data: { getCompletedQuestionsByModule: completedQuestions } = {} } =
+    useQuery(GET_COMPLETED_QUESTIONS_BY_MODULE, {
+      variables: { moduleId, studentId },
+      client: studentClient,
+    });
 
   const [isOpen, setIsOpen] = useState(false);
   const [submitIsOpen, setSubmitIsOpen] = useState(true);
@@ -176,6 +175,7 @@ function QuestionModalCard({
       }
     },
     onError(err) {
+      console.log(err);
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
@@ -195,12 +195,11 @@ function QuestionModalCard({
 
     handleAnswerPoints();
   }
-  const {
-    data: { getTotalPossibleModulePoints: totalPossiblePoints } = {},
-  } = useQuery(GET_TOTAL_POSSIBLE_MODULE_POINTS, {
-    variables: { moduleId },
-    client: studentClient,
-  });
+  const { data: { getTotalPossibleModulePoints: totalPossiblePoints } = {} } =
+    useQuery(GET_TOTAL_POSSIBLE_MODULE_POINTS, {
+      variables: { moduleId },
+      client: studentClient,
+    });
   const { data: { getModulePointsByStudent: studentPoints } = {} } = useQuery(
     GET_MODULE_POINTS_BY_STUDENT,
     {

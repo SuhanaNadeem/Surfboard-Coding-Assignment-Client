@@ -1,10 +1,11 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import React from "react";
+import React, { useContext } from "react";
 import { IoMdTrash } from "react-icons/io";
 import { adminClient } from "../../GraphqlApolloClients";
 import { useForm } from "../../util/hooks";
 import { GET_QUESTION_BY_ID } from "../student/CompletedQuestion";
 import { GET_STRING_STRING_DICTS_BY_STUDENT } from "./QuesAnsPairs";
+import { AdminAuthContext } from "../../context/adminAuth";
 
 export default function QuesAnsPair({
   questionId,
@@ -12,6 +13,7 @@ export default function QuesAnsPair({
   answerId,
   stringStringDictId,
 }) {
+  const { admin } = useContext(AdminAuthContext);
   const {
     data: { getQuestionById: question } = {},
     // refetch: refetchQuestion,
@@ -72,9 +74,11 @@ export default function QuesAnsPair({
         onSubmit={onSubmit}
         className="flex items-center justify-center mt-1"
       >
-        <button type="submit" className="focus:outline-none">
-          <IoMdTrash size={16} />
-        </button>
+        {admin.id === "TOGCUQ996G" && (
+          <button type="submit" className="focus:outline-none">
+            <IoMdTrash size={16} />
+          </button>
+        )}
       </form>
     </div>
   ) : (

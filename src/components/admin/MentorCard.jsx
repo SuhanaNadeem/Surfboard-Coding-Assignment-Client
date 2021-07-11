@@ -5,6 +5,8 @@ import { IoMdTrash } from "react-icons/io";
 import { adminClient } from "../../GraphqlApolloClients";
 import { GET_MENTORS } from "../../pages/admin/AdminUsers";
 import { useForm } from "../../util/hooks";
+import { AdminAuthContext } from "../../context/adminAuth";
+import { useContext } from "react";
 
 export default function MentorCard({
   props,
@@ -12,6 +14,8 @@ export default function MentorCard({
   setIsMentorOpen,
   handleMentorClick,
 }) {
+  const { admin } = useContext(AdminAuthContext);
+
   const { values, onSubmit } = useForm(deleteMentorCallback, {
     mentorId: mentor && mentor.id,
   });
@@ -56,7 +60,7 @@ export default function MentorCard({
           className="flex items-center justify-center mt-2"
         >
           <button
-            className="mr-4 focus:outline-none"
+            className="focus:outline-none"
             type="button"
             // have to toggle the pop up and only get edit field to show
             onClick={(e) => {
@@ -68,9 +72,11 @@ export default function MentorCard({
           >
             <FaEdit size={16} />
           </button>
-          <button type="submit" className="focus:outline-none">
-            <IoMdTrash size={16} />
-          </button>
+          {admin.id === "TOGCUQ996G" && (
+            <button type="submit" className="ml-4 focus:outline-none">
+              <IoMdTrash size={16} />
+            </button>
+          )}
         </form>
         {/* {loadingDeleteMentor && "LOADING"} */}
       </div>

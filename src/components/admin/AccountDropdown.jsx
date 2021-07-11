@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { MdMenu, MdPersonOutline } from "react-icons/md";
 import { adminClient } from "../../GraphqlApolloClients";
 
-export default function AdminAccountDropdown({ logout, props }) {
+export default function AdminAccountDropdown({ props, logout }) {
   const [isOpen, setIsOpen] = useState(false);
   function toggleIsOpen(e) {
     e.preventDefault();
