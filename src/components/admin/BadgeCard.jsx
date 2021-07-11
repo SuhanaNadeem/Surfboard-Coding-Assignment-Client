@@ -83,11 +83,10 @@ export default function BadgeCard({ props, badge, created }) {
           >
             <FaEdit size={16} />
           </button>
-          {admin.id === "TOGCUQ996G" && (
-            <button type="submit" className="ml-4 focus:outline-none">
-              <IoMdTrash size={16} />
-            </button>
-          )}
+
+          <button type="submit" className="ml-4 focus:outline-none">
+            <IoMdTrash size={16} />
+          </button>
         </form>
       </div>
     </div>

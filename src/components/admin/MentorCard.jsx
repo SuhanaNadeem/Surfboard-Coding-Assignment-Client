@@ -45,7 +45,7 @@ export default function MentorCard({
     deleteMentor();
   }
 
-  return mentor ? (
+  return mentor && admin ? (
     <div>
       <div className="bg-white h-full focus:outline-none flex-shrink-0 first:ml-2 shadow w-48  ease-in-out md:hover:-translate-y-1 align-middle flex flex-col items-center text-center p-4 rounded-md overflow-hidden hover:shadow-md hover:bg-gray-100 justify-center">
         <p className="uppercase tracking-wide text-red-800 font-semibold text-md">
@@ -72,11 +72,9 @@ export default function MentorCard({
           >
             <FaEdit size={16} />
           </button>
-          {admin.id === "TOGCUQ996G" && (
-            <button type="submit" className="ml-4 focus:outline-none">
-              <IoMdTrash size={16} />
-            </button>
-          )}
+          <button type="submit" className="ml-4 focus:outline-none">
+            <IoMdTrash size={16} />
+          </button>
         </form>
         {/* {loadingDeleteMentor && "LOADING"} */}
       </div>
