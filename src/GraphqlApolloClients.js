@@ -5,15 +5,9 @@ import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { createUploadLink } from "apollo-upload-client";
 
-const backendURI =
-  process.env.NODE_ENV === "production"
-    ? "https://lynx-institute.herokuapp.com/"
-    : "http://localhost:5000/";
+const backendURI = "http://localhost:5000/";
 
-const wsURI =
-  process.env.NODE_ENV === "production"
-    ? `wss://lynx-institute.herokuapp.com/subscriptions`
-    : "ws://localhost:5000/subscriptions";
+const wsURI = "ws://localhost:5000/subscriptions";
 
 const httpLink = createUploadLink({
   uri: backendURI,
